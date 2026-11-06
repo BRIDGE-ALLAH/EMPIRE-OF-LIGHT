@@ -34,7 +34,7 @@ export function AddProjectHosting({ project }: { project: ProjectResponse }) {
   return (
     <section className="space-y-6">
       <PageHeader
-        title="Run your app on Temps"
+        title="Run your app on MW-DEVPLATFORM"
         description="Choose where your code is. Your saved data stays here."
       />
       <ol
