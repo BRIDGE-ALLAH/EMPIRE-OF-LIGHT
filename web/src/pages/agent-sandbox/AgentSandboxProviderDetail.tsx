@@ -306,7 +306,7 @@ function DefaultModelSetting({ provider }: { provider: ProviderCatalogDto }) {
       } else {
         toast.warning(`Could not refresh ${provider.name} models`, {
           description:
-            'Temps kept the last known model list because live discovery did not complete.',
+            'MW-DEVPLATFORM kept the last known model list because live discovery did not complete.',
         })
       }
     } catch {
