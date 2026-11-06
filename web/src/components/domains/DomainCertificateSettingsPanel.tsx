@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024-2026 Temps Contributors
+// SPDX-FileCopyrightText: 2024-2026 MW-DEVPLATFORM Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 import { certificateSettingsErrors } from './certificate-settings'
@@ -118,7 +118,7 @@ export function DomainCertificateSettingsPanel({
             description={
               wildcard
                 ? 'Wildcard certificates require DNS-01.'
-                : 'HTTP-01 requires this hostname to reach Temps on port 80. DNS-01 validates ownership using DNS TXT records.'
+                : 'HTTP-01 requires this hostname to reach MW-DEVPLATFORM on port 80. DNS-01 validates ownership using DNS TXT records.'
             }
             error={errors['Validation method']}
           >
