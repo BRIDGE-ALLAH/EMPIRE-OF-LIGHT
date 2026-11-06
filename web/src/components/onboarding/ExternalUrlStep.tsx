@@ -26,7 +26,7 @@ export function ExternalUrlStep({
   onBack,
 }: ExternalUrlStepProps) {
   const queryClient = useQueryClient()
-  const [externalUrl, setExternalUrl] = useState(`https://temps.${baseDomain}`)
+  const [externalUrl, setExternalUrl] = useState(`https://mw.${baseDomain}`)
   // Preview domain should be the base domain without the wildcard prefix
   const [previewDomain, setPreviewDomain] = useState(baseDomain)
 
@@ -95,12 +95,12 @@ export function ExternalUrlStep({
               id="externalUrl"
               value={externalUrl}
               onChange={(e) => setExternalUrl(e.target.value)}
-              placeholder="https://temps.example.com"
+              placeholder="https://mw.example.com"
               className="pl-10"
             />
           </div>
           <p className="text-xs text-muted-foreground">
-            The main URL where you&apos;ll access the Temps dashboard
+            The main URL where you&apos;ll access the MW-DEVPLATFORM dashboard
           </p>
         </div>
 
