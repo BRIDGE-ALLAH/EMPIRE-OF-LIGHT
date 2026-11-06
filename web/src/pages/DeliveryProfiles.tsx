@@ -554,7 +554,7 @@ export default function DeliveryProfiles() {
                   <p className="text-sm text-muted-foreground">
                     Deliver a hostname such as app.example.com through Bunny
                     CDN. Use an active Pull Zone whose origin points to the
-                    Temps edge target and has Add Host Header enabled. Its API
+                    MW-DEVPLATFORM edge target and has Add Host Header enabled. Its API
                     key is encrypted at rest and never shown again. DNS is
                     configured separately; a Bunny DNS connection is optional.
                   </p>
