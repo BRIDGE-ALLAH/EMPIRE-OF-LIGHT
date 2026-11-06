@@ -66,7 +66,7 @@ const basePath = (project: ProjectResponse) =>
 function failure(error: unknown) {
   return (
     readFailureServerDetail(error) ??
-    'Temps could not complete this request. Please retry.'
+    'MW-DEVPLATFORM could not complete this request. Please retry.'
   )
 }
 function Health({ value }: { value: string }) {
@@ -126,7 +126,7 @@ function Setup({
       <h2 className="text-base font-semibold">Send check-ins from your job</h2>
       {coverage.data && !coverage.data.configured && (
         <Callout tone="warning" title="Notifications need configuration">
-          {coverage.data.reason}. Native alarms are available in Temps.{' '}
+          {coverage.data.reason}. Native alarms are available in MW-DEVPLATFORM.{' '}
           <Link
             className="underline"
             to={coverage.data.setup_path ?? '/settings/notifications'}
@@ -155,7 +155,7 @@ function Setup({
         code={`import * as Sentry from '@sentry/node';\n\nSentry.init({ dsn: process.env.SENTRY_DSN });\nawait Sentry.withMonitor(${JSON.stringify(slug)}, async () => {\n  await runScheduledJob();\n});\nawait Sentry.flush(5000);`}
       />
       <p className="text-sm text-muted-foreground">
-        Schedule this code in your existing scheduler. Temps detects missed
+        Schedule this code in your existing scheduler. MW-DEVPLATFORM detects missed
         starts and runtime timeouts; it does not execute the job.
       </p>
       <div className="flex flex-wrap gap-3 text-sm">
@@ -198,7 +198,7 @@ function CronList({ project }: { project: ProjectResponse }) {
     <PageContainer>
       <PageHeader
         title="Check-ins"
-        description="Get alerted when a job you schedule outside Temps fails, starts late or runs too long. The job reports each run through the Sentry SDK."
+        description="Get alerted when a job you schedule outside MW-DEVPLATFORM fails, starts late or runs too long. The job reports each run through the Sentry SDK."
         actions={
           rows.length > 0 ? (
             <>
@@ -430,7 +430,7 @@ function CronRecord({ project }: { project: ProjectResponse }) {
             label: 'Configuration',
             value:
               monitor.configuration_source === 'temps'
-                ? 'Managed in Temps'
+                ? 'Managed in MW-DEVPLATFORM'
                 : 'SDK supplied',
           },
         ]}
@@ -991,7 +991,7 @@ function CronForm({
         {numeric('Failures before alert', 'failures', 100)}
         {numeric('Successes before recovery', 'recoveries', 100)}
       </div>
-      <Callout tone="info" title="Managed in Temps">
+      <Callout tone="info" title="Managed in MW-DEVPLATFORM">
         Saving makes this configuration authoritative over SDK settings and
         resets the health counters. Paused monitors stay paused. Configure
         notification destinations in{' '}
