@@ -103,7 +103,7 @@ export default function DeliveryProfileDetail() {
       ? 'Cloudflare proxy'
       : profile.provider_kind === 'bunny'
         ? 'bunny.net CDN'
-        : 'Direct to Temps origin'
+        : 'Direct to MW-DEVPLATFORM origin'
   const facts: DetailFact[] = [
     { label: 'Delivery', value: delivery },
     {
