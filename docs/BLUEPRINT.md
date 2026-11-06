@@ -231,7 +231,7 @@ Suggested direction:
 
 ### Logo concept
 
-Explore a simple **witness mark**: a circular horizon or orbital arc paired with a precise point of light. The mark should remain legible as a small app icon and should not resemble a religious symbol or imply surveillance.
+The first MW mark is implemented as a **lunar witness mark**: a restrained crescent and point of light inside a midnight-navy field, paired in the full lockup with the MOONWITNESS wordmark and MW-DEVPLATFORM descriptor. Source assets live in `web/public/svg/mw-icon.svg`, `mw-logo-dark.svg`, and `mw-logo-light.svg`; the favicon is `web/public/favicon.svg`. Legacy SVG asset paths are retained as compatibility aliases to the MW artwork. The mark is a navigation and product-identity device, not a religious symbol or a surveillance claim.
 
 ### UI distinction
 
@@ -239,23 +239,26 @@ Keep the brand layer separate from semantic status colors. Success, warning, fai
 
 ## 10. Roadmap: from brand to usable product
 
-### Phase 0 — Establish truth (now)
+### Phase 0 — Establish truth
 
-- Publish this narrative and link it from the root README.
-- State clearly that the current codebase is Temps-derived.
-- Preserve all upstream notices, licenses, and legal attribution.
-- Create an inventory of user-visible upstream naming and operational identifiers.
+- [x] Publish this narrative and link it from the root README.
+- [x] State clearly that the current codebase is Temps-derived.
+- [x] Preserve upstream notices, licenses, and legal attribution.
+- [x] Establish a compatibility policy separating product copy from internal identifiers.
 
-**Exit criteria:** README and blueprint agree about what the repository is today and what remains planned.
+**Exit criteria:** README and blueprint agree about the current implementation and remaining work.
 
-### Phase 1 — Brand alignment
+### Phase 1 — Brand alignment (in progress)
 
-- Define final logo, typography, color tokens, iconography, and writing style.
-- Update public landing copy and documentation navigation.
-- Rework user-facing console language where the feature behavior is unchanged.
-- Keep legal attribution and upstream provenance visible.
+- [x] Define the initial MW logo family, neutral/lunar-gold palette, typography direction, icon usage, and writing style in `docs/BRAND_SYSTEM.md`.
+- [x] Add MW product identity to the browser title, favicon, shared sidebar, loading shell, login screen, setup copy, and package description.
+- [x] Add application metadata and social-preview descriptions to the HTML shell.
+- [x] Keep upstream legal attribution and implementation identifiers intact; legacy SVG logo paths now resolve to MW artwork.
+- [ ] Review every route, auth state, email template, notification, CLI surface, and generated page for user-visible upstream branding.
+- [ ] Run frontend lint, typecheck, unit tests, and production build; review light/dark and mobile screenshots.
+- [ ] Align any public landing page and documentation navigation that is shipped by this repository.
 
-**Exit criteria:** public-facing MW language is consistent, accessible, and does not misstate implementation status.
+**Exit criteria:** all shipped public surfaces consistently use MW identity, remain accessible, and pass frontend validation without changing upstream behavior.
 
 ### Phase 2 — Safe technical rebrand
 
