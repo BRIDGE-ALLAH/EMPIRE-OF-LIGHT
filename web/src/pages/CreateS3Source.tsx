@@ -255,7 +255,7 @@ export function CreateS3Source() {
               <div className="space-y-1 border-t pt-5 md:col-span-2">
                 <h2 className="font-medium">Credentials</h2>
                 <p className="text-sm text-muted-foreground">
-                  Temps encrypts these credentials at rest.
+                  MW-DEVPLATFORM encrypts these credentials at rest.
                 </p>
               </div>
 
