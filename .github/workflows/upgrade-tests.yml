@@ -124,6 +124,7 @@ jobs:
           tar -xzf candidate/temps-linux-amd64.tar.gz -C candidate
 
       - name: Download previous release
+        id: previous-release
         run: |
           set -euo pipefail
           tag="${PREVIOUS_VERSION:-}"
@@ -141,7 +142,16 @@ jobs:
               python3 .github/scripts/release_select.py --channel "$PREVIOUS_CHANNEL" \
                 "${fallback[@]}" --min-core v0.1.0)
           fi
-          test -n "$tag"
+          if [ -z "$tag" ]; then
+            if [ -n "${PREVIOUS_VERSION:-}" ]; then
+              echo "::error::The explicitly requested previous release '$PREVIOUS_VERSION' was not found."
+              exit 1
+            fi
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No published stable/beta release with the required migration asset exists yet; upgrade testing is skipped until the first qualifying release is published."
+            exit 0
+          fi
+          echo "available=true" >> "$GITHUB_OUTPUT"
           echo "Previous release: $tag"
           mkdir -p previous
           gh release download "$tag" --repo "$GITHUB_REPOSITORY" \
@@ -152,6 +162,7 @@ jobs:
           tar -xzf previous/temps-linux-amd64.tar.gz -C previous
 
       - name: Verify binaries run
+        if: steps.previous-release.outputs.available == 'true'
         run: |
           chmod +x candidate/temps previous/temps
           previous/temps --version
@@ -161,11 +172,13 @@ jobs:
       # inside the test. postgres:18 is what the pre-migration backup uses
       # when no matching pg_dump is installed (the runner ships an older one).
       - name: Pre-pull images
+        if: steps.previous-release.outputs.available == 'true'
         run: |
           docker pull gotempsh/redis-walg:8-bookworm
           docker pull postgres:18
 
       - name: Upgrade, verify, guard and roll back
+        if: steps.previous-release.outputs.available == 'true'
         env:
           OLD_BIN: previous/temps
           NEW_BIN: candidate/temps
