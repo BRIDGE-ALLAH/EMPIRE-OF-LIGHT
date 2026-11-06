@@ -45,17 +45,17 @@ export function AppLoadingScreen() {
   return (
     <div
       role="status"
-      aria-label="Loading Temps"
+      aria-label="Loading MW-DEVPLATFORM"
       className="flex h-dvh w-full bg-background"
     >
       <aside className="hidden w-64 shrink-0 flex-col gap-6 border-r p-3 md:flex">
         <div className="flex items-center gap-2 px-1 pt-1">
           <span className="flex size-8 items-center justify-center">
             {logoIcon ?? (
-              <img src="/svg/temps-icon.svg" alt="" className="size-full" />
+              <img src="/svg/mw-icon.svg" alt="" className="size-full" />
             )}
           </span>
-          <span className="text-sm font-semibold">{logoText ?? 'Temps'}</span>
+          <span className="text-sm font-semibold">{logoText ?? 'MOONWITNESS'}</span>
         </div>
         <div className="space-y-2">
           {NAV_ROWS.map((row) => (
