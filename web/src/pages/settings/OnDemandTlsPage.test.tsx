@@ -40,7 +40,7 @@ test('renders the stored state, the restart note and every control', () => {
     external_url: 'https://203-0-113-7.sslip.io',
     letsencrypt: { email: 'ops@example.com' },
   })
-  expect(html).toContain('Saved state: on. Changes apply after Temps restarts.')
+  expect(html).toContain('Saved state: on. Changes apply after MW-DEVPLATFORM restarts.')
   expect(html).toContain('id="on-demand-tls-enabled"')
   expect(html).toContain('Effective zone: 203-0-113-7.sslip.io.')
   expect(html).toContain('id="on-demand-tls-max-concurrent"')

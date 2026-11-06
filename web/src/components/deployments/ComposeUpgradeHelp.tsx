@@ -76,7 +76,7 @@ export function ComposeUpgradeHelp({
             </p>
           )}
           <div className="space-y-2">
-            <p className="font-medium">1. Choose where Temps runs</p>
+            <p className="font-medium">1. Choose where MW-DEVPLATFORM runs</p>
             <div
               role="group"
               aria-label="MW-DEVPLATFORM installation"
@@ -164,7 +164,7 @@ export function ComposeUpgradeHelp({
           )}
 
           <div className="space-y-2">
-            <p className="font-medium">2. Verify the version Temps will use</p>
+            <p className="font-medium">2. Verify the version MW-DEVPLATFORM will use</p>
             <p className="text-muted-foreground">
               Run this as the same user and in the same environment as MW-DEVPLATFORM
               (inside the MW-DEVPLATFORM container for a Docker installation). Confirm v
@@ -178,7 +178,7 @@ export function ComposeUpgradeHelp({
           <div className="space-y-2">
             <p className="font-medium">3. Restart MW-DEVPLATFORM and retry</p>
             <p className="text-muted-foreground">
-              Restart the Temps service or container to run its startup check
+              Restart the MW-DEVPLATFORM service or container to run its startup check
               again. Refresh this console, then retry the Compose check or
               failed deployment. The warning clears when MW-DEVPLATFORM detects a
               supported plugin.

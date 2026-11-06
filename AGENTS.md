@@ -93,7 +93,7 @@ narrowest item. Existing variables and their justification:
 - **Use `require_service`** in plugins for dependencies the app cannot function without.
 - **Let the user configure and control their setup**: show status and give instructions; never do things silently on their behalf.
 - **Design new features for a small footprint** ([Scalability & Efficiency](#scalability--efficiency)) and **give every feature a visible surface that onboards when unconfigured** ([Feature Discoverability](#feature-discoverability)).
-- **Use Conventional Commits and sign off every commit** ([Commits and pull requests](#commits-and-pull-requests)).
+- **Use Conventional Commits** ([Commits and pull requests](#commits-and-pull-requests)).
 
 ## Errors
 
@@ -345,10 +345,4 @@ FORCE_WEB_BUILD=1 cargo build                # debug build with the web UI
   `Changelog` workflow validates **every** non-merge commit in `base..HEAD` and
   fails the PR on one bad subject. `git revert` defaults to `Revert "..."`, which
   is not conventional: pass an explicit conventional `-m`, or amend right after.
-- **DCO sign-off**: every commit carries a `Signed-off-by: Name <email>` trailer;
-  the DCO check also validates every commit in `base..HEAD`. Always
-  `git commit -s` (and `-s` on `--amend` and `revert`); never a plain
-  `git commit`. Repair with `git commit --amend --no-edit -s`. Before opening or
-  updating a PR, check every commit in the range
-  (`git log origin/main..HEAD --format='%h%n%B%n---'`); the hooks do not add it.
 - Read [`REVIEW.md`](./REVIEW.md) before opening the PR.

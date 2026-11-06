@@ -65,7 +65,7 @@ describe('post-restore WAL archiving guidance', () => {
   test('an imported disabled policy requires external startup changes instead of a failed repair', () => {
     const markup = renderPanel({ archive_mode: 'off', warnings: [] }, true)
     expect(markup).toContain('Continuous WAL archiving is disabled')
-    expect(markup).toContain('startup settings are managed outside Temps')
+    expect(markup).toContain('startup settings are managed outside MW-DEVPLATFORM')
     expect(markup).toContain('Enable archive_mode')
     expect(markup).toContain('restart it before creating a full backup')
     expect(markup).toContain('restore into a new managed service')

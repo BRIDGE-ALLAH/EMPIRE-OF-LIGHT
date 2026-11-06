@@ -1,8 +1,8 @@
-import { SaveRow, SettingsGroup } from '@temps-sdk/ds'
-import { SettingToggleRow } from '@/components/settings/SettingToggleRow'
 // SPDX-FileCopyrightText: 2024-2026 Temps Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
+import { SaveRow, SettingsGroup } from '@temps-sdk/ds'
+import { SettingToggleRow } from '@/components/settings/SettingToggleRow'
 import { ProjectResponse } from '@/api/client'
 import {
   deleteProjectMutation,
@@ -179,7 +179,7 @@ export function GeneralSettings({ project, refetch }: GeneralSettingsProps) {
     refetch()
   }
 
-  const handleToggleServesOwnMW-DEVPLATFORMApi = async (enabled: boolean) => {
+  const handleToggleServesOwnTempsApi = async (enabled: boolean) => {
     if (!project?.id) return
 
     await toast.promise(
@@ -317,7 +317,7 @@ export function GeneralSettings({ project, refetch }: GeneralSettingsProps) {
               </>
             }
             checked={project?.serves_own_temps_api ?? false}
-            onCheckedChange={handleToggleServesOwnMW-DEVPLATFORMApi}
+            onCheckedChange={handleToggleServesOwnTempsApi}
             disabled={updateProjectSettings.isPending}
           />
           {/* ADR-040: the backfill is a deliberate CLI action, so its status

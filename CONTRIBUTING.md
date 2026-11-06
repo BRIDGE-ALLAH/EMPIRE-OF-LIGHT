@@ -185,42 +185,9 @@ incompatible changes so the generated changelog calls them out. Regenerate
 tracked OpenAPI clients when the API changes, and record the source server
 release and verified compatibility range when releasing an SDK.
 
-### Developer Certificate of Origin (sign-off required)
+### Commits
 
-Every commit must be signed off under the [Developer Certificate of Origin](DCO)
-(DCO 1.1, the same one the Linux kernel uses). Signing off means you are
-certifying that you wrote the code, or that you have the right to submit it
-under this project's licenses. It is **not** a copyright assignment — you keep
-the copyright to your contribution.
-
-In practice it is one flag:
-
-```bash
-git commit -s -m "feat(auth): add JWT token refresh"
-```
-
-which appends a trailer matching your git author identity:
-
-```
-Signed-off-by: Your Name <your@email.example>
-```
-
-Make it the default for every repository you work in:
-
-```bash
-git config --global format.signOff true
-```
-
-The **DCO** CI job checks every commit in the pull request and fails if any of
-them is missing the trailer or if the trailer does not match the commit author.
-If you forgot, sign off the whole branch retroactively and force-push:
-
-```bash
-git rebase --signoff origin/main
-git push --force-with-lease
-```
-
-Merge commits and bot-authored commits (Dependabot) are exempt.
+Use Conventional Commits.
 
 ### Changelog (generated — do not edit)
 
@@ -276,7 +243,7 @@ Docker-dependent tests run as part of the normal test suite and skip gracefully 
 2. **Name your branch** descriptively: `feat/add-webhook-support`, `fix/deployment-timeout`.
 3. **Write your code** following the coding standards above.
 4. **Add tests** for any new functionality.
-5. **Commit** using Conventional Commits format, and sign off each commit with `git commit -s` (see [Developer Certificate of Origin](#developer-certificate-of-origin-sign-off-required)).
+5. **Commit** using Conventional Commits format.
 6. **Push** your branch and open a Pull Request targeting `main`.
 7. **Describe your changes** in the PR body: what changed, why, and how to test it.
 
@@ -288,7 +255,6 @@ Pre-commit hooks run automatically on each commit to check formatting (`cargo fm
 - [ ] Tests pass (`cargo test --lib`)
 - [ ] New functionality includes tests
 - [ ] Commit messages follow Conventional Commits (they generate the changelog — see below)
-- [ ] Every commit is signed off (`git commit -s`) per the [DCO](DCO)
 - [ ] PR description explains the change
 - [ ] Do **not** edit `CHANGELOG.md` — it is generated from your commit messages
 
@@ -302,7 +268,7 @@ This project follows a Code of Conduct to ensure a welcoming and inclusive commu
 
 ## License
 
-Temps is dual-licensed under the [MIT License](LICENSE-MIT) and [Apache License 2.0](LICENSE). By contributing, you agree that your contributions will be licensed under the same terms, and you certify their origin under the [Developer Certificate of Origin](DCO) by signing off each commit.
+Temps is dual-licensed under the [MIT License](LICENSE-MIT) and [Apache License 2.0](LICENSE). By contributing, you agree that your contributions will be licensed under the same terms.
 
 Forks may rename, rebrand, modify, and redistribute Temps under either license.
 When redistributing Temps code, retain its SPDX copyright and license headers
