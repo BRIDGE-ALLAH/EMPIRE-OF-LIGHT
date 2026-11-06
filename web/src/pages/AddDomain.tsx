@@ -432,7 +432,7 @@ export function AddDomain() {
                                         </div>
                                         <p className="text-sm text-muted-foreground">
                                           The tunnel carries every name under{' '}
-                                          {connector.domain}. Temps creates the
+                                          {connector.domain}. MW-DEVPLATFORM creates the
                                           DNS record and the provider serves
                                           HTTPS, so there is no certificate to
                                           issue and no port to open.
