@@ -158,7 +158,7 @@ export function OnDemandTlsPage() {
       reset(data)
       toast.success('On-demand TLS saved', {
         description:
-          'Restart Temps to apply the switch, zone and limits. The deployment URL mode applies right away.',
+          'Restart MW-DEVPLATFORM to apply the switch, zone and limits. The deployment URL mode applies right away.',
       })
     } catch {
       // useUpdateSettings already reports the server's reason in a toast.
@@ -223,7 +223,7 @@ export function OnDemandTlsPage() {
       >
         <SettingsGroup
           title="Issuance"
-          description={`Saved state: ${savedEnabled ? 'on' : 'off'}. Changes apply after Temps restarts.`}
+          description={`Saved state: ${savedEnabled ? 'on' : 'off'}. Changes apply after MW-DEVPLATFORM restarts.`}
         >
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-1">
