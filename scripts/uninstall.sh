@@ -43,7 +43,7 @@ docker info >/dev/null 2>&1 || fail "Docker daemon is not accessible."
 cd "$INSTALL_DIR"
 services=$(docker compose -p "$PROJECT_NAME" config --services) || fail "Compose configuration is invalid; nothing was removed."
 for service in temps postgres clickhouse; do
-  printf '%s\\n' "$services" | grep -Fxq "$service" || fail "Expected service '$service' is missing; refusing to remove this project."
+  printf '%s\n' "$services" | grep -Fxq "$service" || fail "Expected service '$service' is missing; refusing to remove this project."
 done
 
 printf '%s\n' "This will stop and remove containers and project networks for '$PROJECT_NAME'."
