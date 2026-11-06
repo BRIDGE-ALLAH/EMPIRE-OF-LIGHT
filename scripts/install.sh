@@ -86,7 +86,7 @@ mkdir -p -m 700 secrets
 if [[ -z "${TEMPS_ADMIN_EMAIL}" ]]; then
   read -r -p "Initial administrator email: " TEMPS_ADMIN_EMAIL
 fi
-[[ "$TEMPS_ADMIN_EMAIL" =~ ^[^[:space:]@]+@[^[:space:]@]+\.[^[:space:]@]+$ ]] || fail "A valid administrator email is required."
+[[ "$TEMPS_ADMIN_EMAIL" =~ ^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$ ]] || fail "A valid administrator email is required."
 DOCKER_GID=$(stat -c '%g' /var/run/docker.sock) || fail "Could not determine Docker socket group ID."
 POSTGRES_PASSWORD=$(openssl rand -hex 32)
 CLICKHOUSE_PASSWORD=$(openssl rand -hex 32)
