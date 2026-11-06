@@ -93,7 +93,7 @@ narrowest item. Existing variables and their justification:
 - **Use `require_service`** in plugins for dependencies the app cannot function without.
 - **Let the user configure and control their setup**: show status and give instructions; never do things silently on their behalf.
 - **Design new features for a small footprint** ([Scalability & Efficiency](#scalability--efficiency)) and **give every feature a visible surface that onboards when unconfigured** ([Feature Discoverability](#feature-discoverability)).
-- **Use Conventional Commits and sign off every commit** ([Commits and pull requests](#commits-and-pull-requests)).
+- **Use Conventional Commits** ([Commits and pull requests](#commits-and-pull-requests)).
 
 ## Errors
 
