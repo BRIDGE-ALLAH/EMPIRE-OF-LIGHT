@@ -1510,7 +1510,7 @@ export function DomainDetail() {
                 Certificate and domain history are preserved
               </AlertTitle>
               <AlertDescription>
-                Temps changes the route atomically without deleting the domain
+                MW-DEVPLATFORM changes the route atomically without deleting the domain
                 or its TLS certificate. Existing connections and a cold target
                 environment may still cause a brief interruption, so confirm the
                 destination is ready to serve this hostname.
