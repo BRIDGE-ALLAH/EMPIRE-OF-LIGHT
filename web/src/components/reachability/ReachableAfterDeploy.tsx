@@ -20,7 +20,7 @@ export function ReachableAfterDeploy({
   projectSlug,
   environmentId,
 }: {
-  /** The deploy succeeded and Temps serves the app. */
+  /** The deploy succeeded and MW-DEVPLATFORM serves the app. */
   enabled: boolean
   projectId: number
   projectSlug: string
@@ -37,7 +37,7 @@ export function ReachableAfterDeploy({
   const headline = reachability.data
     ? reachabilityHeadline(reachability.data)
     : null
-  // Said only when Temps knows nobody can open it and has a fix; while it
+  // Said only when MW-DEVPLATFORM knows nobody can open it and has a fix; while it
   // cannot tell, the header carries the state.
   const show = enabled && headline?.kind === 'not_reachable' && headline.canFix
   if (!show) return null
