@@ -59,7 +59,7 @@ test('the warning opens a guide with the detected version and copyable update an
   )
   expect(dialog.textContent).toContain('docker compose version')
   expect(dialog.textContent).toContain('same user')
-  expect(dialog.textContent).toContain('Restart Temps')
+  expect(dialog.textContent).toContain('Restart MW-DEVPLATFORM')
   expect(
     view.getByRole('button', { name: 'Copy Compose update command' })
   ).toBeTruthy()
@@ -87,8 +87,8 @@ test('switching installation changes the instructions without offering host pack
   expect(dialog.textContent).toContain('Check for updates')
   expect(dialog.textContent).not.toContain('sudo')
 
-  fireEvent.click(view.getByRole('button', { name: 'Temps in Docker' }))
-  expect(dialog.textContent).toContain('image that runs Temps')
+  fireEvent.click(view.getByRole('button', { name: 'MW-DEVPLATFORM in Docker' }))
+  expect(dialog.textContent).toContain('image that runs MW-DEVPLATFORM')
   expect(dialog.textContent).toContain('persistent volumes')
   expect(dialog.textContent).toContain('inside the container')
   expect(
