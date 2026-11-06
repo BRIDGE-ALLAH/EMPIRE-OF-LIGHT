@@ -488,7 +488,7 @@ export function HttpChecksSettings({
                 <>
                   <CredentialProviderMark provider={presetId} />
                   {presets.data?.find((preset) => preset.id === presetId)
-                    ?.name ?? 'Custom HTTP / Temps'}
+                    ?.name ?? 'Custom HTTP / MW-DEVPLATFORM'}
                 </>
               )}
             </p>
