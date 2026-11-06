@@ -48,7 +48,7 @@ const PHASE_LABEL: Record<SelfUpdatePhase, string> = {
   installing: 'Installing…',
   migrating: 'Applying database migrations…',
   restarting: 'Restarting the server…',
-  pending_restart: 'Installed — waiting for you to restart temps',
+  pending_restart: 'Installed — waiting for you to restart MW-DEVPLATFORM',
   failed: 'Failed',
 }
 
@@ -179,8 +179,8 @@ export function UpdateNowDialog({
                 : result?.status === 'failed'
                   ? 'Update failed'
                   : watching
-                    ? 'Updating temps'
-                    : 'Update temps'}
+                    ? 'Updating MW-DEVPLATFORM'
+                    : 'Update MW-DEVPLATFORM'}
           </AlertDialogTitle>
           <AlertDialogDescription asChild>
             <div className="space-y-3 text-sm">
@@ -280,7 +280,7 @@ function ConfirmBody({
   return (
     <>
       <p>
-        temps will download{' '}
+        MW-DEVPLATFORM will download{' '}
         <strong className="font-mono">
           {latestVersion ?? 'the latest release'}
         </strong>
@@ -296,7 +296,7 @@ function ConfirmBody({
       <p className="text-muted-foreground">
         {willRestart
           ? 'The server — including proxied traffic to your deployed apps — is unavailable for a few seconds while it restarts. The previous binary is kept alongside the new one so you can roll back by hand.'
-          : 'Nothing goes offline: temps keeps serving the current version until you restart it yourself, which is when the new version takes over. The previous binary is kept alongside the new one so you can roll back by hand.'}
+          : 'Nothing goes offline: MW-DEVPLATFORM keeps serving the current version until you restart it yourself, which is when the new version takes over. The previous binary is kept alongside the new one so you can roll back by hand.'}
       </p>
 
       {caveat && (
@@ -370,7 +370,7 @@ function WatchingBody({
       <p className="text-muted-foreground">
         {expectRestart
           ? 'The console loses contact with the server while it restarts — that is expected. This dialog reports the result as soon as it is back.'
-          : 'temps stays up while this runs; the new version takes over when you restart it.'}
+          : 'MW-DEVPLATFORM stays up while this runs; the new version takes over when you restart it.'}
       </p>
       {waitedTooLong && expectRestart && (
         <p className="flex gap-2 rounded border border-destructive/40 bg-destructive/10 p-2 text-destructive">
@@ -435,11 +435,11 @@ function ResultBody({ result }: { result: SelfUpdateAttempt }) {
       <>
         <p>
           <strong className="font-mono">{result.to_version}</strong> is
-          installed, but temps is still running{' '}
+          installed, but MW-DEVPLATFORM is still running{' '}
           <span className="font-mono">{result.from_version}</span>.
         </p>
         <p className="text-muted-foreground">
-          Nothing on this host restarts temps automatically, so the update goes
+          Nothing on this host restarts MW-DEVPLATFORM automatically, so the update goes
           live the next time you restart it yourself.
         </p>
         {result.previous_binary_path && (
@@ -455,7 +455,7 @@ function ResultBody({ result }: { result: SelfUpdateAttempt }) {
     return (
       <>
         <p>
-          temps is now running{' '}
+          MW-DEVPLATFORM is now running{' '}
           <strong className="font-mono">{result.to_version}</strong> (was{' '}
           <span className="font-mono">{result.from_version}</span>).
         </p>
