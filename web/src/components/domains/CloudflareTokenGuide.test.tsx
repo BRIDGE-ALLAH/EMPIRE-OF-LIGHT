@@ -29,7 +29,7 @@ describe('CloudflareTokenChecklist', () => {
       renderToStaticMarkup(<CloudflareTokenGuide tunnel="required" />),
     ]) {
       expect(html).toContain('Covers every tunnel in this Cloudflare account')
-      expect(html).toContain('use a separate Cloudflare account for Temps')
+      expect(html).toContain('use a separate Cloudflare account for MW-DEVPLATFORM')
       expect(html).toContain('Client IP Address Filtering')
     }
   })
@@ -50,7 +50,7 @@ describe('token template link', () => {
     expect(CLOUDFLARE_TOKEN_TEMPLATE_URL).toBe(
       'https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=' +
         '%5B%7B%22key%22%3A%22zone%22%2C%22type%22%3A%22read%22%7D%2C%7B%22key%22%3A%22dns%22%2C' +
-        '%22type%22%3A%22edit%22%7D%5D&accountId=*&zoneId=all&name=Temps'
+        '%22type%22%3A%22edit%22%7D%5D&accountId=*&zoneId=all&name=MW-DEVPLATFORM'
     )
     const keys = JSON.parse(
       new URL(CLOUDFLARE_TOKEN_TEMPLATE_URL).searchParams.get(
