@@ -181,7 +181,7 @@ export function ErrorGroupDetail({ project }: { project: ProjectResponse }) {
   // Tell the assistant which error the user is looking at.
   const assistantContext = errorGroup
     ? [
-        'The user is viewing an error group (error tracking) in the Temps console.',
+        'The user is viewing an error group (error tracking) in the MW-DEVPLATFORM console.',
         `Service: "${project.name}" (project slug: ${project.slug}, project id: ${project.id}).`,
         `Error group #${errorGroupId}: "${errorGroup.title}" (type: ${errorGroup.error_type ?? 'unknown'}).`,
         `Seen ${errorGroup.total_count} time(s); first ${errorGroup.first_seen}, last ${errorGroup.last_seen}.`,
