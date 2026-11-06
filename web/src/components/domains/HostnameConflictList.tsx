@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024-2026 Temps Contributors
+// SPDX-FileCopyrightText: 2024-2026 MW-DEVPLATFORM Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 import type { DnsRecordConflict } from '@/api/client'
@@ -19,8 +19,8 @@ interface HostnameConflictListProps {
 }
 
 /**
- * Generated hostnames whose DNS records Temps will not write without the
- * user's say. Each one is adopted (Temps takes the record over and points
+ * Generated hostnames whose DNS records MW-DEVPLATFORM will not write without the
+ * user's say. Each one is adopted (MW-DEVPLATFORM takes the record over and points
  * it at the new value) or skipped (its record is left exactly as it is).
  * There is deliberately no "adopt all": every record is confirmed on its
  * own, next to its current value.
@@ -38,8 +38,8 @@ export function HostnameConflictList({
   return (
     <div className="space-y-3">
       <Callout tone="warning" title={title}>
-        Temps never overwrites a DNS record it does not manage. Adopt a record
-        to let Temps take it over and point it at the new value, or skip its
+        MW-DEVPLATFORM never overwrites a DNS record it does not manage. Adopt a record
+        to let MW-DEVPLATFORM take it over and point it at the new value, or skip its
         hostname to leave the record exactly as it is. All other changes are
         applied either way.
       </Callout>
