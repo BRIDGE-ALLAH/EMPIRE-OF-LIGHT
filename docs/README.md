@@ -7,7 +7,8 @@ This is the documentation home for the unified ARSY platform monorepo.
 - Product narrative: PRODUCT_NARRATIVE.md — final ecosystem identity, ARSY definition, technology roles, and non-overlap rules.
 - Unified monorepo blueprint: BLUEPRINT.md — single-repository architecture, Node/Rust boundary, migration sequence, VPS direction, and acceptance gates.
 - Brand system: BRAND_SYSTEM.md — approved naming, language, and provenance rules.
-- Monorepo consolidation plan: MONOREPO_CONSOLIDATION.md — source inventory, migration ledger requirements, phased consolidation, and retirement gates.
+- Monorepo consolidation plan: MONOREPO_CONSOLIDATION.md — source inventory, migration phases, and retirement gates.
+- Migration ledger: migration/MIGRATION_LEDGER.md — source-to-destination tracking; currently an inventory baseline, not a completed migration.
 
 ## Technical references
 
