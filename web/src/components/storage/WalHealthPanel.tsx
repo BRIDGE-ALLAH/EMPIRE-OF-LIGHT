@@ -135,7 +135,7 @@ export function WalHealthPanel({
                     This imported database’s startup settings are managed outside
                     MW-DEVPLATFORM. Enable archive_mode in its external PostgreSQL startup
                     settings and restart it before creating a full backup.
-                    Alternatively, restore into a new managed service. Temps
+                    Alternatively, restore into a new managed service. MW-DEVPLATFORM
                     cannot change the imported container’s startup command.
                   </>
                 ) : (
