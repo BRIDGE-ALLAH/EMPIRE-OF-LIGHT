@@ -124,7 +124,7 @@ export function BaseDomainStep({
                 <li>
                   • Preview deployments: *.preview.{value || 'example.com'}
                 </li>
-                <li>• Main access URL: temps.{value || 'example.com'}</li>
+                <li>• Main access URL: mw.{value || 'example.com'}</li>
               </ul>
             </div>
           </AlertDescription>
