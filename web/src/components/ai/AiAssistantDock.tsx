@@ -1170,7 +1170,7 @@ export function DockBody({
             size="sm"
             onClick={startAssistant}
             className="h-8 gap-1"
-            title="Ask Temps to inspect or change something"
+            title="Ask MOONWITNESS to inspect or change something"
           >
             <Sparkles className="h-4 w-4" />
             New
@@ -1209,7 +1209,7 @@ export function DockBody({
   )
 
   const headerTitle = inAssistant
-    ? (assistant?.conversation.title ?? 'Temps assistant')
+    ? (assistant?.conversation.title ?? 'MOONWITNESS assistant')
     : inConversation
       ? (active?.title ?? 'AI chat')
       : picking
@@ -1356,10 +1356,10 @@ export function DockBody({
                 size="sm"
                 onClick={startAssistant}
                 className={cn('mr-1 h-8 gap-1', isPage && 'lg:hidden')}
-                title="Ask Temps to inspect or change something"
+                title="Ask MOONWITNESS to inspect or change something"
               >
                 <Sparkles className="h-4 w-4" />
-                <span className="hidden sm:inline">Ask Temps</span>
+                <span className="hidden sm:inline">Ask MOONWITNESS</span>
               </Button>
             )}
             {!inConversation &&
@@ -1543,7 +1543,7 @@ export function DockBody({
               <div>
                 <p className="font-medium">No AI conversations yet</p>
                 <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-                  Ask Temps to inspect or change your setup, or start a project
+                  Ask MOONWITNESS to inspect or change your setup, or start a project
                   chat to investigate deployments, logs, traces, and errors.
                 </p>
               </div>
@@ -1801,7 +1801,7 @@ function ConversationList({
         <MessageSquare className="h-7 w-7 text-muted-foreground" />
         <p className="text-sm font-medium">No AI conversations yet</p>
         <p className="max-w-xs text-sm text-muted-foreground">
-          Click “Ask Temps” to manage your setup by chat, “New chat” to start
+          Click “Ask MOONWITNESS” to manage your setup by chat, “New chat” to start
           one for a project, or open a failed deployment / firing alert and
           choose “Debug with AI”.
         </p>
