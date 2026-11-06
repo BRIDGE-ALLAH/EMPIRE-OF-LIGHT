@@ -368,9 +368,9 @@ export function ManualProjectConfigurator({
       )
       if (blockedIndex >= 0) {
         form.setError(`environmentVariables.${blockedIndex}.key`, {
-          message: 'Temps provides this variable automatically at deployment',
+          message: 'MW-DEVPLATFORM provides this variable automatically at deployment',
         })
-        toast.error('Remove the environment variable managed by Temps.')
+        toast.error('Remove the environment variable managed by MW-DEVPLATFORM.')
         return
       }
       setIsSubmitting(true)
@@ -825,7 +825,7 @@ export function ManualProjectConfigurator({
             form.setValue('environmentVariables', [...currentVars, ...newVars])
             if (skippedCount > 0) {
               toast.info(
-                `Skipped ${skippedCount} variable${skippedCount === 1 ? '' : 's'} provided automatically by Temps`
+                `Skipped ${skippedCount} variable${skippedCount === 1 ? '' : 's'} provided automatically by MW-DEVPLATFORM`
               )
             }
           }}
