@@ -1346,7 +1346,7 @@ export default function ProxyMetrics() {
       <PageContainer innerClassName="space-y-6">
         <PageHeader
           title="Proxy"
-          description="Hot-path traffic and latency metrics for the Temps proxy"
+          description="Hot-path traffic and latency metrics for the MW-DEVPLATFORM proxy"
           actions={
             <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
               {/* Per-project views read the control plane's request logs,
@@ -1418,7 +1418,7 @@ export default function ProxyMetrics() {
               <p className="mb-4 text-sm text-muted-foreground">
                 Sockets are file descriptors, so descriptor exhaustion is how
                 the proxy stops accepting connections. Collected on Linux only.
-                Temps alerts on these automatically —{' '}
+                MW-DEVPLATFORM alerts on these automatically —{' '}
                 <Link
                   to="/monitoring/rules"
                   className="underline underline-offset-2 hover:text-foreground"
