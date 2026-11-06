@@ -730,7 +730,7 @@ export default function DnsProviderDetail() {
                 <div>
                   <CardTitle>Managed zones</CardTitle>
                   <CardDescription>
-                    DNS zones Temps can use to manage records for projects
+                    DNS zones MW-DEVPLATFORM can use to manage records for projects
                   </CardDescription>
                 </div>
                 <div className="flex items-center gap-2">
@@ -882,7 +882,7 @@ export default function DnsProviderDetail() {
                                   Sync DNS records
                                 </label>
                                 <p className="pl-12 text-xs text-muted-foreground">
-                                  Lets Temps create and update DNS records for
+                                  Lets MW-DEVPLATFORM create and update DNS records for
                                   generated project addresses in this zone.
                                   Existing custom domains are managed
                                   separately.
@@ -922,7 +922,7 @@ export default function DnsProviderDetail() {
                           )}
                           {domain.proxied_by_default && (
                             <p className="text-xs text-muted-foreground">
-                              Public TLS terminates at Cloudflare; Temps serves
+                              Public TLS terminates at Cloudflare; MW-DEVPLATFORM serves
                               a self-signed origin certificate. Cloudflare Full
                               does not authenticate the origin. Full (strict)
                               needs a separately installed valid certificate for
