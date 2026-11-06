@@ -75,6 +75,7 @@ if ! command -v curl >/dev/null 2>&1 || ! command -v tar >/dev/null 2>&1 || ! co
 fi
 if ! command -v docker >/dev/null 2>&1; then
   info "Installing Docker Engine and Compose v2 from the official Docker repository..."
+  apt-get update
   DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl gnupg
   install -m 0755 -d /etc/apt/keyrings
   curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error https://download.docker.com/linux/"$ID"/gpg -o /etc/apt/keyrings/docker.asc
@@ -97,7 +98,7 @@ docker info >/dev/null 2>&1 || {
   docker info >/dev/null 2>&1 || fail "Docker daemon is not accessible."
 }
 mem_gib=$(awk '/MemTotal:/ {printf "%d", $2/1024/1024}' /proc/meminfo)
-disk_gib=$(df -Pk "$(dirname "$INSTALL_DIR")" 2>/dev/null | awk 'NR==2 {printf "%d", $4/1024/1024}')
+disk_gib=$(df -Pk / 2>/dev/null | awk 'NR==2 {printf "%d", $4/1024/1024}')
 cpu_count=$(getconf _NPROCESSORS_ONLN 2>/dev/null || printf '1')
 (( mem_gib >= 8 )) || warn "VPS has ${mem_gib} GiB RAM; 8 GiB or more is recommended for source builds."
 (( disk_gib >= 40 )) || warn "VPS has ${disk_gib} GiB free; at least 40 GiB is recommended for image builds and persistent data."
