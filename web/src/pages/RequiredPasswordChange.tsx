@@ -208,8 +208,8 @@ export function RequiredPasswordChange() {
     <div className="flex min-h-dvh flex-col items-center justify-center bg-background p-4">
       <div className="w-full max-w-md space-y-6">
         <div className="flex items-center justify-center gap-3">
-          <img src="/svg/temps-icon.svg" alt="Temps logo" className="size-12" />
-          <div className="text-2xl font-semibold">Temps</div>
+          <img src="/svg/mw-icon.svg" alt="MOONWITNESS logo" className="size-12" />
+          <div className="text-2xl font-semibold">MOONWITNESS</div>
         </div>
 
         <Card>
@@ -219,7 +219,7 @@ export function RequiredPasswordChange() {
             </CardTitle>
             <CardDescription className="text-pretty text-base sm:text-sm">
               Your administrator requires you to replace the temporary password
-              before accessing Temps.
+              before accessing MW-DEVPLATFORM.
             </CardDescription>
           </CardHeader>
           <CardContent>
