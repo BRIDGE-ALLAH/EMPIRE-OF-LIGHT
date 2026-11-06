@@ -35,7 +35,7 @@ function radio(view: ReturnType<typeof render>, name: string) {
 
 test('follows a hosting change made elsewhere instead of offering to save it', async () => {
   const view = render(card('hosted'))
-  expect(radio(view, 'Temps runs it').getAttribute('aria-checked')).toBe('true')
+  expect(radio(view, 'MW-DEVPLATFORM runs it').getAttribute('aria-checked')).toBe('true')
   expect(saveButton(view).disabled).toBe(true)
 
   // The project is marked external elsewhere (another tab, a refetch).
@@ -55,6 +55,6 @@ test('an unsaved choice enables Save and says what saving it does', async () => 
   })
   expect(saveButton(view).disabled).toBe(false)
   expect(
-    view.getByText(/Running deployments keep running; Temps refuses new ones/)
+    view.getByText(/Running deployments keep running; MW-DEVPLATFORM refuses new ones/)
   ).not.toBeNull()
 })
