@@ -2071,7 +2071,7 @@ function IngestKeySetup({ project }: ProjectAnalyticsProps) {
 
 // Analytics Setup Component
 /**
- * Offered when a project hosted by MW-DEVPLATFORM is set up as "not hosted on Temps":
+ * Offered when a project hosted by MW-DEVPLATFORM is set up as "not hosted on MW-DEVPLATFORM":
  * marking it External labels it and stops MW-DEVPLATFORM from trying to deploy it.
  */
 function MarkExternalNotice({ project }: ProjectAnalyticsProps) {
