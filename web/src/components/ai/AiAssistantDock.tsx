@@ -1550,7 +1550,7 @@ export function DockBody({
               <div className="flex gap-2">
                 <Button size="sm" onClick={startAssistant}>
                   <Sparkles className="mr-1.5 size-4" />
-                  Ask Temps
+                  Ask MOONWITNESS
                 </Button>
                 <Button size="sm" variant="outline" onClick={startPicking}>
                   <Plus className="mr-1.5 size-4" />
