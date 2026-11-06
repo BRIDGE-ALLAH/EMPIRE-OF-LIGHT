@@ -634,7 +634,7 @@ export function MonitoringSettingsPage() {
             </SelectContent>
           </Select>
           <p className="mt-2 text-xs leading-5 text-muted-foreground">
-            Controls how often Temps samples CPU, memory, database, container,
+            Controls how often MW-DEVPLATFORM samples CPU, memory, database, container,
             and node metrics. Shorter intervals show finer detail but create
             more raw metric rows.
           </p>
@@ -1129,7 +1129,7 @@ export function MonitoringSettingsPage() {
                 </div>
                 <p className="min-h-10 text-xs leading-5 text-muted-foreground">
                   Stores application metric points sent by OpenTelemetry SDKs
-                  and collectors. These are separate from the Temps-scraped
+                  and collectors. These are separate from the MW-DEVPLATFORM-scraped
                   resource metrics configured above.
                 </p>
                 <DurationInput
@@ -1194,7 +1194,7 @@ export function MonitoringSettingsPage() {
       <SettingsSection
         title="Geolocation database"
         icon={Globe}
-        description="Keep the MaxMind GeoLite2 city database current. With a free MaxMind license key Temps downloads the latest build itself; without one it falls back to the copy shipped with the repository, which is only as current as the release."
+        description="Keep the MaxMind GeoLite2 city database current. With a free MaxMind license key MW-DEVPLATFORM downloads the latest build itself; without one it falls back to the copy shipped with the repository, which is only as current as the release."
       >
         <div className="space-y-4">
           <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">
