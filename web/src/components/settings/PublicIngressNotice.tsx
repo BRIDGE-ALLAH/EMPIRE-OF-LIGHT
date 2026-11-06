@@ -13,10 +13,10 @@ interface PublicIngressNoticeProps {
 }
 
 /**
- * Warns when Temps can tell that third parties cannot reach the URL they are
+ * Warns when MW-DEVPLATFORM can tell that third parties cannot reach the URL they are
  * given (ADR-051). Without it the only symptom is data that never arrives —
  * an Opens column that stays at zero, a push that deploys nothing — because
- * the failing request never reaches Temps to be reported.
+ * the failing request never reaches MW-DEVPLATFORM to be reported.
  *
  * Renders nothing when callbacks can arrive, or when the status is unknown.
  */
