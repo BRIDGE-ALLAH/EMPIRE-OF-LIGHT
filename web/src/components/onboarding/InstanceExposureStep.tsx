@@ -17,7 +17,7 @@ export function InstanceExposureStep({
   return (
     <div className="space-y-6">
       <div className="text-center space-y-2">
-        <h2 className="text-2xl font-bold">Welcome to Temps!</h2>
+        <h2 className="text-2xl font-bold">Welcome to MOONWITNESS!</h2>
         <p className="text-muted-foreground">
           Let&apos;s set up your deployment platform
         </p>
@@ -122,7 +122,7 @@ export function InstanceExposureStep({
                   No, keep local only
                 </h3>
                 <p className="text-sm text-muted-foreground mb-3">
-                  Run Temps on your local network without internet exposure
+                  Run MW-DEVPLATFORM on your local network without internet exposure
                 </p>
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
