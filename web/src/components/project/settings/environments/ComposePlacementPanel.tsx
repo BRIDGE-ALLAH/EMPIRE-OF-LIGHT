@@ -200,7 +200,7 @@ function homeOfflineExplanation(
   if (movePending) {
     return `The next deployment cannot start the stack there, and its volumes are on ${placement.moving_from_node_name}, which is ${placement.moving_from_node_status ?? 'unavailable'}, so its running state is unknown. Bring either node back online: ${placement.moving_from_node_name} to cancel the move and keep its data, or ${placement.home_node_name} to complete it with empty volumes.`
   }
-  return 'Deployments of this stack fail until it is back, because its volumes are on it. Temps never moves a Compose stack on its own; bring the node back online, or move the stack (its data stays behind).'
+  return 'Deployments of this stack fail until it is back, because its volumes are on it. MW-DEVPLATFORM never moves a Compose stack on its own; bring the node back online, or move the stack (its data stays behind).'
 }
 
 interface MoveComposeStackDialogProps {
@@ -353,7 +353,7 @@ function composeMoveDescription(
   if (placement.moving_from_node_id != null) {
     return `Its volumes are on ${runningNodeName}, which is ${placement.moving_from_node_status ?? 'unavailable'}, so the move cannot be cancelled until that node is back. The next deployment starts it on ${placement.home_node_name} with empty volumes; choose another node to start it there instead.`
   }
-  return `It runs on ${placement.home_node_name} and keeps its volumes there. On the next deployment Temps stops it there and starts it on the node you choose with empty volumes.`
+  return `It runs on ${placement.home_node_name} and keeps its volumes there. On the next deployment MW-DEVPLATFORM stops it there and starts it on the node you choose with empty volumes.`
 }
 
 function moveButtonLabel(pending: boolean, cancelsMove: boolean): string {
