@@ -473,7 +473,7 @@ export function ScheduleDetail() {
                   <span>
                     Included{' '}
                     <span className="text-muted-foreground">
-                      (Temps&apos;s own database is backed up every run)
+                      (MW-DEVPLATFORM&apos;s own database is backed up every run)
                     </span>
                   </span>
                 ) : (
