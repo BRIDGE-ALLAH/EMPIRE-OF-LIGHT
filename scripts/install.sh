@@ -61,7 +61,7 @@ command -v sed >/dev/null 2>&1 || fail "sed is required."
 if [[ -e "$INSTALL_DIR" ]]; then
   fail "Install path already exists: $INSTALL_DIR. Move/backup it yourself; installer will not overwrite existing data."
 fi
-for name in temps-postgres temps-clickhouse temps-app temps-ingress; do
+for name in temps-postgres temps-clickhouse temps-app temps-ingress temps-admin-ingress; do
   if docker ps -a --format '{{.Names}}' | grep -Fxq "$name"; then
     fail "A container named '$name' already exists. Nothing was stopped or removed; resolve the conflict manually."
   fi
