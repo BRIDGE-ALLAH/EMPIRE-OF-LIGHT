@@ -63,7 +63,7 @@ const SOURCE_DETAILS: Record<
     description: 'Trace export and service metadata',
   },
   temps: {
-    label: 'Temps platform',
+    label: 'MW-DEVPLATFORM platform',
     description: 'Deployment APIs and scheduled request authentication',
   },
 }
@@ -107,7 +107,7 @@ export function ProvidedEnvironmentVariables({
     () => [
       ...platformVariables.map((variable) => ({
         name: variable.name,
-        provider: 'Temps',
+        provider: 'MW-DEVPLATFORM',
         isUserOverridable: variable.is_user_overridable,
       })),
       ...databases.flatMap((database, index) =>
@@ -151,7 +151,7 @@ export function ProvidedEnvironmentVariables({
             type="button"
             variant="ghost"
             className="h-auto w-full justify-start rounded-none px-4 py-3 text-left hover:bg-primary/[0.06]"
-            aria-label={`${isOpen ? 'Hide' : 'Show'} environment variables provided by Temps`}
+            aria-label={`${isOpen ? 'Hide' : 'Show'} environment variables provided by MW-DEVPLATFORM`}
           >
             <div className="flex w-full items-center gap-3">
               <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-primary/25 bg-background">
@@ -159,7 +159,7 @@ export function ProvidedEnvironmentVariables({
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-sm font-medium">Provided by Temps</span>
+                  <span className="text-sm font-medium">Provided by MW-DEVPLATFORM</span>
                   {isLoading ? (
                     <Skeleton className="h-4 w-20 rounded-full" />
                   ) : totalVariableCount > 0 ? (
@@ -349,7 +349,7 @@ export function ProvidedEnvironmentVariableWarning({
         provided by {collision.provider}.{' '}
         {collision.isUserOverridable
           ? 'Your value takes precedence.'
-          : 'Temps will override this value; remove it or use another key.'}
+          : 'MW-DEVPLATFORM will override this value; remove it or use another key.'}
       </p>
     </div>
   )
