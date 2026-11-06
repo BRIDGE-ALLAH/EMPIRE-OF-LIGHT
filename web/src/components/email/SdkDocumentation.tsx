@@ -338,7 +338,7 @@ const response = await fetch('https://your-temps-instance.com/api/emails', {
     from: 'hello@mail.example.com',
     from_name: 'My App',
     to: ['user@example.com'],
-    subject: 'Hello from Temps!',
+    subject: 'Hello from MW-DEVPLATFORM!',
     html: '<h1>Hello!</h1><p>This is a test email.</p>',
     text: 'Hello! This is a test email.',
     tags: ['test'],
