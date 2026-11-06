@@ -134,7 +134,7 @@ export default defineConfig({
   },
   html: {
     title: 'MOONWITNESS — MW-DEVPLATFORM',
-    favicon: './public/svg/mw-icon.svg',
+    favicon: './public/favicon.svg',
     // Rsbuild's built-in shell is a bare `<html>`; this one declares the
     // document language so assistive technology reads it correctly
     // (WCAG 3.1.1).
