@@ -1282,7 +1282,7 @@ export function AddDnsProvider() {
                       >
                         Open Bunny account settings
                       </a>{' '}
-                      to find your key. Temps checks access and encrypts the key
+                      to find your key. MW-DEVPLATFORM checks access and encrypts the key
                       before saving. Next, choose an existing DNS zone. CDN Pull
                       Zones are configured separately.
                     </FormDescription>
