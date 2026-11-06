@@ -197,7 +197,7 @@ export function ServiceTemplateRuntimeCard({
               Service template details unavailable
             </CardTitle>
             <CardDescription>
-              Temps could not read this service&apos;s saved template release.
+              MW-DEVPLATFORM could not read this service&apos;s saved template release.
               Its current runtime is still editable, but upgrades and resetting
               to template defaults are disabled until this is resolved.
             </CardDescription>
@@ -297,7 +297,7 @@ export function ServiceTemplateRuntimeCard({
               <div className="flex items-start gap-3 rounded-lg border bg-muted/25 p-3 text-sm">
                 <Boxes className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
                 <p className="text-muted-foreground">
-                  Temps pulls this image directly; there is no source build. A
+                  MW-DEVPLATFORM pulls this image directly; there is no source build. A
                   new image version is applied when you deploy again. Existing
                   containers keep running until that deployment is ready.
                 </p>
