@@ -35,7 +35,7 @@ const options: Array<{
     mode: 'project_environment',
     title: 'Database per environment',
     description:
-      'Production and previews stay isolated. This is the existing Temps behavior.',
+      'Production and previews stay isolated. This is the existing MW-DEVPLATFORM behavior.',
     icon: Layers3,
   },
   {
@@ -189,7 +189,7 @@ export function DatabaseProvisioningDialog({
               </p>
             ) : (
               <p className="text-xs leading-relaxed text-muted-foreground">
-                Temps reuses this database if it exists, or creates it on the
+                MW-DEVPLATFORM reuses this database if it exists, or creates it on the
                 first deployment.
               </p>
             )}
