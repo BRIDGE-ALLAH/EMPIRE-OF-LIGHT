@@ -63,7 +63,7 @@ export function PeoplePicker({
     return (
       <p className="text-sm text-muted-foreground">
         {kind === 'teams'
-          ? 'Temps could not list the teams.'
+          ? 'MW-DEVPLATFORM could not list the teams.'
           : 'Only instance admins can list people.'}{' '}
         Leave it empty to let everyone with access to the project sign in.
       </p>
