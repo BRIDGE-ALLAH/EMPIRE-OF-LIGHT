@@ -6,7 +6,7 @@ from the automated reviewer, the rest from maintainers. The findings repeat, so
 this file lists the repeats. Before you open a PR, check your change against the
 sections that apply and ask "why this and not the alternative?".
 
-Process rules (attribution, commits, DCO) are in [`AGENTS.md`](./AGENTS.md).
+Process rules (attribution and commits) are in [`AGENTS.md`](./AGENTS.md).
 Engineering rules (errors, architecture, tests) are in [`AGENTS.md`](./AGENTS.md).
 This file covers what those two do not: the failure modes that have blocked merges.
 
