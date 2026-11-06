@@ -39,7 +39,7 @@ function MissingPublicUrl({
         <p>
           Once it is set, this page&apos;s link appears here, for example{' '}
           <code className="text-xs">
-            https://temps.example.com/api/status/…
+            https://mw.example.com/api/status/…
           </code>
           . Until then there is nothing to copy or open.
         </p>
