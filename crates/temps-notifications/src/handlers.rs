@@ -2782,7 +2782,7 @@ mod tests {
                     "smtp_port": 587,
                     "username": "mailer",
                     "password": "mail-secret",
-                    "from_name": "Temps",
+                    "from_name": "MOONWITNESS",
                     "from_address": "alerts@example.com",
                     "to_addresses": ["ops@example.com"],
                     "tls_mode": "Starttls",
