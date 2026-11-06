@@ -383,7 +383,7 @@ function AiSummaryDefaultsCard({
           AI summary defaults (all screens)
         </CardTitle>
         <CardDescription>
-          Controls only AI summaries across Temps. This is separate from each
+          Controls only AI summaries across MW-DEVPLATFORM. This is separate from each
           gateway key&apos;s default model; choose “Use provider/key default” to
           inherit that setting.
         </CardDescription>
