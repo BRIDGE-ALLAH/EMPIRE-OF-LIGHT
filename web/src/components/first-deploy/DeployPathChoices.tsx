@@ -26,7 +26,7 @@ const DEPLOY_PATH_CHOICES: readonly DeployPathChoice[] = [
     key: 'git',
     title: 'Deploy from Git',
     description:
-      'Connect GitHub or GitLab, or paste a public repository URL. Temps detects the framework and redeploys on every push.',
+      'Connect GitHub or GitLab, or paste a public repository URL. MW-DEVPLATFORM detects the framework and redeploys on every push.',
     example: 'A Next.js, Vite, Go, Python or Dockerfile repository',
     href: '/projects/new?source=browse',
     icon: GitBranch,
