@@ -1670,7 +1670,7 @@ function DiscoveredEnvironmentVariableRow({
               status: 'warning',
               label: 'Value missing',
               detail:
-                'Declared in your repository but not configured in Temps.',
+                'Declared in your repository but not configured in MW-DEVPLATFORM.',
             },
           ]}
         />
