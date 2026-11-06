@@ -72,10 +72,10 @@ Prerequisites: Docker Engine, Docker Compose v2, `curl`, `tar`, and OpenSSL. The
 Review `docker-compose.yml`, `.env.example`, [release readiness](docs/RELEASE_READINESS.md), and the Docker-socket security boundary before installation. The bootstrap downloads the selected GitHub branch archive into `/opt/empire-of-light` by default and refuses to overwrite an existing directory.
 
 ```bash
-git clone https://github.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT.git
-cd EMPIRE-OF-LIGHT
-sudo bash scripts/install-empire-of-light.sh --branch main
+curl -fsSL https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/main/scripts/install-empire-of-light.sh | sudo bash -s -- --branch main
 ```
+
+To review the installer before execution, download it first and inspect the file. The one-line command runs the script with root privileges.
 
 To prepare configuration without starting containers:
 
