@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 // *Make it reachable* as a page (ADR 069): who can open it, at which
-// address and how visitors get in, exactly what Temps will do, and the run
+// address and how visitors get in, exactly what MW-DEVPLATFORM will do, and the run
 // that does it. The backend says first which audiences can work for this
 // environment, so the user only picks among options that do; the URL holds
 // the choices and the run, so every entry point links here and a run can be
@@ -105,7 +105,7 @@ const AUDIENCE_COPY: Record<PageAudience, { label: string; help: string }> = {
   },
   signed_in: {
     label: 'People who sign in',
-    help: 'A public address with a sign-in in front: the Temps sign-in, or Cloudflare Access.',
+    help: 'A public address with a sign-in in front: the MW-DEVPLATFORM sign-in, or Cloudflare Access.',
   },
   private: {
     label: 'Only my private network',
@@ -223,7 +223,7 @@ function ReachabilityFlow({
     <div className="w-full min-w-0 space-y-6">
       <PageHeader
         title="Make it reachable"
-        description={`Give ${environment.name} an address, for the people who should open it. Temps sets up only what is missing, and can undo it.`}
+        description={`Give ${environment.name} an address, for the people who should open it. MW-DEVPLATFORM sets up only what is missing, and can undo it.`}
         actions={
           <Button variant="outline" asChild>
             <Link to={domainsHref}>Who can reach it</Link>
@@ -704,8 +704,8 @@ function PlanForm({
             {option ? (
               <div className="grid gap-6 lg:grid-cols-2">
                 <div className="min-w-0 space-y-2">
-                  <h3 className="text-sm font-medium">What Temps will do</h3>
-                  <ol className="space-y-2" aria-label="What Temps will do">
+                  <h3 className="text-sm font-medium">What MW-DEVPLATFORM will do</h3>
+                  <ol className="space-y-2" aria-label="What MW-DEVPLATFORM will do">
                     {option.steps.map((step, index) => (
                       <li
                         key={`${step.kind}-${index}`}
@@ -768,7 +768,7 @@ function PlanForm({
               </div>
             ) : (
               <p className="text-sm text-muted-foreground">
-                Pick a way in to see exactly what Temps will create.
+                Pick a way in to see exactly what MW-DEVPLATFORM will create.
               </p>
             )}
           </section>
