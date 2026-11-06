@@ -315,6 +315,29 @@ The requested references were `moonwitnessxv` and `A-L-L-AH.COM`. They could not
 
 The MoonWitness interpretation and values in this document are an original working brand synthesis for MW-DEVPLATFORM. Before treating them as the definitive founder narrative, verify the intended source URLs and review their original content with the project owner.
 
+## 14. Release readiness — evidence-based status
+
+The brand and product direction are documented, but documentation completion is not equivalent to software completion.
+
+At the time of this update:
+- The repository contains multiple GitHub Actions workflow definitions.
+- The GitHub repository API returned no recent workflow-run records and no published release records.
+- The only branch returned by the repository API was `main`; no open pull requests or issues were returned.
+- The current deployment manifests and Cargo workspace retain Temps identifiers.
+- No independent clean-host install, sample-app deployment, restore drill, or upgrade/rollback result was available as evidence in this review.
+
+Accordingly, the release is **not certified production-ready**. This is an evidence status, not a claim that the software is broken.
+
+The operational acceptance process is now documented in [Release Readiness & Operator Runbook](RELEASE_READINESS.md). A release owner must attach reproducible CI, build, security, installation, sample deployment, backup/restore, and upgrade/rollback evidence before checking off the Definition of Done in this blueprint.
+
+The next engineering sequence is:
+1. Run the existing CI and test workflows against the exact release commit; fix failures and retain run links.
+2. Validate the Compose stack on a clean supported Linux host using private, unique credentials.
+3. Deploy a sample application and verify ingress, TLS, logs, health, and observability end to end.
+4. Exercise backup/restore and upgrade/rollback on disposable test environments.
+5. Publish the supported OS/architecture matrix, known limitations, release notes, and operator support guidance.
+6. Only then make a production-readiness claim or publish a stable MW-branded release.
+
 ---
 
 **One-line narrative:**  
