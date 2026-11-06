@@ -232,7 +232,7 @@ export function HarnessLoginPanel({
   return (
     <div className="space-y-3">
       <p className="text-sm text-muted-foreground">
-        Sign in with the {provider.name} account you already pay for. Temps runs
+        Sign in with the {provider.name} account you already pay for. MW-DEVPLATFORM runs
         the CLI&apos;s own sign-in on this server; you approve access in your
         browser and no API key is needed.
       </p>
