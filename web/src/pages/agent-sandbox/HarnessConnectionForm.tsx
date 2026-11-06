@@ -61,7 +61,7 @@ const CONNECTION_METHOD_ICONS: Record<
 const OPENCODE_CREDENTIAL_DISCLOSURE =
   'OpenCode uses a private runtime credential file. Code running as the harness user can access this credential; only use it in workspaces you trust. Refreshed tokens stay in this sandbox; after replacing the sandbox, you may need to import your local login again.'
 const RELAY_CREDENTIAL_DISCLOSURE =
-  'Encrypted on this Temps instance. Workspaces reach the model through a short-lived relay and never receive the credential.'
+  'Encrypted on this MW-DEVPLATFORM instance. Workspaces reach the model through a short-lived relay and never receive the credential.'
 
 /** Render `code` spans from catalog hints such as "Run `claude setup-token`". */
 function InlineCode({ text }: { text: string }) {
@@ -85,7 +85,7 @@ function InlineCode({ text }: { text: string }) {
 
 /**
  * Connect a harness: pick how to sign in, provide that one credential, done.
- * Temps verifies it with a small test request before saving. Once connected
+ * MW-DEVPLATFORM verifies it with a small test request before saving. Once connected
  * the form collapses to a one-line summary with a Replace action.
  */
 export function HarnessConnectionForm({
@@ -207,7 +207,7 @@ export function HarnessConnectionForm({
     onError: (error) => {
       const detail = problemDetail(
         error,
-        'Could not verify the local login. Authenticate the CLI as the user running Temps and try again.'
+        'Could not verify the local login. Authenticate the CLI as the user running MW-DEVPLATFORM and try again.'
       )
       setCredentialError(detail)
       toast.error(`Could not import ${provider.name} login`, {
@@ -336,8 +336,8 @@ export function HarnessConnectionForm({
         {busy
           ? 'Checking the harness in a temporary sandbox…'
           : activeMethod?.kind === 'login'
-            ? 'The sign-in itself stays with the CLI on this server; Temps saves only a short-lived access token.'
-            : 'Temps verifies it with one small test request, which may use your provider allowance.'}
+            ? 'The sign-in itself stays with the CLI on this server; MW-DEVPLATFORM saves only a short-lived access token.'
+            : 'MW-DEVPLATFORM verifies it with one small test request, which may use your provider allowance.'}
       </p>
     </div>
   )
@@ -429,7 +429,7 @@ export function HarnessConnectionForm({
   if (methods.length === 0) {
     return (
       <p role="status" className="text-sm text-muted-foreground">
-        {provider.name} has no connection methods on this server. Update Temps
+        {provider.name} has no connection methods on this server. Update MW-DEVPLATFORM
         to connect it.
       </p>
     )
@@ -486,7 +486,7 @@ export function HarnessConnectionForm({
             ) : method.kind === 'local' ? (
               <div className="space-y-3">
                 <p className="text-sm text-muted-foreground">
-                  Temps found a {provider.name} login on this server (
+                  MW-DEVPLATFORM found a {provider.name} login on this server (
                   {provider.local_credential?.label.toLowerCase()}). Importing
                   copies it into encrypted settings without exposing it to this
                   browser.
