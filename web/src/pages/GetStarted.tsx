@@ -48,7 +48,7 @@ export function GetStarted() {
         title="Deploy your first app"
         description={
           projectSlug
-            ? 'Temps is pulling the image, starting the container and routing a URL to it.'
+            ? 'MW-DEVPLATFORM is pulling the image, starting the container and routing a URL to it.'
             : 'Get something live on this server first. It proves Docker, image downloads and routing all work, and takes about a minute.'
         }
       />
