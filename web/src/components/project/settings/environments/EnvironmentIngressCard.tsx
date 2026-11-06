@@ -36,13 +36,13 @@ const MODES: { value: IngressMode; title: string; description: string }[] = [
     value: 'enforce',
     title: 'Enforce',
     description:
-      'The compiled endpoint decides. It applies the same IP, rate-limit, captcha and password rules, plus a Temps login when required.',
+      'The compiled endpoint decides. It applies the same IP, rate-limit, captcha and password rules, plus an MW-DEVPLATFORM login when required.',
   },
 ]
 
 const TITLE = 'Access Control'
 const DESCRIPTION =
-  "Choose how the proxy decides who may open this environment's URLs, and whether visitors must sign in to Temps."
+  "Choose how the proxy decides who may open this environment's URLs, and whether visitors must sign in to MW-DEVPLATFORM."
 
 /**
  * An environment's ingress mode and Temps login requirement (ADR-055 §11).
@@ -148,7 +148,7 @@ export function EnvironmentIngressCard({
         <div className="flex items-start justify-between gap-4 rounded-lg border p-4">
           <div className="space-y-1">
             <Label htmlFor={`require-login-${environmentId}`}>
-              Require a Temps login
+              Require an MW-DEVPLATFORM login
             </Label>
             <p className="text-sm text-muted-foreground">
               Visitors are sent to this console to sign in, and only people who
