@@ -140,7 +140,12 @@ export const Login = () => {
               alt="MOONWITNESS logo"
               className="size-12"
             />
-            <span className="text-2xl font-bold">MOONWITNESS</span>
+            <span className="flex flex-col leading-tight">
+              <span className="text-2xl font-bold tracking-tight">MOONWITNESS</span>
+              <span className="mt-1 text-[10px] font-semibold tracking-[0.2em] text-muted-foreground">
+                MW-DEVPLATFORM
+              </span>
+            </span>
           </div>
           <div className="flex flex-col space-y-2 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">
