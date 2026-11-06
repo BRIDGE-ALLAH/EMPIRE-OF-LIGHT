@@ -18,7 +18,7 @@ export function InitialLoadScreen() {
     >
       <div className="flex flex-col items-center gap-6">
         <div className="initial-load-mark flex items-center gap-2">
-          <img src="/favicon.png" alt="" className="size-8" />
+          <img src="/svg/mw-icon.svg" alt="" className="size-8" />
           <span className="text-xl font-semibold tracking-tight">MOONWITNESS</span>
         </div>
         <div className="h-1 w-32 overflow-hidden rounded-full bg-muted">
