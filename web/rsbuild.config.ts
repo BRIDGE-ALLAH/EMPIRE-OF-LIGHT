@@ -133,7 +133,7 @@ export default defineConfig({
     },
   },
   html: {
-    title: 'Temps',
+    title: 'MOONWITNESS — MW-DEVPLATFORM',
     favicon: './src/favicon.png',
     // Rsbuild's built-in shell is a bare `<html>`; this one declares the
     // document language so assistive technology reads it correctly
