@@ -63,10 +63,10 @@
   /* gray-200 borders (#eaeaea) — Vercel's signature subtle border */
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  /* Vercel blue ring (#0070f3) for focus */
-  --ring: oklch(0.59 0.2032 256.82);
-  /* Vercel signature accent colors for charts */
-  --chart-1: oklch(0.59 0.2032 256.82); /* blue #0070f3 */
+  /* MoonWitness lunar-gold focus ring; restrained accent, accessible against neutral surfaces. */
+  --ring: oklch(0.66 0.13 78);
+  /* MW-DEVPLATFORM observability palette: lunar gold leads, status hues remain semantic. */
+  --chart-1: oklch(0.66 0.13 78); /* lunar gold */
   --chart-2: oklch(0.723 0.1844 150.31); /* green */
   --chart-3: oklch(0.773 0.1776 69.61); /* amber */
   --chart-4: oklch(0.627 0.2193 23.03); /* red */
@@ -79,7 +79,7 @@
   --sidebar-accent: oklch(0.955 0 0); /* #f2f2f2 — hovered nav items */
   --sidebar-accent-foreground: oklch(0.145 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.59 0.2032 256.82);
+  --sidebar-ring: oklch(0.66 0.13 78);
   --font-sans:
     'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, sans-serif;
