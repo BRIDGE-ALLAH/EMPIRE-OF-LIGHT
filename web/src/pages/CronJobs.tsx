@@ -63,7 +63,7 @@ function Instructions() {
           hour, day of month, month, weekday.
         </li>
         <li>
-          <InlineCode>path</InlineCode> is an endpoint of your app; Temps calls
+          <InlineCode>path</InlineCode> is an endpoint of your app; MW-DEVPLATFORM calls
           it with a POST request.
         </li>
         <li>Changes apply on your next deployment.</li>
@@ -90,7 +90,7 @@ function HowToAddDialog({
         <DialogHeader>
           <DialogTitle>Add a cron job</DialogTitle>
           <DialogDescription>
-            Temps calls your endpoint on the schedule you set.
+            MW-DEVPLATFORM calls your endpoint on the schedule you set.
           </DialogDescription>
         </DialogHeader>
         <Instructions />
@@ -100,7 +100,7 @@ function HowToAddDialog({
 }
 
 /**
- * Monitoring › Cron jobs: the jobs Temps runs itself, the `cron:` entries of
+ * Monitoring › Cron jobs: the jobs MW-DEVPLATFORM runs itself, the `cron:` entries of
  * `.temps.yaml` registered per environment on deploy, for the environment
  * chosen in the project bar. Jobs scheduled anywhere else are watched from
  * Check-ins, a different feature with its own tab.
@@ -126,7 +126,7 @@ export function CronJobs({ project }: { project: ProjectResponse }) {
         title="Cron jobs"
         description={
           <>
-            Endpoints of your app that Temps calls on a schedule, from{' '}
+            Endpoints of your app that MW-DEVPLATFORM calls on a schedule, from{' '}
             <InlineCode>cron:</InlineCode> in{' '}
             <InlineCode>.temps.yaml</InlineCode>
             {environment ? ` (${environment.name})` : ''}.
