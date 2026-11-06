@@ -19,7 +19,7 @@ const INSTALLATIONS = [
   { id: 'apt', label: 'Ubuntu / Debian' },
   { id: 'rpm', label: 'Fedora / RHEL' },
   { id: 'desktop', label: 'Docker Desktop' },
-  { id: 'container', label: 'Temps in Docker' },
+  { id: 'container', label: 'MW-DEVPLATFORM in Docker' },
 ] as const
 
 type Installation = (typeof INSTALLATIONS)[number]['id']
@@ -63,7 +63,7 @@ export function ComposeUpgradeHelp({
         <DialogHeader>
           <DialogTitle>Update Docker Compose</DialogTitle>
           <DialogDescription>
-            Temps needs Docker Compose v{minimumVersion} or newer. Ask your
+            MW-DEVPLATFORM needs Docker Compose v{minimumVersion} or newer. Ask your
             server administrator to follow these steps if you do not have shell
             access.
           </DialogDescription>
@@ -79,7 +79,7 @@ export function ComposeUpgradeHelp({
             <p className="font-medium">1. Choose where Temps runs</p>
             <div
               role="group"
-              aria-label="Temps installation"
+              aria-label="MW-DEVPLATFORM installation"
               className="flex flex-wrap gap-2"
             >
               {INSTALLATIONS.map(({ id, label }) => (
@@ -99,7 +99,7 @@ export function ComposeUpgradeHelp({
           {command && (
             <div className="space-y-2">
               <p>
-                Run this on the Temps server. It installs or updates the Compose
+                Run this on the MW-DEVPLATFORM server. It installs or updates the Compose
                 plugin using Docker&apos;s package repository.
               </p>
               <Command value={command} label="Copy Compose update command" />
@@ -129,7 +129,7 @@ export function ComposeUpgradeHelp({
 
           {installation === 'desktop' && (
             <p>
-              Update Docker Desktop on the machine running Temps; it includes
+              Update Docker Desktop on the machine running MW-DEVPLATFORM; it includes
               Compose. Open Docker Desktop&apos;s menu and select Check for
               updates, or install the latest release from{' '}
               <a
@@ -146,8 +146,8 @@ export function ComposeUpgradeHelp({
 
           {installation === 'container' && (
             <p>
-              Update the Compose plugin in the image that runs Temps, then
-              recreate the Temps container with that image, keeping its existing
+              Update the Compose plugin in the image that runs MW-DEVPLATFORM, then
+              recreate the MW-DEVPLATFORM container with that image, keeping its existing
               configuration and persistent volumes. Updating Compose on the
               Docker host alone does not update the copy inside the container.
               Use the package manager for the runtime image or{' '}
@@ -166,8 +166,8 @@ export function ComposeUpgradeHelp({
           <div className="space-y-2">
             <p className="font-medium">2. Verify the version Temps will use</p>
             <p className="text-muted-foreground">
-              Run this as the same user and in the same environment as Temps
-              (inside the Temps container for a Docker installation). Confirm v
+              Run this as the same user and in the same environment as MW-DEVPLATFORM
+              (inside the MW-DEVPLATFORM container for a Docker installation). Confirm v
               {minimumVersion} or newer.
             </p>
             <Command
@@ -176,11 +176,11 @@ export function ComposeUpgradeHelp({
             />
           </div>
           <div className="space-y-2">
-            <p className="font-medium">3. Restart Temps and retry</p>
+            <p className="font-medium">3. Restart MW-DEVPLATFORM and retry</p>
             <p className="text-muted-foreground">
               Restart the Temps service or container to run its startup check
               again. Refresh this console, then retry the Compose check or
-              failed deployment. The warning clears when Temps detects a
+              failed deployment. The warning clears when MW-DEVPLATFORM detects a
               supported plugin.
             </p>
           </div>
