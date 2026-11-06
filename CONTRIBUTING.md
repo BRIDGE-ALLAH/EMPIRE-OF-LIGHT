@@ -187,7 +187,7 @@ release and verified compatibility range when releasing an SDK.
 
 ### Commits
 
-Use Conventional Commits. Commit sign-off trailers are not required.
+Use Conventional Commits.
 
 ### Changelog (generated — do not edit)
 
