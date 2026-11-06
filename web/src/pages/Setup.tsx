@@ -73,7 +73,7 @@ function buildRecommendations(
       icon: Sparkles,
       tone: 'default',
       title: 'Enable built-in AI',
-      body: 'Separately connect a model provider for Temps chat, autofix, and AI summaries.',
+      body: 'Separately connect a model provider for MW-DEVPLATFORM chat, autofix, and AI summaries.',
       href: '/ai-gateway',
       cta: 'Choose provider',
     })
