@@ -407,7 +407,7 @@ export function EmailProviderDetail() {
         onOpenChange={setIsDeleteDialogOpen}
         resourceType="email provider"
         resourceName={provider.name}
-        consequences="This permanently deletes the provider and its stored credentials from Temps. Domains still assigned to this provider will be unable to send email until reassigned."
+        consequences="This permanently deletes the provider and its stored credentials from MW-DEVPLATFORM. Domains still assigned to this provider will be unable to send email until reassigned."
         confirmLabel="Delete provider"
         isPending={deleteMutation.isPending}
         onConfirm={() => deleteMutation.mutate()}
