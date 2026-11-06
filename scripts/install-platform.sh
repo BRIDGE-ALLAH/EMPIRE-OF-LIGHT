@@ -59,12 +59,49 @@ done
 [[ "$SOURCE_REF" =~ ^[0-9a-fA-F]{40}$ ]] || fail "Source ref must be an exact 40-character commit SHA."
 [[ "$(uname -s)" == "Linux" ]] || fail "Supported install target is Linux. No host changes were made."
 [[ $EUID -eq 0 ]] || fail "Run as root: sudo bash install-platform.sh"
+# Prepare a clean Ubuntu/Debian VPS automatically. Existing Docker installations
+# are never replaced or reconfigured; if Compose v2 is missing, stop safely.
+[[ -r /etc/os-release ]] || fail "Cannot identify Linux distribution."
+. /etc/os-release
+case "${ID:-}" in
+  ubuntu|debian) ;;
+  *) fail "Automatic host setup supports Ubuntu and Debian only (detected: ${ID:-unknown})." ;;
+esac
+command -v apt-get >/dev/null 2>&1 || fail "apt-get is required for VPS prerequisite setup."
+if ! command -v curl >/dev/null 2>&1 || ! command -v tar >/dev/null 2>&1 || ! command -v openssl >/dev/null 2>&1; then
+  info "Installing required host utilities..."
+  apt-get update
+  DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl tar openssl coreutils sed grep
+fi
+if ! command -v docker >/dev/null 2>&1; then
+  info "Installing Docker Engine and Compose v2 from the official Docker repository..."
+  DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl gnupg
+  install -m 0755 -d /etc/apt/keyrings
+  curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error https://download.docker.com/linux/"$ID"/gpg -o /etc/apt/keyrings/docker.asc
+  chmod a+r /etc/apt/keyrings/docker.asc
+  docker_arch=$(dpkg --print-architecture)
+  docker_codename="${UBUNTU_CODENAME:-${VERSION_CODENAME:-}}"
+  [[ -n "$docker_codename" ]] || fail "Could not determine the distribution codename."
+  printf 'deb [arch=%s signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/%s %s stable\\n' "$docker_arch" "$ID" "$docker_codename" > /etc/apt/sources.list.d/docker.list
+  apt-get update
+  DEBIAN_FRONTEND=noninteractive apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  systemctl enable --now docker
+fi
 for cmd in curl tar docker openssl stat sed grep install; do
-  command -v "$cmd" >/dev/null 2>&1 || fail "Missing prerequisite: $cmd"
+  command -v "$cmd" >/dev/null 2>&1 || fail "Missing prerequisite after setup: $cmd"
 done
-docker compose version >/dev/null 2>&1 || fail "Docker Compose v2 plugin is required."
-[[ -S /var/run/docker.sock ]] || fail "Docker socket not found. Install/start Docker Engine first."
-docker info >/dev/null 2>&1 || fail "Docker daemon is not accessible."
+docker compose version >/dev/null 2>&1 || fail "Docker is present but Compose v2 is missing. Install the Docker Compose plugin manually; existing Docker was left untouched."
+[[ -S /var/run/docker.sock ]] || fail "Docker socket not found. Start Docker Engine first."
+docker info >/dev/null 2>&1 || {
+  command -v systemctl >/dev/null 2>&1 && systemctl enable --now docker || true
+  docker info >/dev/null 2>&1 || fail "Docker daemon is not accessible."
+}
+mem_gib=$(awk '/MemTotal:/ {printf "%d", $2/1024/1024}' /proc/meminfo)
+disk_gib=$(df -Pk "$(dirname "$INSTALL_DIR")" 2>/dev/null | awk 'NR==2 {printf "%d", $4/1024/1024}')
+cpu_count=$(getconf _NPROCESSORS_ONLN 2>/dev/null || printf '1')
+(( mem_gib >= 8 )) || warn "VPS has ${mem_gib} GiB RAM; 8 GiB or more is recommended for source builds."
+(( disk_gib >= 40 )) || warn "VPS has ${disk_gib} GiB free; at least 40 GiB is recommended for image builds and persistent data."
+(( cpu_count >= 4 )) || warn "VPS has ${cpu_count} CPU cores; 4 or more are recommended."
 [[ ! -e "$INSTALL_DIR" ]] || fail "Install path already exists: $INSTALL_DIR. Move/backup it yourself; installer will not overwrite existing data."
 
 for name in temps-postgres temps-clickhouse temps-app temps-ingress temps-admin-ingress; do
@@ -160,6 +197,24 @@ if ! docker compose -p empire-of-light up -d --build; then
   exit 1
 fi
 docker compose -p empire-of-light ps
+info "Waiting for database, application, and ingress health checks (up to 10 minutes)..."
+health_deadline=$((SECONDS + 600))
+required_containers=(temps-postgres temps-clickhouse temps-app temps-ingress temps-admin-ingress)
+while (( SECONDS < health_deadline )); do
+  all_healthy=1
+  for container in "${required_containers[@]}"; do
+    state=$(docker inspect --format '{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "$container" 2>/dev/null || printf 'missing')
+    [[ "$state" == "healthy" ]] || all_healthy=0
+  done
+  (( all_healthy )) && break
+  sleep 5
+done
+if (( ! all_healthy )); then
+  warn "One or more required services did not become healthy. Installation files and volumes are preserved."
+  docker compose -p empire-of-light ps || true
+  docker compose -p empire-of-light logs --tail=200 || true
+  fail "VPS deployment did not pass the service health gate."
+fi
 info "Inspect logs with: cd '$INSTALL_DIR' && docker compose -p empire-of-light logs --tail=200"
-info "Published ports are loopback-bound. Configure a separately reviewed reverse proxy, DNS and TLS before public access."
-ok "Compose startup command completed. Confirm service health and readiness before use."
+info "Published ports are loopback-bound. Public DNS/HTTPS reverse proxy setup remains a separate step."
+ok "All required Compose services report healthy."
