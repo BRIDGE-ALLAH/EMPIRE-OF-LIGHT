@@ -80,7 +80,7 @@ export function SampleDeployCard({ className }: { className?: string }) {
               Deploy a sample app in one click
             </h2>
             <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-              No code needed. Temps creates a project named{' '}
+              No code needed. MW-DEVPLATFORM creates a project named{' '}
               <span className="font-medium text-foreground">
                 {SAMPLE_APP.baseName}
               </span>
