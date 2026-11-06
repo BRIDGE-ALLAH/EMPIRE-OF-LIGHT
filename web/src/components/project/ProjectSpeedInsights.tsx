@@ -709,7 +709,7 @@ export function ProjectSpeedInsights({ project }: ProjectSpeedInsightsProps) {
           <CardHeader>
             <CardTitle>Set up analytics to track performance</CardTitle>
             <CardDescription>
-              The Temps analytics SDK automatically tracks Core Web Vitals
+              The MW-DEVPLATFORM analytics SDK automatically tracks Core Web Vitals
               alongside page views and events
             </CardDescription>
           </CardHeader>
@@ -723,7 +723,7 @@ export function ProjectSpeedInsights({ project }: ProjectSpeedInsightsProps) {
                       Automatic Web Vitals tracking
                     </h4>
                     <p className="text-sm text-muted-foreground">
-                      When you install the Temps analytics SDK, it automatically
+                      When you install the MW-DEVPLATFORM analytics SDK, it automatically
                       captures LCP, INP, CLS, FCP, TTFB, and FID.
                     </p>
                   </div>
