@@ -27,7 +27,7 @@ const externalProjectSchema = z.object({
 type ExternalProjectValues = z.infer<typeof externalProjectSchema>
 
 /**
- * Create a service for an app that runs outside Temps. Temps never deploys
+ * Create a service for an app that runs outside MW-DEVPLATFORM. MW-DEVPLATFORM never deploys
  * it; it receives the app's analytics, errors and traces, and labels the
  * service External. Creating it leads straight to the ingest-key setup (or,
  * from a project's "New service", to that project).
@@ -54,7 +54,7 @@ export function ExternalProjectConfigurator({
       body: {
         name: values.name,
         hosting: 'external',
-        // Required by the API, unused: Temps never builds this service.
+        // Required by the API, unused: MW-DEVPLATFORM never builds this service.
         preset: 'dockerfile',
         directory: './',
         main_branch: 'main',
@@ -79,10 +79,10 @@ export function ExternalProjectConfigurator({
                 Track an app hosted elsewhere
               </p>
               <p className="text-sm text-muted-foreground">
-                For an app on Vercel, Netlify, a VPS or anywhere else. Temps
+                For an app on Vercel, Netlify, a VPS or anywhere else. MW-DEVPLATFORM
                 receives its analytics, session replays, errors and traces, but
                 never deploys it. The service is labelled External; you can let
-                Temps host it later in its settings.
+                MW-DEVPLATFORM host it later in its settings.
               </p>
             </div>
           </div>
