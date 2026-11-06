@@ -41,13 +41,13 @@ const OIDC_ERROR_MESSAGES: Record<string, string> = {
   email_not_verified:
     'Your identity provider has not confirmed your email. Verify it at the IdP, then try again.',
   user_not_provisioned:
-    'No Temps account exists for this email. Ask an administrator to create one.',
+    'No MW-DEVPLATFORM account exists for this email. Ask an administrator to create one.',
   provider_disabled: 'This SSO provider is currently disabled.',
   credentials_changed:
     'Your password was reset by an administrator while you were signing in. Start sign-in again.',
   provider_not_found: 'The SSO provider configuration was not found.',
   no_provider_configured:
-    'No SSO provider is configured on this Temps instance.',
+    'No SSO provider is configured on this MW-DEVPLATFORM instance.',
   issuer_invalid: 'The SSO provider URL is invalid.',
   return_to_invalid: 'Invalid post-login redirect target.',
   role_invalid: 'The role assigned by the SSO provider is invalid.',
@@ -136,11 +136,11 @@ export const Login = () => {
         <div className="flex flex-col items-center space-y-6">
           <div className="flex items-center gap-3">
             <img
-              src="/svg/temps-icon.svg"
-              alt="Temps logo"
+              src="/svg/mw-icon.svg"
+              alt="MOONWITNESS logo"
               className="size-12"
             />
-            <span className="text-2xl font-bold">Temps</span>
+            <span className="text-2xl font-bold">MOONWITNESS</span>
           </div>
           <div className="flex flex-col space-y-2 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">
