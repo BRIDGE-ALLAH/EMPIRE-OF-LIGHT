@@ -46,31 +46,23 @@ This repository currently contains a substantial Temps-derived Rust/Cargo worksp
 
 Preserve upstream license, NOTICE, copyright, and third-party attribution. Do not globally rename Rust crates, binaries, environment variables, services, database objects, image names, or persistent paths.
 
-## Experimental source bootstrap
+## VPS installation bootstrap
 
-The current `scripts/install.sh` remains the upstream Temps binary installer. It downloads upstream `temps-*` assets and installs the `temps` executable; it is not an ARSY Node installer.
+For a clean Ubuntu or Debian VPS, `scripts/install-platform.sh` installs Docker Engine and the Docker Compose v2 plugin from Docker's official APT repository when Docker is absent. It downloads an immutable source archive without requiring Git, generates private credentials, validates the Compose configuration, builds the current stack, and waits for the database, application, and ingress health checks.
 
-For the existing Compose stack only, `scripts/install-platform.sh` provides an experimental source bootstrap. It downloads an immutable, commit-pinned source archive with `curl` and `tar`, so a local Git clone is not required. It generates private credentials, validates Compose configuration, and can build/start the current stack. It is not a signed binary release, does not install the Rust-first ARSY Node profile, and does not certify production readiness.
-
-Review the script before running it with root privileges:
+Review the installer before running it as root:
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/829f23de5ffee78f985c6dc5c6e2b8c67361a906/scripts/install-platform.sh
+curl -fsSLO https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/main/scripts/install-platform.sh
 less install-platform.sh
 sudo bash install-platform.sh
 ```
 
-Or, if you have reviewed and trust the pinned script source, run it directly without cloning:
+The installer supports Ubuntu and Debian only. It does not replace an existing Docker installation; if Docker exists but Compose v2 is missing, it stops and asks for manual repair. It refuses to overwrite an existing install directory or stop conflicting containers/networks. The initial administrator and ingress passwords are shown once; store them securely.
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/829f23de5ffee78f985c6dc5c6e2b8c67361a906/scripts/install-platform.sh | sudo bash
-```
+This remains an experimental source bootstrap for the current Compose stack, not a signed binary release or the complete Rust-first ARSY Node profile. The Compose listeners are bound to loopback. Public DNS, HTTPS/reverse proxy, and firewall configuration are not automated yet. Do not expose the service publicly until those ingress controls are configured and verified.
 
-The bootstrap refuses to overwrite an existing install directory or stop conflicting containers/networks. It shows the initial admin and ingress passwords once; store them securely. Published ports remain loopback-bound. DNS, TLS, reverse proxy, firewall, backups, restore, upgrade, and rollback remain separate operator responsibilities.
-
-Run `bash scripts/test-installers.sh` for shell syntax, immutable-ref validation, and fail-closed CLI smoke checks. These checks do not replace a live Docker deployment or clean-host installation test.
-
-The paired `scripts/uninstall.sh` removes only the Compose project's containers and networks. It preserves named volumes, images, source, `.env`, and secret files; it does not uninstall unrelated Docker projects such as Coolify and has no automatic data-wipe option. Verify backups before manually deleting retained data.
+Run `bash scripts/test-installers.sh` for installer contract checks. These do not replace a live clean-host VPS installation. The paired `scripts/uninstall.sh` removes only this Compose project's containers and networks; it preserves named volumes, images, source, `.env`, and secret files. It does not uninstall unrelated Docker projects such as Coolify and has no automatic data-wipe option. Verify backups before manually deleting retained data.
 
 ## Documentation
 
