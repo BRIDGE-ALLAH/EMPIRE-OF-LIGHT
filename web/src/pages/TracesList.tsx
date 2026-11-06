@@ -437,7 +437,7 @@ function OtelSetupSection({
     .split('__SERVICE_NAME__')
     .join(project.name)
 
-  const envVarsCode = `# Auto-injected on Temps deployments.
+  const envVarsCode = `# Auto-injected on MW-DEVPLATFORM deployments.
 # Set these manually when running on Vercel, Fly, AWS, bare metal, etc.
 OTEL_EXPORTER_OTLP_ENDPOINT=${otlpEndpoint}
 OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
@@ -472,7 +472,7 @@ OTEL_SERVICE_NAME=${project.name}`
     <div id="traces-setup">
       <SetupWizardShell
         title="Set up OpenTelemetry"
-        description="Pick your framework — the snippet and endpoint are pre-filled for this service. Apps deployed on Temps get these env vars automatically."
+        description="Pick your framework — the snippet and endpoint are pre-filled for this service. Apps deployed on MW-DEVPLATFORM get these env vars automatically."
         currentStep={wizardStep}
         steps={steps}
         celebrate={celebrate}
@@ -480,7 +480,7 @@ OTEL_SERVICE_NAME=${project.name}`
         {wizardStep === 'framework' && (
           <div className="space-y-6">
             <div className="rounded-lg border border-primary/30 bg-primary/5 p-3 text-sm">
-              <p className="font-medium">Deployed on Temps?</p>
+              <p className="font-medium">Deployed on MW-DEVPLATFORM?</p>
               <p className="mt-0.5 text-xs text-muted-foreground">
                 The OTLP endpoint, auth token, service name, and version are
                 injected automatically. Just install the SDK and add the
@@ -593,7 +593,7 @@ OTEL_SERVICE_NAME=${project.name}`
                 </h4>
               </div>
               <p className="text-xs text-muted-foreground">
-                Skip this if you deploy on Temps. Required when running the app
+                Skip this if you deploy on MW-DEVPLATFORM. Required when running the app
                 on Vercel, Fly, AWS, bare metal, etc.
               </p>
               <div className="flex items-center gap-3">
@@ -618,7 +618,7 @@ OTEL_SERVICE_NAME=${project.name}`
               </div>
               <CodeBlock code={envVarsCode} language="bash" title=".env" />
               <p className="text-xs text-muted-foreground">
-                Replace <code>&lt;YOUR_API_KEY&gt;</code> with a Temps API key (
+                Replace <code>&lt;YOUR_API_KEY&gt;</code> with an MW-DEVPLATFORM API key (
                 <code>tk_...</code>) from{' '}
                 <strong>Settings &rarr; API Keys</strong>.
               </p>
