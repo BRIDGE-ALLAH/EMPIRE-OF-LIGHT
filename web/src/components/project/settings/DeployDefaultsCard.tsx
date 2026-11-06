@@ -392,7 +392,7 @@ export function DeployDefaultsCard({
           <CardHeader>
             <CardTitle>Port and health check</CardTitle>
             <CardDescription>
-              Where the app listens, and how Temps decides a new deployment is
+              Where the app listens, and how MW-DEVPLATFORM decides a new deployment is
               ready before it takes traffic.
             </CardDescription>
           </CardHeader>
