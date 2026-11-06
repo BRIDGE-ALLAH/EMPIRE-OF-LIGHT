@@ -9,11 +9,11 @@ import { useBreadcrumbs } from '@/contexts/BreadcrumbContext'
 import { usePageTitle } from '@/hooks/usePageTitle'
 
 /**
- * The Temps assistant, full screen.
+ * The MOONWITNESS assistant, full screen.
  *
  * Same component as the dock (`DockBody`) with the whole content area instead
  * of a 28rem column. The top-bar AI button lands here: with no AI provider it
- * is the onboarding (paste an OpenRouter key), then a chat with Temps, with
+ * is the onboarding (paste an OpenRouter key), then a chat with MOONWITNESS, with
  * past conversations in the rail. The dock remains for contextual "ask AI
  * about this" actions, where the page being discussed has to stay visible.
  */
@@ -29,10 +29,10 @@ export function AiChat() {
     clearInitialContext()
   }, [clearInitialContext])
 
-  usePageTitle('Temps assistant')
+  usePageTitle('MOONWITNESS assistant')
 
   useEffect(() => {
-    setBreadcrumbs([{ label: 'Temps assistant' }])
+    setBreadcrumbs([{ label: 'MOONWITNESS assistant' }])
   }, [setBreadcrumbs])
 
   // The dock and this page render the same assistant; showing both at once
