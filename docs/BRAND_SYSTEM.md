@@ -83,8 +83,8 @@ A future technical rename requires an inventory, compatibility plan, migration a
 
 ## UI acceptance checklist
 
-- [ ] Sidebar and loading shell use the MW product mark and MOONWITNESS name.
-- [ ] Browser title identifies MOONWITNESS — MW-DEVPLATFORM.
+- [x] Sidebar and loading shell use the MW product mark and MOONWITNESS name.
+- [x] Browser title identifies MOONWITNESS — MW-DEVPLATFORM.
 - [ ] Login, setup, onboarding, empty, error, and notification copy use approved product language.
 - [ ] No upstream product logo or unqualified “Temps” remains in user-facing surfaces, except explicit attribution or documented compatibility.
 - [ ] Brand accent does not replace semantic success, warning, danger, or neutral status colors.
