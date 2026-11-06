@@ -72,6 +72,8 @@ This repository is based on the Temps codebase and still contains upstream imple
 
 MW-DEVPLATFORM is the intended product and brand direction for this repository. A complete technical rebrand—binary names, Rust crate names, container names, environment variables, UI copy, hosted documentation, installer and release artifacts—must be handled as a separate, tested migration. This README does not claim that migration has already happened.
 
+**Release status:** production readiness is not yet certified. The repository contains CI workflow definitions, but a successful current release pipeline, clean-host installation, backup/restore exercise, and upgrade/rollback test must be evidenced before a production-ready claim. Follow [the release readiness runbook](docs/RELEASE_READINESS.md) and do not treat a successful container start as a security or production sign-off.
+
 Upstream attribution, third-party notices, and the applicable MIT OR Apache-2.0 licensing terms must remain intact. See [NOTICE](NOTICE), [LICENSE](LICENSE), and [LICENSE-MIT](LICENSE-MIT).
 
 ## Getting started
@@ -126,6 +128,7 @@ Use the repository's pinned Rust toolchain in [`rust-toolchain.toml`](rust-toolc
 ## Documentation
 
 - **[MW-DEVPLATFORM Blueprint](docs/BLUEPRINT.md)** — narrative, positioning, principles, product architecture, roadmap, and acceptance criteria.
+- **[Release readiness & operator runbook](docs/RELEASE_READINESS.md)** — first-install steps, engineering/security gates, and evidence required before production.
 - [Architecture overview](docs/architecture/overview/page.mdx)
 - [Crate map](docs/architecture/crates.md)
 - [Documentation index](docs/README.md)
