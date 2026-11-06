@@ -1,4 +1,4 @@
-# MW-DEVPLATFORM — Release Readiness & Operator Runbook
+# Empire of Light Platform — Release Readiness & Operator Runbook
 
 > **Build with clarity. Deploy with sovereignty. Operate with accountability.**
 
@@ -10,12 +10,13 @@ This runbook turns the product blueprint into verifiable release gates. It delib
 
 The repository contains a substantial Temps-derived Rust workspace, web application, Docker Compose deployment, and multiple GitHub Actions workflow definitions. At the time this document was prepared, the repository API returned no recent workflow runs and no published releases. This is not evidence that tests fail; it means a successful current build, clean installation, and production operation have not been independently demonstrated here.
 
-Do not advertise a production-ready MW-branded release until the gates below have recorded evidence.
+Do not advertise a production-ready Empire of Light release until the gates below have recorded evidence.
 
 ## 2. Identity and compatibility
 
-- Product / public brand: **MOONWITNESS — MW-DEVPLATFORM**.
-- Product promise: **Your infrastructure. Your visibility. Your responsibility.**
+- Product / public brand: **Empire of Light Platform**.
+- Ecosystem: **A-L-L-A-H.COM**.
+- Product promise: **A sovereign infrastructure foundation for building, delivering, and operating digital products.**
 - Current implementation lineage: Temps-derived.
 - Current Compose services, environment variables, Rust crates, executable and many operational identifiers still use `temps`.
 - Preserve upstream copyright, license, NOTICE, and third-party attribution.
@@ -34,58 +35,34 @@ Use a dedicated Linux host for a real deployment. Confirm:
 
 ## 4. First-install procedure
 
-Run from the repository root on the target host.
+The repository now provides an experimental source bootstrap. It is not a signed release installer and does not certify production readiness.
 
-1. Review `.env.example`, `docker-compose.yml`, `Dockerfile`, and `Dockerfile.ingress` before starting anything.
-2. Create a private environment file:
-
-   ```bash
-   install -m 600 .env.example .env
-   ```
-
-3. Generate independent database passwords:
+1. Use a dedicated Linux host with Docker Engine, Docker Compose v2, Git, and OpenSSL. Confirm the Docker daemon is running.
+2. Review `.env.example`, `docker-compose.yml`, `Dockerfile`, `Dockerfile.ingress`, and the installer before execution. Check the configured Docker subnets against host, LAN, VPN, and existing Docker routes.
+3. From a checkout of this repository, run:
 
    ```bash
-   openssl rand -hex 32
-   openssl rand -hex 32
+   sudo bash scripts/install.sh --branch main
    ```
 
-   Put one value in `POSTGRES_PASSWORD` and the other in `CLICKHOUSE_PASSWORD`. Do not reuse credentials.
-
-4. Determine the Docker socket group ID:
+   The installer clones the selected ref into `/opt/empire-of-light`, refuses to overwrite an existing path or known conflicting container names, creates a mode-restricted `.env` and secret files, generates unique database and initial admin credentials, validates Compose configuration, and starts the build unless `--skip-start` is supplied.
+4. Store the initial administrator and ingress passwords shown by the installer in a password manager. They are shown once and are not recoverable from the installer output.
+5. Review the generated `.env` and every subnet/static IP before allowing public traffic. Do not expose administrative endpoints directly to the internet.
+6. Inspect startup:
 
    ```bash
-   stat -c '%g' /var/run/docker.sock
+   cd /opt/empire-of-light
+   docker compose -p empire-of-light ps
+   docker compose -p empire-of-light logs --tail=200
    ```
 
-   Set the result as `DOCKER_GID`. On non-Linux hosts, follow the platform-specific Docker socket guidance rather than assuming this command applies.
+7. Confirm that all expected services report healthy. Inspect database initialization, credential synchronization, application startup, and ingress errors. Verify `/readyz` through the documented local/network path.
 
-5. Set `TEMPS_ADMIN_EMAIL`. Create the password files at the exact paths configured by `TEMPS_ADMIN_PASSWORD_FILE` and `TEMPS_ADMIN_INGRESS_PASSWORD_FILE`. Use two different strong passwords. Keep the parent directory private and follow the file permission requirements documented in `.env.example`.
+The installer does not install Docker, configure a public domain, configure a reverse proxy, issue TLS certificates, or modify firewall policy. The Compose file binds published ports to host loopback. Those responsibilities require a separate, reviewed operator procedure.
 
-6. Review every subnet and static IP in `.env`. Change all related values together if any range conflicts with existing networks.
+### Conservative uninstall
 
-7. Render and validate the deployment configuration:
-
-   ```bash
-   docker compose config --quiet
-   docker compose config
-   ```
-
-   Resolve every missing variable or validation error. Review the rendered output for unexpected public port bindings before proceeding; do not paste rendered secrets into tickets or public logs.
-
-8. Build and start the stack:
-
-   ```bash
-   docker compose up -d --build
-   docker compose ps
-   docker compose logs --tail=200
-   ```
-
-9. Confirm that all expected services report healthy. Inspect individual logs for database initialization, credential synchronization, application startup, and ingress errors.
-
-10. Verify the documented application readiness endpoint from the host/network path appropriate to the deployment. Do not assume a running container means the application is ready.
-
-**Important:** the Compose file binds published ports to host loopback. A reverse proxy, firewall policy, DNS and TLS configuration are separate operator responsibilities. Do not expose administrative endpoints directly to the public internet.
+Run `sudo bash /opt/empire-of-light/scripts/uninstall.sh` and type `REMOVE` when prompted. The script removes only the Compose project's containers and network. Named volumes, images, source, `.env`, and secrets are intentionally preserved. It has no automatic data-wipe option.
 
 ## 5. Engineering validation gates
 
@@ -181,4 +158,4 @@ Copy this section into each release record:
 
 A release is production-ready only when all applicable acceptance items are checked with reproducible evidence, a supported deployment profile is published, and an operator other than the original developer can install, secure, operate, back up, upgrade, and recover the platform by following the documentation.
 
-Until then, describe the repository accurately as an active, Temps-derived implementation and the MW-DEVPLATFORM brand/product direction—not as a fully validated production release.
+Until then, describe the repository accurately as an active, Temps-derived implementation under the Empire of Light Platform brand—not as a fully validated production release.
