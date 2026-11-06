@@ -12,7 +12,7 @@ export function SourceMapArtifacts({ project }: { project: ProjectResponse }) {
     <div className="space-y-6">
       <PageHeader
         title="Source maps"
-        description="Resolve minified JavaScript with Debug IDs or release source maps. Artifacts are stored and managed by Temps."
+        description="Resolve minified JavaScript with Debug IDs or release source maps. Artifacts are stored and managed by MW-DEVPLATFORM."
       />
       <SourceMaps project={project} />
     </div>
