@@ -119,7 +119,7 @@ export function createProgram(): Command {
 
   program
     .name('temps')
-    .description('CLI for Temps deployment platform')
+    .description('CLI for MW-DEVPLATFORM')
     .version(VERSION, '-V, --version', 'Display version number')
     .option('--no-color', 'Disable colored output')
     .option('--debug', 'Enable debug output')
@@ -279,7 +279,7 @@ export function createProgram(): Command {
     'after',
     `
 ${colors.bold('Quick Start:')}
-  ${colors.muted('$')} temps login                    ${colors.muted('# Authenticate with Temps')}
+  ${colors.muted('$')} temps login                    ${colors.muted('# Authenticate with MW-DEVPLATFORM')}
   ${colors.muted('$')} temps init                     ${colors.muted('# Initialize project in current directory')}
   ${colors.muted('$')} temps up                       ${colors.muted('# Deploy from current directory')}
   ${colors.muted('$')} temps status                   ${colors.muted('# View project status')}
