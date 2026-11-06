@@ -7,7 +7,7 @@
 
 *An open, self-hostable developer platform for teams who want to build, ship, observe, and govern their digital work on infrastructure they control.*
 
-[Architecture blueprint](docs/BLUEPRINT.md) · [Architecture map](docs/architecture/overview/page.mdx) · [Security guidance](SECURITY.md) · [Contributing](CONTRIBUTING.md)
+[Brand system](docs/BRAND_SYSTEM.md) · [Architecture blueprint](docs/BLUEPRINT.md) · [Architecture map](docs/architecture/overview/page.mdx) · [Security guidance](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
 </div>
 
@@ -135,16 +135,11 @@ Use the repository's pinned Rust toolchain in [`rust-toolchain.toml`](rust-toolc
 - [Security policy](SECURITY.md)
 - [Contributing guide](CONTRIBUTING.md)
 
-## Roadmap for the MW identity
+## MW identity implementation
 
-The brand direction is defined; implementation alignment remains an explicit roadmap:
+The product narrative and identity rules are documented in [the brand system](docs/BRAND_SYSTEM.md) and [the product blueprint](docs/BLUEPRINT.md). The dashboard sidebar, loading shell, browser title, original product mark, and lunar focus accent now carry the MW identity. This is the first shell-level implementation, not a claim that every route, email, CLI output, installer, or release artifact has been rebranded. Continue the UI audit using the acceptance checklist in the brand system.
 
-1. Establish MW product language and visual identity across the web UI and public documentation.
-2. Inventory all upstream Temps references and classify them as user-facing copy, internal identifiers, attribution, legal notices, or operational compatibility.
-3. Replace user-facing copy only where behavior and support paths are ready.
-4. Design a compatibility-safe migration for CLI, services, environment variables, images, and deployment automation.
-5. Add end-to-end smoke tests and migration documentation before changing production identifiers.
-6. Publish MW-branded installation, upgrade, backup, and recovery guides only after those paths are validated.
+Do not globally rename the Temps-derived technical identifiers. Preserve upstream attribution and plan any CLI, service, environment-variable, image, database, or deployment rename as a compatibility migration with tested upgrade and rollback paths.
 
 ## Community and contributions
 
