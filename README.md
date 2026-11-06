@@ -48,7 +48,7 @@ The list describes source-code capability areas, not a certification that every 
 
 ## Installer status
 
-`scripts/install.sh` is now an **experimental source-based bootstrap** for the existing Docker Compose stack. It clones this repository, generates private database/admin credentials, validates the Compose configuration, and can build/start the stack. It does not download the upstream Temps CLI binary.
+`scripts/install.sh` remains the upstream verified Temps binary installer. Empire of Light's separate `scripts/install-empire-of-light.sh` is an **experimental source-based bootstrap** for the existing Docker Compose stack. It downloads a GitHub source archive with `curl` (no local Git clone required), generates private database/admin credentials, validates the Compose configuration, and can build/start the stack.
 
 This is not yet a signed binary/release installer or a production-certified VPS deployment. DNS, TLS, reverse-proxy configuration, firewall policy, backups, restore, upgrades, and rollback remain operator responsibilities. The installer refuses to overwrite an existing installation path and does not remove conflicting containers.
 
@@ -67,20 +67,20 @@ The following source bootstrap is experimental and is not a production deploymen
 
 ### Bootstrap on a clean Linux host
 
-Prerequisites: Docker Engine, Docker Compose v2, Git, and OpenSSL. The Docker daemon must be running and accessible to the installer.
+Prerequisites: Docker Engine, Docker Compose v2, `curl`, `tar`, and OpenSSL. The Docker daemon must be running and accessible to the installer.
 
-Review `docker-compose.yml`, `.env.example`, [release readiness](docs/RELEASE_READINESS.md), and the Docker-socket security boundary before installation. The installer creates `/opt/empire-of-light` by default and refuses to overwrite an existing directory.
+Review `docker-compose.yml`, `.env.example`, [release readiness](docs/RELEASE_READINESS.md), and the Docker-socket security boundary before installation. The bootstrap downloads the selected GitHub branch archive into `/opt/empire-of-light` by default and refuses to overwrite an existing directory.
 
 ```bash
 git clone https://github.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT.git
 cd EMPIRE-OF-LIGHT
-sudo bash scripts/install.sh --branch main
+sudo bash scripts/install-empire-of-light.sh --branch main
 ```
 
 To prepare configuration without starting containers:
 
 ```bash
-sudo bash scripts/install.sh --branch main --skip-start
+sudo bash scripts/install-empire-of-light.sh --branch main --skip-start
 ```
 
 The installer displays the initial administrator and ingress passwords once. Store them in a password manager. The Compose stack publishes its ports on host loopback only; configure and review a separate reverse proxy, DNS, TLS, and firewall before public access. It does not automatically install Docker or configure a public domain.
