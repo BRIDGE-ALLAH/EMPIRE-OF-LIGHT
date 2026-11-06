@@ -84,7 +84,7 @@ describe('ProviderEditor local credential onboarding', () => {
   test('offers one-click import without rendering credential material', () => {
     const html = renderEditor({})
 
-    expect(html).toContain('Temps found a Codex login on this server')
+    expect(html).toContain('MW-DEVPLATFORM found a Codex login on this server')
     expect(html).toContain('without exposing it to this browser')
     expect(html).toContain('Import login')
     expect(html).not.toContain('oauth-secret')
