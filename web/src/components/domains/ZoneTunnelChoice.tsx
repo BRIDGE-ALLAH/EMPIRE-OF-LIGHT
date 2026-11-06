@@ -80,7 +80,7 @@ export function ZoneTunnelChoice({
       <div className="space-y-0.5">
         <p className="text-base font-medium">How visitors reach apps here</p>
         <p className="text-sm text-muted-foreground">
-          Apps under this zone can go through {provider.name}: Temps creates
+          Apps under this zone can go through {provider.name}: MW-DEVPLATFORM creates
           the tunnel and each app&apos;s DNS record, and Cloudflare serves
           HTTPS. Workers need no public address or open port.
         </p>
