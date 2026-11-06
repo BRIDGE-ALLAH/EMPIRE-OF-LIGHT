@@ -776,7 +776,7 @@ export function GitImportClone({
               <h2 className="text-lg font-semibold">Curated services</h2>
               <p className="text-sm text-muted-foreground">
                 Reviewed, version-pinned applications that integrate with
-                Temps-managed databases and storage.
+                MW-DEVPLATFORM-managed databases and storage.
               </p>
             </div>
             <TemplateList
