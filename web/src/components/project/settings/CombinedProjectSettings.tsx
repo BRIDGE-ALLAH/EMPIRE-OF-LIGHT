@@ -134,7 +134,7 @@ export function CombinedProjectSettings({
         {
           id: 'source',
           title: 'Source',
-          description: 'Whether Temps runs this app, and what it deploys from.',
+          description: 'Whether MW-DEVPLATFORM runs this app, and what it deploys from.',
           icon: CodeXml,
           content: (
             <BuildDeploySettings
@@ -147,7 +147,7 @@ export function CombinedProjectSettings({
         {
           id: 'repository',
           title: 'Repository',
-          description: 'The Git repository and branch Temps builds from.',
+          description: 'The Git repository and branch MW-DEVPLATFORM builds from.',
           icon: GitBranch,
           content: <GitSettings project={project} refetch={refetch} embedded />,
         },
