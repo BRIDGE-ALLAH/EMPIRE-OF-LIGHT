@@ -1,337 +1,198 @@
-# Empire of Light Platform — Product & Architecture Blueprint
+# A-L-L-A-H.COM / Empire of Light — Unified Monorepo Blueprint
 
-> **A sovereign infrastructure foundation for building, delivering, and operating digital products.**
+## 1. Canonical decisions
 
-| Field | Value |
+| Concern | Final decision |
 |---|---|
-| Canonical repository | `BRIDGE-ALLAH/EMPIRE-OF-LIGHT` |
-| Ecosystem | A-L-L-A-H.COM — Empire of Light |
-| Product | Empire of Light Platform |
-| Category | Self-hostable developer and infrastructure operations platform |
-| Implementation baseline | Temps-derived Rust workspace and web application |
-| Document status | Canonical target blueprint; implementation maturity remains evidence-based |
-| Companion narrative | [PRODUCT_NARRATIVE.md](PRODUCT_NARRATIVE.md) |
-
----
-
-## 1. Executive definition
-
-Empire of Light Platform is the infrastructure and developer-platform foundation of the A-L-L-A-H.COM ecosystem. It provides the technical substrate for connecting source code, building and releasing applications, operating workloads, managing supported infrastructure services, and understanding system behavior.
-
-Its purpose is to make infrastructure operations coherent and inspectable while preserving operator control. It does not attempt to become every product in the ecosystem. It provides infrastructure capabilities through explicit contracts so that ecosystem products can build differentiated experiences without reimplementing the runtime.
-
-**Product outcome:** an operator can deploy and operate workloads, understand their state, govern access, and recover from failure using documented and testable procedures.
-
-## 2. Strategic context and ecosystem ownership
-
-A-L-L-A-H.COM is the ecosystem home and integration surface. Empire of Light is the wider vision and the identity of this platform foundation. The following ownership boundaries are normative:
-
-| Capability | Authoritative owner | Integration rule |
-|---|---|---|
-| Ecosystem users, tenant identity, roles, and product policy | A-L-L-A-H.COM / ARSY | Platform receives explicit mapped principals and scoped permissions; no duplicate ecosystem identity store |
-| Product-domain APIs and user-facing workflows | A-L-L-A-H.COM / ARSY and its apps | Use platform APIs/SDKs; do not copy platform internals |
-| Build, deploy, workload execution, nodes, runtime | Empire of Light Platform | ARSY requests and coordinates; this platform executes supported infrastructure operations |
-| Network routing, ingress, domains, TLS, runtime network policy | Empire of Light Platform, within documented scope | Avoid a second proxy or routing engine in ARSY |
-| Platform-local operational telemetry | Empire of Light Platform | Expose events and read APIs; ecosystem analytics may consume them without becoming a second source of runtime truth |
-| Ecosystem audit and cross-tenant administrative policy | A-L-L-A-H.COM / ARSY | Platform keeps its own operational audit; map correlation IDs and actor references explicitly |
-| Platform-local storage and infrastructure persistence | Empire of Light Platform | Do not share private tables with ARSY |
-| Ecosystem commercial catalog, plans, entitlements, and billing policy | A-L-L-A-H.COM / ARSY / Empire Economy | Platform exposes measured usage facts and enforceable resource limits through contracts |
-| Payment processing and commerce experience | Empire Economy and its designated providers | Do not embed a second payment or subscription authority in this platform |
-| MoonWitness research, corpus, narrative, publishing | MoonWitness product surfaces | Consume platform capabilities; do not move narrative content ownership here |
-| ROCKSOUL creative/media products | ROCKSOUL product surfaces | Consume platform capabilities; do not create creative-domain services here |
+| Organization | BRIDGE-ALLAH |
+| Canonical repository | BRIDGE-ALLAH/EMPIRE-OF-LIGHT |
+| Public ecosystem brand | A-L-L-A-H.COM |
+| Vision | Empire of Light |
+| Unified platform | ARSY |
+| Repository architecture | One monorepo |
+| Control/API backend | Node.js + Fastify |
+| Infrastructure execution | Rust |
+| Web applications | Existing Next.js/app stacks |
+| VPS distribution profile | ARSY Node |
 
-A feature with unclear ownership is blocked from implementation until an Architecture Decision Record (ADR) names its owner, data source of truth, API boundary, security model, and migration path.
+There must be one canonical source repository. The separate bjo163/A-L-L-A-H.COM repository is a migration source, not a second long-term platform repository. Its code, plans, contracts, and documentation must be reconciled into this monorepo. Do not claim consolidation complete until files, dependencies, workflows, provenance, and clean-checkout verification are addressed.
 
-## 3. Problem and target users
+## 2. Product definition
 
-### Problem
+A-L-L-A-H.COM is the public ecosystem identity. Empire of Light is the overarching vision. ARSY is the unified platform coordinating ecosystem applications and infrastructure capabilities.
 
-Teams often assemble application delivery, databases, networking, monitoring, security, and automation from separate products. This fragments configuration and operational evidence, increases integration work, and makes incident ownership difficult to trace.
+ARSY is not a language-specific service. It is composed of bounded components. Node.js/Fastify and Rust are complementary technologies within the same monorepo and product.
 
-### Target users
+## 3. Target logical layout
 
-1. Independent developers who need a repeatable self-hosted delivery environment.
-2. Engineering teams operating multiple applications and environments.
-3. Digital studios and agencies that need consistent operational patterns.
-4. Organizations requiring control over workload placement, data location, and operational access.
+    BRIDGE-ALLAH/EMPIRE-OF-LIGHT
+    |
+    +-- apps/
+    |   +-- arsy/                 Node.js + Fastify control/API backend
+    |   +-- gate/                 Public ecosystem entrance
+    |   +-- dock/                 Main user-facing home
+    |   +-- headquarter/          Administrative/operational experience
+    |   +-- id/                   Identity and access experience
+    |   +-- moonwitness/          Knowledge/research/publishing experience
+    |   +-- rocksoul/             Creative/media experience
+    |   +-- other verified apps
+    |
+    +-- platform/
+    |   +-- rust-engine/          Existing Rust infrastructure workspace
+    |   +-- node-profile/         ARSY Node installation/deployment profile
+    |   +-- contracts/            Only contracts without an existing owner
+    |
+    +-- packages/                 Shared SDKs, UI, schemas, tooling
+    +-- docs/                     Narrative, blueprint, ADRs, app docs, plans
+    +-- scripts/ and deployment/  CI, release, verification, install, recovery
 
-### Jobs to be done
+This is a target logical layout, not an instruction to move the current Cargo workspace blindly. Keep the Rust workspace root if relocation would create needless churn. Cargo and pnpm can coexist in one repository.
 
-- Connect a repository and produce a traceable build.
-- Deploy, inspect, and roll back a release.
-- Operate workloads, nodes, domains, certificates, and supported data services.
-- Diagnose behavior using logs, metrics, traces, events, and health signals.
-- Apply least-privilege access and inspect privileged operations.
-- Automate infrastructure workflows with clear failure and retry semantics.
-- Back up, restore, upgrade, and recover a deployment.
+## 4. Responsibility boundaries
 
-## 4. Product scope
+### ARSY Control — Node.js + Fastify
 
-### In scope
+Owns ecosystem-facing APIs, identity integration, tenant and product policy, orchestration decisions, product workflows, and external integrations.
 
-- Source integration, build orchestration, deployments, previews, and release lifecycle.
-- Workload execution, containers, workers, nodes, and runtime health.
-- Routing, ingress, domains, TLS, and supported network policy.
-- Supported managed data-service provisioning and lifecycle.
-- Logs, metrics, traces, analytics, errors, uptime, and diagnostics.
-- Platform-local authentication/authorization required to operate the platform.
-- API keys, operational audit, security tooling, and policy enforcement within platform scope.
-- CLI, SDK, plugin, AI, automation, sandbox, and MCP surfaces already supported by the implementation.
-- Operator workflows for configuration, health, backup, restore, upgrade, and rollback.
+Does not own container/build/runtime engine internals, a second proxy or scheduler, Rust-private persistence, or duplicate payment execution.
 
-### Explicitly out of scope
+### ARSY Infrastructure Engine — Rust
 
-- Becoming the canonical user-facing ecosystem portal; that belongs to A-L-L-A-H.COM apps.
-- Owning ecosystem-wide identity, tenant membership, role policy, or cross-tenant administration.
-- Owning product plans, commercial catalog, subscriptions, entitlements, invoices, or payment processing.
-- Implementing a second general-purpose container runtime, proxy, observability backend, or database platform inside ARSY.
-- MoonWitness corpus, research, story canon, or publishing workflows.
-- ROCKSOUL media creation, distribution, and entertainment workflows.
-- A general-purpose operating system.
-- Claiming a fully supported ARSY Node installer before independent artifacts and installation evidence exist.
+Owns supported build/deployment execution, workload lifecycle, runtime, workers, nodes, networking, infrastructure resources, platform-local operational state, and infrastructure telemetry.
 
-## 5. Architecture
+Does not own ecosystem-wide identity, tenant membership, product catalog, subscription, entitlement, payment policy, or MoonWitness/ROCKSOUL content.
 
-The existing repository is a large Rust workspace with a web application, SDKs, scripts, deployment configuration, and documentation. Keep the detailed crate map and architecture overview as the source of truth for actual modules. The following is the product-level logical model:
+### Applications
 
-```text
-A-L-L-A-H.COM Apps / ARSY
-  Identity • Tenant Policy • Product APIs • Commercial Policy
-                    |
-           Versioned API / SDK
-                    |
-                    v
-+----------------------------------------------+
-|        EMPIRE OF LIGHT PLATFORM              |
-|                                              |
-|  Platform Control Plane                     |
-|  Projects • Platform Config • Orchestration  |
-|                    |                         |
-|  Execution Plane  |  Network / Ingress       |
-|  Builds • Releases|  Routes • TLS • Domains  |
-|  Workloads • Nodes|  Traffic Policy          |
-|                    |                         |
-|  Observability Plane                         |
-|  Logs • Metrics • Traces • Events • Health   |
-|                    |                         |
-|  Platform Persistence & Backup               |
-+----------------------------------------------+
-                    |
-             Operator Infrastructure
-```
+Apps own their experiences and domain workflows. They call authoritative ARSY APIs and do not connect directly to private infrastructure-engine databases or bypass tenant authorization.
 
-This is a logical responsibility diagram, not a deployment topology. Do not split modules into new services solely to match the boxes.
+### ARSY Node
 
-### 5.1 Platform control plane
+ARSY Node is an installation and runtime profile, not a separate repository or third backend. It packages compatible artifacts and host configuration for a supported VPS/node role.
 
-Owns platform-local resource configuration and orchestration required to operate infrastructure. It must expose stable, documented interfaces for ecosystem integration.
+## 5. Cross-language integration contract
 
-### 5.2 Execution plane
+The Node/Rust boundary must be explicit, versioned, authenticated, and testable.
+
+Required properties:
+1. Service-to-service identity with scoped credentials and rotation/revocation.
+2. Authenticated principal and tenant references; never trust browser-supplied identity.
+3. Versioned request/response and event schemas.
+4. Idempotency keys for provisioning and lifecycle commands.
+5. Durable operation IDs and observable state transitions.
+6. Correlation IDs across API, engine, node, logs, and audit.
+7. Timeouts, retries, cancellation, reconciliation, and compensation semantics.
+8. Secret redaction in logs and telemetry.
+9. Compatibility policy and contract tests in CI.
+10. No shared private database tables; communicate through APIs, events, SDKs, or local library interfaces.
 
-Owns the supported build and workload lifecycle: scheduling/dispatch, execution, deployment state, workers, nodes, and runtime health. It must report durable state transitions and meaningful failure reasons.
+Do not turn every function into an HTTP service. Choose process/API boundaries only when independent lifecycle, isolation, scaling, or security justifies the cost.
 
-### 5.3 Network and ingress plane
+## 6. Single source-of-truth rules
 
-Owns supported routing, ingress, domains, certificates, and traffic policy. Security-sensitive changes require explicit validation, safe defaults, and audit evidence.
+| Domain | Authoritative owner |
+|---|---|
+| Ecosystem identity and tenant policy | ARSY Control |
+| Product authorization/orchestration decision | ARSY Control |
+| Build/deploy/runtime execution | Rust Infrastructure Engine |
+| Infrastructure node state | Rust Infrastructure Engine |
+| Application experience | Owning app |
+| Product billing/catalog/entitlements | Ecosystem commercial domain |
+| Infrastructure usage facts and limits | Rust reports facts; ARSY applies product policy |
+| Platform operational telemetry | Rust Infrastructure Engine |
+| Product analytics and business audit | ARSY / owning product domain |
+| MoonWitness knowledge and narrative | MoonWitness |
+| ROCKSOUL creative/media | ROCKSOUL |
+| Communication signal network | ARSY Radio domain through explicit contract |
 
-### 5.4 Observability plane
+If a capability appears in multiple places, identify the source of truth and migrate toward one owner. Do not add a third implementation.
 
-Owns platform operational telemetry and diagnostics. Events must have stable identifiers and correlation metadata. Do not conflate platform telemetry with ecosystem product analytics.
+## 7. Current implementation and migration truth
 
-### 5.5 Persistence and recovery
+The destination repository currently holds the substantial Rust/Cargo platform workspace and its technical assets. The source repository bjo163/A-L-L-A-H.COM holds the pnpm workspace, Fastify ARSY Hub, ecosystem apps, shared packages, and associated plans/docs.
 
-Owns platform-local persistence and supported storage integrations. Backup and restore are product capabilities only when exercised in tests against supported versions.
+The target is one monorepo, but source consolidation is not complete. Required migration work includes source/destination inventory, duplicate detection, dependency/workspace reconciliation, CI and secret mapping, app/package/contract ownership, docs/plans/ADR preservation, release/deployment reconciliation, and clean-checkout verification.
 
-## 6. Integration contract with ARSY
+The Rust source is Temps-derived. Preserve applicable licenses, NOTICE, copyright, and third-party attribution. The existing scripts/install.sh still targets upstream Temps release assets and is not an ARSY Node installer.
 
-ARSY is the ecosystem-facing product/control integration layer. It owns ecosystem identity, tenant policy, product-domain APIs, and commercial coordination. Empire of Light Platform owns infrastructure execution and platform-local operational state.
+## 8. Monorepo migration sequence
 
-Required integration rules:
+### Phase A — Freeze architecture and inventory
+- Declare this repository the only long-term canonical destination.
+- Inventory tracked files in both repositories.
+- Inventory Cargo crates, pnpm packages, apps, APIs, schemas, migrations, workflows, secrets, deployment targets, docs, plans, ADRs, and open issues.
+- Build a path/package ownership map and detect duplicate implementations.
+- Create a migration ledger with source path, target path, owner, decision, status, verification, and commit.
 
-1. **No shared private database:** communicate through documented API, SDK, event, or adapter contracts.
-2. **No duplicate authority:** one owner per identity, tenant, billing, runtime, routing, and telemetry domain.
-3. **Explicit principal mapping:** map ecosystem actor and tenant references to scoped platform permissions; never infer authority from a client-supplied tenant ID.
-4. **Least privilege:** use dedicated service credentials with narrowly scoped capabilities and revocation.
-5. **Correlation:** propagate request, actor, tenant-reference, and operation identifiers where appropriate; avoid leaking secrets or sensitive payloads.
-6. **Idempotency:** provisioning and lifecycle commands must safely handle retries and duplicate delivery.
-7. **Observable outcomes:** return operation IDs, durable status, and actionable errors.
-8. **Versioning:** document compatibility and deprecation policy for API/SDK/event contracts.
-9. **Failure isolation:** define timeout, retry, cancellation, compensation, and reconciliation behavior.
-10. **No source copying:** integrate with platform capabilities; do not fork internal modules into ARSY.
+Exit: every maintained component and critical contract is classified.
 
-### Ownership examples
+### Phase B — Workspace and source integration
+- Preserve the existing Rust workspace and tests.
+- Bring the pnpm workspace and Fastify ARSY app into the canonical repository without overwriting Rust paths.
+- Resolve root manifest collisions deliberately.
+- Reconcile package names and aliases only where safe.
+- Consolidate shared schemas and SDKs; do not duplicate contract ownership.
+- Preserve legal notices and source provenance.
 
-- ARSY decides whether a tenant may request a deployment; the platform executes the authorized deployment.
-- The platform reports resource usage facts; ARSY/Empire Economy applies product plan, entitlement, and billing policy.
-- The platform records infrastructure operations; ARSY records ecosystem-level administrative and business audit events. Correlate them without merging ownership.
-- The platform may have platform-local operator accounts; those accounts do not replace ecosystem users or tenant membership.
+Exit: clean checkout can install dependencies and discover both workspaces.
 
-## 7. Current implementation truth
+### Phase C — CI, contracts, and security
+- Reconcile GitHub Actions without dropping existing checks.
+- Add coordinated Rust and Node workspace checks.
+- Add cross-language contract validation and integration fixtures.
+- Reconcile secrets and environment variables without committing values.
+- Verify supply-chain, license, vulnerability, and secret-scanning controls.
 
-The current codebase is derived from Temps and retains a Rust workspace of more than one hundred crates, web UI, SDKs, scripts, Compose configuration, and upstream technical documentation.
+Exit: required tests run on canonical branches and cross-language contracts are enforced.
 
-The source tree includes capability areas for delivery, runtime, networking, managed services, observability, security, AI/automation, and extensibility. Capability presence does not establish feature completeness or production maturity. The crate map, source, tests, ADRs, release workflow, and runbooks remain authoritative for implementation detail.
+### Phase D — Applications and operations
+- Integrate apps and packages in small ownership batches.
+- Reconcile docs, plans, ADRs, and runbooks.
+- Define local development profiles without forcing every app to run together.
+- Define deployment profiles and compatible component releases.
+- Validate health checks, observability, backup, restore, and rollback.
 
-### Known identity and installer gap
+Exit: maintained components have one authoritative source path and executable development/deployment contracts.
 
-- The root README and existing blueprint previously described MOONWITNESS / MW-DEVPLATFORM and required reconciliation after the repository rename.
-- The installer at `scripts/install.sh` still targets `gotempsh/temps`, downloads `temps-*` release assets, and installs the `temps` binary.
-- Technical identifiers remain upstream-derived. No blind global rename is authorized.
-- No claim is made here that an independent Empire of Light release artifact, ARSY Node installer, clean VPS install, or production upgrade/rollback has been validated.
+### Phase E — VPS installer and source retirement
+- Build canonical release artifacts for Rust and Node components.
+- Publish checksums, signatures/provenance, SBOM, and compatibility manifest.
+- Implement ARSY Node preflight, install, configuration, health, upgrade, rollback, backup, restore, and uninstall.
+- Test clean VPS install, retry, interruption, upgrade, rollback, and restore.
+- Only after acceptance, mark the old source repository read-only/archive it and point it to the canonical destination.
 
-Treat these as explicit migration gaps, not cosmetic documentation details.
+Exit: no active build, deployment, release, or product workflow depends on the old repository.
 
-## 8. Naming and source provenance
+## 9. ARSY Node requirements
 
-- **Ecosystem:** A-L-L-A-H.COM — Empire of Light.
-- **Platform product:** Empire of Light Platform.
-- **Repository:** `BRIDGE-ALLAH/EMPIRE-OF-LIGHT`.
-- **Ecosystem application/control integration:** ARSY in the A-L-L-A-H.COM repository.
-- **Future self-hosted node/distribution experience:** ARSY Node, only after release and installer gates are met.
+- Version-pinned artifacts built by canonical CI.
+- Supported OS/architecture matrix.
+- SHA-256 checksums and verifiable signatures/provenance.
+- Least-privilege service accounts and explicit host permissions.
+- Safe secret generation and configuration.
+- Idempotent install and recovery from interrupted operations.
+- Health checks and actionable diagnostics.
+- Version compatibility across Fastify Control, Rust Engine, and node agents.
+- Backup/restore, upgrade/rollback, and uninstall.
+- Clean-host test evidence.
 
-This repository is Temps-derived. Preserve all upstream copyright statements, NOTICE files, license texts, and third-party attribution. Keep implementation identifiers compatible until each migration is planned and tested. A product rename does not change legal provenance.
+Hard stop: do not rename the current upstream Temps installer and do not claim ARSY Node is ready until these gates pass.
 
-## 9. ARSY Node and VPS installation direction
+## 10. Anti-overlap rules for humans and AI agents
 
-ARSY Node is the intended ecosystem-facing name for a self-hosted installation profile that combines verified Empire of Light platform artifacts with the required A-L-L-A-H.COM integration components. It is a distribution and installation contract, not a new runtime to build in parallel.
-
-### Required installer properties
-
-- Version-pinned, platform-specific release artifacts.
-- SHA-256 checksums and preferably verifiable signatures/provenance.
-- Supported Linux distributions and CPU architectures documented.
-- Preflight checks for privileges, disk, memory, ports, DNS, firewall, and Docker/runtime prerequisites.
-- Explicit configuration and secret generation; no default production credentials.
-- Idempotent installation and safe re-execution.
-- Health checks and actionable failure diagnostics.
-- Least-privilege service execution and documented host-level permissions.
-- Backup, restore, upgrade, rollback, and uninstall behavior.
-- No silent migration or destructive data operation.
-- Clean-host integration tests for each supported profile.
-
-### Installer implementation sequence
-
-1. Inventory the current upstream installer, release workflows, binaries, assets, Compose services, and environment variables.
-2. Define the supported product distribution and version compatibility matrix.
-3. Establish an independent release pipeline that builds and publishes the intended artifacts.
-4. Add artifact checksums/signatures and provenance verification.
-5. Implement ARSY Node preflight, configuration, install, health, and recovery commands.
-6. Test clean install, interrupted install, rerun/idempotency, upgrade, rollback, backup, and restore.
-7. Publish operator documentation and known limitations.
-8. Only then replace or wrap upstream installer entry points, preserving attribution and a documented compatibility path.
-
-**Hard stop:** until steps 1–7 have evidence, `scripts/install.sh` must remain clearly identified as the upstream Temps installer. Do not tell users to run it to install Empire of Light or ARSY Node.
-
-## 10. Security, reliability, and trust requirements
-
-- Never commit secrets, private customer data, production identifiers, or host-specific credentials.
-- Treat Docker socket access and host-level execution as high-risk capabilities.
-- Apply least privilege and private service networking.
-- Keep secrets out of logs, command output, URLs, browser state, and telemetry.
-- Document external network calls, telemetry, data residency, backup destinations, and retention.
-- Audit privileged actions with actor, operation, target, correlation ID, and timestamp; redact sensitive values.
-- Require review for authentication, authorization, cryptography, migrations, resource limits, cancellation, and cleanup.
-- Define resource quotas and safe defaults for multi-tenant or shared environments.
-- Test failure paths, retries, duplicate commands, partial upgrades, and restore procedures.
-- Preserve upstream licenses and notices.
-
-## 11. Roadmap and exit gates
-
-### Phase 0 — Identity and truth alignment
-
-- [x] Confirm repository identity as `BRIDGE-ALLAH/EMPIRE-OF-LIGHT`.
-- [x] Establish the platform's role within A-L-L-A-H.COM.
-- [x] Separate platform execution from ARSY ecosystem policy and product workflows.
-- [x] Document the upstream installer limitation and provenance requirement.
-- [ ] Audit all user-facing surfaces, docs navigation, CLI output, email templates, installer messages, and release metadata for remaining legacy product copy.
-- [ ] Record all residual overlap findings as owned migration tasks or ADRs.
-
-**Exit gate:** repository narrative, README, and blueprint agree; no unsupported maturity claims remain.
-
-### Phase 1 — Platform boundary and API contract
-
-- [ ] Inventory current public APIs, SDKs, events, auth models, and platform-local resource domains.
-- [ ] Define ARSY-to-platform service authentication and principal/tenant mapping.
-- [ ] Define API/event versioning, idempotency, correlation, retry, timeout, and reconciliation behavior.
-- [ ] Identify duplicate or conflicting implementations in ARSY and assign one owner per capability.
-- [ ] Add contract tests and integration test fixtures.
-
-**Exit gate:** an end-to-end provisioning operation can be authorized by ARSY, executed by the platform, and reconciled with auditable outcomes without shared private storage.
-
-### Phase 2 — Independent release foundation
-
-- [ ] Define supported release targets and version policy.
-- [ ] Build reproducible platform artifacts in CI.
-- [ ] Publish checksums, signatures/provenance, SBOM, and release notes.
-- [ ] Separate product artifacts from upstream release URLs and names without erasing attribution.
-- [ ] Validate upgrade compatibility and rollback policy.
-
-**Exit gate:** a pinned release can be installed and verified without downloading an upstream Temps binary.
-
-### Phase 3 — ARSY Node and operator readiness
-
-- [ ] Implement installer preflight and safe configuration.
-- [ ] Implement idempotent install, health, upgrade, rollback, backup, restore, and uninstall workflows.
-- [ ] Test clean-host installs on every supported OS/architecture profile.
-- [ ] Validate firewall, TLS, secrets, permissions, data persistence, and failure recovery.
-- [ ] Publish operator runbooks and support matrix.
-
-**Exit gate:** an operator can install, secure, inspect, back up, upgrade, roll back, and recover using published instructions.
-
-### Phase 4 — Product maturity and ecosystem integration
-
-- [ ] Publish feature maturity and known limitations.
-- [ ] Publish API/SDK examples and integration contracts.
-- [ ] Validate metering facts and resource-limit enforcement with ARSY/Empire Economy.
-- [ ] Establish release, vulnerability disclosure, and support processes.
-- [ ] Add operational SLOs and incident/recovery exercises.
-
-**Exit gate:** ecosystem products integrate through stable contracts, and platform releases have repeatable operational evidence.
-
-## 12. Definition of done
-
-A feature is complete only when:
-
-- its authoritative owner and non-overlap boundary are documented;
-- behavior is implemented and covered by relevant tests;
-- security, permissions, resource limits, and failure paths are reviewed;
-- API/configuration changes are documented and versioned;
-- observability and actionable diagnostics exist;
-- upgrade, rollback, and data compatibility are considered;
-- the README and blueprint describe actual behavior, not aspirations.
-
-A release is production-ready only when the release readiness runbook's applicable checks pass with recorded evidence. Documentation alone is not evidence of implementation.
-
-## 13. Anti-overlap rules for contributors and AI agents
-
-Before creating a service, crate, package, database table, API, worker, or UI surface:
-
-1. Search the existing workspace and architecture docs for an equivalent capability.
-2. Search the A-L-L-A-H.COM repository's documented ownership contracts.
+1. Search both source repositories and all monorepo paths.
+2. Search manifests, imports, APIs, schemas, migrations, tests, and active plans.
 3. Name the authoritative owner and source of truth.
-4. Prefer extension or integration over duplication.
-5. If two existing implementations overlap, document the observed overlap and propose a migration; do not add a third.
-6. Keep a capability in this repository only when it is part of the infrastructure platform's execution responsibility.
-7. Keep ecosystem identity, tenant policy, product billing, and creative/knowledge domains outside this repository.
-8. Add an ADR for any new cross-repository boundary or change of ownership.
+4. Prefer reuse, extension, or migration over duplication.
+5. Do not move a package while another active package owns its contracts or data.
+6. Do not create separate repositories as a workaround for workspace integration.
+7. Do not create a service just to mirror an architecture diagram.
+8. Record cross-domain changes in an ADR and migration ledger.
+9. Keep tasks small, autonomous, testable, and safe to retry.
+10. Update README, narrative, blueprint, contracts, and tests when ownership changes.
 
-### Prohibited shortcuts
+## 11. Definition of done
 
-- Global search-and-replace of upstream identifiers.
-- Rebranding the installer without changing and testing its actual download source.
-- Claiming a service, API, billing flow, installer, or release is complete based only on a plan or diagram.
-- Creating a second runtime, proxy, identity provider, billing authority, or observability backend to avoid integration work.
-- Splitting modules into microservices without a scaling, isolation, ownership, or reliability justification.
-- Removing upstream notices or rewriting history to imply original authorship.
+A clean checkout of the canonical repository contains both workspaces and all maintained applications; Rust and Node stacks build/test from a clean checkout; cross-language contracts are versioned and tested; each capability has one owner; canonical CI and release automation work; ARSY Node has clean-host evidence; and no active development or deployment depends on the source repository.
 
-## 14. Source-of-truth documents
-
-- [Product narrative](PRODUCT_NARRATIVE.md) — purpose, ecosystem role, ownership boundaries, and product voice.
-- [Architecture overview](architecture/overview/page.mdx) — implementation-oriented architecture.
-- [Crate map](architecture/crates.md) — workspace inventory.
-- [Release readiness](RELEASE_READINESS.md) — evidence required for safe operation.
-- [AGENTS.md](../AGENTS.md) — engineering and agent rules.
-- [REVIEW.md](../REVIEW.md) — recurring security and reliability findings.
-- [NOTICE](../NOTICE), [LICENSE](../LICENSE), and [LICENSE-MIT](../LICENSE-MIT) — upstream provenance and licensing.
-
-When documents disagree, implementation and tests establish current behavior; this blueprint establishes intended ownership and target direction. Update both when a verified architectural decision changes.
+One ecosystem. One canonical monorepo. Multiple independently deployable components. No duplicated platform authority.
