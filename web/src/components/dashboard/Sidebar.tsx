@@ -344,7 +344,7 @@ export default function AppSidebar() {
               >
                 {logoIcon ?? (
                   <img
-                    src="/svg/temps-icon.svg"
+                    src="/svg/mw-icon.svg"
                     alt="logo"
                     className="size-full"
                   />
@@ -353,11 +353,11 @@ export default function AppSidebar() {
               {!compact && (
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="flex items-center gap-1.5 truncate font-semibold">
-                    {logoText ?? 'Temps'}
+                    {logoText ?? 'MOONWITNESS'}
                     {logoBadge}
                   </span>
                   <span className="truncate text-xs">
-                    {import.meta.env.TEMPS_VERSION}
+                    MW-DEVPLATFORM · {import.meta.env.TEMPS_VERSION}
                   </span>
                 </div>
               )}
