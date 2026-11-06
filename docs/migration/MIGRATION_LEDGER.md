@@ -19,6 +19,35 @@ bjo163/A-L-L-A-H.COM, default branch main. Keep this source intact until all mig
 - Local shell syntax and CLI smoke checks were run against the installer/uninstaller behavior. The smoke test is wired into the `workflow-contracts` job in `.github/workflows/rust-tests.yml`; the resulting GitHub Actions run still needs to provide evidence. No live Docker deployment, clean-host installation, VPS operation, or production readiness test has been performed by this change.
 
 
+## Legacy Fastify route inventory — source `dev`
+
+Inspected `apps/arsy/src/app.ts` on source branch `dev` (blob `3302311f472977869d6e3d18e68a176e62c4b6b5`, 1,199 lines). It declares 34 direct Fastify route handlers. It also registers plugin-owned route surfaces for authentication, SDUI, LLM gateway, and storage; those plugin routes are additional inventory work and are not included in the 34 count.
+
+| Domain | Direct routes found | Rust migration disposition |
+|---|---|---|
+| Health/readiness | `GET /health`, `GET /ready` | Map to existing health/readiness and deployment probes |
+| Qorpus | `POST /v1/qorpus/ingest`, `POST /v1/qorpus/search` | Audit knowledge/search and memory crates; pending parity map |
+| Threads | `GET/POST /v1/threads` | Audit existing AI-agent/conversation capabilities; pending |
+| Audit | `GET /v1/admin/audit-events` | Audit existing audit crate and authorization scope; pending |
+| Nexus NAS | `GET/POST /v1/nexus/nas` | Audit existing storage/provider/secret capabilities; pending |
+| Nexus pools | `GET /v1/nexus/pools` | Identify owning Rust resource/pool capability; pending |
+| Orbit instances | `GET/POST /v1/orbit/instances` | Audit existing sandbox/workload/runtime capabilities; pending |
+| Works plans | `GET/POST /v1/works/plans` | Identify commercial/product-policy owner; pending |
+| Works subscriptions | `GET/POST /v1/works/subscriptions` | Audit revenue/billing capabilities; pending |
+| Works invoices | `GET /v1/works/invoices` | Audit revenue/billing capabilities; pending |
+| Public ISP | `GET /v1/public/isp/plans`, `GET /v1/public/isp/coverage` | Identify public catalog/coverage owner and safe projection contract; pending |
+| HelioGrid | `POST /v1/heliogrid/telemetry` | Identify telemetry ingestion owner; pending |
+| Internationalization | `GET /v1/i18n/languages`, `POST /v1/i18n/terms/sync` | Identify localization/catalog owner; pending |
+| Projects | `GET/POST /v1/projects`, `GET/PATCH /v1/projects/:projectId` | Audit existing project/deployment ownership; pending |
+| Project tasks | `GET /v1/projects/:projectId/tasks`, `PATCH /v1/projects/:projectId/tasks/:taskId` | Audit project/task ownership and authorization; pending |
+| Project operations | `POST /v1/projects/:projectId/sync`, `GET /v1/projects/:projectId/export` | Map sync/export semantics and idempotency; pending |
+| Project stages | `GET/POST /v1/projects/:projectId/stages` | Audit workflow/stage capabilities; pending |
+| Admin cron | `GET /v1/admin/cron`, `POST /v1/admin/cron/seed/:companyId` | Map scheduling/tenant admin behavior; pending |
+
+Cross-cutting behavior observed in this source file includes exact-method public route rules, per-route rate limits, CORS origin policy, security headers/CSP, a principal guard, tenant scoping, admin-reason hashing, ORM-backed persistence, addon registration, and migration/seed orchestration. The Fastify app uses the source repository's PGlite-based `@allah/arsy-orm`; do not assume its data model or transaction behavior matches the Rust platform.
+
+**Disposition:** this is a requirements inventory, not a route-parity claim. No Fastify handler has been marked migrated. Each route must be mapped to an existing Rust owner or an evidenced gap, then covered by authorization, tenant-isolation, contract, and behavior-parity tests before consumer cutover.
+
 ## Verified source components and Rust-first disposition
 
 | Source area | Current evidence | Target decision | Status |
