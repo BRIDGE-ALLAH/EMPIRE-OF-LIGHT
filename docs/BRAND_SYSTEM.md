@@ -1,98 +1,96 @@
-# MOONWITNESS — MW-DEVPLATFORM Brand System
+# Empire of Light Platform — Brand & Language System
 
 > **Build with clarity. Deploy with sovereignty. Operate with accountability.**
 
-This document is the product-facing identity standard for the MW-DEVPLATFORM edition of this repository. It is intentionally separate from upstream engineering attribution and internal compatibility identifiers.
+This document governs product-facing language for the infrastructure platform in `BRIDGE-ALLAH/EMPIRE-OF-LIGHT`. It does not change upstream legal attribution or authorize a blind rename of technical identifiers.
 
 ## Identity
 
-- **Master brand:** MOONWITNESS
-- **Product name:** MW-DEVPLATFORM
-- **Short product label:** MW Platform
-- **Descriptor:** Self-hosted developer platform
+- **Ecosystem brand:** A-L-L-A-H.COM — Empire of Light.
+- **Platform product:** Empire of Light Platform.
+- **Repository:** `BRIDGE-ALLAH/EMPIRE-OF-LIGHT`.
+- **Category:** Self-hostable developer and infrastructure operations platform.
+- **Descriptor:** Infrastructure foundation for building, delivering, and operating digital products.
 - **Promise:** Your infrastructure. Your visibility. Your responsibility.
-- **Primary domain:** `moonwitnessxv` brand ecosystem; deployment hostnames are operator-configured.
 
-Use **MOONWITNESS** for the parent identity and **MW-DEVPLATFORM** when describing the product or its technical capabilities. Do not alternate randomly among Moon Witness, MoonWitnessX, MW Dev Platform, or Temps in user-facing copy.
+Use **Empire of Light Platform** when referring to this repository's product. Use **A-L-L-A-H.COM** when referring to the wider ecosystem. Use **ARSY** only for the separate ecosystem application/control integration layer defined in the A-L-L-A-H.COM repository. Use **MoonWitness** for its knowledge, research, narrative, and publishing domain—not as the name of this infrastructure platform.
 
-## Narrative
+## Narrative and voice
 
-MOONWITNESS is built around the idea that technology should increase human agency. The Moon represents perspective, cycles, navigation, and illumination through change. Witness represents observation, evidence, and accountability. MW-DEVPLATFORM turns those ideas into practical infrastructure: a place to build, deploy, observe, secure, and operate digital products while retaining control over code, data, and operational decisions.
+The platform makes infrastructure capabilities coherent and inspectable without hiding operational reality. It should help operators understand what is running, what changed, what failed, who can act, where data lives, and how to recover.
 
-The platform should make complexity legible rather than pretend it does not exist. Users should be able to understand what is running, what changed, what failed, who can act, where data lives, and what to do next.
-
-## Voice
-
-Write in a clear, calm, capable, technically literate voice.
+Write in a clear, calm, technically literate, evidence-led voice.
 
 Prefer:
-- “See what is running. Understand what changed.”
-- “Deploy with confidence. Operate with evidence.”
-- “Your infrastructure. Your visibility. Your responsibility.”
+- “Build, deploy, and operate with evidence.”
+- “Keep infrastructure control in your hands.”
+- “See what changed. Understand what failed.”
 - “Self-hosted by design. Transparent by default.”
 
 Avoid:
-- exaggerated claims such as unhackable, zero-risk, or infinitely scalable;
-- presenting planned features as shipped;
-- implying religious authority, divine endorsement, or moral certification;
-- decorative spiritual language in operational controls, alerts, or error messages.
-
-Values such as Amanah (stewardship), Ihsan (careful excellence), Adl (fairness), and Rahmah (human-centred care) are engineering lenses. Express them through security, reliability, accessibility, and transparent product behavior—not slogans in every screen.
+- unsupported claims such as unhackable, zero-risk, infinitely scalable, or production-ready without evidence;
+- presenting planned capabilities as shipped;
+- implying divine endorsement, religious authority, or moral certification;
+- decorative spiritual language in operational controls, alerts, and error messages;
+- using ecosystem names as interchangeable labels for unrelated products.
 
 ## Visual direction
 
-The interface is an operations console, not a marketing landing page. Prioritize dense but readable information, clear hierarchy, predictable navigation, fast scanning, and calm feedback.
+The visual system must distinguish the infrastructure console from the A-L-L-A-H.COM public gateway, MoonWitness knowledge experiences, ROCKSOUL creative surfaces, and Empire Economy commerce experiences.
 
-- **Foundation:** neutral surfaces, strong contrast, restrained borders, compact resource lists.
-- **Primary ink:** deep midnight navy `#111827`.
-- **Lunar accent:** muted gold `#D6B36A`; use sparingly for focus, highlights, and brand moments, never as the only status signal.
-- **Light surfaces:** white and cool near-white.
-- **Dark surfaces:** deep charcoal/navy with accessible foreground contrast.
-- **Typography:** retain the existing Geist / Geist Mono system unless a tested, repository-wide typography migration is proposed.
-- **Iconography:** consistent Lucide line icons for controls; use the original MW mark only for product identity.
-- **Motion:** functional and subtle; respect reduced-motion preferences.
+For operational interfaces:
+- prioritize information hierarchy, legibility, accessibility, predictable navigation, and fast scanning;
+- use semantic status colors consistently; brand accents must never be the only status signal;
+- preserve readable density for resource tables, logs, events, and diagnostics;
+- use motion only when it explains state or feedback, and respect reduced-motion preferences;
+- avoid decorative astronomy motifs behind dense operational data.
 
-The original product mark is `web/public/svg/mw-icon.svg`. Do not replace it with an upstream logo or use the mark as a decorative watermark behind operational data.
+### Existing asset status
+
+The repository previously introduced MOONWITNESS / MW-DEVPLATFORM visual assets and copy. Their existence in the current source tree does not make them the approved final Empire of Light identity. Treat any MW-specific mark, browser title, favicon, social image, or UI label as a **legacy asset requiring inventory and deliberate replacement**.
+
+Do not delete or overwrite legacy assets blindly. First find every reference, confirm whether it is used by shipped routes or integrations, provide the replacement asset, update all references, and run visual/accessibility checks. Until that migration is complete, document the residual legacy surfaces honestly.
+
+No final logo artwork, color token set, or complete UI rebrand is certified by this document alone.
 
 ## Product language map
 
 | Context | Approved label |
 |---|---|
-| Browser title | MOONWITNESS — MW-DEVPLATFORM |
-| Sidebar brand | MOONWITNESS |
-| Product descriptor | MW-DEVPLATFORM |
-| Loading state | Loading MW-DEVPLATFORM |
-| Documentation | MW-DEVPLATFORM |
-| Internal lineage / legal attribution | Temps, where technically or legally required |
+| Ecosystem | A-L-L-A-H.COM — Empire of Light |
+| This platform | Empire of Light Platform |
+| This repository | `BRIDGE-ALLAH/EMPIRE-OF-LIGHT` |
+| Ecosystem integration layer | ARSY |
+| Knowledge and research product | MoonWitness |
+| Creative/media product | ROCKSOUL |
+| Commerce product domain | Empire Economy |
+| Legal/upstream lineage | Temps, where technically or legally required |
 
-## Technical naming and upstream compatibility
+## Technical naming and provenance
 
 The codebase is derived from Temps. Preserve upstream copyright headers, NOTICE files, license texts, provider attributions, and required third-party notices.
 
-Do not perform a blind global replacement of `temps`. The string appears in crate names, binary and service identifiers, environment variables, database objects, migration history, image names, API contracts, and persistent storage paths. Those are compatibility surfaces, not merely brand copy.
+Do not globally replace `temps`. It appears in crate names, binary and service identifiers, environment variables, database objects, migration history, image names, API contracts, installer logic, and persistent storage paths. These are compatibility surfaces, not merely brand copy.
 
-Classify every occurrence before changing it:
+Classify each occurrence before changing it:
 
-1. **User-facing brand/copy:** use MOONWITNESS or MW-DEVPLATFORM.
+1. **User-facing product copy:** use Empire of Light Platform.
 2. **Internal implementation identifiers:** retain until a deliberate migration is designed and tested.
-3. **Deployment compatibility:** retain current names or provide aliases and migration steps.
-4. **Legal attribution and upstream provenance:** preserve exactly as required.
-5. **Documentation examples:** use MW product language while accurately documenting existing `TEMPS_*` variables and commands.
+3. **Deployment and data compatibility:** retain or provide aliases, migration steps, and rollback.
+4. **Legal attribution and upstream provenance:** preserve as required.
+5. **Documentation examples:** describe actual `TEMPS_*` variables and commands accurately until their migration is complete.
 
-A future technical rename requires an inventory, compatibility plan, migration and rollback tests, upgrade documentation, and a release decision. Cosmetic rebranding must never make existing installations undiscoverable or unrecoverable.
+A technical rename requires an inventory, compatibility plan, migration and rollback tests, upgrade documentation, and an explicit release decision.
 
-## UI acceptance checklist
+## Acceptance checklist
 
-- [x] Sidebar and loading shell use the MW product mark and MOONWITNESS name.
-- [x] Browser title identifies MOONWITNESS — MW-DEVPLATFORM.
-- [ ] Login, setup, onboarding, empty, error, and notification copy use approved product language.
-- [ ] No upstream product logo or unqualified “Temps” remains in user-facing surfaces, except explicit attribution or documented compatibility.
-- [ ] Brand accent does not replace semantic success, warning, danger, or neutral status colors.
-- [ ] Light and dark themes retain accessible contrast.
-- [ ] Mobile, collapsed-sidebar, and loading states show the same identity.
-- [ ] Source attribution, licenses, and legal notices remain intact.
-- [ ] Frontend lint, typecheck, unit tests, E2E smoke tests, and production build pass.
+- [ ] Browser title, favicon, metadata, and product shell use the approved platform identity.
+- [ ] Login, setup, onboarding, empty, error, notification, and email copy use approved language.
+- [ ] CLI, installer, Compose labels, and release metadata are audited.
+- [ ] Legacy MW marks and MoonWitness product labels are either replaced or explicitly retained as historical/compatibility references.
+- [ ] Semantic status colors and accessibility remain intact.
+- [ ] Light/dark, mobile, and responsive states are reviewed.
+- [ ] Frontend lint, typecheck, tests, and production build pass where applicable.
+- [ ] Upstream legal attribution and technical compatibility are preserved.
 
-## Scope note
-
-A brand system and the first shell-level identity updates do not certify a complete UI rebrand. Every route, auth state, email template, generated page, CLI output, installer, Compose service, and release artifact must be audited and validated before claiming full brand completion.
+A completed documentation update is not evidence that the visual or technical rebrand is complete.
