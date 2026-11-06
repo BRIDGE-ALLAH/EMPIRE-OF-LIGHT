@@ -326,7 +326,7 @@ export function AddNotificationProvider() {
     <Wizard
       fullWidth
       title="Add notification provider"
-      description="Choose a delivery method and configure where Temps sends notifications. Providers apply to all projects on this instance."
+      description="Choose a delivery method and configure where MW-DEVPLATFORM sends notifications. Providers apply to all projects on this instance."
       currentStep={currentStep}
       steps={[
         { id: 'provider-type', label: 'Choose provider' },
