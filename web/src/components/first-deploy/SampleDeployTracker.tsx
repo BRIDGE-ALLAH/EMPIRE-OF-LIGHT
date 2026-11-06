@@ -190,7 +190,7 @@ export function SampleDeployTracker({
             </>
           ) : readFailed ? (
             <p>
-              Temps could not read this project&apos;s latest deployment. Check
+              MW-DEVPLATFORM could not read this project&apos;s latest deployment. Check
               again, or start the sample deployment.
             </p>
           ) : (
