@@ -1,7 +1,7 @@
 /* SPDX-FileCopyrightText: 2024-2026 Temps Contributors */
 /* SPDX-License-Identifier: MIT OR Apache-2.0 */
 
-/* Import Google Fonts - Geist (Vercel's font family) */
+/* Geist and Geist Mono provide a compact, legible operations-console type system. */
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
 
@@ -14,7 +14,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Vercel-inspired light palette (Geist design system) */
+  /* MOONWITNESS console foundation: calm neutral surfaces, clear contrast, and restrained lunar accents. */
   /* Main background is pure white, cards sit on subtle gray-50 */
   --background: oklch(1 0 0); /* #ffffff — geist background */
   --foreground: oklch(0.145 0 0); /* #0a0a0a — geist foreground */
@@ -23,7 +23,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  /* Primary: near-black CTAs like Vercel's "Add New…" button */
+  /* Primary actions use high-contrast ink; the lunar accent is reserved for focus and brand moments. */
   --primary: oklch(0.145 0 0);
   --primary-foreground: oklch(0.985 0 0);
   /* gray-50 (#fafafa) — subtle secondary surface */
@@ -71,7 +71,7 @@
   --chart-3: oklch(0.773 0.1776 69.61); /* amber */
   --chart-4: oklch(0.627 0.2193 23.03); /* red */
   --chart-5: oklch(0.645 0.2253 296.37); /* purple */
-  /* Sidebar uses gray-50 — slightly darker than main canvas like Vercel nav rail */
+  /* Sidebar uses a subtle neutral surface to separate navigation from the workspace. */
   --sidebar: oklch(0.985 0 0); /* #fafafa */
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.145 0 0);
