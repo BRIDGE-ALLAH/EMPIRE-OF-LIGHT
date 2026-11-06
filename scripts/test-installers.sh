@@ -41,7 +41,7 @@ cat > "$fake_bin/docker" <<'DOCKER'
 #!/usr/bin/env bash
 set -Eeuo pipefail
 printf '%s\n' "$*" >> "$DOCKER_CALLS"
-if [[ "$1 $2" == "compose version" || "$1" == "info" ]]; then
+if [[ "$1 ${2:-}" == "compose version" || "$1" == "info" ]]; then
   exit 0
 fi
 if [[ "$1" == "compose" && "$*" == *"config --services"* ]]; then
