@@ -88,7 +88,7 @@ test('the settings switches are named by their labels', () => {
   )
   expect(markup).toContain('id="serves-own-temps-api"')
   expect(labelFor(markup, 'serves-own-temps-api')).toBe(
-    'App serves its own Temps API'
+    'App serves its own MW-DEVPLATFORM API'
   )
 })
 
