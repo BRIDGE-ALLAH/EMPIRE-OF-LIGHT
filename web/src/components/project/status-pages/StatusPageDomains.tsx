@@ -396,7 +396,7 @@ function AddDomainForm({ page }: { page: StatusPageResponse }) {
                       <span>
                         <span className="font-medium">HTTP</span>
                         <span className="block text-muted-foreground">
-                          The hostname already points at this Temps instance.
+                          The hostname already points at this MW-DEVPLATFORM instance.
                         </span>
                       </span>
                     </label>
@@ -444,7 +444,7 @@ export function StatusPageDomains({ page }: { page: StatusPageResponse }) {
         <h3 className="text-lg font-semibold">Custom domains</h3>
         <p className="text-sm text-muted-foreground">
           Serve this page on your own hostname, e.g.{' '}
-          <code className="text-xs">status.example.com</code>. Temps checks that
+          <code className="text-xs">status.example.com</code>. MW-DEVPLATFORM checks that
           you control it and issues a certificate before serving anything there.
           Only the page and <code className="text-xs">/summary.json</code> are
           reachable on it.
