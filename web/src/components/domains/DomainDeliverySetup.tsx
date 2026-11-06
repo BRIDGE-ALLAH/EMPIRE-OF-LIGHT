@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024-2026 Temps Contributors
+// SPDX-FileCopyrightText: 2024-2026 MW-DEVPLATFORM Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 import {
@@ -301,10 +301,10 @@ export function DomainDeliverySetup({
             {preview.record.requires_adoption && (
               <div className="rounded-lg border border-amber-500/40 bg-amber-500/5 p-4">
                 <p className="text-sm font-medium">
-                  This record is not managed by Temps
+                  This record is not managed by MW-DEVPLATFORM
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Adopting it permits Temps to update its destination and manage
+                  Adopting it permits MW-DEVPLATFORM to update its destination and manage
                   future changes. You can skip this setup to leave the record
                   untouched.
                 </p>
@@ -475,7 +475,7 @@ export function DomainDeliverySetup({
                       />
                     </FormControl>
                     <p className="text-xs text-muted-foreground">
-                      Confirm the address of the Temps server serving this
+                      Confirm the address of the MW-DEVPLATFORM server serving this
                       project.
                     </p>
                     <FormMessage />
