@@ -1,124 +1,107 @@
-# Empire of Light — Product Narrative
+# A-L-L-A-H.COM / Empire of Light — Canonical Product Narrative
 
-> **A sovereign infrastructure foundation for building, delivering, and operating digital products.**
+> One ecosystem. One monorepo. Multiple bounded applications and execution components.
 
-**Canonical repository:** `BRIDGE-ALLAH/EMPIRE-OF-LIGHT`  
-**Ecosystem brand:** A-L-L-A-H.COM — Empire of Light  
-**Document status:** Canonical product narrative  
-**Implementation truth:** This repository is a Temps-derived Rust platform codebase. The repository rename does not itself complete a product rebrand, binary migration, release migration, or production certification.
+## Canonical decision
 
-## 1. The reason this repository exists
+- Organization: BRIDGE-ALLAH
+- Canonical repository: BRIDGE-ALLAH/EMPIRE-OF-LIGHT
+- Public ecosystem brand: A-L-L-A-H.COM
+- Ecosystem vision: Empire of Light
+- Unified platform: ARSY
+- Repository model: one monorepo
+- Control/API technology: Node.js + Fastify
+- Infrastructure execution technology: Rust
 
-Empire of Light is the infrastructure and developer-platform foundation within the wider A-L-L-A-H.COM ecosystem. It exists to make the technical work of creating, delivering, and operating digital products more coherent, inspectable, and controllable.
+All A-L-L-A-H.COM / Empire of Light platform development converges into one canonical repository: BRIDGE-ALLAH/EMPIRE-OF-LIGHT. The former bjo163/A-L-L-A-H.COM repository is a migration source, not a second long-term platform home. Its maintained applications, packages, contracts, plans, and documentation must be reconciled into the canonical monorepo before the source repository is retired.
 
-Modern product teams assemble deployment systems, runtimes, databases, networking, observability, security, automation, and AI capabilities from disconnected tools. The resulting system can be powerful, but it is often difficult to understand as a whole. Configuration is duplicated, operational evidence is scattered, and the responsibility for failures crosses too many boundaries.
+This is a monorepo decision, not a monolith-process decision. Components may build, deploy, scale, and release independently while sharing one source of truth and one coordinated architecture.
 
-This repository develops a self-hostable platform foundation for that infrastructure lifecycle. Its purpose is not to claim ownership of every product, business workflow, identity, or creative experience in the ecosystem. Its purpose is to provide a dependable technical substrate that other products can integrate with through explicit contracts.
+## What ARSY means
 
-**The promise:** make infrastructure capabilities usable without making their behavior opaque.
+ARSY is the unified platform, not one language, executable, or repository. It consists of bounded components:
 
-## 2. Place in the A-L-L-A-H.COM ecosystem
+- ARSY Control — Node.js + Fastify. Owns ecosystem APIs, identity and tenant integration, product policy, orchestration decisions, integrations, and application workflows.
+- ARSY Infrastructure Engine — Rust. Owns build execution, deployment machinery, workload/runtime operations, node and resource management, networking, and infrastructure telemetry.
+- ARSY Applications — user-facing experiences such as GATE, Dock, Headquarter, ID, MoonWitness, and other approved applications.
+- ARSY Node — the supported host/VPS installation and operating profile. It is not a separate repository or a third backend.
 
-A-L-L-A-H.COM is the ecosystem's product and integration home. Empire of Light is the wider vision and the name of this infrastructure foundation. The repositories and applications around it have distinct responsibilities.
+Node.js and Rust are complementary implementation domains of one platform. Do not build a second ARSY backend or duplicate infrastructure capabilities in Fastify.
 
-| System | Owns | Does not own |
-|---|---|---|
-| `A-L-L-A-H.COM` repository | Ecosystem applications, ARSY product APIs, user-facing experiences, product-domain workflows, and integration contracts | Reimplementing a complete infrastructure runtime already provided here |
-| `EMPIRE-OF-LIGHT` repository | Infrastructure platform substrate: application delivery, workload execution, nodes, networking, managed infrastructure capabilities, and operational telemetry | Ecosystem-wide identity authority, creative canon, user-facing MoonWitness products, or commercial policy |
-| ARSY | Ecosystem application/control integration: product APIs, identity and tenant policy, orchestration decisions, and commercial-domain coordination | A second container runtime, build engine, proxy, or observability backend |
-| MoonWitness | Knowledge, research, narrative, and publishing experiences | Infrastructure provisioning or tenant authorization authority |
-| ROCKSOUL | Creative and media experiences | Platform runtime or identity authority |
-| Empire Economy | Commerce experiences and commercial workflows | Duplicating infrastructure metering or payment execution without an explicit contract |
+## Why retain both technologies
 
-This table is an ownership contract, not a claim that every target capability is already implemented. Where current code does not yet match the target boundary, record the gap and migrate incrementally; do not create a second implementation to make the diagram look complete.
+The existing application/control code uses Node.js, Fastify, and a pnpm workspace. The infrastructure repository contains a substantial Rust/Cargo workspace derived from Temps. Both represent meaningful implementation and should be reconciled, not discarded or rewritten.
 
-## 3. Product definition
+Use Node.js + Fastify for ecosystem APIs, product workflows, identity/tenant policy integration, orchestration, and external integrations. Use Rust for infrastructure execution, runtime-sensitive operations, resource management, networking, and capabilities already implemented in the Rust platform.
 
-**Category:** self-hostable developer and infrastructure operations platform.
+Choose technology by responsibility, not fashion. The Node/Rust boundary must use explicit versioned APIs, SDKs, events, or process contracts. Do not create a network service for every internal function.
 
-**Primary users:** independent builders, engineering teams, digital studios, and organizations that need control over their deployment and operational environment.
+## Ecosystem ownership
 
-**Core jobs:**
-- connect source code and produce traceable builds and releases;
-- deploy and operate workloads on infrastructure the operator controls;
-- manage nodes, routing, domains, TLS, and supported data services;
-- understand system health through logs, metrics, traces, events, and diagnostics;
-- apply explicit access, security, and operational controls;
-- automate repeatable workflows while preserving auditability;
-- recover through tested backup, restore, upgrade, and rollback procedures.
+| Domain | Responsibility |
+|---|---|
+| A-L-L-A-H.COM | Public ecosystem brand, entry, product integration, overall experience |
+| ARSY Control | Platform API, identity/tenant integration, product policy, orchestration |
+| Rust Infrastructure Engine | Build, deployment, workload execution, nodes, runtime, networking, infrastructure telemetry |
+| GATE | Public entrance and ecosystem gateway |
+| Dock | Main user-facing home |
+| Headquarter | Administrative and operational command experience |
+| ID | Identity and access experience; server-side authority remains in ARSY Control |
+| MoonWitness | Knowledge, research, narrative, publishing |
+| ROCKSOUL | Creative and media products |
+| Empire Economy | Commerce and business workflows |
+| ARSY Radio | Communication and signal-network domain through explicit contracts |
 
-**Differentiator:** a coherent operational foundation with visible boundaries and portable deployment practices—not a promise that one product replaces every specialized tool.
+These are logical ownership boundaries, not a requirement that every domain become a microservice or repository. Apps may be packages or independently deployable services inside the monorepo.
 
-## 4. Architecture doctrine
+## One repository, clear internal boundaries
 
-The platform is organized around separable responsibilities:
+The canonical repository must contain the Rust workspace, Node.js/Fastify ARSY Control, web applications, shared packages, SDKs, contracts, deployment profiles, CI/release automation, and product documentation.
 
-1. **Experience and integration surfaces** — web console, CLI, SDKs, APIs, and supported integration protocols.
-2. **Platform control plane** — platform-local configuration and orchestration required to manage infrastructure resources.
-3. **Execution plane** — builds, releases, workloads, containers, workers, nodes, and runtime operations.
-4. **Network and ingress plane** — routing, domains, certificates, traffic policy, and edge-facing controls.
-5. **Observability plane** — logs, metrics, traces, events, analytics, uptime, and diagnostics.
-6. **Persistence plane** — relational, analytical, and object storage plus backup and recovery mechanisms.
+The exact directory layout must be reconciled with both existing source trees before moving files. Do not blindly copy directories or overwrite destination files. Inventory paths, packages, dependencies, duplicate capabilities, workflows, contracts, plans, and licenses. Select one authoritative implementation for each capability, preserve required history and attribution, and migrate in verifiable batches.
 
-These are architectural responsibilities, not a mandate to split every module into a separate service. Prefer existing modules and contracts where they already provide the capability. Extract a service only when independent scaling, isolation, ownership, or failure containment justifies the operational cost.
+## Non-overlap rules
 
-### The ARSY integration boundary
+- One canonical repository for the ecosystem and platform source.
+- One authoritative owner for each data domain and policy.
+- ARSY Control owns ecosystem identity integration, tenant policy, and product orchestration decisions.
+- Rust engine owns infrastructure execution and platform-local runtime state.
+- Applications use documented APIs; they do not access private engine or ARSY database tables.
+- Commercial policy belongs to the ecosystem commercial domain; infrastructure reports usage facts and enforces explicit resource limits.
+- Platform operational telemetry is distinct from product analytics and business audit.
+- MoonWitness and ROCKSOUL own their content domains, not infrastructure primitives.
+- Shared packages contain genuinely shared contracts or utilities, not duplicated business logic.
+- Independently deployable components are allowed; competing source repositories are not the target architecture.
 
-ARSY is the ecosystem-facing application/control integration layer. It may request infrastructure actions, reconcile desired state, map ecosystem identity and tenant policy to platform permissions, and expose product-level workflows. This repository remains responsible for performing its supported infrastructure operations and reporting verifiable results.
+Before adding a service, crate, package, table, API, worker, or UI, search the entire monorepo and active migration plans. Extend or integrate with the authoritative implementation instead of creating another.
 
-The integration must use documented APIs, SDKs, events, or adapters. It must not share private database tables, copy internal implementation code, or create parallel sources of truth. Platform-local identities and permissions remain scoped to platform operation; ecosystem identity and tenant authorization remain owned by the A-L-L-A-H.COM/ARSY side. Every cross-system mapping must be explicit, least-privileged, auditable, and revocable.
+## Current migration truth
 
-## 5. Naming and compatibility
+The destination repository currently contains the substantial Rust/Cargo infrastructure workspace and its technical assets. The migration-source repository bjo163/A-L-L-A-H.COM contains the pnpm workspace, Fastify ARSY Hub, ecosystem applications, shared packages, and related plans/docs.
 
-The GitHub repository name is `EMPIRE-OF-LIGHT`. The product-facing identity is **Empire of Light Platform**, within **A-L-L-A-H.COM — Empire of Light**.
+Therefore, the target is one monorepo, but code consolidation is not yet complete. Do not claim that the canonical repository already contains all A-L-L-A-H.COM applications or that a single checkout builds every component until migration and clean-checkout verification are complete.
 
-The current source tree is derived from the Temps codebase and still contains upstream identifiers in crate names, binaries, environment variables, container services, URLs, release assets, installer logic, and documentation. Those identifiers are implementation and compatibility facts—not permission to erase upstream attribution.
+The Rust codebase is Temps-derived. Preserve upstream licenses, NOTICE files, copyright, and third-party attribution. The current scripts/install.sh still resolves upstream Temps releases and installs a temps executable; it is not an ARSY Node installer.
 
-Rules:
-- Do not perform a blind global replacement of `temps`, crate names, service names, environment variables, or URLs.
-- Preserve upstream copyright, license, NOTICE, and third-party attribution.
-- Separate user-facing copy changes from technical identifier migrations.
-- Rename externally consumed identifiers only with compatibility aliases, migration notes, tests, and rollback paths.
-- Never publish an Empire of Light release or installer that silently downloads an upstream Temps binary.
+## VPS direction
 
-## 6. What is true today
+ARSY Node is the host installation and operating profile of the unified platform. It must install compatible, version-pinned artifacts built by canonical CI, verify checksums/signatures and provenance, check host prerequisites, configure secrets safely, be idempotent, expose health diagnostics, and support backup, restore, upgrade, rollback, and uninstall.
 
-The repository currently contains a substantial Temps-derived Rust workspace (more than one hundred crates), a web application, SDKs, scripts, deployment configuration, and extensive technical documentation. Existing source describes application delivery, workload/runtime operations, networking, managed data services, observability, security, AI/automation, and extension surfaces.
+Do not relabel an upstream Temps installer as ARSY Node. A single repository does not require one process or one giant installer. Define deployment profiles only when actual operational needs justify them.
 
-The current root README and blueprint were still written for MOONWITNESS / MW-DEVPLATFORM before this reconciliation. The installer at `scripts/install.sh` explicitly resolves releases from `gotempsh/temps`, downloads `temps-*` assets, and installs the `temps` executable. It is therefore an upstream installer, not an Empire of Light / ARSY Node installer.
+## Migration safeguards
 
-A successful repository rename or a running development stack does not prove that the platform has been rebranded, independently released, safely installable on a clean VPS, or production-ready.
+- Preserve upstream licenses, NOTICE, copyright, and third-party attribution.
+- Do not rewrite history to imply original authorship.
+- Do not globally replace Temps identifiers, crate names, binaries, environment variables, or persistent paths.
+- Do not move or overwrite files before inventory and conflict resolution.
+- Preserve useful plans, decisions, issue references, and application contracts.
+- Record obsolete plans as superseded rather than silently deleting useful context.
+- Maintain a migration ledger with source path, destination path, owner, decision, verification, and commit.
+- Keep the source repository intact until the destination passes migration verification.
 
-## 7. VPS and ARSY Node direction
+## Success definition
 
-The eventual self-hosted installation experience may be called **ARSY Node** at the ecosystem level, but it must be a deliberate, versioned distribution built from verified Empire of Light platform artifacts and the A-L-L-A-H.COM integration components.
+A clean checkout of BRIDGE-ALLAH/EMPIRE-OF-LIGHT contains the authoritative Rust engine, Fastify ARSY Control, approved applications, shared packages, contracts, deployment profiles, and documentation. Both workspaces have reproducible checks, cross-component contracts are tested, and no active product capability depends on a second repository as its source of truth.
 
-The installer must not build the entire Rust workspace on an ordinary production VPS unless that is an explicitly supported installation mode. Prefer signed or checksum-verified, version-pinned release artifacts with a published provenance record. Installation must be reproducible, idempotent, least-privileged, and safe to retry.
-
-Before an ARSY Node installer is considered usable, the release pipeline must publish platform-specific artifacts; checksums and preferably signatures; a supported OS/architecture matrix; a first-run configuration flow; secret-safe setup; health checks; upgrade and rollback behavior; backup/restore procedures; and a clean-host test report. Until then, the existing upstream installer must be clearly labeled and must not be promoted as the product installer.
-
-## 8. Product principles
-
-- **Truth before polish:** distinguish implemented, partial, experimental, planned, and unsupported capabilities.
-- **Sovereignty with evidence:** document outbound calls, telemetry, storage locations, backups, and operator responsibilities.
-- **Secure by default:** least privilege, protected secrets, private service networks, explicit ingress, and auditable privileged actions.
-- **Recoverability:** design and test backup, restore, upgrade, rollback, and failure recovery.
-- **Interoperability:** prefer stable contracts and adapters over shared private internals.
-- **Operational restraint:** do not split services or introduce dependencies without a demonstrated need.
-- **Preserve provenance:** retain upstream licenses, notices, history, and compatibility where required.
-- **Human agency:** explain consequential actions and provide operators with enough evidence to make informed decisions.
-
-## 9. What this product is not
-
-- It is not a general-purpose operating system or a replacement for Linux.
-- It is not the entire A-L-L-A-H.COM ecosystem in one repository.
-- It is not the canonical home for MoonWitness stories, research corpus, or ROCKSOUL media.
-- It is not the ecosystem's sole identity, tenant, billing, or commercial-policy authority.
-- It is not production-ready merely because its source tree is large or a Compose stack starts.
-- It is not an ARSY Node installer until independently built, versioned, verified artifacts and installation tests exist.
-
-## 10. Decision rule
-
-When a proposed feature appears to overlap another repository, do not immediately implement it. First identify the authoritative owner, the data source of truth, the API contract, the security boundary, and the failure/recovery behavior. Reuse or integrate with the owner. If ownership is unclear, record an architecture decision before coding.
-
-**The measure of success is not the number of services or features. It is whether the ecosystem can deliver useful products through a coherent, secure, understandable, and recoverable infrastructure foundation.**
+One ecosystem. One canonical monorepo. Node.js and Rust as complementary parts of ARSY.
