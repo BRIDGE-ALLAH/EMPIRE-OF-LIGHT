@@ -218,7 +218,7 @@ function NoticeContent({ notice }: { notice: Exclude<JobLogNotice, 'none'> }) {
       return (
         <>
           <WifiOff className="h-4 w-4 shrink-0" aria-hidden="true" />
-          Live stream unavailable. Refreshing logs every few seconds while Temps
+          Live stream unavailable. Refreshing logs every few seconds while MW-DEVPLATFORM
           reconnects.
         </>
       )
