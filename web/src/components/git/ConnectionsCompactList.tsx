@@ -603,7 +603,7 @@ export function ConnectionsCompactList({
         onOpenChange={(open) => setDeleteDialog({ ...deleteDialog, open })}
         resourceType="git connection"
         resourceName={deleteDialog.connectionName}
-        consequences="All repositories associated with this connection are removed from Temps. Projects that still deploy from it block the deletion."
+        consequences="All repositories associated with this connection are removed from MW-DEVPLATFORM. Projects that still deploy from it block the deletion."
         isPending={deleteConnectionMut.isPending}
         onConfirm={() =>
           deleteConnectionMut.mutate({
