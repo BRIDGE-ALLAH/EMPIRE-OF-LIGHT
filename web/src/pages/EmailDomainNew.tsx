@@ -253,7 +253,7 @@ const MODE_OPTIONS: ModeOption[] = [
     title: 'Create new domain',
     description: 'Provision a new sending domain with your provider',
     details:
-      'Temps will register the domain identity with your provider and generate the DNS records you need to add. Best for domains you have not set up for email yet.',
+      'MW-DEVPLATFORM will register the domain identity with your provider and generate the DNS records you need to add. Best for domains you have not set up for email yet.',
     icon: <Plus className="size-6" />,
   },
   {
@@ -550,7 +550,7 @@ function ConfigureStep({
                 )}
                 <p className="text-sm text-muted-foreground">
                   {isScaleway
-                    ? 'The domain UUID shown in the Scaleway console (Transactional Email → Domains). Required so Temps can look up the correct identity.'
+                    ? 'The domain UUID shown in the Scaleway console (Transactional Email → Domains). Required so MW-DEVPLATFORM can look up the correct identity.'
                     : 'The provider-internal UUID for this domain identity. Required for Scaleway; not needed for SES (which uses the domain name for lookups).'}
                 </p>
               </div>
@@ -763,7 +763,7 @@ export function EmailDomainNew() {
       if (error.httpStatus === 409) {
         toast.error('Domain already registered', {
           description:
-            'This domain is already tracked in Temps for this provider. Find it in the list or verify the provider ID.',
+            'This domain is already tracked in MW-DEVPLATFORM for this provider. Find it in the list or verify the provider ID.',
         })
       } else {
         toast.error('Failed to import domain', { description: error.message })
