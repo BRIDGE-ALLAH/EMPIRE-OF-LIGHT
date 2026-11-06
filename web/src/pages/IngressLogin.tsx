@@ -25,7 +25,7 @@ import {
 } from '@/lib/ingress-login'
 
 /**
- * Sign-in hand-off for an environment that requires a Temps login
+ * Sign-in hand-off for an environment that requires a MW-DEVPLATFORM login
  * (ADR-055 §11).
  *
  * The proxy sends a visitor here with a signed request naming the site. The
@@ -64,7 +64,7 @@ export function IngressLogin() {
           </div>
           <CardTitle className="text-2xl">Open this site?</CardTitle>
           <CardDescription>
-            This site only admits people signed in to Temps. Continue to open it
+            This site only admits people signed in to MW-DEVPLATFORM. Continue to open it
             as {user?.email ?? 'your account'}.
           </CardDescription>
         </CardHeader>
