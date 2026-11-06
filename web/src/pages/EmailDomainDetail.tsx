@@ -665,7 +665,7 @@ export function EmailDomainDetail() {
             {isSmtp && !isSmtpStatusUnknown && !isVerified && (
               <Callout tone="warning" title="Sending is paused">
                 <p>
-                  Emails from {domain.domain} are captured, not delivered. Temps doesn&apos;t check DNS
+                  Emails from {domain.domain} are captured, not delivered. MW-DEVPLATFORM doesn&apos;t check DNS
                   for SMTP domains — make sure the domain is verified at your SMTP provider, then
                   enable sending.
                 </p>
@@ -684,7 +684,7 @@ export function EmailDomainDetail() {
             {noAuthorizedProjects && (
               <Callout tone="warning" title="No project can send from this domain yet">
                 <p>
-                  Apps deployed on Temps send with their project&apos;s deployment token, which is
+                  Apps deployed on MW-DEVPLATFORM send with their project&apos;s deployment token, which is
                   rejected for {domain.domain} until that project is authorized.
                   {!canManageAuthorizations
                     ? ' Ask an administrator to authorize one.'
@@ -772,7 +772,7 @@ export function EmailDomainDetail() {
                 <CardHeader>
                   <CardTitle>DNS</CardTitle>
                   <CardDescription>
-                    Temps doesn&apos;t manage or check DNS for SMTP domains. Configure SPF, DKIM and
+                    MW-DEVPLATFORM doesn&apos;t manage or check DNS for SMTP domains. Configure SPF, DKIM and
                     DMARC for {domain.domain} at your SMTP provider
                     {provider ? ` (${provider.name})` : ''}, which verifies the domain before it
                     accepts mail.
@@ -813,7 +813,7 @@ export function EmailDomainDetail() {
                         Automatic DNS setup
                       </CardTitle>
                       <CardDescription>
-                        If you&apos;ve connected a DNS provider in Temps, we can create
+                        If you&apos;ve connected a DNS provider in MW-DEVPLATFORM, we can create
                         these records for you.
                       </CardDescription>
                     </CardHeader>
@@ -1018,7 +1018,7 @@ export function EmailDomainDetail() {
         resourceType="email domain"
         resourceName={domain.domain}
         confirmLabel="Delete domain"
-        consequences="Its DNS configuration is removed from Temps (the DNS records in your registrar are not removed). Applications using this domain will no longer be able to send email."
+        consequences="Its DNS configuration is removed from MW-DEVPLATFORM (the DNS records in your registrar are not removed). Applications using this domain will no longer be able to send email."
         isPending={deleteMutation.isPending}
         onConfirm={() => deleteMutation.mutate()}
       />
