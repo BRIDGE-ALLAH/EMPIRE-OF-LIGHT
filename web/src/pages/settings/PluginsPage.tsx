@@ -192,7 +192,7 @@ export function PluginsPage() {
       />
       <PageHeader
         title="Plugins"
-        description="Extend Temps with tools for your deployments."
+        description="Extend MW-DEVPLATFORM with tools for your deployments."
         actions={
           canManagePlugins && (
             <Button
