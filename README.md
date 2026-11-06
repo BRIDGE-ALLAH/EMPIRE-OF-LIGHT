@@ -46,11 +46,29 @@ This repository currently contains a substantial Temps-derived Rust/Cargo worksp
 
 Preserve upstream license, NOTICE, copyright, and third-party attribution. Do not globally rename Rust crates, binaries, environment variables, services, database objects, image names, or persistent paths.
 
-## Critical installer warning
+## Experimental source bootstrap
 
-The current scripts/install.sh still targets upstream gotempsh/temps releases, downloads temps-* assets, and installs the temps executable. It is not an Empire of Light or ARSY Node installer.
+The current `scripts/install.sh` remains the upstream Temps binary installer. It downloads upstream `temps-*` assets and installs the `temps` executable; it is not an ARSY Node installer.
 
-Do not relabel or promote it as the product installer. ARSY Node requires canonical CI-built, version-pinned Rust artifacts, checksums/signatures and provenance, supported OS/architecture profiles, clean-host installation tests, safe configuration, health checks, backup/restore, upgrade, and rollback.
+For the existing Compose stack only, `scripts/install-platform.sh` provides an experimental source bootstrap. It downloads an immutable, commit-pinned source archive with `curl` and `tar`, so a local Git clone is not required. It generates private credentials, validates Compose configuration, and can build/start the current stack. It is not a signed binary release, does not install the Rust-first ARSY Node profile, and does not certify production readiness.
+
+Review the script before running it with root privileges:
+
+```bash
+curl -fsSLO https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/a32440de14dba0d14870b308e112476976d62d04/scripts/install-platform.sh
+less install-platform.sh
+sudo bash install-platform.sh
+```
+
+Or, if you have reviewed and trust the pinned script source, run it directly without cloning:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/a32440de14dba0d14870b308e112476976d62d04/scripts/install-platform.sh | sudo bash
+```
+
+The bootstrap refuses to overwrite an existing install directory or stop conflicting containers/networks. It shows the initial admin and ingress passwords once; store them securely. Published ports remain loopback-bound. DNS, TLS, reverse proxy, firewall, backups, restore, upgrade, and rollback remain separate operator responsibilities.
+
+The paired `scripts/uninstall.sh` removes only the Compose project's containers and networks. It preserves named volumes, images, source, `.env`, and secret files; it does not uninstall unrelated Docker projects such as Coolify and has no automatic data-wipe option. Verify backups before manually deleting retained data.
 
 ## Documentation
 
