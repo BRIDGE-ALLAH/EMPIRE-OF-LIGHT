@@ -440,12 +440,12 @@ export function EditBackupSchedule() {
                       htmlFor="edit-include-control-plane"
                       className="text-sm font-medium"
                     >
-                      Also back up the Temps control plane
+                      Also back up the MW-DEVPLATFORM control plane
                     </Label>
                     <p className="text-xs text-muted-foreground">
-                      Includes Temps&apos;s own database (users, projects,
+                      Includes MW-DEVPLATFORM&apos;s own database (users, projects,
                       service configs, audit logs, error groups). Recommended
-                      unless you use Temps purely as a backup orchestrator for
+                      unless you use MW-DEVPLATFORM purely as a backup orchestrator for
                       external databases.
                     </p>
                   </div>
