@@ -68,6 +68,8 @@ curl -fsSL https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/da2b83
 
 The bootstrap refuses to overwrite an existing install directory or stop conflicting containers/networks. It shows the initial admin and ingress passwords once; store them securely. Published ports remain loopback-bound. DNS, TLS, reverse proxy, firewall, backups, restore, upgrade, and rollback remain separate operator responsibilities.
 
+Run `bash scripts/test-installers.sh` for shell syntax, immutable-ref validation, and fail-closed CLI smoke checks. These checks do not replace a live Docker deployment or clean-host installation test.
+
 The paired `scripts/uninstall.sh` removes only the Compose project's containers and networks. It preserves named volumes, images, source, `.env`, and secret files; it does not uninstall unrelated Docker projects such as Coolify and has no automatic data-wipe option. Verify backups before manually deleting retained data.
 
 ## Documentation
