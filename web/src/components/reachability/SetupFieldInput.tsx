@@ -123,7 +123,7 @@ export function SetupFieldInput({
               <Alert variant="destructive">
                 <AlertDescription className="space-y-2">
                   <p>
-                    Temps could not load your DNS providers, so it cannot tell
+                    MW-DEVPLATFORM could not load your DNS providers, so it cannot tell
                     which accounts you can choose.
                   </p>
                   <Button
