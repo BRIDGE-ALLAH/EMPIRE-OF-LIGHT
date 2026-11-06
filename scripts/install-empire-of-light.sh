@@ -28,7 +28,7 @@ usage(){
 Empire of Light Platform installer
 
 Usage:
-  install.sh [--dir PATH] [--branch REF] [--skip-start]
+  install-empire-of-light.sh [--dir PATH] [--branch BRANCH] [--skip-start]
 
 Environment:
   EMPIRE_INSTALL_DIR       Installation directory (default: /opt/empire-of-light)
@@ -49,8 +49,8 @@ while (($#)); do
 done
 
 [[ "$(uname -s)" == "Linux" ]] || fail "Supported install target is Linux. No host changes were made."
-[[ $EUID -eq 0 ]] || fail "Run as root: sudo bash install.sh (or choose a writable --dir and adapt permissions)."
-for cmd in git docker openssl; do command -v "$cmd" >/dev/null 2>&1 || fail "Missing prerequisite: $cmd"
+[[ $EUID -eq 0 ]] || fail "Run as root: sudo bash install-empire-of-light.sh (or choose a writable --dir and adapt permissions)."
+for cmd in curl tar docker openssl; do command -v "$cmd" >/dev/null 2>&1 || fail "Missing prerequisite: $cmd"
 done
 docker compose version >/dev/null 2>&1 || fail "Docker Compose v2 plugin is required."
 [[ -S /var/run/docker.sock ]] || fail "Docker socket not found at /var/run/docker.sock. Install/start Docker Engine first."
