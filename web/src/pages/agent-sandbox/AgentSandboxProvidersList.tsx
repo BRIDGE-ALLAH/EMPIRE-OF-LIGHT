@@ -64,7 +64,7 @@ export function AgentSandboxProvidersList() {
           </div>
         ) : data?.providers.length === 0 ? (
           <p role="status" className="p-4 text-sm text-muted-foreground">
-            This server offers no harnesses. Update Temps to add one.
+            This server offers no harnesses. Update MW-DEVPLATFORM to add one.
           </p>
         ) : (
           <Table aria-label="Harnesses" aria-busy={isPending}>
@@ -155,7 +155,7 @@ export function HarnessSetupRow({
           {needsAttention && (
             <p className="text-xs text-muted-foreground">
               {provider.workspace_readiness_hint ||
-                'Temps could not confirm a model response. Open the harness to verify it.'}
+                'MW-DEVPLATFORM could not confirm a model response. Open the harness to verify it.'}
             </p>
           )}
         </div>
