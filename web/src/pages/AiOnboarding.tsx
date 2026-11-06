@@ -145,7 +145,7 @@ export function AiOnboarding() {
             AI harness quickstart
           </p>
           <h1 className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">
-            Let your AI operate Temps
+            Let your AI operate MW-DEVPLATFORM
           </h1>
           <p className="mt-1 max-w-3xl text-sm text-muted-foreground sm:text-base">
             Give Codex, Claude Code, Cursor, or another compatible harness the
@@ -276,7 +276,7 @@ export function AiOnboarding() {
         <OnboardingStep
           number="02"
           icon={Wand2}
-          title="Add Temps to your harness"
+          title="Install the Temps skill in your harness"
           description="Run the skill installer inside the repository where you use your AI agent, then authenticate the pinned CLI with the key from step one."
           ready={effectiveHarnessStatus === 'connected'}
           status={
@@ -381,7 +381,7 @@ export function AiOnboarding() {
           className="group flex items-center justify-between gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-primary/30 hover:bg-muted/30"
         >
           <div>
-            <p className="text-sm font-medium">Enable Temps built-in AI</p>
+            <p className="text-sm font-medium">Enable MW-DEVPLATFORM built-in AI</p>
             <p className="mt-0.5 text-xs text-muted-foreground">
               Separately configure a provider for console chat, autofix, and AI
               summaries.
