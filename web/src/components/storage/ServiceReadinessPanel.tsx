@@ -54,7 +54,7 @@ export function ServiceReadinessPanel({
       >
         <div className="space-y-1">
           <p>
-            The container is up. Temps marks the service running once an
+            The container is up. MW-DEVPLATFORM marks the service running once an
             authenticated request with its own credentials succeeds, so
             don&apos;t rely on it until then.
           </p>
@@ -96,7 +96,7 @@ export function ServiceReadinessPanel({
             </div>
           ) : null}
           <p>
-            Temps has not changed or deleted this service&apos;s container or
+            MW-DEVPLATFORM has not changed or deleted this service&apos;s container or
             volumes.
           </p>
           {failure.next_actions.length > 0 ? (
