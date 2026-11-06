@@ -123,7 +123,7 @@ console.log(response.choices[0].message.content);`,
           <CardTitle>Gateway endpoint</CardTitle>
           <CardDescription>
             Use this endpoint with any OpenAI-compatible SDK. Just swap the base
-            URL and use your Temps API key.
+            URL and use your MW-DEVPLATFORM API key.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
