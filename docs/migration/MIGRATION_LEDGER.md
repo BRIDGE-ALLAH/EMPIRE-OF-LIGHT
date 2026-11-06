@@ -46,6 +46,27 @@ Inspected `apps/arsy/src/app.ts` on source branch `dev` (blob `3302311f472977869
 
 Cross-cutting behavior observed in this source file includes exact-method public route rules, per-route rate limits, CORS origin policy, security headers/CSP, a principal guard, tenant scoping, admin-reason hashing, ORM-backed persistence, addon registration, and migration/seed orchestration. The Fastify app uses the source repository's PGlite-based `@allah/arsy-orm`; do not assume its data model or transaction behavior matches the Rust platform.
 
+### Existing Rust capability candidates (not yet proven route parity)
+
+The current generated Rust crate map (`docs/architecture/crates.md`) exposes likely owners that must be inspected before any new implementation is proposed:
+
+| Legacy area | Existing Rust candidates | Evidence gap |
+|---|---|---|
+| Authentication and authorization | `temps-auth`, `temps-authz` | Route-by-route session, role, tenant, and response parity still required |
+| Audit | `temps-audit`, `temps-entities` | Crate map currently shows the audit crate consumed by CLI; HTTP endpoint parity is unproven |
+| Threads / AI conversations | `temps-ai-chat`, `temps-ai-agents`, `temps-memory` | Conversation model, thread lifecycle, and user/tenant scoping are not yet compared |
+| Qorpus ingest/search | `temps-memory`, `temps-ai-chat`, `temps-blob` | No direct Qorpus owner is identified; inspect indexing, chunking, retrieval, and persistence semantics |
+| Nexus NAS / pools | `temps-blob`, `temps-providers-s3`, `temps-backup`, `temps-config` | NAS credential custody, pool lifecycle, and audit semantics need explicit mapping |
+| Orbit instances | `temps-sandbox`, `temps-workload-plane`, `temps-nodes`, `temps-deployments` | Map instance lifecycle and ownership to existing workload/sandbox primitives |
+| Works plans / subscriptions / invoices | `temps-revenue` | Existing crate is described as project revenue tracking; commercial catalog and subscription parity are not established |
+| Projects / tasks / stages | `temps-project-groups`, `temps-projects` | Compare task/stage schemas, workflow transitions, tenant scoping, sync/export behavior |
+| HelioGrid telemetry | `temps-otel`, `temps-product-telemetry`, `temps-monitoring` | Existing telemetry products are not evidence of HelioGrid domain-ingestion parity |
+| Admin cron | `temps-monitoring`, existing scheduler/worker facilities | Monitoring cron checks are not necessarily equivalent to tenant-scoped scheduled jobs |
+| i18n / public ISP catalog | No obvious dedicated crate in the current crate map | Define domain owner and API contract only after searching full source and Rust workspace |
+
+These are search candidates, not approved migrations or evidence of completed behavior. In particular, a crate's existence does not prove that a user-facing HTTP route, authorization policy, data migration, or frontend contract already exists.
+
+
 **Disposition:** this is a requirements inventory, not a route-parity claim. No Fastify handler has been marked migrated. Each route must be mapped to an existing Rust owner or an evidenced gap, then covered by authorization, tenant-isolation, contract, and behavior-parity tests before consumer cutover.
 
 ## Verified source components and Rust-first disposition
