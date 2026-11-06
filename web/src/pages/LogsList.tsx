@@ -208,7 +208,7 @@ export default function LogsList({ project }: LogsListProps) {
       search && `search "${search}"`,
     ].filter(Boolean)
     return [
-      'The user is in the OpenTelemetry Logs explorer in the Temps console.',
+      'The user is in the OpenTelemetry Logs explorer in the MW-DEVPLATFORM console.',
       `Service: "${project.name}" (project slug: ${project.slug}, project id: ${project.id}).`,
       `Time range: ${timeRange}.${filters.length ? ` Active filters: ${filters.join(', ')}.` : ''}`,
       'Fetch logs with the temps CLI: `telemetry-logs query_logs --severity/--service_name/--search/--trace_id`.',
