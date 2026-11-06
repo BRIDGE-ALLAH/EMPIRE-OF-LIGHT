@@ -283,7 +283,7 @@ function ConnectEmptyState({ onConnect }: { onConnect: () => void }) {
     <EmptyState
       icon={CreditCard}
       title="Connect a payment provider"
-      description="Paste a Temps-generated webhook URL into your provider's dashboard to start tracking MRR, ARR, churn, and LTV."
+      description="Paste a MW-DEVPLATFORM-generated webhook URL into your provider's dashboard to start tracking MRR, ARR, churn, and LTV."
       action={
         <Button onClick={onConnect}>
           <Plus className="mr-2 h-4 w-4" />
@@ -1595,7 +1595,7 @@ function ConnectProviderDialog({
             <DialogHeader>
               <DialogTitle>Connect payment provider</DialogTitle>
               <DialogDescription>
-                Temps ingests webhooks from your provider. No API key needed —
+                MW-DEVPLATFORM ingests webhooks from your provider. No API key needed —
                 you&apos;ll paste a URL into their dashboard.
               </DialogDescription>
             </DialogHeader>
@@ -1671,7 +1671,7 @@ function StripeInstructions({
     <div className="rounded-md border bg-muted/30 p-3 text-sm">
       <p className="font-medium">How it works</p>
       <ol className="mt-1 list-decimal space-y-1 pl-5 text-muted-foreground">
-        <li>Create this integration. Temps generates a unique webhook URL.</li>
+        <li>Create this integration. MW-DEVPLATFORM generates a unique webhook URL.</li>
         <li>
           In the Stripe dashboard, go to{' '}
           <strong>Developers → Webhooks → Add endpoint</strong>.
