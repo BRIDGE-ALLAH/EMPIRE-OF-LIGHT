@@ -119,8 +119,8 @@ function BucketItem({ bucket, isOpen, onOpenChange }: BucketItemProps) {
             </div>
             {bucket.total_checks === 0 && (
               <p className="text-xs text-muted-foreground">
-                No check ran in this interval, so Temps can&apos;t say whether
-                the site was up — e.g. the Temps server was down or the
+                No check ran in this interval, so MW-DEVPLATFORM can&apos;t say whether
+                the site was up — e.g. the MW-DEVPLATFORM server was down or the
                 deployment was paused.
               </p>
             )}
