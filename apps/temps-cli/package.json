@@ -1,7 +1,7 @@
 {
   "name": "@temps-sdk/cli",
   "version": "0.1.38",
-  "description": "CLI for Temps deployment platform",
+  "description": "CLI for MW-DEVPLATFORM",
   "type": "module",
   "bin": {
     "temps": "./dist/index.js"
