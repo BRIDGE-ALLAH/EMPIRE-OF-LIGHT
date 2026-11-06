@@ -16,7 +16,7 @@ bjo163/A-L-L-A-H.COM, default branch main. Keep this source intact until all mig
 - Source `dev` is 24 commits ahead of source `main` with 158 changed paths and no commits behind at the time of comparison. Do not treat source `main` as the complete migration baseline; review the `dev` delta and preserve unmerged work before selecting the migration snapshot.
 - Destination branch `feat/empire-of-light-installers` is divergent from current `main` (30 commits ahead and 21 behind at the time of comparison) and contains unrelated application changes. Do not merge that branch wholesale. Only the reviewed source-bootstrap and conservative-uninstall behavior was ported selectively to `main`.
 - Destination `main` now contains `scripts/install-platform.sh`, `scripts/uninstall.sh`, and `scripts/test-installers.sh`. The bootstrap pins an immutable source commit and installs the existing Compose stack only; it is not the Rust-first ARSY Node installer.
-- Local shell syntax and CLI smoke checks were run against the installer/uninstaller behavior. No live Docker deployment, clean-host installation, VPS operation, or production readiness test has been performed by this change.
+- Local shell syntax and CLI smoke checks were run against the installer/uninstaller behavior. The smoke test is wired into the `workflow-contracts` job in `.github/workflows/rust-tests.yml`; the resulting GitHub Actions run still needs to provide evidence. No live Docker deployment, clean-host installation, VPS operation, or production readiness test has been performed by this change.
 
 
 ## Verified source components and Rust-first disposition
