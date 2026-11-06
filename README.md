@@ -1,103 +1,78 @@
-<div align="center">
+# EMPIRE OF LIGHT PLATFORM
 
-# MOONWITNESS
-### MW-DEVPLATFORM
+> **A sovereign infrastructure foundation for building, delivering, and operating digital products.**
 
-**Build with clarity. Deploy with sovereignty. Operate with accountability.**
+**Ecosystem:** [A-L-L-A-H.COM](https://github.com/bjo163/A-L-L-A-H.COM) — Empire of Light  
+**Repository:** `BRIDGE-ALLAH/EMPIRE-OF-LIGHT`  
+**Category:** Self-hostable developer and infrastructure operations platform  
+**Implementation baseline:** Temps-derived Rust workspace and web application
 
-*An open, self-hostable developer platform for teams who want to build, ship, observe, and govern their digital work on infrastructure they control.*
-
-[Brand system](docs/BRAND_SYSTEM.md) · [Architecture blueprint](docs/BLUEPRINT.md) · [Architecture map](docs/architecture/overview/page.mdx) · [Security guidance](SECURITY.md) · [Contributing](CONTRIBUTING.md)
-
-</div>
+[Product narrative](docs/PRODUCT_NARRATIVE.md) · [Platform blueprint](docs/BLUEPRINT.md) · [Architecture overview](docs/architecture/overview/page.mdx) · [Release readiness](docs/RELEASE_READINESS.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
 ---
 
-## The story behind the platform
+## What this repository is
 
-Software should give people more agency, not make them dependent on an opaque stack of disconnected services.
+Empire of Light Platform is the infrastructure and developer-platform foundation within the wider A-L-L-A-H.COM ecosystem. It brings together the technical capabilities required to build, deploy, run, observe, and govern digital workloads on infrastructure controlled by the operator.
 
-**MoonWitness** is the working brand idea behind MW-DEVPLATFORM: *Moon* evokes cycles, perspective, and a light by which change can be observed; *Witness* expresses responsibility, evidence, and the discipline of seeing systems as they really are. Together, the name describes a platform that helps builders create confidently while remaining accountable for what they operate.
+The platform exists to reduce fragmentation without hiding operational reality. Operators should be able to understand what is deployed, where it runs, what changed, what failed, who can act, and how to recover.
 
-MW-DEVPLATFORM turns that idea into infrastructure. It brings application delivery, runtime operations, observability, data services, security controls, and AI-assisted workflows into one self-hostable environment. The goal is not to hide complexity behind a slogan. The goal is to make complexity understandable, inspectable, and manageable.
+This repository is **not the whole A-L-L-A-H.COM ecosystem**. It is not the canonical home for MoonWitness content, ROCKSOUL creative products, ecosystem-wide identity policy, or commercial workflows. Those responsibilities remain with their designated products and repositories.
 
-### Brand promise
+## Product boundaries
 
-> **Your infrastructure. Your visibility. Your responsibility.**
-
-MW-DEVPLATFORM aims to help independent builders, product teams, and organizations move from fragmented tooling to a coherent operating foundation—without giving up control of their code, data, deployment process, or operational decisions.
-
-### Principles
-
-- **Amanah — stewardship:** treat access, data, compute, and user trust as responsibilities.
-- **Clarity — observable by design:** make system state, changes, failures, and costs easier to understand.
-- **Sovereignty — control stays with the operator:** favor self-hosting, transparent configuration, and portable workflows.
-- **Ihsan — quality in execution:** prioritize reliable defaults, careful engineering, and useful failure messages.
-- **Adl — fair boundaries:** apply least privilege, explicit permissions, and predictable resource limits.
-- **Rahmah — human-centred operations:** reduce toil and avoid designs that punish users for not knowing hidden system rules.
-
-These are product and engineering principles, not claims of religious authority or a substitute for the beliefs of any individual or community.
-
-## What MW-DEVPLATFORM is
-
-The repository currently contains a Rust workspace and web application for a self-hosted developer platform. Its existing implementation provides a broad foundation for:
-
-| Area | What it enables |
+| System | Responsibility |
 |---|---|
-| Application delivery | Connect Git repositories, build containerized apps, deploy releases, and manage previews |
-| Runtime and networking | Run workloads, route traffic, manage domains, TLS, and worker nodes |
-| Data services | Provision and operate PostgreSQL, Redis, MongoDB, MariaDB, and S3-compatible services |
-| Observability | Collect analytics, logs, traces, metrics, uptime signals, and application errors |
-| Security and governance | Authentication, authorization, API keys, audit events, network controls, and vulnerability scanning |
-| AI and automation | AI gateway, agents, sandboxes, CLI, and MCP integration surfaces |
-| Extensibility | Plugin SDK and protocol for integrations and additional capabilities |
+| A-L-L-A-H.COM repository | Ecosystem applications, ARSY product APIs, identity/tenant policy, user-facing workflows, and integration contracts |
+| Empire of Light Platform (this repository) | Infrastructure delivery and execution substrate, nodes, networking, supported data services, and operational telemetry |
+| ARSY | Ecosystem-facing control and integration: product-domain APIs, policy mapping, orchestration decisions, and commercial-domain coordination |
+| MoonWitness | Knowledge, research, narrative, and publishing experiences |
+| ROCKSOUL | Creative and media experiences |
+| Empire Economy | Commerce experiences and commercial workflows |
 
-The technical foundation is substantial: a Rust workspace with more than one hundred crates, alongside the web application, SDKs, scripts, and documentation. The exact module boundaries and maturity are documented in the repository's architecture materials.
+These are ownership boundaries, not a declaration that every target capability is complete. See [the product narrative](docs/PRODUCT_NARRATIVE.md) and [the blueprint](docs/BLUEPRINT.md) before adding a capability that may overlap another repository.
 
-## Product positioning
+## What the codebase currently contains
 
-**Category:** self-hosted developer platform / application operations platform.
+The current source is a substantial Temps-derived Rust workspace with more than one hundred crates, a web application, SDKs, scripts, deployment configuration, and technical documentation. Its existing architecture covers or provides foundations for:
 
-**For:** independent developers, engineering teams, digital product studios, and organizations that want an integrated delivery and operations layer.
+- application source integration, builds, deployments, and previews;
+- containerized workloads, workers, nodes, and runtime operations;
+- domains, TLS, routing, ingress, and network controls;
+- supported managed data services;
+- logs, metrics, traces, analytics, errors, uptime, and diagnostics;
+- authentication, authorization, API keys, audit events, and security tooling;
+- AI, automation, sandboxes, CLI, SDK, and MCP integration surfaces.
 
-**Problem:** modern teams often assemble deployment, databases, monitoring, error tracking, logs, analytics, and AI tooling from many separate products. That creates fragmented workflows, duplicated configuration, recurring costs, and operational blind spots.
+The list describes source-code capability areas, not a certification that every feature is complete, secure, supported, or production-ready. Consult the source, tests, architecture docs, and [release readiness runbook](docs/RELEASE_READINESS.md) for maturity evidence.
 
-**Approach:** provide a coherent platform that brings these workflows together while keeping deployment and operational control with the operator.
+## Important: current installer is upstream
 
-**Differentiator:** not simply “more tools in one dashboard,” but a consistent operational surface built around visibility, ownership, and responsible control.
+`scripts/install.sh` is still the upstream Temps installer. It queries `gotempsh/temps` releases, downloads `temps-*` assets, and installs the `temps` executable. **It is not an Empire of Light installer and must not be presented as an ARSY Node installer.**
 
-## Current implementation and attribution
+The repository rename does not create a product release, signed artifact, VPS installation flow, or tested upgrade path. An Empire of Light / ARSY Node installer must be built only after this repository has its own versioned release artifacts, checksums/signatures, supported platform matrix, clean-host installation tests, and recovery procedures. See [the blueprint](docs/BLUEPRINT.md#10-arsy-node-and-vps-installation-direction).
 
-This repository is based on the Temps codebase and still contains upstream implementation names, package identifiers, environment variables, service names, and documentation references. The current executable and Compose services therefore retain the `temps` naming.
+## Getting started with the existing upstream-derived development baseline
 
-MW-DEVPLATFORM is the intended product and brand direction for this repository. A complete technical rebrand—binary names, Rust crate names, container names, environment variables, UI copy, hosted documentation, installer and release artifacts—must be handled as a separate, tested migration. This README does not claim that migration has already happened.
-
-**Release status:** production readiness is not yet certified. The repository contains CI workflow definitions, but a successful current release pipeline, clean-host installation, backup/restore exercise, and upgrade/rollback test must be evidenced before a production-ready claim. Follow [the release readiness runbook](docs/RELEASE_READINESS.md) and do not treat a successful container start as a security or production sign-off.
-
-Upstream attribution, third-party notices, and the applicable MIT OR Apache-2.0 licensing terms must remain intact. See [NOTICE](NOTICE), [LICENSE](LICENSE), and [LICENSE-MIT](LICENSE-MIT).
-
-## Getting started
+The following instructions describe the current repository's existing development/deployment baseline. They are not a production deployment guarantee.
 
 ### Requirements
 
-- Linux host recommended for a self-hosted deployment.
+- Linux host recommended for self-hosted operation.
 - Docker Engine and Docker Compose plugin.
-- Git.
-- OpenSSL for generating strong secrets.
-- Access to the Docker socket for workload management. Docker socket access is effectively host-level privilege; deploy only on a trusted host.
+- Git and OpenSSL.
+- Access to the Docker socket for workload management. Docker socket access is effectively host-level privilege; use a trusted host and review the threat model.
 
-### Prepare a local deployment
+### Prepare configuration
 
-1. Review the deployment variables and security notes in [`.env.example`](.env.example) and [`docker-compose.yml`](docker-compose.yml).
-2. Create a private `.env` file and set every required value. Do not commit secrets.
-3. Generate independent URL-safe database passwords with `openssl rand -hex 32`.
-4. Prepare the initial administrator password files at the paths configured in `.env`; keep their parent directory private and follow the file permission requirements documented in the example.
-5. Confirm the Docker socket group ID and network ranges do not conflict with your host, LAN, or VPN.
-6. Review the Compose file and its exposed ports before starting services.
+1. Review `.env.example`, `docker-compose.yml`, `AGENTS.md`, and [release readiness](docs/RELEASE_READINESS.md).
+2. Create a private `.env` file and set every required value.
+3. Generate independent URL-safe database passwords, for example `openssl rand -hex 32`.
+4. Prepare the initial administrator password files at the paths configured in `.env`; apply restrictive filesystem permissions.
+5. Confirm the Docker socket group ID and network ranges do not conflict with the host, LAN, or VPN.
+6. Review exposed ports, ingress, TLS, and firewall policy before starting services.
 
-The repository's deployment configuration deliberately fails when required credentials are missing. Do not replace those checks with default passwords or expose database ports publicly.
-
-After configuration, start the stack from the repository root:
+Validate and start the configured stack:
 
 ```bash
 docker compose config
@@ -105,45 +80,60 @@ docker compose up -d --build
 docker compose ps
 ```
 
-If `docker compose config` reports a missing variable, return to `.env` and complete the required configuration. Check service logs with:
+Inspect service logs using the service name defined by the current Compose file. Do not assume service names, ports, or commands remain stable across upstream-derived changes; inspect `docker-compose.yml` first.
 
-```bash
-docker compose logs -f temps
-```
+Do not expose administration interfaces directly to the public internet until credentials, TLS, ingress restrictions, firewall rules, backups, and recovery procedures have been reviewed.
 
-> **Operational note:** this is a privileged infrastructure platform. Do not expose its administration interfaces directly to the public internet until TLS, ingress restrictions, administrator credentials, backups, and firewall policy have been reviewed. The commands above are a deployment entry point, not a production security sign-off.
+## Development
 
-### Development
-
-The backend is a Cargo workspace. Start by reviewing:
+The backend is a Cargo workspace. Begin with:
 
 - [`AGENTS.md`](AGENTS.md) — repository engineering rules and contributor entry points.
-- [`Cargo.toml`](Cargo.toml) — Rust workspace members and shared dependencies.
+- [`Cargo.toml`](Cargo.toml) — workspace members and shared dependencies.
 - [`docs/architecture/crates.md`](docs/architecture/crates.md) — generated crate map.
 - [`DESIGN.md`](DESIGN.md) — current web UI design standards.
 - [`REVIEW.md`](REVIEW.md) — recurring security and reliability review findings.
 
-Use the repository's pinned Rust toolchain in [`rust-toolchain.toml`](rust-toolchain.toml). Run checks appropriate to the area you change; do not assume a full workspace test has passed unless it has actually been run.
+Use the pinned toolchain in [`rust-toolchain.toml`](rust-toolchain.toml). Run the checks appropriate to the files changed. Never report tests, builds, security reviews, or release checks as passing unless they were actually executed and their results inspected.
 
 ## Documentation
 
-- **[MW-DEVPLATFORM Blueprint](docs/BLUEPRINT.md)** — narrative, positioning, principles, product architecture, roadmap, and acceptance criteria.
-- **[Release readiness & operator runbook](docs/RELEASE_READINESS.md)** — first-install steps, engineering/security gates, and evidence required before production.
+- **[Product narrative](docs/PRODUCT_NARRATIVE.md)** — canonical ecosystem role, product purpose, boundaries, naming, and principles.
+- **[Platform blueprint](docs/BLUEPRINT.md)** — architecture, ownership boundaries, implementation baseline, roadmap, VPS direction, and acceptance gates.
 - [Architecture overview](docs/architecture/overview/page.mdx)
 - [Crate map](docs/architecture/crates.md)
 - [Documentation index](docs/README.md)
+- [Release readiness & operator runbook](docs/RELEASE_READINESS.md)
 - [Security policy](SECURITY.md)
 - [Contributing guide](CONTRIBUTING.md)
+- [Upstream notices and licenses](NOTICE), [MIT](LICENSE-MIT), and [Apache 2.0](LICENSE)
 
-## MW identity implementation
+## Upstream provenance and compatibility
 
-The product narrative and identity rules are documented in [the brand system](docs/BRAND_SYSTEM.md) and [the product blueprint](docs/BLUEPRINT.md). The dashboard sidebar, loading shell, browser title, original product mark, and lunar focus accent now carry the MW identity. This is the first shell-level implementation, not a claim that every route, email, CLI output, installer, or release artifact has been rebranded. Continue the UI audit using the acceptance checklist in the brand system.
+This repository is derived from the Temps codebase and retains upstream technical identifiers, history, notices, and the applicable MIT OR Apache-2.0 licensing terms. Product identity changes must not erase that provenance.
 
-Do not globally rename the Temps-derived technical identifiers. Preserve upstream attribution and plan any CLI, service, environment-variable, image, database, or deployment rename as a compatibility migration with tested upgrade and rollback paths.
+Do not globally rename crate names, binaries, environment variables, container services, image names, telemetry keys, URLs, or release assets. Treat each externally consumed identifier as a compatibility migration with inventory, aliases or deprecation where appropriate, tests, upgrade notes, and rollback.
 
-## Community and contributions
+## Release status
 
-Contributions should make the platform more understandable, secure, and dependable. Before proposing a change, read [AGENTS.md](AGENTS.md), [REVIEW.md](REVIEW.md), and [CONTRIBUTING.md](CONTRIBUTING.md).
+<em>Production readiness is not certified by this README.</em> Before calling a release production-ready, the project must provide evidence for:
+
+- clean-host installation and first-admin bootstrap;
+- supported OS/architecture and resource matrix;
+- TLS, ingress, firewall, and least-privilege configuration;
+- authentication and authorization tests;
+- backup and restore exercise;
+- upgrade and rollback exercise;
+- health checks and operational diagnostics;
+- artifact checksums/signatures and provenance;
+- feature maturity and known-limitations documentation;
+- preserved upstream legal attribution.
+
+A container starting successfully is not a production sign-off.
+
+## Contributing
+
+Before proposing a change, read [`AGENTS.md`](AGENTS.md), [`REVIEW.md`](REVIEW.md), and [`CONTRIBUTING.md`](CONTRIBUTING.md). Prefer small, reviewable changes with explicit ownership, tests, and documented operational consequences.
 
 ## License
 
