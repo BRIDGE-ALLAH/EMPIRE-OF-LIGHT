@@ -129,6 +129,9 @@ jobs:
 
       - name: Test worker agent service installer
         run: scripts/test-install-agent-service.sh
+ 
+      - name: Test platform source installer and conservative uninstaller
+        run: bash scripts/test-installers.sh
 
       - name: Verify release image runtime contract
         run: scripts/test-release-dockerfile.sh
