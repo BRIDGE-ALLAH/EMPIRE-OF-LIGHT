@@ -4,7 +4,7 @@
   "type": "module",
   "workspaces": ["packages/*"],
   "version": "1.0.0",
-  "description": "The Temps console — the full OSS web app, also exported as <TempsConsole> for downstream editions to consume whole.",
+  "description": "The MOONWITNESS MW-DEVPLATFORM console — a self-hosted developer platform for building, deploying, observing, and operating digital products.",
   "engines": {
     "node": ">=22.0.0"
   },
