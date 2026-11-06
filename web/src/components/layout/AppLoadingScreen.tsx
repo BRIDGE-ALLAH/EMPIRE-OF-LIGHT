@@ -67,7 +67,7 @@ export function AppLoadingScreen() {
         <header className="flex h-14 shrink-0 items-center gap-3 border-b px-4">
           <span className="flex size-7 items-center justify-center md:hidden">
             {logoIcon ?? (
-              <img src="/svg/temps-icon.svg" alt="" className="size-full" />
+              <img src="/svg/mw-icon.svg" alt="" className="size-full" />
             )}
           </span>
           <Skeleton className="h-4 w-32" />
