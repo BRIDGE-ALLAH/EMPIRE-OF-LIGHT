@@ -619,7 +619,7 @@ export function S3SourcesManagement() {
         resourceType="S3 source"
         resourceName={sourceToDelete?.name ?? ''}
         confirmLabel="Delete source"
-        consequences={`Removes it (bucket ${sourceToDelete?.bucket_name ?? ''}) from Temps. Backup schedules pointing at this source will fail on their next run, and services that rely on it for WAL archiving will stop shipping new data until reconfigured. Objects already in the bucket will not be deleted.`}
+        consequences={`Removes it (bucket ${sourceToDelete?.bucket_name ?? ''}) from MW-DEVPLATFORM. Backup schedules pointing at this source will fail on their next run, and services that rely on it for WAL archiving will stop shipping new data until reconfigured. Objects already in the bucket will not be deleted.`}
         isPending={deleteMutation.isPending}
         onConfirm={confirmDeleteSource}
       />
