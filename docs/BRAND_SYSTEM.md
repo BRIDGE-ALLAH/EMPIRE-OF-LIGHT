@@ -1,96 +1,68 @@
-# Empire of Light Platform — Brand & Language System
+# A-L-L-A-H.COM / Empire of Light — Unified Platform Brand System
 
-> **Build with clarity. Deploy with sovereignty. Operate with accountability.**
+## Canonical identity
 
-This document governs product-facing language for the infrastructure platform in `BRIDGE-ALLAH/EMPIRE-OF-LIGHT`. It does not change upstream legal attribution or authorize a blind rename of technical identifiers.
+- Public ecosystem brand: A-L-L-A-H.COM
+- Ecosystem vision: Empire of Light
+- Unified platform: ARSY
+- Canonical repository: BRIDGE-ALLAH/EMPIRE-OF-LIGHT
+- Repository model: one monorepo
+- Control/API technology: Node.js + Fastify
+- Infrastructure execution technology: Rust
 
-## Identity
+ARSY is the unified platform, not the name of one language-specific backend. Use ARSY Control for the Node.js/Fastify ecosystem API and orchestration component, and ARSY Infrastructure Engine for the Rust infrastructure execution component. These are bounded parts of one platform in one repository.
 
-- **Ecosystem brand:** A-L-L-A-H.COM — Empire of Light.
-- **Platform product:** Empire of Light Platform.
-- **Repository:** `BRIDGE-ALLAH/EMPIRE-OF-LIGHT`.
-- **Category:** Self-hostable developer and infrastructure operations platform.
-- **Descriptor:** Infrastructure foundation for building, delivering, and operating digital products.
-- **Promise:** Your infrastructure. Your visibility. Your responsibility.
+## Product language
 
-Use **Empire of Light Platform** when referring to this repository's product. Use **A-L-L-A-H.COM** when referring to the wider ecosystem. Use **ARSY** only for the separate ecosystem application/control integration layer defined in the A-L-L-A-H.COM repository. Use **MoonWitness** for its knowledge, research, narrative, and publishing domain—not as the name of this infrastructure platform.
+| Context | Approved name |
+|---|---|
+| Ecosystem and public entry | A-L-L-A-H.COM |
+| Overall vision | Empire of Light |
+| Unified platform | ARSY |
+| Node.js/Fastify component | ARSY Control |
+| Rust component | ARSY Infrastructure Engine |
+| VPS installation profile | ARSY Node |
+| Knowledge/research/publishing | MoonWitness |
+| Creative/media | ROCKSOUL |
+| Commerce | Empire Economy |
+| Communication domain | ARSY Radio |
 
-## Narrative and voice
+Do not refer to the Rust engine as a second ARSY product, or describe A-L-L-A-H.COM and Empire of Light as separate platforms or repositories. Apps and components may deploy independently; they share one canonical source repository.
 
-The platform makes infrastructure capabilities coherent and inspectable without hiding operational reality. It should help operators understand what is running, what changed, what failed, who can act, where data lives, and how to recover.
+## Voice
 
-Write in a clear, calm, technically literate, evidence-led voice.
+Use a clear, confident, technically literate, evidence-led voice. Explain what a component does and what it does not own. Avoid exaggerated claims, spiritualized operational controls, and describing planned work as shipped.
 
-Prefer:
-- “Build, deploy, and operate with evidence.”
-- “Keep infrastructure control in your hands.”
-- “See what changed. Understand what failed.”
-- “Self-hosted by design. Transparent by default.”
-
-Avoid:
-- unsupported claims such as unhackable, zero-risk, infinitely scalable, or production-ready without evidence;
-- presenting planned capabilities as shipped;
-- implying divine endorsement, religious authority, or moral certification;
-- decorative spiritual language in operational controls, alerts, and error messages;
-- using ecosystem names as interchangeable labels for unrelated products.
+Preferred messages:
+- One ecosystem. One platform. Clear boundaries.
+- Build, deploy, and operate with evidence.
+- Node.js for ecosystem control. Rust for infrastructure execution.
+- One source of truth. Independently deployable components.
 
 ## Visual direction
 
-The visual system must distinguish the infrastructure console from the A-L-L-A-H.COM public gateway, MoonWitness knowledge experiences, ROCKSOUL creative surfaces, and Empire Economy commerce experiences.
+Keep the ecosystem identity cinematic and distinctive while making operational interfaces readable and accessible. Product experiences may have distinct visual DNA, but must share coherent interaction contracts, accessibility expectations, and platform identity rules.
 
-For operational interfaces:
-- prioritize information hierarchy, legibility, accessibility, predictable navigation, and fast scanning;
-- use semantic status colors consistently; brand accents must never be the only status signal;
-- preserve readable density for resource tables, logs, events, and diagnostics;
-- use motion only when it explains state or feedback, and respect reduced-motion preferences;
-- avoid decorative astronomy motifs behind dense operational data.
-
-### Existing asset status
-
-The repository previously introduced MOONWITNESS / MW-DEVPLATFORM visual assets and copy. Their existence in the current source tree does not make them the approved final Empire of Light identity. Treat any MW-specific mark, browser title, favicon, social image, or UI label as a **legacy asset requiring inventory and deliberate replacement**.
-
-Do not delete or overwrite legacy assets blindly. First find every reference, confirm whether it is used by shipped routes or integrations, provide the replacement asset, update all references, and run visual/accessibility checks. Until that migration is complete, document the residual legacy surfaces honestly.
-
-No final logo artwork, color token set, or complete UI rebrand is certified by this document alone.
-
-## Product language map
-
-| Context | Approved label |
-|---|---|
-| Ecosystem | A-L-L-A-H.COM — Empire of Light |
-| This platform | Empire of Light Platform |
-| This repository | `BRIDGE-ALLAH/EMPIRE-OF-LIGHT` |
-| Ecosystem integration layer | ARSY |
-| Knowledge and research product | MoonWitness |
-| Creative/media product | ROCKSOUL |
-| Commerce product domain | Empire Economy |
-| Legal/upstream lineage | Temps, where technically or legally required |
+Operational interfaces prioritize information hierarchy, legibility, clear state, and predictable navigation. Brand accents must not replace semantic status colors. Motion must communicate state and respect reduced-motion preferences.
 
 ## Technical naming and provenance
 
-The codebase is derived from Temps. Preserve upstream copyright headers, NOTICE files, license texts, provider attributions, and required third-party notices.
+The Rust workspace is Temps-derived. Preserve upstream copyright headers, NOTICE files, license texts, provider attributions, and required third-party notices.
 
-Do not globally replace `temps`. It appears in crate names, binary and service identifiers, environment variables, database objects, migration history, image names, API contracts, installer logic, and persistent storage paths. These are compatibility surfaces, not merely brand copy.
+Do not globally rename Temps, crate names, binaries, environment variables, database objects, image names, URLs, or persistent paths. Inventory each occurrence and classify it as user-facing copy, internal identifier, deployment compatibility, or legal attribution before changing it.
 
-Classify each occurrence before changing it:
+The current upstream-specific installer and legacy identifiers must not be cosmetically relabeled as ARSY Node. Technical migrations require tests, aliases or migration instructions, rollback, and release notes.
 
-1. **User-facing product copy:** use Empire of Light Platform.
-2. **Internal implementation identifiers:** retain until a deliberate migration is designed and tested.
-3. **Deployment and data compatibility:** retain or provide aliases, migration steps, and rollback.
-4. **Legal attribution and upstream provenance:** preserve as required.
-5. **Documentation examples:** describe actual `TEMPS_*` variables and commands accurately until their migration is complete.
+## Repository and migration rule
 
-A technical rename requires an inventory, compatibility plan, migration and rollback tests, upgrade documentation, and an explicit release decision.
+BRIDGE-ALLAH/EMPIRE-OF-LIGHT is the one canonical repository. The former bjo163/A-L-L-A-H.COM source must be reconciled into this monorepo; until migration and verification finish, it remains a temporary source of code, not a second long-term platform home. Do not archive or delete it before destination verification.
 
-## Acceptance checklist
+## Brand acceptance
 
-- [ ] Browser title, favicon, metadata, and product shell use the approved platform identity.
-- [ ] Login, setup, onboarding, empty, error, notification, and email copy use approved language.
-- [ ] CLI, installer, Compose labels, and release metadata are audited.
-- [ ] Legacy MW marks and MoonWitness product labels are either replaced or explicitly retained as historical/compatibility references.
-- [ ] Semantic status colors and accessibility remain intact.
-- [ ] Light/dark, mobile, and responsive states are reviewed.
-- [ ] Frontend lint, typecheck, tests, and production build pass where applicable.
+- [ ] All maintained user-facing surfaces use approved ecosystem and component names.
+- [ ] Node.js and Rust components are presented as one ARSY platform.
+- [ ] Apps retain distinct product identities without duplicating platform authority.
+- [ ] Legacy MoonWitness/MW assets are inventoried before replacement.
+- [ ] Browser title, metadata, login, onboarding, CLI, installer, email, and release copy are audited.
+- [ ] Accessibility and semantic status contrast remain intact.
 - [ ] Upstream legal attribution and technical compatibility are preserved.
-
-A completed documentation update is not evidence that the visual or technical rebrand is complete.
