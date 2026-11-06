@@ -788,7 +788,7 @@ export function ServiceRestore() {
           </CardTitle>
           <CardDescription>
             Pick the S3-compatible source that holds the backup. Backups from
-            previous Temps instances appear here too.
+            previous MW-DEVPLATFORM instances appear here too.
           </CardDescription>
         </CardHeader>
         <CardContent>
