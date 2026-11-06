@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024-2026 Temps Contributors
+// SPDX-FileCopyrightText: 2024-2026 MW-DEVPLATFORM Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 import { useState } from 'react'
@@ -22,20 +22,20 @@ import { getErrorMessage } from '@/utils/errorHandling'
 const OPTIONS: Choice<Hosting>[] = [
   {
     value: 'hosted',
-    label: 'Temps runs it',
-    description: 'Temps builds and deploys the app from the source below.',
+    label: 'MW-DEVPLATFORM runs it',
+    description: 'MW-DEVPLATFORM builds and deploys the app from the source below.',
     icon: Server,
   },
   {
     value: 'external',
     label: 'It runs elsewhere',
     description:
-      'The app is hosted outside Temps (Vercel, Netlify, a VPS). Temps receives its analytics, errors and traces, and never deploys it. It is labelled External.',
+      'The app is hosted outside MW-DEVPLATFORM (Vercel, Netlify, a VPS). MW-DEVPLATFORM receives its analytics, errors and traces, and never deploys it. It is labelled External.',
     icon: Globe,
   },
 ]
 
-/** Whether Temps runs this service's app or only observes it. */
+/** Whether MW-DEVPLATFORM runs this service's app or only observes it. */
 export function HostingCard({
   project,
   refetch,
@@ -65,8 +65,8 @@ export function HostingCard({
       })
       toast.success(
         selected === 'external'
-          ? `${project.name} is now marked as running outside Temps`
-          : `Temps can deploy ${project.name} again`
+          ? `${project.name} is now marked as running outside MW-DEVPLATFORM`
+          : `MW-DEVPLATFORM can deploy ${project.name} again`
       )
       refetch()
     } catch (err) {
@@ -82,7 +82,7 @@ export function HostingCard({
       <CardHeader>
         <CardTitle>Where it runs</CardTitle>
         <CardDescription>
-          Whether Temps hosts this app or only observes it.
+          Whether MW-DEVPLATFORM hosts this app or only observes it.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -98,7 +98,7 @@ export function HostingCard({
         <p>
           {changed && selected === 'external' ? (
             <>
-              Running deployments keep running; Temps refuses new ones. Send its
+              Running deployments keep running; MW-DEVPLATFORM refuses new ones. Send its
               analytics with an ingest key from{' '}
               <Link
                 className="underline"
@@ -109,7 +109,7 @@ export function HostingCard({
               .
             </>
           ) : changed ? (
-            'Temps can deploy it again once you save.'
+            'MW-DEVPLATFORM can deploy it again once you save.'
           ) : null}
         </p>
         <Button
