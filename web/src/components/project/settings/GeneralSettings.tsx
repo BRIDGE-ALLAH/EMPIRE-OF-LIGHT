@@ -1,6 +1,6 @@
 import { SaveRow, SettingsGroup } from '@temps-sdk/ds'
 import { SettingToggleRow } from '@/components/settings/SettingToggleRow'
-// SPDX-FileCopyrightText: 2024-2026 Temps Contributors
+// SPDX-FileCopyrightText: 2024-2026 MW-DEVPLATFORM Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 import { ProjectResponse } from '@/api/client'
@@ -179,7 +179,7 @@ export function GeneralSettings({ project, refetch }: GeneralSettingsProps) {
     refetch()
   }
 
-  const handleToggleServesOwnTempsApi = async (enabled: boolean) => {
+  const handleToggleServesOwnMW-DEVPLATFORMApi = async (enabled: boolean) => {
     if (!project?.id) return
 
     await toast.promise(
@@ -190,10 +190,10 @@ export function GeneralSettings({ project, refetch }: GeneralSettingsProps) {
         },
       }),
       {
-        loading: 'Updating Temps API routing...',
+        loading: 'Updating MW-DEVPLATFORM API routing...',
         success: enabled
-          ? 'Temps API paths now reach this service'
-          : 'Temps API paths now reach this Temps instance',
+          ? 'MW-DEVPLATFORM API paths now reach this service'
+          : 'MW-DEVPLATFORM API paths now reach this MW-DEVPLATFORM instance',
       }
     )
     refetch()
@@ -307,17 +307,17 @@ export function GeneralSettings({ project, refetch }: GeneralSettingsProps) {
           />
           <SettingToggleRow
             id="serves-own-temps-api"
-            label="App serves its own Temps API"
+            label="App serves its own MW-DEVPLATFORM API"
             description={
               <>
                 Send <code>/api/_temps</code> and <code>/api/otel</code> on this
-                service&apos;s domains to the app instead of Temps. Only for an
-                app that is itself a Temps console; Temps&apos; analytics and
+                service&apos;s domains to the app instead of MW-DEVPLATFORM. Only for an
+                app that is itself a MW-DEVPLATFORM console; MW-DEVPLATFORM&apos; analytics and
                 ingest then stop receiving its traffic.
               </>
             }
             checked={project?.serves_own_temps_api ?? false}
-            onCheckedChange={handleToggleServesOwnTempsApi}
+            onCheckedChange={handleToggleServesOwnMW-DEVPLATFORMApi}
             disabled={updateProjectSettings.isPending}
           />
           {/* ADR-040: the backfill is a deliberate CLI action, so its status
