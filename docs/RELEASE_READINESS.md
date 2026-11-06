@@ -46,7 +46,7 @@ The bootstrap requires Linux, root privileges, Docker Engine, Docker Compose v2,
 Review the pinned installer before running it:
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/da2b834c85474a76f97552571cfec21491c6140d/scripts/install-platform.sh
+curl -fsSLO https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/829f23de5ffee78f985c6dc5c6e2b8c67361a906/scripts/install-platform.sh
 less install-platform.sh
 sudo bash install-platform.sh
 ```
@@ -54,7 +54,7 @@ sudo bash install-platform.sh
 A direct one-line invocation is available after reviewing and trusting that exact pinned script:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/da2b834c85474a76f97552571cfec21491c6140d/scripts/install-platform.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/829f23de5ffee78f985c6dc5c6e2b8c67361a906/scripts/install-platform.sh | sudo bash
 ```
 
 The script downloads an immutable source commit archive, refuses to overwrite an existing install path or remove known conflicting containers/networks, creates a mode-restricted `.env` and secret files, generates independent database/admin credentials, validates Compose configuration, and starts the stack unless `--skip-start` is supplied. The initial administrator and ingress passwords are displayed once; store them securely.
