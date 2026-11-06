@@ -41,7 +41,7 @@ Use a dedicated Linux host for a real deployment. Confirm:
 
 **Scope warning:** this installs the repository's current Compose stack from a pinned source commit. It does not install the complete Rust-first ARSY Node profile and is not a signed binary release or production certification.
 
-The bootstrap requires Linux, root privileges, Docker Engine, Docker Compose v2, `curl`, `tar`, OpenSSL, and standard shell utilities. It does not require a local Git clone.
+The bootstrap supports Ubuntu and Debian VPS hosts and requires root privileges. It installs Docker Engine and the Docker Compose v2 plugin from Docker's official APT repository when Docker is absent, and installs required host utilities. It does not replace an existing Docker installation; if Docker is present without Compose v2, it stops safely and asks for manual repair. It does not require a local Git clone.
 
 Review the pinned installer before running it:
 
@@ -57,7 +57,7 @@ A direct one-line invocation is available after reviewing and trusting that exac
 curl -fsSL https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/829f23de5ffee78f985c6dc5c6e2b8c67361a906/scripts/install-platform.sh | sudo bash
 ```
 
-The script downloads an immutable source commit archive, refuses to overwrite an existing install path or remove known conflicting containers/networks, creates a mode-restricted `.env` and secret files, generates independent database/admin credentials, validates Compose configuration, and starts the stack unless `--skip-start` is supplied. The initial administrator and ingress passwords are displayed once; store them securely.
+The script downloads an immutable source commit archive, prepares Docker on a clean Ubuntu/Debian host, refuses to overwrite an existing install path or remove known conflicting containers/networks, creates a mode-restricted `.env` and secret files, generates independent database/admin credentials, validates Compose configuration, and starts the stack unless `--skip-start` is supplied. After startup it waits up to 10 minutes for PostgreSQL, ClickHouse, the application, and both ingress containers to report healthy. The initial administrator and ingress passwords are displayed once; store them securely.
 
 To prepare configuration without starting containers:
 
@@ -83,7 +83,7 @@ sudo bash /opt/empire-of-light/scripts/uninstall.sh
 
 The uninstaller asks for confirmation and removes only the selected Compose project's containers and networks. Named volumes, images, source, `.env`, and secrets are preserved. It does not remove unrelated Docker projects. There is no automatic data-wipe option.
 
-The installer does not install Docker, configure a public domain, configure a reverse proxy, issue TLS certificates, or modify firewall policy. Published ports remain loopback-bound. Those responsibilities require a separate, reviewed operator procedure.
+The installer configures Docker on clean Ubuntu/Debian hosts but does not configure a public domain, reverse proxy, TLS certificates, or firewall policy. Published ports remain loopback-bound. Public access is not ready until those ingress responsibilities are completed and verified through a separate operator procedure.
 
 ## 5. ARSY installer status and release requirements
 
