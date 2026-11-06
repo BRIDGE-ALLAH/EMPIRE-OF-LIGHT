@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024-2026 Temps Contributors
+// SPDX-FileCopyrightText: 2024-2026 MW-DEVPLATFORM Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 import { DeliveryProjectOption } from '@/components/domains/DeliveryProjectOption'
@@ -335,7 +335,7 @@ function ComposeFileSelector({
 
   // Live-parses the selected compose file's services so the user can exclude
   // one before the project is even created (e.g. a raw `postgres` container,
-  // which never gets Temps backup/restore, in favor of a managed database).
+  // which never gets MW-DEVPLATFORM backup/restore, in favor of a managed database).
   // Two data sources, same split as the preset/env-example queries above:
   // `repositoryId` for connected repos, `publicRepo` for "git URL" imports.
   const {
@@ -457,8 +457,8 @@ function ComposeFileSelector({
                     </TooltipTrigger>
                     <TooltipContent className="max-w-xs">
                       This looks like a database container — it won&apos;t have
-                      Temps backup/restore. Consider excluding it and using a
-                      Temps-managed database instead.
+                      MW-DEVPLATFORM backup/restore. Consider excluding it and using a
+                      MW-DEVPLATFORM-managed database instead.
                     </TooltipContent>
                   </Tooltip>
                 )}
@@ -1346,9 +1346,9 @@ export function ProjectConfigurator({
       )
       if (blockedIndex >= 0) {
         form.setError(`environmentVariables.${blockedIndex}.key`, {
-          message: 'Temps provides this variable automatically at deployment',
+          message: 'MW-DEVPLATFORM provides this variable automatically at deployment',
         })
-        toast.error('Remove the environment variable managed by Temps.')
+        toast.error('Remove the environment variable managed by MW-DEVPLATFORM.')
         return
       }
       setIsSubmitting(true)
@@ -1825,7 +1825,7 @@ export function ProjectConfigurator({
                   <AlertCircle className="h-4 w-4" />
                   <AlertDescription>
                     This Dockerfile exposes port {effectiveDetectedPort}, but
-                    the service is configured for port {selectedPort}. Temps
+                    the service is configured for port {selectedPort}. MW-DEVPLATFORM
                     routes to the exposed image port after the build, so an app
                     that listens on the configured PORT value may fail its
                     health check. Make these ports match unless your startup
@@ -2290,7 +2290,7 @@ export function ProjectConfigurator({
             form.setValue('environmentVariables', [...currentVars, ...newVars])
             if (skippedCount > 0) {
               toast.info(
-                `Skipped ${skippedCount} variable${skippedCount === 1 ? '' : 's'} provided automatically by Temps`
+                `Skipped ${skippedCount} variable${skippedCount === 1 ? '' : 's'} provided automatically by MW-DEVPLATFORM`
               )
             }
           }}
