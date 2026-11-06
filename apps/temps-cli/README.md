@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/gotempsh/temps/refs/heads/main/web/public/logo/temps-logo-light.png" alt="Temps Platform" width="700" />
+  <img src="https://raw.githubusercontent.com/BRIDGE-ALLAH/MW-DEVPLATFORM/main/web/public/svg/mw-logo-light.svg" alt="MOONWITNESS — MW-DEVPLATFORM" width="700" />
 </p>
 
 <h1 align="center">@temps-sdk/cli</h1>
@@ -11,21 +11,21 @@
 </p>
 
 <p align="center">
-  Command-line interface for the Temps deployment platform. Deploy, manage, and monitor your applications from the terminal -- no dashboard required.
+  Command-line interface for MW-DEVPLATFORM. Deploy, manage, and monitor applications from the terminal while retaining the existing `temps` command for compatibility. Deploy, manage, and monitor your applications from the terminal -- no dashboard required.
 </p>
 
 ---
 
 ## Develop and test a plugin locally
 
-Run a compiled plugin with a simulated Temps host on macOS or Linux:
+Run a compiled plugin with a simulated MW-DEVPLATFORM host on macOS or Linux:
 
 ```bash
 bunx @temps-sdk/cli plugin dev ./my-plugin --session demo --grant events_read
 ```
 
 `./my-plugin` is an executable, not a directory. Open the printed loopback URL
-to preview its UI. No Temps server, login, Docker, database, or provider key is
+to preview its UI. No MW-DEVPLATFORM server, login, Docker, database, or provider key is
 required. The CLI starts Bun automatically for these commands. Native plugins
 execute with your OS permissions: this is a development host, not a sandbox.
 
@@ -89,7 +89,7 @@ The fixture file can also supply `projects`, `environments`, and `deployments`
 arrays matching the SDK DTOs; IDs and references are validated. Default fixtures
 contain project 1, production environment 1, and deployment 42. Host API calls
 outside discovery, these read methods, and mock AI return explicit unsupported
-errors; no request is forwarded to a real Temps instance.
+errors; no request is forwarded to a real MW-DEVPLATFORM instance.
 
 `--role admin|reader` changes the synthetic preview user, independently of plugin
 grants. Browser cookies are intentionally isolated from the plugin; plugins
@@ -114,7 +114,7 @@ restarts, previews its event journal, and can call mock AI. A small Rust
 conformance example lives at `crates/temps-plugin-sdk/examples/plugin-dev-probe.rs`.
 Run `bun run build` followed by `bun run scripts/test-plugin-dev-package.ts`
 to repeat the packed-CLI end-to-end test. Simulator verification does not replace
-installation testing against Temps.
+installation testing against MW-DEVPLATFORM.
 
 ## SSH setup proof of concept
 
@@ -227,7 +227,7 @@ bunx @temps-sdk/cli
 ## Quick Start
 
 ```bash
-# Authenticate with your Temps instance
+# Authenticate with your MW-DEVPLATFORM instance
 bunx @temps-sdk/cli login
 
 # Initialize a project in the current directory
@@ -250,12 +250,12 @@ That's it. The CLI detects your framework, connects your git repo, and deploys -
 bunx @temps-sdk/cli configure
 ```
 
-Walks you through setting your Temps API URL and authentication token, stored in `~/.temps/config.json`.
+Walks you through setting your MW-DEVPLATFORM API URL and authentication token, stored in `~/.temps/config.json`.
 
 ### Environment Variables
 
 ```bash
-TEMPS_API_URL=https://your-instance.temps.dev   # Your Temps API URL
+TEMPS_API_URL=https://your-instance.temps.dev   # Your MW-DEVPLATFORM API URL
 TEMPS_API_TOKEN=your-token                       # API key or deployment token
 TEMPS_PROJECT=my-app                             # Project slug (optional)
 ```
@@ -280,7 +280,7 @@ The CLI walks upward from your working directory to find `.temps/config.json` (l
 
 ### `init`
 
-Initialize a new Temps project in the current directory. Detects your framework, creates a project on the platform, and links it.
+Initialize a new MW-DEVPLATFORM project in the current directory. Detects your framework, creates a project on the platform, and links it.
 
 ```bash
 bunx @temps-sdk/cli init
@@ -288,7 +288,7 @@ bunx @temps-sdk/cli init
 
 ### `link <project>`
 
-Link the current directory to an existing Temps project.
+Link the current directory to an existing MW-DEVPLATFORM project.
 
 ```bash
 bunx @temps-sdk/cli link my-app
@@ -361,7 +361,7 @@ bunx @temps-sdk/cli rollback
 
 ### `env:pull` / `env:push`
 
-Sync environment variables between your local `.env` file and the Temps project.
+Sync environment variables between your local `.env` file and the MW-DEVPLATFORM project.
 
 ```bash
 # Download env vars to .env
@@ -402,7 +402,7 @@ bunx @temps-sdk/cli deployments
 
 ## Multi-Instance Management
 
-Manage multiple Temps server instances (self-hosted and cloud) from a single CLI.
+Manage multiple MW-DEVPLATFORM server instances (self-hosted and cloud) from a single CLI.
 
 ```bash
 # List configured instances
@@ -453,7 +453,7 @@ bunx @temps-sdk/cli migrate
 
 ## Resource Management
 
-The CLI provides full CRUD access to every Temps resource:
+The CLI provides full CRUD access to every MW-DEVPLATFORM resource:
 
 ```bash
 # Projects
@@ -550,7 +550,7 @@ steps:
 ## Requirements
 
 - Node.js 18+ or Bun
-- A running Temps instance (self-hosted or Temps Cloud)
+- A running MW-DEVPLATFORM instance (self-hosted or Temps Cloud)
 
 ## Related
 
