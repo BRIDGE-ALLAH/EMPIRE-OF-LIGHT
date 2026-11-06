@@ -5086,7 +5086,10 @@ mod tests {
 
         // Branding: header bar and footer must be present so the message
         // reads as a real Temps email, not a debug ping.
-        assert!(html.contains(">MOONWITNESS<"), "expected MOONWITNESS brand header");
+        assert!(
+            html.contains(">MOONWITNESS<"),
+            "expected MOONWITNESS brand header"
+        );
         assert!(
             html.contains("Sent by MW-DEVPLATFORM"),
             "expected footer attribution"
