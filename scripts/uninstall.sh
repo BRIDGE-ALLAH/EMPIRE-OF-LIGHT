@@ -6,7 +6,7 @@
 set -Eeuo pipefail
 
 INSTALL_DIR="${EMPIRE_INSTALL_DIR:-/opt/empire-of-light}"
-PROJECT_NAME="${COMPOSE_PROJECT_NAME:-empire-of-light}"
+readonly PROJECT_NAME="empire-of-light"
 ASSUME_YES=0
 
 RED='' RESET=''
@@ -35,9 +35,16 @@ done
 
 [[ -d "$INSTALL_DIR" ]] || fail "Install directory not found: $INSTALL_DIR"
 [[ -f "$INSTALL_DIR/docker-compose.yml" ]] || fail "No docker-compose.yml found in $INSTALL_DIR"
+[[ -f "$INSTALL_DIR/.env" ]] || fail "No .env file found in $INSTALL_DIR; refusing to target an unverified Compose directory."
 command -v docker >/dev/null 2>&1 || fail "Docker is required."
+command -v grep >/dev/null 2>&1 || fail "grep is required."
 docker compose version >/dev/null 2>&1 || fail "Docker Compose v2 plugin is required."
 docker info >/dev/null 2>&1 || fail "Docker daemon is not accessible."
+cd "$INSTALL_DIR"
+services=$(docker compose -p "$PROJECT_NAME" config --services) || fail "Compose configuration is invalid; nothing was removed."
+for service in temps postgres clickhouse; do
+  printf '%s\\n' "$services" | grep -Fxq "$service" || fail "Expected service '$service' is missing; refusing to remove this project."
+done
 
 printf '%s\n' "This will stop and remove containers and project networks for '$PROJECT_NAME'."
 printf '%s\n' "Named volumes, images, source, .env, and secrets will be preserved."
@@ -46,7 +53,6 @@ if (( ! ASSUME_YES )); then
   [[ "$answer" == "REMOVE" ]] || { printf '%s\n' "Cancelled. No changes made."; exit 0; }
 fi
 
-cd "$INSTALL_DIR"
 docker compose -p "$PROJECT_NAME" down
 printf '%s\n' "Compose containers and project networks removed."
 printf '%s\n' "Persistent data and installation files preserved at: $INSTALL_DIR"
