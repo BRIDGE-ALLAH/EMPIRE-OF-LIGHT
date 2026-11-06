@@ -1,7 +1,7 @@
-# Temps console design standard
+# MW-DEVPLATFORM console design standard
 
 This is the authoritative UI reference for existing contributions to
-`web/src`. Use the existing shadcn/ui components, Tailwind semantic tokens,
+`web/src`. The public product identity is **MOONWITNESS — MW-DEVPLATFORM**; upstream package and source identifiers remain unchanged unless a compatibility migration is approved. Use the existing shadcn/ui components, Tailwind semantic tokens,
 and shared layouts. The separate "operator ink" prototype app has been
 retired; it is not an alternative design direction and never was one worth
 resurrecting.
