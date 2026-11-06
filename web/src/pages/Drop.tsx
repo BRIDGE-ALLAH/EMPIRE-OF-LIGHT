@@ -478,7 +478,7 @@ export function Drop({ embedded = false }: { embedded?: boolean }) {
             {project.name} is on its way live.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
-            Temps accepted the bundle and started the deployment. The service
+            MW-DEVPLATFORM accepted the bundle and started the deployment. The service
             page has the live build log and final status.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
@@ -531,7 +531,7 @@ export function Drop({ embedded = false }: { embedded?: boolean }) {
               Drop files. Get a deployment.
             </h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-              Ship a static site or application without Git or a CLI. Temps
+              Ship a static site or application without Git or a CLI. MW-DEVPLATFORM
               detects the preset, creates a service, and starts the right build
               pipeline in one pass.
             </p>
@@ -637,7 +637,7 @@ export function Drop({ embedded = false }: { embedded?: boolean }) {
                         </SelectContent>
                       </Select>
                       <p className="text-xs leading-5 text-muted-foreground">
-                        Temps adds a small index redirect; your selected file
+                        MW-DEVPLATFORM adds a small index redirect; your selected file
                         stays in place.
                       </p>
                     </div>
