@@ -24,82 +24,74 @@ Do not advertise a production-ready ARSY release until the gates below have reco
 - Preserve upstream copyright, license, NOTICE, and third-party attribution.
 - Do not rename CLI commands, database identifiers, images, environment variables, or persistent volume names as a cosmetic change. Plan compatibility aliases and tested migration/rollback first.
 
-Node.js + Fastify and Rust are complementary parts of ARSY: Node.js owns ecosystem control-plane APIs and orchestration; Rust owns infrastructure execution. Their boundary must use explicit, versioned and tested contracts. Do not create a second backend or duplicate infrastructure capabilities.
+ARSY is Rust-first with one backend/platform authority. Rust owns APIs, identity and access enforcement, tenant boundaries, orchestration, infrastructure execution, node operations, and platform services. Node.js is limited to frontend development/build tooling, package management, code generation, and developer scripts where needed. Treat the legacy Fastify service as migration input: map its routes and domain behavior to existing Rust crates, port only verified gaps, and retire the Fastify runtime after parity and consumer cutover.
 
 ## 3. Deployment prerequisites
 
 Use a dedicated Linux host for a real deployment. Confirm:
 
 - Docker Engine and the Docker Compose plugin are installed and supported.
-- Git and OpenSSL are installed.
+- `curl`, `tar`, and OpenSSL are installed. Git is not required by the experimental source bootstrap.
 - The operator understands that mounting `/var/run/docker.sock` grants effectively host-level control.
 - The configured Docker subnets do not overlap the host LAN, VPN, existing Docker networks, or routed networks.
 - Firewall policy, ingress exposure, DNS, TLS termination, and administrator access have been reviewed.
 - Persistent storage capacity, backup destination, restore destination, and monitoring are available.
 
-## 4. First-install procedure — current Temps-derived stack only
+## 4. First-install procedure — experimental Compose source bootstrap
 
-**Scope warning:** this procedure describes the existing Docker Compose stack in this repository. It does not install the complete ARSY Node.js + Rust platform and must not be presented as the ARSY one-command installer.
+**Scope warning:** this installs the repository's current Compose stack from a pinned source commit. It does not install the complete Rust-first ARSY Node profile and is not a signed binary release or production certification.
 
-Run from the repository root on the target host.
+The bootstrap requires Linux, root privileges, Docker Engine, Docker Compose v2, `curl`, `tar`, OpenSSL, and standard shell utilities. It does not require a local Git clone.
 
-1. Review `.env.example`, `docker-compose.yml`, `Dockerfile`, and `Dockerfile.ingress` before starting anything.
-2. Create a private environment file:
+Review the pinned installer before running it:
 
-   ```bash
-   install -m 600 .env.example .env
-   ```
+```bash
+curl -fsSLO https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/a32440de14dba0d14870b308e112476976d62d04/scripts/install-platform.sh
+less install-platform.sh
+sudo bash install-platform.sh
+```
 
-3. Generate independent database passwords:
+A direct one-line invocation is available after reviewing and trusting that exact pinned script:
 
-   ```bash
-   openssl rand -hex 32
-   openssl rand -hex 32
-   ```
+```bash
+curl -fsSL https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/a32440de14dba0d14870b308e112476976d62d04/scripts/install-platform.sh | sudo bash
+```
 
-   Put one value in `POSTGRES_PASSWORD` and the other in `CLICKHOUSE_PASSWORD`. Do not reuse credentials.
+The script downloads an immutable source commit archive, refuses to overwrite an existing install path or remove known conflicting containers/networks, creates a mode-restricted `.env` and secret files, generates independent database/admin credentials, validates Compose configuration, and starts the stack unless `--skip-start` is supplied. The initial administrator and ingress passwords are displayed once; store them securely.
 
-4. Determine the Docker socket group ID:
+To prepare configuration without starting containers:
 
-   ```bash
-   stat -c '%g' /var/run/docker.sock
-   ```
+```bash
+sudo bash install-platform.sh --skip-start
+```
 
-   Set the result as `DOCKER_GID`. On non-Linux hosts, follow the platform-specific Docker socket guidance rather than assuming this command applies.
+After startup, inspect the stack:
 
-5. Set `TEMPS_ADMIN_EMAIL`. Create the password files at the exact paths configured by `TEMPS_ADMIN_PASSWORD_FILE` and `TEMPS_ADMIN_INGRESS_PASSWORD_FILE`. Use two different strong passwords. Keep the parent directory private and follow the file permission requirements documented in `.env.example`.
+```bash
+cd /opt/empire-of-light
+docker compose -p empire-of-light ps
+docker compose -p empire-of-light logs --tail=200
+```
 
-6. Review every subnet and static IP in `.env`. Change all related values together if any range conflicts with existing networks.
+Confirm service health and the documented readiness endpoint before use. A successful `docker compose up` command is not proof of production readiness.
 
-7. Render and validate the deployment configuration:
+### Conservative uninstall
 
-   ```bash
-   docker compose config --quiet
-   docker compose config
-   ```
+```bash
+sudo bash /opt/empire-of-light/scripts/uninstall.sh
+```
 
-   Resolve every missing variable or validation error. Review the rendered output for unexpected public port bindings before proceeding; do not paste rendered secrets into tickets or public logs.
+The uninstaller asks for confirmation and removes only the selected Compose project's containers and networks. Named volumes, images, source, `.env`, and secrets are preserved. It does not remove unrelated Docker projects. There is no automatic data-wipe option.
 
-8. Build and start the stack:
-
-   ```bash
-   docker compose up -d --build
-   docker compose ps
-   docker compose logs --tail=200
-   ```
-
-9. Confirm that all expected services report healthy. Inspect individual logs for database initialization, credential synchronization, application startup, and ingress errors.
-10. Verify the documented application readiness endpoint from the host/network path appropriate to the deployment. Do not assume a running container means the application is ready.
-
-**Important:** the Compose file binds published ports to host loopback. A reverse proxy, firewall policy, DNS and TLS configuration are separate operator responsibilities. Do not expose administrative endpoints directly to the public internet.
+The installer does not install Docker, configure a public domain, configure a reverse proxy, issue TLS certificates, or modify firewall policy. Published ports remain loopback-bound. Those responsibilities require a separate, reviewed operator procedure.
 
 ## 5. ARSY installer status and release requirements
 
-The current `scripts/install.sh` is a Temps-derived upstream installer. It downloads `temps-*` release assets from the upstream Temps project and installs the `temps` executable. It is **not** an A-L-L-A-H.COM, Empire of Light, or ARSY Node installer.
+The current `scripts/install.sh` remains the upstream Temps binary installer. It downloads `temps-*` release assets and installs the `temps` executable; preserve its upstream behavior and legal provenance.
 
-Do not relabel this script, change its download origin, or advertise it as the ARSY installer. Preserve its upstream behavior and provenance until a separately implemented and tested ARSY installer is ready.
+The new `scripts/install-platform.sh` is an experimental, source-based bootstrap for the existing Compose stack. It uses an immutable source commit and does not require a local Git clone, but it is not a signed binary release, does not install the Rust-first ARSY Node profile, and does not certify production readiness. Do not describe it as the ARSY Node installer.
 
-An ARSY installer is not release-ready until all of the following exist and are verified:
+An ARSY Node installer is not release-ready until all of the following exist and are verified:
 
 - Canonical, CI-produced, version-pinned ARSY artifacts for each supported OS and CPU architecture.
 - SHA-256 checksums and a verifiable signing/provenance strategy.
@@ -111,7 +103,7 @@ An ARSY installer is not release-ready until all of the following exist and are 
 - Automated clean-host tests and documented support matrix.
 - A minimal HTTPS bootstrap path (for example, a reviewed `curl` entry point) that downloads a pinned, verified release artifact rather than executing unverified remote content.
 
-Until those gates pass, do not publish a `curl | bash` command or claim one-command ARSY installation is available.
+Until those gates pass, do not claim that one-command ARSY Node installation is available. The experimental Compose bootstrap above is a separate deployment path and must retain its explicit limitations.
 
 ## 6. Engineering validation gates
 
