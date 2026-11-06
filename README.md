@@ -46,15 +46,17 @@ The current source is a substantial Temps-derived Rust workspace with more than 
 
 The list describes source-code capability areas, not a certification that every feature is complete, secure, supported, or production-ready. Consult the source, tests, architecture docs, and [release readiness runbook](docs/RELEASE_READINESS.md) for maturity evidence.
 
-## Important: current installer is upstream
+## Installer status
 
-`scripts/install.sh` is still the upstream Temps installer. It queries `gotempsh/temps` releases, downloads `temps-*` assets, and installs the `temps` executable. **It is not an Empire of Light installer and must not be presented as an ARSY Node installer.**
+`scripts/install.sh` is now an **experimental source-based bootstrap** for the existing Docker Compose stack. It clones this repository, generates private database/admin credentials, validates the Compose configuration, and can build/start the stack. It does not download the upstream Temps CLI binary.
 
-The repository rename does not create a product release, signed artifact, VPS installation flow, or tested upgrade path. An Empire of Light / ARSY Node installer must be built only after this repository has its own versioned release artifacts, checksums/signatures, supported platform matrix, clean-host installation tests, and recovery procedures. See [the blueprint](docs/BLUEPRINT.md#10-arsy-node-and-vps-installation-direction).
+This is not yet a signed binary/release installer or a production-certified VPS deployment. DNS, TLS, reverse-proxy configuration, firewall policy, backups, restore, upgrades, and rollback remain operator responsibilities. The installer refuses to overwrite an existing installation path and does not remove conflicting containers.
 
-## Getting started with the existing upstream-derived development baseline
+The paired `scripts/uninstall.sh` removes only the Compose project's containers and network. It deliberately preserves named volumes, images, source, `.env`, and secrets. See [release readiness](docs/RELEASE_READINESS.md) and [the blueprint](docs/BLUEPRINT.md#10-arsy-node-and-vps-installation-direction).
 
-The following instructions describe the current repository's existing development/deployment baseline. They are not a production deployment guarantee.
+## Getting started
+
+The following source bootstrap is experimental and is not a production deployment guarantee. Use a clean, dedicated Linux host and review the security and network implications first.
 
 ### Requirements
 
@@ -63,26 +65,33 @@ The following instructions describe the current repository's existing developmen
 - Git and OpenSSL.
 - Access to the Docker socket for workload management. Docker socket access is effectively host-level privilege; use a trusted host and review the threat model.
 
-### Prepare configuration
+### Bootstrap on a clean Linux host
 
-1. Review `.env.example`, `docker-compose.yml`, `AGENTS.md`, and [release readiness](docs/RELEASE_READINESS.md).
-2. Create a private `.env` file and set every required value.
-3. Generate independent URL-safe database passwords, for example `openssl rand -hex 32`.
-4. Prepare the initial administrator password files at the paths configured in `.env`; apply restrictive filesystem permissions.
-5. Confirm the Docker socket group ID and network ranges do not conflict with the host, LAN, or VPN.
-6. Review exposed ports, ingress, TLS, and firewall policy before starting services.
+Prerequisites: Docker Engine, Docker Compose v2, Git, and OpenSSL. The Docker daemon must be running and accessible to the installer.
 
-Validate and start the configured stack:
+Review `docker-compose.yml`, `.env.example`, [release readiness](docs/RELEASE_READINESS.md), and the Docker-socket security boundary before installation. The installer creates `/opt/empire-of-light` by default and refuses to overwrite an existing directory.
 
 ```bash
-docker compose config
-docker compose up -d --build
-docker compose ps
+git clone https://github.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT.git
+cd EMPIRE-OF-LIGHT
+sudo bash scripts/install.sh --branch main
 ```
 
-Inspect service logs using the service name defined by the current Compose file. Do not assume service names, ports, or commands remain stable across upstream-derived changes; inspect `docker-compose.yml` first.
+To prepare configuration without starting containers:
 
-Do not expose administration interfaces directly to the public internet until credentials, TLS, ingress restrictions, firewall rules, backups, and recovery procedures have been reviewed.
+```bash
+sudo bash scripts/install.sh --branch main --skip-start
+```
+
+The installer displays the initial administrator and ingress passwords once. Store them in a password manager. The Compose stack publishes its ports on host loopback only; configure and review a separate reverse proxy, DNS, TLS, and firewall before public access. It does not automatically install Docker or configure a public domain.
+
+### Stop and remove the Compose deployment
+
+```bash
+sudo bash /opt/empire-of-light/scripts/uninstall.sh
+```
+
+The uninstaller asks for confirmation and preserves database/application volumes, images, source, `.env`, and secrets. Data deletion is a separate, manual operator action after verified backups.
 
 ## Development
 
