@@ -105,7 +105,7 @@ function ZoneDetail({
   return (
     <Detail
       title={<span className="break-all">{hostname}</span>}
-      description={`Apps under ${connector.domain} reach visitors through this tunnel. Temps writes each app's DNS record; workers need no public address or open port. ${HTTPS_NOTE}`}
+      description={`Apps under ${connector.domain} reach visitors through this tunnel. MW-DEVPLATFORM writes each app's DNS record; workers need no public address or open port. ${HTTPS_NOTE}`}
       verdict={<Status tone={verdict.tone} label={verdict.label} />}
       actions={back}
       facts={facts}
