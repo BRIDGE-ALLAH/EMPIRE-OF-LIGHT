@@ -804,7 +804,7 @@ export default function TraceDetail({ project }: TraceDetailProps) {
     if (!traceId || spans.length === 0) return null
     const rootName = tree[0]?.span?.name ?? '(root span)'
     return [
-      'The user is viewing a distributed trace (OpenTelemetry) in the Temps console.',
+      'The user is viewing a distributed trace (OpenTelemetry) in the MW-DEVPLATFORM console.',
       `Service: "${project.name}" (project slug: ${project.slug}, project id: ${project.id}).`,
       `Trace id: ${traceId}.`,
       `Root span: ${rootName}. Duration: ${formatDuration(traceDuration)}. ${spans.length} span(s) across service(s): ${services.join(', ') || 'unknown'}. Status: ${hasError ? 'ERROR' : 'OK'}.`,
