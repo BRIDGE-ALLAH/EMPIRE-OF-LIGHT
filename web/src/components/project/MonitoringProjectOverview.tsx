@@ -141,7 +141,7 @@ export function MonitoringProjectOverview({
           <div>
             <p className="font-medium">Hosting is optional</p>
             <p className="text-sm text-muted-foreground">
-              Your app can stay where it is. Move it to Temps later and keep
+              Your app can stay where it is. Move it to MW-DEVPLATFORM later and keep
               your data.
             </p>
           </div>
