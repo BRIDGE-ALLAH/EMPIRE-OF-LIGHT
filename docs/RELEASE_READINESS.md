@@ -39,10 +39,10 @@ The repository now provides an experimental source bootstrap. It is not a signed
 
 1. Use a dedicated Linux host with Docker Engine, Docker Compose v2, `curl`, `tar`, and OpenSSL. Confirm the Docker daemon is running.
 2. Review `.env.example`, `docker-compose.yml`, `Dockerfile`, `Dockerfile.ingress`, and the installer before execution. Check the configured Docker subnets against host, LAN, VPN, and existing Docker routes.
-3. From a checkout of this repository, run:
+3. Run the one-command bootstrap (or download and inspect the script before running it):
 
    ```bash
-   sudo bash scripts/install-empire-of-light.sh --branch main
+   curl -fsSL https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/main/scripts/install-empire-of-light.sh | sudo bash -s -- --branch main
    ```
 
    The bootstrap downloads and extracts the selected GitHub branch archive into `/opt/empire-of-light` without requiring a local Git clone, refuses to overwrite an existing path or known conflicting container names, creates a mode-restricted `.env` and secret files, generates unique database and initial admin credentials, validates Compose configuration, and starts the build unless `--skip-start` is supplied.
