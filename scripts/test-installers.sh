@@ -12,6 +12,10 @@ bash -n "$UNINSTALLER" || fail "uninstaller syntax check failed"
 bash -n "$0" || fail "test script syntax check failed"
 
 bash "$INSTALLER" --help >/dev/null || fail "installer help failed"
+
+grep -Fq 'download.docker.com/linux/' "$INSTALLER" || fail "clean VPS Docker bootstrap is missing"
+grep -Fq 'ubuntu|debian' "$INSTALLER" || fail "installer does not declare its supported VPS distributions"
+grep -Fq 'required_containers=(temps-postgres temps-clickhouse temps-app temps-ingress temps-admin-ingress)' "$INSTALLER" || fail "post-deploy service health gate is missing"
 bash "$UNINSTALLER" --help >/dev/null || fail "uninstaller help failed"
 
 if bash "$INSTALLER" --invalid-option >/dev/null 2>&1; then
