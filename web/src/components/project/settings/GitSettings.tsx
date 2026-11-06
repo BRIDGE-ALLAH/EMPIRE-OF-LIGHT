@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024-2026 Temps Contributors
+// SPDX-FileCopyrightText: 2024-2026 MW-DEVPLATFORM Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 import {
@@ -674,7 +674,7 @@ function GitSettingsInline({
           <p className="max-w-[72ch] text-pretty text-base/7 text-muted-foreground sm:text-sm/6">
             {view === 'git'
               ? 'Manage the source repository and the Git events that trigger deployments.'
-              : 'Configure how Temps turns your source into a running application.'}
+              : 'Configure how MW-DEVPLATFORM turns your source into a running application.'}
           </p>
         </div>
       )}
@@ -692,8 +692,8 @@ function GitSettingsInline({
             </div>
             <p className="max-w-[72ch] text-pretty text-base/7 text-muted-foreground sm:text-sm/6">
               {isUploadedSource
-                ? 'Temps is deploying the source snapshot uploaded through Drop. It will not receive updates from Git.'
-                : `Temps fetches ${project.repo_owner}/${project.repo_name} from Git for each deployment.`}
+                ? 'MW-DEVPLATFORM is deploying the source snapshot uploaded through Drop. It will not receive updates from Git.'
+                : `MW-DEVPLATFORM fetches ${project.repo_owner}/${project.repo_name} from Git for each deployment.`}
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-2">
@@ -1121,7 +1121,7 @@ function GitSettingsInline({
                       </div>
                       <p className="mt-0.5 text-xs text-muted-foreground">
                         Edit YAML and inspect the redacted Compose document
-                        Temps will deploy.
+                        MW-DEVPLATFORM will deploy.
                       </p>
                     </div>
                     <ChevronDown className="size-4 text-muted-foreground transition-transform group-data-[state=open]:rotate-180" />
@@ -1305,7 +1305,7 @@ function GitSettingsInline({
                             <p className="mt-1 text-sm/6 text-muted-foreground dark:text-zinc-400">
                               {composePreviewRateLimited
                                 ? publicProvider === 'github'
-                                  ? 'GitHub’s API limit was reached. When you are signed in, Temps automatically uses your valid GitHub connection. Check or reconnect it below, then retry. You can also install a GitHub App without creating or pasting a personal token.'
+                                  ? 'GitHub’s API limit was reached. When you are signed in, MW-DEVPLATFORM automatically uses your valid GitHub connection. Check or reconnect it below, then retry. You can also install a GitHub App without creating or pasting a personal token.'
                                   : 'Anonymous GitLab requests are temporarily exhausted. Connect your own GitLab account, then return here and use Change repository to attach it.'
                                 : composePreviewErrorMessage(
                                     composePreviewQuery.error
@@ -1405,7 +1405,7 @@ function GitSettingsInline({
 
                   <p className="text-[11px] leading-relaxed text-muted-foreground">
                     This preview applies disabled services and your override.
-                    Temps-managed security, network, labels, and runtime
+                    MW-DEVPLATFORM-managed security, network, labels, and runtime
                     environment layers are added during deployment and cannot be
                     edited here. For a connected repository the preview also
                     runs the deployment&apos;s Compose check: it resolves{' '}
@@ -1431,7 +1431,7 @@ function GitSettingsInline({
   )
 }
 
-// Status of the webhook that tells Temps about pushes to the repository, with
+// Status of the webhook that tells MW-DEVPLATFORM about pushes to the repository, with
 // a button to install it (or replace it) when automatic registration failed
 // or the hook was deleted on the provider's side.
 function RepositoryWebhookRow({
@@ -1474,7 +1474,7 @@ function RepositoryWebhookRow({
             <>
               Push events from{' '}
               <span className="font-mono text-foreground">{repository}</span>{' '}
-              reach Temps automatically.
+              reach MW-DEVPLATFORM automatically.
             </>
           ) : (
             <>
@@ -1665,7 +1665,7 @@ function PublicPortsInline({
           </div>
           <p className="text-pretty text-base/7 text-muted-foreground sm:text-sm/6">
             Choose the Compose service and port mapping for each public URL. A
-            service can expose several ports; each gets its own URL. Temps uses
+            service can expose several ports; each gets its own URL. MW-DEVPLATFORM uses
             the published host port when running on the host and the container
             port when running in Docker.
           </p>
@@ -1886,7 +1886,7 @@ function PublicPortsInline({
                     <span className="font-mono text-foreground">
                       {selected.target}/{selected.protocol}
                     </span>
-                    . Temps automatically uses the reachable side.
+                    . MW-DEVPLATFORM automatically uses the reachable side.
                   </p>
                 ) : service && service.ports.length > 0 ? (
                   <p className="mt-2 text-base/7 text-muted-foreground sm:text-sm/6">
@@ -2163,7 +2163,7 @@ function ExcludedServicesInline({
           <Label className="text-sm font-medium">Compose services</Label>
           <p className="text-xs text-muted-foreground mt-0.5">
             Uncheck a service to skip deploying it entirely — e.g. a raw
-            database container, which won’t have Temps backup/restore. Every
+            database container, which won’t have MW-DEVPLATFORM backup/restore. Every
             service runs with all Linux container permissions dropped except a
             minimal set (CHOWN, DAC_OVERRIDE, FOWNER, SETUID, SETGID) most
             official images need to fix ownership on their data volume at
@@ -2236,8 +2236,8 @@ function ExcludedServicesInline({
                       </TooltipTrigger>
                       <TooltipContent className="max-w-xs">
                         This looks like a database container — it won’t have
-                        Temps backup/restore. Consider excluding it and using a
-                        Temps-managed database instead.
+                        MW-DEVPLATFORM backup/restore. Consider excluding it and using a
+                        MW-DEVPLATFORM-managed database instead.
                       </TooltipContent>
                     </Tooltip>
                   )}
@@ -2814,7 +2814,7 @@ export function ChangeRepositoryPage({ project, refetch }: GitSettingsProps) {
                       autoComplete="off"
                     />
                     <p className="text-xs text-muted-foreground">
-                      Temps will access this repository with the selected Git
+                      MW-DEVPLATFORM will access this repository with the selected Git
                       connection. It does not need to be synced first.
                     </p>
                     {manualRepositoryReference && !manualRepository && (
