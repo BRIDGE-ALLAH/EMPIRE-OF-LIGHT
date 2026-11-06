@@ -182,9 +182,9 @@ const providerOptions: ProviderOption[] = [
   {
     id: 'ses',
     name: 'AWS SES',
-    tagline: 'Fully managed by Temps',
+    tagline: 'Fully managed by MW-DEVPLATFORM',
     description:
-      'Send through Amazon Simple Email Service. Temps manages domain verification, DKIM/SPF DNS records, and tracks bounces and complaints.',
+      'Send through Amazon Simple Email Service. MW-DEVPLATFORM manages domain verification, DKIM/SPF DNS records, and tracks bounces and complaints.',
     icon: <AWSIcon className="size-6 text-[#FF9900]" />,
     requirements: [
       'AWS access key with SES permissions',
@@ -198,7 +198,7 @@ const providerOptions: ProviderOption[] = [
     name: 'Scaleway',
     tagline: 'European transactional email',
     description:
-      'Send through Scaleway Transactional Email. EU-hosted infrastructure with domain verification and DNS managed by Temps.',
+      'Send through Scaleway Transactional Email. EU-hosted infrastructure with domain verification and DNS managed by MW-DEVPLATFORM.',
     icon: <ScalewayIcon className="size-6 text-[#4F0599]" />,
     requirements: [
       'Scaleway secret key with email permissions',
@@ -211,7 +211,7 @@ const providerOptions: ProviderOption[] = [
     name: 'SMTP',
     tagline: 'Import an existing provider',
     description:
-      'Use SMTP credentials you already have (AWS SES SMTP, Sendgrid, Mailgun, …). Your sending domain must already be verified at the upstream provider — Temps will not manage DNS.',
+      'Use SMTP credentials you already have (AWS SES SMTP, Sendgrid, Mailgun, …). Your sending domain must already be verified at the upstream provider — MW-DEVPLATFORM will not manage DNS.',
     icon: <Server className="size-6 text-muted-foreground" />,
     requirements: [
       'SMTP host and port',
@@ -376,7 +376,7 @@ export function AddEmailProvider() {
     <PageContainer>
       <Wizard
         title="Add email provider"
-        description="Choose how Temps sends transactional emails, then configure its credentials."
+        description="Choose how MW-DEVPLATFORM sends transactional emails, then configure its credentials."
         currentStep={step}
         steps={[
           { id: 'type', label: 'Choose provider' },
@@ -437,7 +437,7 @@ export function AddEmailProvider() {
               <p className="mt-1 text-sm text-muted-foreground">
                 {selected.id === 'smtp'
                   ? 'Use your upstream SMTP credentials. Your sending domain must already be verified there.'
-                  : `Enter the credentials Temps should use to send through ${providerTypeLabel(selected.id)}.`}
+                  : `Enter the credentials MW-DEVPLATFORM should use to send through ${providerTypeLabel(selected.id)}.`}
               </p>
             </div>
             {createMutation.isError && (
@@ -630,7 +630,7 @@ export function AddEmailProvider() {
                   <>
                     <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900 dark:border-amber-900/40 dark:bg-amber-950/30 dark:text-amber-100">
                       Domains added under an SMTP provider are treated as
-                      already verified — Temps cannot manage DKIM/SPF/MX records
+                      already verified — MW-DEVPLATFORM cannot manage DKIM/SPF/MX records
                       via SMTP. Make sure DNS is configured at your upstream
                       provider (e.g. the AWS SES console) before sending.
                     </div>
