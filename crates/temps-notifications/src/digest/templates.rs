@@ -250,7 +250,7 @@ fn wrap_document(project_name: &str, week_start: String, week_end: String, body:
   <tr><td style="padding:8px 32px 24px 32px;">{body}</td></tr>
   <tr><td style="padding:20px 32px 28px 32px;border-top:1px solid {border};">
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:{muted};font-size:12px;line-height:1.6;text-align:center;">
-      This is an automated weekly digest from Temps.<br>
+      This is an automated weekly digest from MW-DEVPLATFORM.<br>
       Manage your notification preferences in your account settings.
     </div>
   </td></tr>
@@ -714,7 +714,7 @@ pub fn render_text_template(digest: &WeeklyDigestData) -> Result<String> {
     }
 
     text.push_str(&format!(
-        "{rule}\n\nThis is an automated weekly digest from Temps.\nManage your notification preferences in your account settings.\n",
+        "{rule}\n\nThis is an automated weekly digest from MW-DEVPLATFORM.\nManage your notification preferences in your account settings.\n",
         rule = rule,
     ));
 
