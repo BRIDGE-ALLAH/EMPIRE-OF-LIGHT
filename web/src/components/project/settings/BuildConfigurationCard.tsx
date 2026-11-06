@@ -155,7 +155,7 @@ function BuildConfigurationForm({
           <CardHeader>
             <CardTitle className="text-base">Build configuration</CardTitle>
             <CardDescription>
-              The framework Temps builds with, and where it finds your code.
+              The framework MW-DEVPLATFORM builds with, and where it finds your code.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
