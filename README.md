@@ -55,7 +55,7 @@ For the existing Compose stack only, `scripts/install-platform.sh` provides an e
 Review the script before running it with root privileges:
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/a32440de14dba0d14870b308e112476976d62d04/scripts/install-platform.sh
+curl -fsSLO https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/da2b834c85474a76f97552571cfec21491c6140d/scripts/install-platform.sh
 less install-platform.sh
 sudo bash install-platform.sh
 ```
@@ -63,7 +63,7 @@ sudo bash install-platform.sh
 Or, if you have reviewed and trust the pinned script source, run it directly without cloning:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/a32440de14dba0d14870b308e112476976d62d04/scripts/install-platform.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/BRIDGE-ALLAH/EMPIRE-OF-LIGHT/da2b834c85474a76f97552571cfec21491c6140d/scripts/install-platform.sh | sudo bash
 ```
 
 The bootstrap refuses to overwrite an existing install directory or stop conflicting containers/networks. It shows the initial admin and ingress passwords once; store them securely. Published ports remain loopback-bound. DNS, TLS, reverse proxy, firewall, backups, restore, upgrade, and rollback remain separate operator responsibilities.
