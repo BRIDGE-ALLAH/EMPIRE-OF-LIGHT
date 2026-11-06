@@ -879,8 +879,8 @@ export function ProjectDeployments({
       <EmptyPlaceholder
         className="border-2 border-dashed"
         icon={Globe}
-        title="Runs outside Temps"
-        description="This app is hosted elsewhere, so Temps does not deploy it. Its analytics, errors and traces arrive through an ingest key."
+        title="Runs outside MW-DEVPLATFORM"
+        description="This app is hosted elsewhere, so MW-DEVPLATFORM does not deploy it. Its analytics, errors and traces arrive through an ingest key."
         action={
           <div className="flex flex-wrap justify-center gap-2">
             <Button asChild>
@@ -890,7 +890,7 @@ export function ProjectDeployments({
             </Button>
             <Button asChild variant="outline">
               <Link to={`/projects/${project.slug}/settings/delivery`}>
-                Let Temps host it
+                Let MW-DEVPLATFORM host it
               </Link>
             </Button>
           </div>
