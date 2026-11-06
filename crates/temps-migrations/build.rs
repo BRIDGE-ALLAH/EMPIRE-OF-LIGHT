@@ -29,8 +29,8 @@ fn io_error(action: &str, path: &Path, error: io::Error) -> String {
 }
 
 fn run() -> Result<(), String> {
-    let manifest_dir = env::var_os("CARGO_MANIFEST_DIR")
-        .ok_or("Cargo did not set CARGO_MANIFEST_DIR")?;
+    let manifest_dir =
+        env::var_os("CARGO_MANIFEST_DIR").ok_or("Cargo did not set CARGO_MANIFEST_DIR")?;
     let directory = PathBuf::from(manifest_dir).join("src/migration");
     println!("cargo:rerun-if-changed={}", directory.display());
     println!("cargo:rerun-if-changed=src/migration_order.rs");
