@@ -172,7 +172,7 @@ export function DataImportForm({
           Copy a database into this service
         </CardTitle>
         <CardDescription>
-          Temps connects to the source with the connection string below, dumps
+          MW-DEVPLATFORM connects to the source with the connection string below, dumps
           the database and loads it into a database of this service. The
           connection string is used for this import only and is never stored.
         </CardDescription>
