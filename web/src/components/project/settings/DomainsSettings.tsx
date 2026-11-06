@@ -225,7 +225,7 @@ export function DomainsSettings({ project }: DomainsSettingsProps) {
       )}
 
       {/* Domains lead the page (DESIGN.md); each environment's reachability
-          follows them. An app hosted elsewhere is never served by Temps'
+          follows them. An app hosted elsewhere is never served by MW-DEVPLATFORM's
           ingress. */}
       {project.hosting !== 'external' && project.source_type !== 'external' && (
         <EnvironmentReachabilityList
