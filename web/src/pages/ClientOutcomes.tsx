@@ -43,7 +43,7 @@ export default function ClientOutcomes({
   return (
     <Ledger<ClientOutcome>
       title="SDK ingestion health"
-      description="See telemetry discarded inside your Sentry SDK before it reached Temps. Reports are approximate and retained for 31 days."
+      description="See telemetry discarded inside your Sentry SDK before it reached MW-DEVPLATFORM. Reports are approximate and retained for 31 days."
       actions={
         <Button
           variant="outline"
