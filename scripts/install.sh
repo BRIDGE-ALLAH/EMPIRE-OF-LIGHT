@@ -67,6 +67,12 @@ for name in temps-postgres temps-clickhouse temps-app temps-ingress temps-admin-
   fi
 done
 
+for name in temps-docker-workloads empire-of-light_temps-network empire-of-light_temps-ingress-network empire-of-light_temps-host-network; do
+  if docker network inspect "$name" >/dev/null 2>&1; then
+    fail "A Docker network named '$name' already exists. Nothing was changed; review the network conflict manually."
+  fi
+done
+
 info "Empire of Light Platform — source bootstrap"
 info "Repository: $REPO_URL"
 info "Ref: $BRANCH"
