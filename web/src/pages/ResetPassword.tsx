@@ -87,11 +87,11 @@ export const ResetPassword = () => {
         <div className="flex flex-col items-center space-y-6">
           <div className="flex items-center gap-3">
             <img
-              src="/svg/temps-icon.svg"
-              alt="Temps logo"
+              src="/svg/mw-icon.svg"
+              alt="MOONWITNESS logo"
               className="size-12"
             />
-            <span className="text-2xl font-bold">Temps</span>
+            <span className="text-2xl font-bold">MOONWITNESS</span>
           </div>
         </div>
 
