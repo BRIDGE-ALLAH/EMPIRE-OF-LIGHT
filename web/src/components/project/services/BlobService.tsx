@@ -267,7 +267,7 @@ export function BlobService({ project: _project }: BlobServiceProps) {
                     blob
                   </code>{' '}
                   singleton reads its config from environment variables — no
-                  extra wiring required when running on Temps.
+                  extra wiring required when running on MW-DEVPLATFORM.
                 </p>
                 <CodeBlock
                   code={`import { blob } from '@temps-sdk/blob'
@@ -293,11 +293,11 @@ await blob.del(url)`}
                 <p className="text-sm text-muted-foreground">
                   These environment variables are injected automatically into
                   deployments running on this instance. Set them yourself only
-                  when running locally or outside of Temps.
+                  when running locally or outside of MW-DEVPLATFORM.
                 </p>
                 <CodeBlock
                   code={`# Required
-TEMPS_API_URL=https://your-instance.temps.dev   # API endpoint
+TEMPS_API_URL=https://mw.example.com   # API endpoint
 TEMPS_TOKEN=your-token                          # API key or deployment token
 
 # Required for API keys (deployment tokens embed the project ID)
@@ -316,7 +316,7 @@ TEMPS_PROJECT_ID=42`}
                   code={`import { createClient } from '@temps-sdk/blob'
 
 const storage = createClient({
-  apiUrl: 'https://your-instance.temps.dev',
+  apiUrl: 'https://mw.example.com',
   token: process.env.TEMPS_TOKEN,
   projectId: 42, // optional with deployment tokens
 })`}
@@ -346,7 +346,7 @@ const storage = createClient({
   cacheControl: 'public, max-age=31536000, immutable',
 })
 
-console.log(result.url)         // https://your-instance.temps.dev/api/blob/...
+console.log(result.url)         // https://mw.example.com/api/blob/...
 console.log(result.pathname)    // images/avatar-abc123.png
 console.log(result.contentType) // image/png
 console.log(result.size)        // 12345
