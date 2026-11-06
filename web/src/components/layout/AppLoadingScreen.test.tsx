@@ -7,8 +7,8 @@ import { AppLoadingScreen, PageSkeleton } from './AppLoadingScreen'
 
 test('the boot screen shows the shell outline, not just a mark', () => {
   const html = renderToStaticMarkup(<AppLoadingScreen />)
-  expect(html).toContain('aria-label="Loading Temps"')
-  expect(html).toContain('/svg/temps-icon.svg')
+  expect(html).toContain('aria-label="Loading MW-DEVPLATFORM"')
+  expect(html).toContain('/svg/mw-icon.svg')
   // The sidebar rows and the page body are placeholders too.
   expect(html.match(/animate-pulse/g)?.length ?? 0).toBeGreaterThan(8)
 })
