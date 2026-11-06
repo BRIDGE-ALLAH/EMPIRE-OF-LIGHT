@@ -27,7 +27,7 @@ Do not advertise a production-ready Empire of Light release until the gates belo
 Use a dedicated Linux host for a real deployment. Confirm:
 
 - Docker Engine and the Docker Compose plugin are installed and supported.
-- Git and OpenSSL are installed.
+- `curl`, `tar`, and OpenSSL are installed. Git is not required by the source bootstrap.
 - The operator understands that mounting `/var/run/docker.sock` grants effectively host-level control.
 - The configured Docker subnets do not overlap the host LAN, VPN, existing Docker networks, or routed networks.
 - Firewall policy, ingress exposure, DNS, TLS termination, and administrator access have been reviewed.
@@ -37,15 +37,15 @@ Use a dedicated Linux host for a real deployment. Confirm:
 
 The repository now provides an experimental source bootstrap. It is not a signed release installer and does not certify production readiness.
 
-1. Use a dedicated Linux host with Docker Engine, Docker Compose v2, Git, and OpenSSL. Confirm the Docker daemon is running.
+1. Use a dedicated Linux host with Docker Engine, Docker Compose v2, `curl`, `tar`, and OpenSSL. Confirm the Docker daemon is running.
 2. Review `.env.example`, `docker-compose.yml`, `Dockerfile`, `Dockerfile.ingress`, and the installer before execution. Check the configured Docker subnets against host, LAN, VPN, and existing Docker routes.
 3. From a checkout of this repository, run:
 
    ```bash
-   sudo bash scripts/install.sh --branch main
+   sudo bash scripts/install-empire-of-light.sh --branch main
    ```
 
-   The installer clones the selected ref into `/opt/empire-of-light`, refuses to overwrite an existing path or known conflicting container names, creates a mode-restricted `.env` and secret files, generates unique database and initial admin credentials, validates Compose configuration, and starts the build unless `--skip-start` is supplied.
+   The bootstrap downloads and extracts the selected GitHub branch archive into `/opt/empire-of-light` without requiring a local Git clone, refuses to overwrite an existing path or known conflicting container names, creates a mode-restricted `.env` and secret files, generates unique database and initial admin credentials, validates Compose configuration, and starts the build unless `--skip-start` is supplied.
 4. Store the initial administrator and ingress passwords shown by the installer in a password manager. They are shown once and are not recoverable from the installer output.
 5. Review the generated `.env` and every subnet/static IP before allowing public traffic. Do not expose administrative endpoints directly to the internet.
 6. Inspect startup:
