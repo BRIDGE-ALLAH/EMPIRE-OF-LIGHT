@@ -94,7 +94,7 @@ function DockHeader({ onClose }: { onClose: () => void }) {
         <span className="grid size-7 place-items-center rounded-md border border-border bg-muted/40">
           <Sparkles className="size-3.5" />
         </span>
-        <span className="text-sm font-semibold">Temps AI</span>
+        <span className="text-sm font-semibold">MOONWITNESS AI</span>
       </div>
       <Button
         variant="ghost"
