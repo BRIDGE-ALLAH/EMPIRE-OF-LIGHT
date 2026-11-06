@@ -313,7 +313,7 @@ export function Settings() {
                 help={{
                   label: 'About the public ingress URL',
                   content:
-                    'The address third parties call back: email open and click tracking, git provider webhooks, SES delivery events, revenue webhooks and error-tracking DSNs. Set it when the console is restricted (VPN, firewall, allowlist), so only this hostname has to be public. Temps serves nothing but those callback routes on it. Use a hostname outside the preview domain, which is reserved for the names Temps generates.',
+                    'The address third parties call back: email open and click tracking, git provider webhooks, SES delivery events, revenue webhooks and error-tracking DSNs. Set it when the console is restricted (VPN, firewall, allowlist), so only this hostname has to be public. MW-DEVPLATFORM serves nothing but those callback routes on it. Use a hostname outside the preview domain, which is reserved for the names Temps generates.',
                 }}
               >
                 {(fieldProps) => (
@@ -386,7 +386,7 @@ export function Settings() {
                 </p>
                 <Disclosure label="How automatic redirects work">
                   <p>
-                    Automatic redirects HTTP requests only after Temps has
+                    Automatic redirects HTTP requests only after MW-DEVPLATFORM has
                     issued a certificate for the console hostname. HTTP-only
                     installations keep working.
                   </p>
@@ -426,7 +426,7 @@ export function Settings() {
                   </p>
                 )}
                 <p className="text-sm text-muted-foreground">
-                  How service containers reach the Temps API from inside the
+                  How service containers reach the MW-DEVPLATFORM API from inside the
                   Docker network (OTLP metrics ingest, agent callbacks). Leave
                   blank to use{' '}
                   <code className="font-mono text-xs">
