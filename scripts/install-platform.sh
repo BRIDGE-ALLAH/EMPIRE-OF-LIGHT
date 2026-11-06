@@ -98,7 +98,9 @@ docker info >/dev/null 2>&1 || {
   docker info >/dev/null 2>&1 || fail "Docker daemon is not accessible."
 }
 mem_gib=$(awk '/MemTotal:/ {printf "%d", $2/1024/1024}' /proc/meminfo)
-disk_gib=$(df -Pk / 2>/dev/null | awk 'NR==2 {printf "%d", $4/1024/1024}')
+disk_probe=$(dirname "$INSTALL_DIR")
+while [[ ! -d "$disk_probe" ]]; do disk_probe=$(dirname "$disk_probe"); done
+disk_gib=$(df -Pk "$disk_probe" 2>/dev/null | awk 'NR==2 {printf "%d", $4/1024/1024}')
 cpu_count=$(getconf _NPROCESSORS_ONLN 2>/dev/null || printf '1')
 (( mem_gib >= 8 )) || warn "VPS has ${mem_gib} GiB RAM; 8 GiB or more is recommended for source builds."
 (( disk_gib >= 40 )) || warn "VPS has ${disk_gib} GiB free; at least 40 GiB is recommended for image builds and persistent data."
@@ -145,7 +147,8 @@ cd "$INSTALL_DIR"
 install -m 600 .env.example .env
 mkdir -p -m 700 secrets
 if [[ -z "$ADMIN_EMAIL" ]]; then
-  read -r -p "Initial administrator email: " ADMIN_EMAIL
+  [[ -r /dev/tty ]] || fail "Set TEMPS_ADMIN_EMAIL or run the installer from an interactive terminal."
+  read -r -p "Initial administrator email: " ADMIN_EMAIL </dev/tty
 fi
 [[ "$ADMIN_EMAIL" =~ ^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$ ]] || fail "A valid administrator email is required."
 DOCKER_GID=$(stat -c '%g' /var/run/docker.sock) || fail "Could not determine Docker socket group ID."
