@@ -1756,7 +1756,7 @@ function renderBaseUrlNote(source: IngestBaseUrlSource, readFailed: boolean) {
       <p className="text-xs text-muted-foreground">
         Could not read this instance&apos;s public URL. Replace{' '}
         <code>{INGEST_URL_PLACEHOLDER}</code> with the address your apps use to
-        reach Temps.
+        reach MW-DEVPLATFORM.
       </p>
     )
   }
@@ -1937,7 +1937,7 @@ function IngestKeySetup({ project }: ProjectAnalyticsProps) {
                 <AlertDescription>
                   {createKey.isError
                     ? 'Failed to create an ingest key. Try again.'
-                    : 'No ingest key yet — create one to let this app send analytics without being deployed by Temps.'}
+                    : 'No ingest key yet — create one to let this app send analytics without being deployed by MW-DEVPLATFORM.'}
                 </AlertDescription>
               </Alert>
               <Button
@@ -2057,7 +2057,7 @@ function IngestKeySetup({ project }: ProjectAnalyticsProps) {
         {renderBaseUrlNote(ingestBase.source, ingestEndpoint.isError)}
         <p className="text-xs text-muted-foreground">
           Works for any host — Vercel, Netlify, GitHub Pages, a static bucket,
-          or anywhere else this app doesn&apos;t run on Temps. Manage this key
+          or anywhere else this app doesn&apos;t run on MW-DEVPLATFORM. Manage this key
           anytime with{' '}
           <code className="rounded bg-muted px-1 py-0.5 text-[11px]">
             bunx @temps-sdk/cli analytics keys list
@@ -2071,8 +2071,8 @@ function IngestKeySetup({ project }: ProjectAnalyticsProps) {
 
 // Analytics Setup Component
 /**
- * Offered when a project Temps hosts is set up as "not hosted on Temps":
- * marking it External labels it and stops Temps from trying to deploy it.
+ * Offered when a project hosted by MW-DEVPLATFORM is set up as "not hosted on Temps":
+ * marking it External labels it and stops MW-DEVPLATFORM from trying to deploy it.
  */
 function MarkExternalNotice({ project }: ProjectAnalyticsProps) {
   // Hosting shows on the service and on its project's cards.
@@ -2086,7 +2086,7 @@ function MarkExternalNotice({ project }: ProjectAnalyticsProps) {
         body: { hosting: 'external' },
         throwOnError: true,
       })
-      toast.success(`${project.name} is marked as running outside Temps`)
+      toast.success(`${project.name} is marked as running outside MW-DEVPLATFORM`)
       await invalidate()
     } catch (err) {
       toast.error(getErrorMessage(err, 'Could not mark it as external'))
@@ -2097,8 +2097,8 @@ function MarkExternalNotice({ project }: ProjectAnalyticsProps) {
   return (
     <div className="flex flex-col gap-3 rounded-lg border p-4 sm:flex-row sm:items-center">
       <p className="flex-1 text-sm text-muted-foreground">
-        Is this app hosted outside Temps? Mark the service External so it is
-        labelled that way and Temps never tries to deploy it. You can change
+        Is this app hosted outside MW-DEVPLATFORM? Mark the service External so it is
+        labelled that way and MW-DEVPLATFORM never tries to deploy it. You can change
         this later in Settings.
       </p>
       <Button
@@ -2190,7 +2190,7 @@ export default function RootLayout({
   );
 }`,
       envExample: `# .env.local
-TEMPS_API_KEY=your_api_key_here # Get this from your Temps dashboard
+TEMPS_API_KEY=your_api_key_here # Get this from your MW-DEVPLATFORM dashboard
 NEXT_PUBLIC_PROJECT_SLUG=${project.slug}
 NEXT_PUBLIC_TEMPS_API_URL=https://your-temps-instance.com`,
     },
@@ -2222,7 +2222,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    // Forward analytics events to Temps API
+    // Forward analytics events to the MW-DEVPLATFORM API
     const response = await fetch(\`\${process.env.NEXT_PUBLIC_TEMPS_API_URL}/api/analytics/\${process.env.NEXT_PUBLIC_PROJECT_SLUG}/events\`, {
       method: 'POST',
       headers: {
@@ -2246,7 +2246,7 @@ export default async function handler(
   return res.status(405).json({ error: 'Method not allowed' });
 }`,
       envExample: `# .env.local
-TEMPS_API_KEY=your_api_key_here # Get this from your Temps dashboard
+TEMPS_API_KEY=your_api_key_here # Get this from your MW-DEVPLATFORM dashboard
 NEXT_PUBLIC_PROJECT_SLUG=${project.slug}
 NEXT_PUBLIC_TEMPS_API_URL=https://your-temps-instance.com`,
     },
@@ -2335,7 +2335,7 @@ export default function App() {
     },
     {
       id: 'external',
-      name: 'Not hosted on Temps',
+      name: 'Not hosted on MW-DEVPLATFORM',
       category: 'Other',
       icon: () => <Globe className="h-5 w-5" />,
       description: 'Vercel, Netlify, static hosting, or anywhere else',
@@ -2350,7 +2350,7 @@ export default function App() {
   // Generate AI prompt for coding agents based on the selected framework
   const getAnalyticsAiPrompt = () => {
     const fw = selectedFrameworkData
-    return `Add Temps analytics to my ${fw.name}${fw.description ? ` (${fw.description})` : ''} application.
+    return `Add MW-DEVPLATFORM analytics to my ${fw.name}${fw.description ? ` (${fw.description})` : ''} application.
 
 ## Using an AI coding CLI? Install the Temps skill
 
@@ -2462,7 +2462,7 @@ function UserProfile({ user }) {
 
 After implementation:
 1. Check browser DevTools Network tab for \`/api/_temps\` requests
-2. Verify events appear in the Temps dashboard
+2. Verify events appear in the MW-DEVPLATFORM dashboard
 3. Confirm Web Vitals are being captured`
   }
 
