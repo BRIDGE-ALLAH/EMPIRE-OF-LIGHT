@@ -20,7 +20,7 @@ export default function SandboxPreviewAccess() {
     <>
       {!user && (
         <h1 className="px-6 pt-6 text-center text-lg font-medium">
-          Sign in to Temps to view this preview
+          Sign in to MW-DEVPLATFORM to view this preview
         </h1>
       )}
       <ProtectedLayout>
@@ -63,11 +63,11 @@ function AuthorizePreview() {
       <picture>
         <source
           media="(prefers-color-scheme: dark)"
-          srcSet="/svg/temps-logo-dark.svg"
+          srcSet="/svg/mw-logo-dark.svg"
         />
         <img
-          src="/svg/temps-logo-light.svg"
-          alt="Temps"
+          src="/svg/mw-logo-light.svg"
+          alt="MOONWITNESS"
           width="185"
           height="80"
         />
