@@ -41,7 +41,7 @@ import { readFailureServerDetail } from '@/lib/read-failure'
 
 const failure = (error: unknown) =>
   readFailureServerDetail(error) ??
-  'Temps could not load feedback. Please retry.'
+  'MW-DEVPLATFORM could not load feedback. Please retry.'
 const base = (project: ProjectResponse) =>
   `/projects/${project.slug}/errors/feedback`
 const stamp = (value: string) => new Date(value).toLocaleString()
