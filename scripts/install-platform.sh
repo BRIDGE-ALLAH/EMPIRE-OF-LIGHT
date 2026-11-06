@@ -135,13 +135,17 @@ printf '%s\n' "$INGRESS_PASSWORD" > secrets/admin_ingress_password
 chmod 600 .env secrets/admin_password secrets/admin_ingress_password
 chmod 700 secrets
 
-docker compose -p empire-of-light config --quiet || fail "Compose configuration validation failed. Review $INSTALL_DIR/.env; no containers were started."
-ok "Configuration generated and validated."
 info "Admin email: $ADMIN_EMAIL"
 info "Initial admin password (shown once): $ADMIN_PASSWORD"
 info "Store this password securely now; it is not recoverable from the installer output."
 info "Ingress Basic-auth password (shown once): $INGRESS_PASSWORD"
 info "The ingress password is separate from the application admin password."
+
+if ! docker compose -p empire-of-light config --quiet; then
+  warn "Compose configuration validation failed. Generated credentials and configuration are preserved at $INSTALL_DIR for diagnosis."
+  fail "Review $INSTALL_DIR/.env and the Compose validation error; no containers were started."
+fi
+ok "Configuration generated and validated."
 
 if ((SKIP_START)); then
   info "Startup skipped. Start later with: cd '$INSTALL_DIR' && docker compose -p empire-of-light up -d --build"
