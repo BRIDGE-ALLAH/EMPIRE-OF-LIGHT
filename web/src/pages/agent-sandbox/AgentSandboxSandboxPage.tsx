@@ -459,7 +459,7 @@ export function AgentSandboxSandboxPage() {
           <CardHeader>
             <CardTitle className="text-base">Workspace file limits</CardTitle>
             <CardDescription>
-              Bound uploads, downloads, and previews handled by the Temps
+              Bound uploads, downloads, and previews handled by MW-DEVPLATFORM
               control plane. Existing persistent files are not removed when
               these limits change.
             </CardDescription>
