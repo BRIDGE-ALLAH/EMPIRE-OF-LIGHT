@@ -179,7 +179,7 @@ export function GeneralSettings({ project, refetch }: GeneralSettingsProps) {
     refetch()
   }
 
-  const handleToggleServesOwnMW-DEVPLATFORMApi = async (enabled: boolean) => {
+  const handleToggleServesOwnPlatformApi = async (enabled: boolean) => {
     if (!project?.id) return
 
     await toast.promise(
@@ -317,7 +317,7 @@ export function GeneralSettings({ project, refetch }: GeneralSettingsProps) {
               </>
             }
             checked={project?.serves_own_temps_api ?? false}
-            onCheckedChange={handleToggleServesOwnMW-DEVPLATFORMApi}
+            onCheckedChange={handleToggleServesOwnPlatformApi}
             disabled={updateProjectSettings.isPending}
           />
           {/* ADR-040: the backfill is a deliberate CLI action, so its status
