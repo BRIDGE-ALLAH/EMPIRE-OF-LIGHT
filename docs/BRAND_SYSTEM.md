@@ -1,4 +1,4 @@
-# A-L-L-A-H.COM / Empire of Light — Unified Platform Brand System
+# A-L-L-A-H.COM / Empire of Light — Rust-First Platform Brand System
 
 ## Canonical identity
 
@@ -7,10 +7,11 @@
 - Unified platform: ARSY
 - Canonical repository: BRIDGE-ALLAH/EMPIRE-OF-LIGHT
 - Repository model: one monorepo
-- Control/API technology: Node.js + Fastify
-- Infrastructure execution technology: Rust
+- Backend/platform authority: Rust
+- Web experience: existing Next.js / React apps
+- Node.js: frontend tooling only where required
 
-ARSY is the unified platform, not the name of one language-specific backend. Use ARSY Control for the Node.js/Fastify ecosystem API and orchestration component, and ARSY Infrastructure Engine for the Rust infrastructure execution component. These are bounded parts of one platform in one repository.
+ARSY is the unified Rust-first platform. Do not present it as separate Node and Rust backends. Rust is the sole planned backend authority.
 
 ## Product language
 
@@ -19,24 +20,23 @@ ARSY is the unified platform, not the name of one language-specific backend. Use
 | Ecosystem and public entry | A-L-L-A-H.COM |
 | Overall vision | Empire of Light |
 | Unified platform | ARSY |
-| Node.js/Fastify component | ARSY Control |
-| Rust component | ARSY Infrastructure Engine |
+| Backend and platform | ARSY Rust Platform |
 | VPS installation profile | ARSY Node |
 | Knowledge/research/publishing | MoonWitness |
 | Creative/media | ROCKSOUL |
 | Commerce | Empire Economy |
 | Communication domain | ARSY Radio |
 
-Do not refer to the Rust engine as a second ARSY product, or describe A-L-L-A-H.COM and Empire of Light as separate platforms or repositories. Apps and components may deploy independently; they share one canonical source repository.
+ARSY Node names the host/VPS operating profile, not a Node.js backend. Avoid ambiguous language that suggests it is a separate Node.js service.
 
 ## Voice
 
-Use a clear, confident, technically literate, evidence-led voice. Explain what a component does and what it does not own. Avoid exaggerated claims, spiritualized operational controls, and describing planned work as shipped.
+Use a clear, confident, technically literate, evidence-led voice. Explain what a component does and what it does not own. Avoid exaggerated claims and describing planned work as shipped.
 
 Preferred messages:
-- One ecosystem. One platform. Clear boundaries.
-- Build, deploy, and operate with evidence.
-- Node.js for ecosystem control. Rust for infrastructure execution.
+- One ecosystem. One Rust-first platform.
+- Rust owns the backend and platform authority.
+- Node.js is frontend tooling, not a second backend.
 - One source of truth. Independently deployable components.
 
 ## Visual direction
@@ -60,7 +60,8 @@ BRIDGE-ALLAH/EMPIRE-OF-LIGHT is the one canonical repository. The former bjo163/
 ## Brand acceptance
 
 - [ ] All maintained user-facing surfaces use approved ecosystem and component names.
-- [ ] Node.js and Rust components are presented as one ARSY platform.
+- [ ] ARSY is consistently presented as one Rust-first platform.
+- [ ] No copy suggests a Fastify backend or dual backend architecture.
 - [ ] Apps retain distinct product identities without duplicating platform authority.
 - [ ] Legacy MoonWitness/MW assets are inventoried before replacement.
 - [ ] Browser title, metadata, login, onboarding, CLI, installer, email, and release copy are audited.
