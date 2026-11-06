@@ -1556,7 +1556,7 @@ impl EmailProvider {
                 <tr><td style="padding: 24px 32px; background: #0f172a; border-radius: 8px 8px 0 0;">
                     <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 18px; font-weight: 700; color: #ffffff; letter-spacing: -0.02em;">Temps</td>
+                            <td style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 18px; font-weight: 700; color: #ffffff; letter-spacing: -0.02em;">MOONWITNESS</td>
                             <td align="right" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; color: #94a3b8;">{timestamp}</td>
                         </tr>
                     </table>
@@ -1592,7 +1592,7 @@ impl EmailProvider {
                 <tr><td style="padding: 16px 32px; background: #f9fafb; border-top: 1px solid #e5e7eb; border-radius: 0 0 8px 8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
                     <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; color: #9ca3af;">Sent by Temps &middot; Self-hosted PaaS</td>
+                            <td style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; color: #9ca3af;">Sent by MW-DEVPLATFORM &middot; Self-hosted developer platform</td>
                             <td align="right" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; color: #9ca3af;">{priority} priority</td>
                         </tr>
                     </table>
@@ -1665,9 +1665,9 @@ impl EmailProvider {
             .or_else(|_| std::env::var("TEMPS_PUBLIC_HOSTNAME"))
             .unwrap_or_else(|_| "temps instance".to_string());
 
-        let subject = "[Temps] Notification provider health check";
+        let subject = "[MW-DEVPLATFORM] Notification provider health check";
         let plain_body = format!(
-            "Temps notification provider health check\n\
+            "MW-DEVPLATFORM notification provider health check\n\
              \n\
              This is an automated message confirming that the email notification provider \
              is reachable and authorised to send mail.\n\
@@ -1678,7 +1678,7 @@ impl EmailProvider {
              Timestamp:  {timestamp}\n\
              \n\
              If you didn't expect this email, an operator triggered a health check from \
-             the Temps notifications dashboard. No action is required.\n",
+             the MW-DEVPLATFORM notifications dashboard. No action is required.\n",
             host = host,
             smtp_host = self.smtp_host,
             smtp_port = self.smtp_port,
@@ -1729,7 +1729,7 @@ impl EmailProvider {
 
     /// Render the HTML body for the health-check email. Visually matches the
     /// regular notification template (`render_notification_email`) so it lands
-    /// in the inbox looking like a real Temps message rather than a debug ping.
+    /// in the inbox looking like a real MW-DEVPLATFORM message rather than a debug ping.
     fn render_health_check_email(
         host: &str,
         smtp_host: &str,
@@ -1756,7 +1756,7 @@ impl EmailProvider {
                 <tr><td style="padding: 24px 32px; background: #0f172a; border-radius: 8px 8px 0 0;">
                     <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 18px; font-weight: 700; color: #ffffff; letter-spacing: -0.02em;">Temps</td>
+                            <td style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 18px; font-weight: 700; color: #ffffff; letter-spacing: -0.02em;">MOONWITNESS</td>
                             <td align="right" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; color: #94a3b8;">{timestamp}</td>
                         </tr>
                     </table>
@@ -1779,7 +1779,7 @@ impl EmailProvider {
                 <!-- Message -->
                 <tr><td style="padding: 16px 32px 8px; background: #ffffff;">
                     <p style="margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; color: #374151; line-height: 1.7;">
-                        Your Temps instance just verified that this email notification provider can authenticate against the SMTP relay and deliver mail to the configured recipients. No action is required &mdash; if you didn&rsquo;t trigger this check from the dashboard, you can safely ignore the message.
+                        Your MW-DEVPLATFORM instance just verified that this email notification provider can authenticate against the SMTP relay and deliver mail to the configured recipients. No action is required &mdash; if you didn&rsquo;t trigger this check from the dashboard, you can safely ignore the message.
                     </p>
                 </td></tr>
 
@@ -1805,7 +1805,7 @@ impl EmailProvider {
                 <tr><td style="padding: 16px 32px; background: #f9fafb; border-top: 1px solid #e5e7eb; border-radius: 0 0 8px 8px;">
                     <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; color: #9ca3af;">Sent by Temps &middot; Self-hosted PaaS</td>
+                            <td style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; color: #9ca3af;">Sent by MW-DEVPLATFORM &middot; Self-hosted developer platform</td>
                             <td align="right" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; color: #9ca3af;">Automated health check</td>
                         </tr>
                     </table>
@@ -2036,7 +2036,7 @@ impl NotificationProvider for WebhookProvider {
         let test_payload = serde_json::json!({
             "test": true,
             "type": "health_check",
-            "message": "Temps webhook health check",
+            "message": "MW-DEVPLATFORM webhook health check",
             "timestamp": Utc::now().to_rfc3339(),
         });
 
@@ -3027,8 +3027,8 @@ impl NotificationService {
         if let Some(provider) = provider {
             let notification_provider = self.load_provider(&provider).await?;
             let notification = Notification::new(
-                "Temps test notification",
-                "This is a test alert from your Temps notification settings. No action is required.",
+                "MW-DEVPLATFORM test notification",
+                "This is a test alert from your MW-DEVPLATFORM notification settings. No action is required.",
             );
             // A provider test must exercise delivery, not only configuration.
             // Otherwise the UI can report success while credentials, routing,
@@ -3091,8 +3091,8 @@ impl NotificationService {
         let (route, providers) = self.routing_service.route_with_providers(route_id).await?;
         let severity = NotificationRoutingService::parse_severity(&route.min_severity)?;
         let notification = Notification::new(
-            format!("Temps test notification: route \"{}\"", route.name),
-            "This is a test alert sent through a notification route from your Temps notification settings. No action is required.",
+            format!("MW-DEVPLATFORM test notification: route \"{}\"", route.name),
+            "This is a test alert sent through a notification route from your MW-DEVPLATFORM notification settings. No action is required.",
         )
         .with_severity(severity);
 
@@ -4436,7 +4436,7 @@ mod tests {
             account_id: "acct123".to_string(),
             api_token: "cf-token".to_string(),
             from_address: "welcome@infracf.example.com".to_string(),
-            from_name: Some("Temps".to_string()),
+            from_name: Some("MOONWITNESS".to_string()),
             to_addresses: to.into_iter().map(String::from).collect(),
             api_base: None,
         }
@@ -4460,7 +4460,7 @@ mod tests {
             with_name.sender_value(),
             serde_json::json!({
                 "email": "welcome@infracf.example.com",
-                "name": "Temps",
+                "name": "MOONWITNESS",
             })
         );
 
@@ -4524,7 +4524,7 @@ mod tests {
         let parsed: CloudflareProvider = serde_json::from_str(&json).unwrap();
         assert_eq!(parsed.account_id, "acct123");
         assert_eq!(parsed.to_addresses.len(), 2);
-        assert_eq!(parsed.from_name.as_deref(), Some("Temps"));
+        assert_eq!(parsed.from_name.as_deref(), Some("MOONWITNESS"));
         assert_eq!(parsed.api_base, None);
     }
 
@@ -5086,9 +5086,9 @@ mod tests {
 
         // Branding: header bar and footer must be present so the message
         // reads as a real Temps email, not a debug ping.
-        assert!(html.contains(">Temps<"), "expected Temps brand header");
+        assert!(html.contains(">MOONWITNESS<"), "expected MOONWITNESS brand header");
         assert!(
-            html.contains("Sent by Temps"),
+            html.contains("Sent by MW-DEVPLATFORM"),
             "expected footer attribution"
         );
         assert!(html.contains("Health check"), "expected status badge");
