@@ -208,7 +208,7 @@ export function ComposeSecuritySettings({
         <p className="text-sm text-muted-foreground">
           Checks are enabled by default. Exceptions apply to this service on its
           next deployment and may expose the host or other services. Docker
-          configuration validity and protection of Temps-generated files always
+          configuration validity and protection of MW-DEVPLATFORM-generated files always
           remain enforced. Ordinary named volumes need no exception. These
           settings replace the former per-service “Disable sandbox” option;
           configure any required exceptions here before your next deployment.
