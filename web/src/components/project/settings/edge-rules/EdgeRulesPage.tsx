@@ -258,7 +258,7 @@ export function EdgeRulesPage({ project }: EdgeRulesPageProps) {
         >
           Protection
         </Link>
-        . Certificate checks, Temps&apos; challenge pages and the password form
+        . Certificate checks, MW-DEVPLATFORM&apos;s challenge pages and the password form
         always bypass it.
       </p>
 
