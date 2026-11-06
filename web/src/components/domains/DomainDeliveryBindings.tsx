@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024-2026 Temps Contributors
+// SPDX-FileCopyrightText: 2024-2026 MW-DEVPLATFORM Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 import {
@@ -229,10 +229,10 @@ function removeConsequences(
   binding: DomainDeliveryBindingResponse | null
 ): string {
   const base =
-    'This removes the owned DNS record and can interrupt traffic. The domain route and certificate stay in Temps. You can delete the domain route afterward.'
+    'This removes the owned DNS record and can interrupt traffic. The domain route and certificate stay in MW-DEVPLATFORM. You can delete the domain route afterward.'
   if (binding?.provider_kind !== 'bunny') return base
   if (binding.bunny_hostname_owned) {
-    return `${base} Temps added ${binding.hostname} to your Bunny Pull Zone, so it is also detached from the Pull Zone, together with its edge certificate.`
+    return `${base} MW-DEVPLATFORM added ${binding.hostname} to your Bunny Pull Zone, so it is also detached from the Pull Zone, together with its edge certificate.`
   }
-  return `${base} ${binding.hostname} was on your Bunny Pull Zone before Temps set up delivery, so it stays there with its edge certificate. Remove it in Bunny if you no longer need it.`
+  return `${base} ${binding.hostname} was on your Bunny Pull Zone before MW-DEVPLATFORM set up delivery, so it stays there with its edge certificate. Remove it in Bunny if you no longer need it.`
 }
