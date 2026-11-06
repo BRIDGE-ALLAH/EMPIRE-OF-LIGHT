@@ -189,7 +189,7 @@ export function SecurityPage() {
       >
         <SettingsSection
           title="Proxy client IP"
-          description="Choose when Temps trusts forwarding headers from a local reverse proxy"
+          description="Choose when MW-DEVPLATFORM trusts forwarding headers from a local reverse proxy"
           icon={LockKeyhole}
         >
           <div className="space-y-3">
@@ -208,7 +208,7 @@ export function SecurityPage() {
               />
             </div>
             <p className="text-sm text-muted-foreground">
-              Enable only when your reverse proxy connects to Temps over
+              Enable only when your reverse proxy connects to MW-DEVPLATFORM over
               loopback and overwrites X-Real-IP and either overwrites
               X-Forwarded-For with the actual client address or appends it as
               the final entry. Otherwise, clients may spoof their IP in
@@ -233,10 +233,10 @@ export function SecurityPage() {
               </p>
             )}
             <p className="text-sm text-muted-foreground">
-              Your reverse proxy ends TLS, so Temps cannot fingerprint the
+              Your reverse proxy ends TLS, so MW-DEVPLATFORM cannot fingerprint the
               visitor itself. If the proxy computes the visitor&apos;s JA4 and
               overwrites a header with it, name that header here; the name must
-              contain &quot;ja4&quot;. Temps reads it only from the trusted
+              contain &quot;ja4&quot;. MW-DEVPLATFORM reads it only from the trusted
               loopback proxy and removes it before requests reach your apps.
             </p>
           </div>
@@ -259,7 +259,7 @@ export function SecurityPage() {
               {...register('trusted_private_networks_text')}
             />
             <p className="text-sm text-muted-foreground">
-              By default Temps refuses to send requests to private, loopback and
+              By default MW-DEVPLATFORM refuses to send requests to private, loopback and
               CGNAT addresses so a project member cannot use a webhook URL to
               probe your internal network. List the networks that host services
               you want to reach, such as an internal webhook receiver, a model
@@ -284,10 +284,10 @@ export function SecurityPage() {
               </AlertTitle>
               <AlertDescription>
                 Any project member who can create a webhook, uptime check or AI
-                provider can make Temps send requests into these networks. Keep
-                them narrow, and avoid trusting the network your Temps database
+                provider can make MW-DEVPLATFORM send requests into these networks. Keep
+                them narrow, and avoid trusting the network your MW-DEVPLATFORM database
                 or Docker API listens on. Loopback (127.0.0.0/8) reaches the
-                Temps host itself. Changes are audit-logged and reach every
+                MW-DEVPLATFORM host itself. Changes are audit-logged and reach every
                 Temps process within a few seconds.
               </AlertDescription>
             </Alert>
