@@ -1,25 +1,30 @@
-# MW-DEVPLATFORM — Release Readiness & Operator Runbook
+# A-L-L-A-H.COM — EMPIRE OF LIGHT | Release Readiness & Operator Runbook
 
-> **Build with clarity. Deploy with sovereignty. Operate with accountability.**
+> **One ecosystem. One canonical monorepo. Build with clarity. Deploy with sovereignty. Operate with accountability.**
 
-This runbook turns the product blueprint into verifiable release gates. It deliberately distinguishes repository configuration from proof that a deployment works.
+This runbook turns the ARSY product blueprint into verifiable release gates. It deliberately distinguishes repository configuration from proof that a deployment works.
 
 ## 1. Readiness statement
 
 **Current status: NOT YET CERTIFIED FOR PRODUCTION.**
 
-The repository contains a substantial Temps-derived Rust workspace, web application, Docker Compose deployment, and multiple GitHub Actions workflow definitions. At the time this document was prepared, the repository API returned no recent workflow runs and no published releases. This is not evidence that tests fail; it means a successful current build, clean installation, and production operation have not been independently demonstrated here.
+The repository contains a substantial Temps-derived Rust workspace, web application, Docker Compose deployment, and multiple GitHub Actions workflow definitions. A successful current build, clean installation, and production operation have not yet been independently demonstrated in this readiness record. This is not evidence that tests fail; it means the required evidence is not recorded here.
 
-Do not advertise a production-ready MW-branded release until the gates below have recorded evidence.
+Do not advertise a production-ready ARSY release until the gates below have recorded evidence.
 
-## 2. Identity and compatibility
+## 2. Product identity and compatibility
 
-- Product / public brand: **MOONWITNESS — MW-DEVPLATFORM**.
-- Product promise: **Your infrastructure. Your visibility. Your responsibility.**
-- Current implementation lineage: Temps-derived.
+- Public ecosystem brand: **A-L-L-A-H.COM**.
+- Product / vision: **EMPIRE OF LIGHT**.
+- Unified platform: **ARSY**.
+- Engineering workspace / project context: **MW-DEVPLATFORM** (internal project name, not the public product brand).
+- Product principle: **One ecosystem. One canonical monorepo.**
+- Current implementation lineage: Temps-derived for the Rust/Cargo portion of this repository.
 - Current Compose services, environment variables, Rust crates, executable and many operational identifiers still use `temps`.
 - Preserve upstream copyright, license, NOTICE, and third-party attribution.
 - Do not rename CLI commands, database identifiers, images, environment variables, or persistent volume names as a cosmetic change. Plan compatibility aliases and tested migration/rollback first.
+
+Node.js + Fastify and Rust are complementary parts of ARSY: Node.js owns ecosystem control-plane APIs and orchestration; Rust owns infrastructure execution. Their boundary must use explicit, versioned and tested contracts. Do not create a second backend or duplicate infrastructure capabilities.
 
 ## 3. Deployment prerequisites
 
@@ -32,7 +37,9 @@ Use a dedicated Linux host for a real deployment. Confirm:
 - Firewall policy, ingress exposure, DNS, TLS termination, and administrator access have been reviewed.
 - Persistent storage capacity, backup destination, restore destination, and monitoring are available.
 
-## 4. First-install procedure
+## 4. First-install procedure — current Temps-derived stack only
+
+**Scope warning:** this procedure describes the existing Docker Compose stack in this repository. It does not install the complete ARSY Node.js + Rust platform and must not be presented as the ARSY one-command installer.
 
 Run from the repository root on the target host.
 
@@ -82,12 +89,31 @@ Run from the repository root on the target host.
    ```
 
 9. Confirm that all expected services report healthy. Inspect individual logs for database initialization, credential synchronization, application startup, and ingress errors.
-
 10. Verify the documented application readiness endpoint from the host/network path appropriate to the deployment. Do not assume a running container means the application is ready.
 
 **Important:** the Compose file binds published ports to host loopback. A reverse proxy, firewall policy, DNS and TLS configuration are separate operator responsibilities. Do not expose administrative endpoints directly to the public internet.
 
-## 5. Engineering validation gates
+## 5. ARSY installer status and release requirements
+
+The current `scripts/install.sh` is a Temps-derived upstream installer. It downloads `temps-*` release assets from the upstream Temps project and installs the `temps` executable. It is **not** an A-L-L-A-H.COM, Empire of Light, or ARSY Node installer.
+
+Do not relabel this script, change its download origin, or advertise it as the ARSY installer. Preserve its upstream behavior and provenance until a separately implemented and tested ARSY installer is ready.
+
+An ARSY installer is not release-ready until all of the following exist and are verified:
+
+- Canonical, CI-produced, version-pinned ARSY artifacts for each supported OS and CPU architecture.
+- SHA-256 checksums and a verifiable signing/provenance strategy.
+- A documented, non-root-by-default installation model with explicit privilege boundaries.
+- Preflight checks for OS, architecture, disk, ports, dependencies, and conflicting services.
+- Idempotent installation, safe configuration and secret handling.
+- Health/readiness checks with actionable diagnostics.
+- Backup, upgrade, rollback, and uninstall behavior that preserves user data unless deletion is explicitly requested.
+- Automated clean-host tests and documented support matrix.
+- A minimal HTTPS bootstrap path (for example, a reviewed `curl` entry point) that downloads a pinned, verified release artifact rather than executing unverified remote content.
+
+Until those gates pass, do not publish a `curl | bash` command or claim one-command ARSY installation is available.
+
+## 6. Engineering validation gates
 
 Run checks in the repository's pinned Rust toolchain and supported development environment.
 
@@ -120,7 +146,7 @@ For frontend changes, use the package manager and scripts declared by the releva
 - Validate Compose using a real, private deployment environment.
 - Record command, commit SHA, environment, date, exit status, and any skipped tests.
 
-## 6. Security and operations gates
+## 7. Security and operations gates
 
 Before production:
 
@@ -136,7 +162,7 @@ Before production:
 - Establish monitoring, alert routing, retention, incident ownership, and a security disclosure contact.
 - Publish data-flow, telemetry, external-service, retention, and deletion documentation.
 
-## 7. Release acceptance record
+## 8. Release acceptance record
 
 A release owner should attach evidence for each item. Mark a box only after the test has actually passed.
 
@@ -156,7 +182,7 @@ A release owner should attach evidence for each item. Mark a box only after the 
 - [ ] Known limitations, support matrix, and release notes are published.
 - [ ] Legal notices and upstream attribution are intact.
 
-## 8. Release record template
+## 9. Release record template
 
 Copy this section into each release record:
 
@@ -177,8 +203,8 @@ Copy this section into each release record:
 | Known limitations | |
 | Approval date | |
 
-## 9. Definition of production-ready
+## 10. Definition of production-ready
 
 A release is production-ready only when all applicable acceptance items are checked with reproducible evidence, a supported deployment profile is published, and an operator other than the original developer can install, secure, operate, back up, upgrade, and recover the platform by following the documentation.
 
-Until then, describe the repository accurately as an active, Temps-derived implementation and the MW-DEVPLATFORM brand/product direction—not as a fully validated production release.
+Until then, describe the repository accurately as an active, Temps-derived implementation being consolidated into the A-L-L-A-H.COM / Empire of Light ecosystem and ARSY platform—not as a fully validated production release.
