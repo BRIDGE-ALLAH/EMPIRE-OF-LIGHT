@@ -96,7 +96,7 @@ function ContainerNameForm({
               </FormControl>
               <FormDescription>
                 Must start with <code>{settings.required_prefix}</code>. Give
-                each Temps instance that shares this Docker host its own name.
+                each MW-DEVPLATFORM instance that shares this Docker host its own name.
                 Leave empty for the default{' '}
                 <code>{settings.default_container_name}</code>.
               </FormDescription>
@@ -197,7 +197,7 @@ export function ContainerNameField({
           : 'Default name for this instance.'}{' '}
         {settings.in_use
           ? 'It cannot change while the service exists; delete the service first to pick another name.'
-          : `If another Temps instance on this Docker host already uses it, enabling ${serviceName} fails with a conflict. Pick a unique name first.`}
+          : `If another MW-DEVPLATFORM instance on this Docker host already uses it, enabling ${serviceName} fails with a conflict. Pick a unique name first.`}
       </p>
       <ContainerNameForm
         key={settings.container_name}
