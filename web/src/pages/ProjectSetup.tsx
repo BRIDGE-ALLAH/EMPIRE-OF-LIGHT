@@ -29,7 +29,7 @@ export function ProjectSetup({ project }: { project: ProjectResponse }) {
       <div className="w-full py-4">
         <ErrorAlert
           title="Failed to load service setup"
-          description="Temps could not check the current setup state for this service."
+          description="MW-DEVPLATFORM could not check the current setup state for this service."
           retry={() => setup.refetch()}
         />
       </div>
