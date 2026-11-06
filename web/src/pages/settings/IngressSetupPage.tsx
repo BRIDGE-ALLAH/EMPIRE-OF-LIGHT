@@ -159,7 +159,7 @@ export function IngressSetupPage() {
     <div className="w-full space-y-6">
       <PageHeader
         title="Expose your apps"
-        description="Let visitors on the internet reach the apps your workers run. Pick how they get in, then Temps sets it up and shows each step."
+        description="Let visitors on the internet reach the apps your workers run. Pick how they get in, then MW-DEVPLATFORM sets it up and shows each step."
       />
 
       <section className="space-y-3" aria-labelledby="ingress-way">
@@ -186,7 +186,7 @@ export function IngressSetupPage() {
             selected={via === 'ports'}
             title="Open ports on a public IP"
           >
-            The worker listens on ports 80 and 443 itself and Temps issues
+            The worker listens on ports 80 and 443 itself and MW-DEVPLATFORM issues
             Let&apos;s Encrypt certificates. Needs a public IP that sends those
             ports to the worker.
           </WayCard>
@@ -549,7 +549,7 @@ function TunnelSetup({
         <Alert>
           <AlertTitle>Cloudflare Tunnel isn&apos;t available here</AlertTitle>
           <AlertDescription>
-            This Temps doesn&apos;t offer Cloudflare Tunnel. Upgrade the control
+            This MW-DEVPLATFORM instance doesn&apos;t offer Cloudflare Tunnel. Upgrade the control
             plane, or use open ports on a public IP instead.
           </AlertDescription>
         </Alert>
@@ -665,7 +665,7 @@ function TunnelSetup({
           <CardTitle className="text-base">5. Create</CardTitle>
           <CardDescription>
             {ready
-              ? `Creates tunnel ${tunnelName} in Cloudflare for ${tunnelDomain}, running on ${chosenNodes.map((n) => n.name).join(', ')}.${managed ? '' : ` Adds ${zone} to Temps first.`}`
+              ? `Creates tunnel ${tunnelName} in Cloudflare for ${tunnelDomain}, running on ${chosenNodes.map((n) => n.name).join(', ')}.${managed ? '' : ` Adds ${zone} to MW-DEVPLATFORM first.`}`
               : 'Pick an account, a domain and at least one worker.'}
           </CardDescription>
         </CardHeader>
@@ -774,7 +774,7 @@ function CredentialSection({
             className="mt-0.5"
           />
           <span className="text-sm">
-            Use a Cloudflare account already in Temps
+            Use a Cloudflare account already in MW-DEVPLATFORM
             <span className="block text-xs text-muted-foreground">
               {accounts.length === 0
                 ? 'None yet.'
@@ -794,7 +794,7 @@ function CredentialSection({
           <span className="text-sm">
             Paste an API token
             <span className="block text-xs text-muted-foreground">
-              Temps checks it with Cloudflare, then adds the account.
+              MW-DEVPLATFORM checks it with Cloudflare, then adds the account.
             </span>
           </span>
         </Label>
@@ -927,7 +927,7 @@ function TokenForm({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name in Temps</FormLabel>
+                <FormLabel>Name in MW-DEVPLATFORM</FormLabel>
                 <FormControl>
                   <Input autoComplete="off" {...field} />
                 </FormControl>
@@ -1023,7 +1023,7 @@ function ConnectedNote({
         resourceType="Cloudflare account"
         resourceName={account.name}
         verb="Remove"
-        consequences="Temps forgets this account and its API token so you can paste a different one. Nothing set up on this page uses it yet."
+        consequences="MW-DEVPLATFORM forgets this account and its API token so you can paste a different one. Nothing set up on this page uses it yet."
         isPending={remove.isPending}
         onConfirm={() => remove.mutate()}
       />
@@ -1139,7 +1139,7 @@ function ZoneOption({
           <span className="font-medium break-all">{zone.name}</span>
           {managed && (
             <Badge variant="outline">
-              {managed.verified ? 'In Temps' : 'In Temps, not verified'}
+              {managed.verified ? 'In MW-DEVPLATFORM' : 'In MW-DEVPLATFORM, not verified'}
             </Badge>
           )}
           {zone.status !== 'active' && (
@@ -1569,7 +1569,7 @@ function OutcomePanel({
               <li>Its DNS records in Cloudflare go with it.</li>
               {outcome.created.managedDomain && (
                 <li>
-                  {outcome.created.managedDomain.domain} is removed from Temps.
+                  {outcome.created.managedDomain.domain} is removed from MW-DEVPLATFORM.
                 </li>
               )}
               {outcome.created.autoManageEnabled && (
@@ -1582,7 +1582,7 @@ function OutcomePanel({
                 <li>
                   The Cloudflare account{' '}
                   {addedAccount ? <strong>{addedAccount}</strong> : 'it'} added
-                  on this page is removed from Temps.
+                  on this page is removed from MW-DEVPLATFORM.
                 </li>
               )}
             </ul>
