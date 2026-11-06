@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024-2026 Temps Contributors
+// SPDX-FileCopyrightText: 2024-2026 MW-DEVPLATFORM Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 // Saved Cloudflare Access tokens (ADR 065 D9): the separate, account-wide
@@ -145,7 +145,7 @@ function AccessTokenCheck({
   if (check.isError)
     return (
       <p role="status" className="text-xs text-muted-foreground">
-        Temps could not check the token now; it is checked again when you save
+        MW-DEVPLATFORM could not check the token now; it is checked again when you save
         it.
       </p>
     )
@@ -263,7 +263,7 @@ function AddAccessTokenForm({ onDone }: { onDone: () => void }) {
                 />
               </FormControl>
               <FormDescription>
-                Checked before it is saved, then stored encrypted. Temps never
+                Checked before it is saved, then stored encrypted. MW-DEVPLATFORM never
                 shows it again.
               </FormDescription>
               <FormMessage />
@@ -413,7 +413,7 @@ export function CloudflareAccessTokens({ canManage }: { canManage: boolean }) {
           </ul>
         ) : (
           <p className="text-sm text-muted-foreground">
-            No Access token is saved, so signed-in addresses use the Temps
+            No Access token is saved, so signed-in addresses use the MW-DEVPLATFORM
             sign-in.
           </p>
         )}
@@ -435,7 +435,7 @@ export function CloudflareAccessTokens({ canManage }: { canManage: boolean }) {
         resourceType="Cloudflare Access token"
         resourceName={toDelete?.name ?? ''}
         confirmLabel="Delete token"
-        consequences="Temps forgets the token. Access apps stay in Cloudflare as they are."
+        consequences="MW-DEVPLATFORM forgets the token. Access apps stay in Cloudflare as they are."
         isPending={remove.isPending}
         onConfirm={() => {
           if (toDelete) remove.mutate({ path: { provider_id: toDelete.id } })
