@@ -25,7 +25,7 @@ interface FlagsSetupGuideProps {
 /**
  * Integration guide for reading flags from a running application.
  *
- * There is no per-language Temps flag SDK, and inventing one for six ecosystems
+ * There is no per-language MW-DEVPLATFORM flag SDK, and inventing one for six ecosystems
  * is not the same job as shipping flags. What every language *does* have is an
  * HTTP client, so each snippet is a complete, self-contained client against the
  * two public endpoints:
@@ -69,8 +69,8 @@ export function FlagsSetupGuide({
         </CardHeader>
         <CardContent className="space-y-3">
           <CodeBlock
-            code={`# Injected automatically into every deployment on Temps
-TEMPS_API_URL=https://your-instance.temps.dev/api
+            code={`# Injected automatically into every deployment on MW-DEVPLATFORM
+TEMPS_API_URL=https://mw.example.com/api
 TEMPS_API_TOKEN=dt_...`}
             language="bash"
           />
@@ -107,7 +107,7 @@ TEMPS_API_TOKEN=dt_...`}
               <CardDescription>
                 Each snippet is a complete client: it polls in the background,
                 caches with an ETag, evaluates in memory, and falls back to your
-                own default whenever Temps is unreachable. No request of yours
+                own default whenever MW-DEVPLATFORM is unreachable. No request of yours
                 ever waits on the control plane.
               </CardDescription>
             </div>
@@ -704,9 +704,9 @@ bunx @temps-sdk/cli flags archive ${flagKey}`
 }
 
 function aiPrompt(flagKey: string, envQuery: string): string {
-  return `Add Temps feature flags to this application.
+  return `Add MW-DEVPLATFORM feature flags to this application.
 
-Temps injects TEMPS_API_URL and TEMPS_API_TOKEN into deployments. Do not add a
+MW-DEVPLATFORM injects TEMPS_API_URL and TEMPS_API_TOKEN into deployments. Do not add a
 new SDK dependency — implement a small client using the HTTP endpoints below,
 in the language and idiom this codebase already uses.
 
