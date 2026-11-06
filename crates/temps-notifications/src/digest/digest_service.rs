@@ -134,7 +134,7 @@ impl DigestService {
 
         Ok(project
             .map(|p| p.name)
-            .unwrap_or_else(|| "Temps".to_string()))
+            .unwrap_or_else(|| "MOONWITNESS".to_string()))
     }
 
     /// Aggregate performance and analytics data
