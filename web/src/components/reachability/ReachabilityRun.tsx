@@ -288,7 +288,7 @@ function RunProgress({
             <p className="font-medium">Recovering an interrupted setup</p>
             <p>
               {run.error ??
-                'Temps restarted during this setup and is checking what its unfinished steps made. Resume and undo come back once it has.'}
+                'MW-DEVPLATFORM restarted during this setup and is checking what its unfinished steps made. Resume and undo come back once it has.'}
             </p>
           </AlertDescription>
         </Alert>
@@ -352,7 +352,7 @@ function RunProgress({
       )}
       {run.state === 'waiting' && !run.error && (
         <p className="text-sm text-muted-foreground">
-          Everything is set up; Temps keeps checking until the address answers.
+          Everything is set up; MW-DEVPLATFORM keeps checking until the address answers.
         </p>
       )}
       {undone.length > 0 && (
@@ -405,7 +405,7 @@ function RunProgress({
                 </span>
                 .{' '}
                 <span className="text-muted-foreground">
-                  Temps leaves it as it is until you decide.
+                  MW-DEVPLATFORM leaves it as it is until you decide.
                 </span>
               </p>
               <div className="flex flex-wrap gap-2">
@@ -445,7 +445,7 @@ function RunProgress({
             onChange={(event) => setToken(event.target.value)}
           />
           <p className="text-xs text-muted-foreground">
-            Paste it again: Temps never stores it until the run saves the
+            Paste it again: MW-DEVPLATFORM never stores it until the run saves the
             account.
           </p>
           <CloudflareTokenCheck token={token} hostname={run.address ?? ''} />
@@ -477,7 +477,7 @@ function RunProgress({
             </div>
           ))}
           <p className="text-xs text-muted-foreground">
-            Paste the OAuth client again: Temps never stores it until the run
+            Paste the OAuth client again: MW-DEVPLATFORM never stores it until the run
             saves it.
           </p>
         </div>
