@@ -69,7 +69,7 @@ function categorizeError(error: unknown): CategorizedError {
       icon: WifiOff,
       title: 'Cannot reach the server',
       summary:
-        'Your browser could not connect to the Temps API. The server may be offline or unreachable from your network.',
+        'Your browser could not connect to the MW-DEVPLATFORM API. The server may be offline or unreachable from your network.',
       statusLabel: 'Network error',
       troubleshooting: [
         'Check your internet connection and VPN, if any.',
@@ -126,7 +126,7 @@ function categorizeError(error: unknown): CategorizedError {
     statusLabel: `${status5xx} ${status5xx === 503 ? 'Service Unavailable' : 'Internal Server Error'}`,
     troubleshooting: [
       'Retry in a few seconds — many 5xx errors resolve on their own.',
-      'Check server logs: `journalctl -u temps -f` or the Temps log output.',
+      'Check server logs: `journalctl -u temps -f` or the MW-DEVPLATFORM log output.',
       'Confirm database connectivity (`TEMPS_DATABASE_URL`) and migrations are up to date.',
       'Open the status page or contact support if the issue persists.',
     ],
