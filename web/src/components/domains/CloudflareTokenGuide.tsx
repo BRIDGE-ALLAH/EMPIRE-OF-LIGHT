@@ -1,8 +1,8 @@
-// SPDX-FileCopyrightText: 2024-2026 Temps Contributors
+// SPDX-FileCopyrightText: 2024-2026 MW-DEVPLATFORM Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-// The least-privilege Cloudflare API token Temps needs, as the operator
-// creates it in the Cloudflare dashboard. Temps only lists zones, edits DNS
+// The least-privilege Cloudflare API token MW-DEVPLATFORM needs, as the operator
+// creates it in the Cloudflare dashboard. MW-DEVPLATFORM only lists zones, edits DNS
 // records and, for tunnels, manages the account's Cloudflare Tunnels.
 
 import { useMutation } from '@tanstack/react-query'
@@ -27,7 +27,7 @@ export const CLOUDFLARE_TOKEN_TEMPLATE_URL = `${CLOUDFLARE_API_TOKENS_URL}?permi
     { key: 'zone', type: 'read' },
     { key: 'dns', type: 'edit' },
   ])
-)}&accountId=*&zoneId=all&name=Temps`
+)}&accountId=*&zoneId=all&name=MW-DEVPLATFORM`
 
 /** The token's permissions, in Cloudflare's own words, and what each is for. */
 export const CLOUDFLARE_TOKEN_PERMISSIONS = [
@@ -47,7 +47,7 @@ export const CLOUDFLARE_TOKEN_PERMISSIONS = [
  * saved.
  */
 export const TUNNEL_SCOPE_NOTE =
-  "Covers every tunnel in this Cloudflare account, not only the ones Temps creates: if this token leaks, all of them are exposed. If other tunnels live in this account, use a separate Cloudflare account for Temps. When the control plane has a fixed outgoing IP address, you can also limit the token to it with Cloudflare's optional Client IP Address Filtering."
+  "Covers every tunnel in this Cloudflare account, not only the ones MW-DEVPLATFORM creates: if this token leaks, all of them are exposed. If other tunnels live in this account, use a separate Cloudflare account for MW-DEVPLATFORM. When the control plane has a fixed outgoing IP address, you can also limit the token to it with Cloudflare's optional Client IP Address Filtering."
 
 export function TunnelScopeNote({ className }: { className?: string }) {
   return (
@@ -102,7 +102,7 @@ export function CloudflareTokenChecklist({
           </li>
           <li>
             <strong className="text-foreground">Zone Resources</strong>: only
-            the domains Temps manages, not &ldquo;All zones&rdquo;
+            the domains MW-DEVPLATFORM manages, not &ldquo;All zones&rdquo;
           </li>
         </ul>
       </div>
@@ -201,7 +201,7 @@ export function TokenPermissionList({
 
 /**
  * Checks a pasted token as soon as it is pasted and marks each permission
- * present or missing. The token is sent to Temps for the check only.
+ * present or missing. The token is sent to MW-DEVPLATFORM for the check only.
  */
 export function CloudflareTokenCheck({
   token,
@@ -212,7 +212,7 @@ export function CloudflareTokenCheck({
   token: string
   /** The zone the token is for, matched exactly. */
   zone?: string | null
-  /** A hostname the token is for, when the zone is not known: Temps
+  /** A hostname the token is for, when the zone is not known: MW-DEVPLATFORM
    * checks the longest zone the token reaches that contains it. */
   hostname?: string | null
   tunnel?: 'required' | 'optional'
@@ -237,7 +237,7 @@ export function CloudflareTokenCheck({
   if (check.isError)
     return (
       <p role="status" className="text-xs text-muted-foreground">
-        Temps could not check the token now; it is checked again when you
+        MW-DEVPLATFORM could not check the token now; it is checked again when you
         continue.
       </p>
     )
@@ -253,7 +253,7 @@ export function CloudflareTokenGuide({
 }) {
   return (
     <div className="space-y-2 rounded-md border p-3 text-sm">
-      <p className="font-medium">Create a token with only what Temps needs</p>
+      <p className="font-medium">Create a token with only what MW-DEVPLATFORM needs</p>
       <ol className="list-decimal space-y-1.5 pl-5 text-muted-foreground">
         <li>
           Open{' '}
@@ -304,17 +304,17 @@ export function CloudflareTokenGuide({
         </li>
         <li>
           <strong>Zone Resources</strong>: Include → Specific zone → each domain
-          Temps manages. Not &ldquo;All zones&rdquo;.
+          MW-DEVPLATFORM manages. Not &ldquo;All zones&rdquo;.
         </li>
         <li>
-          Leave the expiry empty, or note it: when the token expires, Temps can
+          Leave the expiry empty, or note it: when the token expires, MW-DEVPLATFORM can
           no longer update DNS records
           {tunnel === 'required' ? ' or tunnels' : ''}.
         </li>
       </ol>
       <p className="text-xs text-muted-foreground">
         An existing token can be edited in Cloudflare to add a permission or a
-        zone; it keeps its value, so Temps needs no change.
+        zone; it keeps its value, so MW-DEVPLATFORM needs no change.
       </p>
     </div>
   )
