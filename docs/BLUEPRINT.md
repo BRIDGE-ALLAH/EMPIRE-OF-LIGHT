@@ -50,6 +50,55 @@ This is a monorepo, not a monolith. Keep bounded Rust crates and independently d
 
 This is a target logical view, not an instruction to relocate the current Cargo workspace. Keep its root and crate identities stable unless evidence demonstrates a necessary change. pnpm may remain for frontend packages and build tooling; it must not introduce a competing backend authority.
 
+### Architecture at a glance
+
+The diagram describes the target ownership model. It is not a claim that every application, API, or migration has already been completed.
+
+```mermaid
+flowchart TB
+  subgraph EXPERIENCE["A-L-L-A-H.COM ecosystem experiences"]
+    GATE["GATE"]
+    DOCK["Dock"]
+    HQ["Headquarter"]
+    ID["ID"]
+    MW["MoonWitness and other approved apps"]
+  end
+
+  subgraph ARSY["ARSY — single Rust backend/platform authority"]
+    API["Rust API and domain services"]
+    IAM["Identity · authorization · tenant enforcement"]
+    ORCH["Product orchestration and domain workflows"]
+    CONTRACTS["Versioned API and event contracts"]
+    INFRA["Existing Rust infrastructure capabilities"]
+  end
+
+  subgraph HOSTS["Operator-controlled hosts"]
+    NODE["ARSY Node — Rust host agent/profile"]
+    WORKLOADS["Workloads · networks · data services"]
+  end
+
+  subgraph TOOLING["Frontend development toolchain"]
+    NODEJS["Node.js · pnpm · Next.js build/dev tooling"]
+  end
+
+  LEGACY["Legacy Fastify Hub — migration reference only"]
+
+  GATE --> CONTRACTS
+  DOCK --> CONTRACTS
+  HQ --> CONTRACTS
+  ID --> CONTRACTS
+  MW --> CONTRACTS
+  CONTRACTS --> API
+  API --> IAM
+  API --> ORCH
+  ORCH --> INFRA
+  INFRA <--> NODE
+  NODE --> WORKLOADS
+  NODEJS -. "builds and tests" .-> EXPERIENCE
+  LEGACY -. "requirements and parity inventory; no parallel runtime" .-> API
+```
+
+
 ## 4. Backend authority — Rust
 
 Rust owns:
