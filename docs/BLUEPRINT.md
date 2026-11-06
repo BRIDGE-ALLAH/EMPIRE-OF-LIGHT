@@ -254,8 +254,9 @@ Keep the brand layer separate from semantic status colors. Success, warning, fai
 - [x] Add MW product identity to the browser title, favicon, shared sidebar, loading shell, login screen, setup copy, and package description.
 - [x] Add application metadata and social-preview descriptions to the HTML shell.
 - [x] Keep upstream legal attribution and implementation identifiers intact; legacy SVG logo paths now resolve to MW artwork.
-- [ ] Review every route, auth state, email template, notification, CLI surface, and generated page for user-visible upstream branding.
-- [ ] Run frontend lint, typecheck, unit tests, and production build; review light/dark and mobile screenshots.
+- [x] Review all 186 page modules and the primary shared UI components; replace user-facing upstream product copy across authentication, onboarding, AI, projects, deployments, domains, email, monitoring, security, and observability surfaces.
+- [ ] Finish the separate audit of email templates, notification payloads, CLI output, installer messages, and generated/public pages; retain explicit Temps Cloud and upstream SDK/API identifiers where they are real integrations.
+- [ ] Run frontend lint, typecheck, unit tests, and production build; review light/dark and mobile screenshots. Current GitHub Actions runs do not provide a completed frontend validation result.
 - [ ] Align any public landing page and documentation navigation that is shipped by this repository.
 
 **Exit criteria:** all shipped public surfaces consistently use MW identity, remain accessible, and pass frontend validation without changing upstream behavior.
