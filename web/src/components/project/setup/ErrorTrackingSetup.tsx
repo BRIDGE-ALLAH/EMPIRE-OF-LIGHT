@@ -622,11 +622,11 @@ export function ErrorTrackingSetup({ project }: ErrorTrackingSetupProps) {
 
   const aiPrompt = useMemo(() => {
     const dsnValue = hasDsn ? dsn : '<your-temps-dsn>'
-    return `Add Temps error tracking (Sentry-compatible) to my ${platform.name} app.
+    return `Add MW-DEVPLATFORM error tracking (Sentry-compatible) to my ${platform.name} app.
 
 ## DSN environment variable
 
-Temps automatically injects \`${platform.envVarName}\` into the runtime environment when the app is deployed on Temps — do NOT hardcode the DSN in source.
+MW-DEVPLATFORM automatically injects \`${platform.envVarName}\` into the runtime environment when the app is deployed on MW-DEVPLATFORM — do NOT hardcode the DSN in source.
 
 For **local development only**, add this to \`.env\`:
 
@@ -648,9 +648,9 @@ ${platform.buildSnippet(platform.dsnExpression)}
 
 ## Verify
 
-1. Throw a test error from your app (e.g. \`throw new Error('Temps test')\`).
+1. Throw a test error from your app (e.g. \`throw new Error('MW-DEVPLATFORM test')\`).
 2. Run the app and trigger the error path.
-3. Open Error Tracking → Error Groups in the Temps dashboard — the error should appear within a few seconds.
+3. Open Error Tracking → Error Groups in the MW-DEVPLATFORM dashboard — the error should appear within a few seconds.
 `
   }, [platform, dsn, hasDsn])
 
@@ -801,7 +801,7 @@ ${platform.buildSnippet(platform.dsnExpression)}
                         Using an AI coding CLI? Run the official Sentry skill.
                       </p>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        Temps is Sentry wire-compatible, so the{' '}
+                        MW-DEVPLATFORM is Sentry wire-compatible, so the{' '}
                         <code className="rounded bg-muted px-1 py-0.5 text-[11px]">
                           {platform.sentrySkill}
                         </code>{' '}
@@ -809,11 +809,11 @@ ${platform.buildSnippet(platform.dsnExpression)}
                         <code className="rounded bg-muted px-1 py-0.5 text-[11px]">
                           getsentry/sentry-for-ai
                         </code>{' '}
-                        works against your Temps DSN — just set{' '}
+                        works against your MW-DEVPLATFORM DSN — just set{' '}
                         <code className="rounded bg-muted px-1 py-0.5 text-[11px]">
                           {platform.envVarName}
                         </code>{' '}
-                        to the Temps DSN instead of a Sentry one.
+                        to the MW-DEVPLATFORM DSN instead of a Sentry one.
                       </p>
                     </div>
                     <div className="space-y-1.5">
@@ -840,7 +840,7 @@ ${platform.buildSnippet(platform.dsnExpression)}
                           add-error-tracking
                         </code>{' '}
                         skill detects your platform and wires the
-                        Sentry-compatible SDK using your Temps DSN env var.
+                        Sentry-compatible SDK using your MW-DEVPLATFORM DSN env var.
                       </p>
                     </div>
                     <div className="space-y-1.5">
@@ -885,7 +885,7 @@ ${platform.buildSnippet(platform.dsnExpression)}
             <Info className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
             <div className="min-w-0 space-y-1">
               <p className="font-medium">
-                Temps injects{' '}
+                MW-DEVPLATFORM injects{' '}
                 <code className="rounded bg-muted px-1 py-0.5 text-[11px]">
                   {platform.envVarName}
                 </code>{' '}
