@@ -271,7 +271,7 @@ export function EmailTrackingSetup({ providerId }: { providerId: number }) {
             </li>
             <li>
               Paste its ARN into the &quot;SNS Topic ARN&quot; field above and{' '}
-              <strong>save the provider first</strong> — Temps only
+              <strong>save the provider first</strong> — MW-DEVPLATFORM only
               auto-confirms subscriptions for topics it already knows about.
               Subscribing before saving leaves the subscription stuck in
               &quot;pending&quot; forever.
