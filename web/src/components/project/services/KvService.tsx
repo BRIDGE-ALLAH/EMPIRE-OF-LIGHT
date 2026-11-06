@@ -277,7 +277,7 @@ export function KvService({ project }: KvServiceProps) {
                     kv
                   </code>{' '}
                   singleton reads its config from environment variables — no
-                  extra wiring required when running on Temps.
+                  extra wiring required when running on MW-DEVPLATFORM.
                 </p>
                 <CodeBlock
                   code={`import { kv } from '@temps-sdk/kv'
@@ -297,11 +297,11 @@ await kv.del('user:123')`}
                 <p className="text-sm text-muted-foreground">
                   These environment variables are injected automatically into
                   deployments running on this instance. Set them yourself only
-                  when running locally or outside of Temps.
+                  when running locally or outside of MW-DEVPLATFORM.
                 </p>
                 <CodeBlock
                   code={`# Required
-TEMPS_API_URL=https://your-instance.temps.dev   # API endpoint
+TEMPS_API_URL=https://mw.example.com   # API endpoint
 TEMPS_TOKEN=your-token                          # API key or deployment token
 
 # Required for API keys (deployment tokens embed the project ID)
@@ -320,7 +320,7 @@ TEMPS_PROJECT_ID=42`}
                   code={`import { createClient } from '@temps-sdk/kv'
 
 const kv = createClient({
-  apiUrl: 'https://your-instance.temps.dev',
+  apiUrl: 'https://mw.example.com',
   token: process.env.TEMPS_TOKEN,
   projectId: 42, // optional with deployment tokens
 })`}
