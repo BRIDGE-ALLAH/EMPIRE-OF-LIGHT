@@ -51,7 +51,7 @@ import {
 /**
  * Parameter names that get tucked into the "Advanced" collapsible by
  * default. Heroku/Render users were confused by `database`, `username`,
- * and `password` showing up at the top — Temps gives each linked project
+ * and `password` showing up at the top — MW-DEVPLATFORM gives each linked project
  * environment its own database, logical database, or bucket automatically
  * (see `service-link-copy.ts`), so the default admin credentials are rarely
  * what the user needs to edit.
