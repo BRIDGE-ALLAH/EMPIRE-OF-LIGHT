@@ -10,6 +10,15 @@ BRIDGE-ALLAH/EMPIRE-OF-LIGHT, default branch main.
 
 bjo163/A-L-L-A-H.COM, default branch main. Keep this source intact until all migration acceptance gates pass. Do not archive, delete, or make it read-only prematurely.
 
+## Verified repository snapshot — 2026-11-06
+
+- Source `main` comparison base: `bf8681c714b9983861664a05f0c6d9df752f7549`.
+- Source `dev` is 24 commits ahead of source `main` with 158 changed paths and no commits behind at the time of comparison. Do not treat source `main` as the complete migration baseline; review the `dev` delta and preserve unmerged work before selecting the migration snapshot.
+- Destination branch `feat/empire-of-light-installers` is divergent from current `main` (30 commits ahead and 21 behind at the time of comparison) and contains unrelated application changes. Do not merge that branch wholesale. Only the reviewed source-bootstrap and conservative-uninstall behavior was ported selectively to `main`.
+- Destination `main` now contains `scripts/install-platform.sh`, `scripts/uninstall.sh`, and `scripts/test-installers.sh`. The bootstrap pins an immutable source commit and installs the existing Compose stack only; it is not the Rust-first ARSY Node installer.
+- Local shell syntax and CLI smoke checks were run against the installer/uninstaller behavior. No live Docker deployment, clean-host installation, VPS operation, or production readiness test has been performed by this change.
+
+
 ## Verified source components and Rust-first disposition
 
 | Source area | Current evidence | Target decision | Status |
@@ -37,6 +46,9 @@ bjo163/A-L-L-A-H.COM, default branch main. Keep this source intact until all mig
 | Rust crate names and upstream identifiers | Preserve until individually migrated with compatibility tests |
 | Existing deployment manifests | Inventory before changing |
 | scripts/install.sh | Treat as upstream Temps installer; do not relabel as ARSY Node |
+| scripts/install-platform.sh | Experimental pinned source bootstrap for the current Compose stack only; not ARSY Node |
+| scripts/uninstall.sh | Conservative Compose removal; preserves named volumes, images, source, .env, and secrets |
+| scripts/test-installers.sh | Syntax and CLI smoke checks; does not replace live installation tests |
 | Upstream license, NOTICE, copyright | Preserve required notices and attribution |
 
 ## Required inventory fields
