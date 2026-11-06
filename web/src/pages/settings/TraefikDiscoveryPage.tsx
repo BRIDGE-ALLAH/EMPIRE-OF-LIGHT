@@ -274,8 +274,8 @@ function SetupInstructions({
           <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">
             Host(`app.example.com`)
           </code>{' '}
-          Traefik label becomes a working route on this Temps instance, with no
-          change to that container. Temps reads the labels; it never rewrites
+          Traefik label becomes a working route on this MW-DEVPLATFORM instance, with no
+          change to that container. MW-DEVPLATFORM reads the labels; it never rewrites
           them, and it never displaces a deployment, custom domain or the
           console hostname.
         </p>
@@ -627,7 +627,7 @@ export function TraefikDiscoveryPage() {
         {
           description: enabled
             ? 'The proxy reloads its route table automatically.'
-            : 'The container keeps its labels; Temps just stops serving the host.',
+            : 'The container keeps its labels; MW-DEVPLATFORM just stops serving the host.',
         }
       )
     },
@@ -662,7 +662,7 @@ export function TraefikDiscoveryPage() {
         title="Traefik discovery"
         description={
           <>
-            Route containers Temps did not deploy by reading the Traefik labels
+            Route containers MW-DEVPLATFORM did not deploy by reading the Traefik labels
             they already carry, so an existing docker-compose, Coolify or
             Dokploy stack becomes reachable through this instance without
             changing those containers.
@@ -729,7 +729,7 @@ export function TraefikDiscoveryPage() {
             <CardTitle className="text-base">Discovered routes</CardTitle>
             <CardDescription>
               Containers adopted from their Traefik labels. Disabling a route
-              stops Temps serving that host without touching the
+              stops MW-DEVPLATFORM serving that host without touching the
               container&apos;s labels, so the row stays visible.
             </CardDescription>
           </CardHeader>
@@ -759,7 +759,7 @@ export function TraefikDiscoveryPage() {
                   <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">
                     traefik.enable=true
                   </code>{' '}
-                  label that Temps can adopt. Add the labels below to a running
+                  label that MW-DEVPLATFORM can adopt. Add the labels below to a running
                   container and it appears here on the next reconciliation.
                 </p>
                 <div className="mt-3 flex items-start justify-between gap-2 rounded-md bg-muted p-3">
