@@ -1,4 +1,4 @@
-# A-L-L-A-H.COM / Empire of Light — Unified Monorepo Blueprint
+# A-L-L-A-H.COM / Empire of Light — Rust-First Monorepo Blueprint
 
 ## 1. Canonical decisions
 
@@ -10,25 +10,31 @@
 | Vision | Empire of Light |
 | Unified platform | ARSY |
 | Repository architecture | One monorepo |
-| Control/API backend | Node.js + Fastify |
-| Infrastructure execution | Rust |
-| Web applications | Existing Next.js/app stacks |
-| VPS distribution profile | ARSY Node |
+| Backend/platform authority | Rust |
+| Web applications | Existing Next.js / React stacks |
+| Node.js | Frontend tooling only where needed |
+| VPS distribution profile | ARSY Node, Rust-first |
 
-There must be one canonical source repository. The separate bjo163/A-L-L-A-H.COM repository is a migration source, not a second long-term platform repository. Its code, plans, contracts, and documentation must be reconciled into this monorepo. Do not claim consolidation complete until files, dependencies, workflows, provenance, and clean-checkout verification are addressed.
+There is one canonical source repository and one backend authority: Rust. The separate bjo163/A-L-L-A-H.COM repository is a migration source, not a second long-term platform repository.
 
 ## 2. Product definition
 
-A-L-L-A-H.COM is the public ecosystem identity. Empire of Light is the overarching vision. ARSY is the unified platform coordinating ecosystem applications and infrastructure capabilities.
+A-L-L-A-H.COM is the public ecosystem identity. Empire of Light is the overarching vision. ARSY is the unified Rust-first platform coordinating ecosystem applications and infrastructure capabilities.
 
-ARSY is not a language-specific service. It is composed of bounded components. Node.js/Fastify and Rust are complementary technologies within the same monorepo and product.
+This is a monorepo, not a monolith. Keep bounded Rust crates and independently deployable Rust services where justified. Do not create a service for every module.
 
 ## 3. Target logical layout
 
     BRIDGE-ALLAH/EMPIRE-OF-LIGHT
     |
+    +-- existing Cargo workspace / Rust platform
+    |   +-- ARSY API and platform services (audit existing crates first)
+    |   +-- identity, access and tenant enforcement (single authority)
+    |   +-- orchestration and platform domain services
+    |   +-- infrastructure/runtime/build/deployment capabilities
+    |   +-- ARSY Node / host agent and operations
+    |
     +-- apps/
-    |   +-- arsy/                 Node.js + Fastify control/API backend
     |   +-- gate/                 Public ecosystem entrance
     |   +-- dock/                 Main user-facing home
     |   +-- headquarter/          Administrative/operational experience
@@ -37,162 +43,179 @@ ARSY is not a language-specific service. It is composed of bounded components. N
     |   +-- rocksoul/             Creative/media experience
     |   +-- other verified apps
     |
-    +-- platform/
-    |   +-- rust-engine/          Existing Rust infrastructure workspace
-    |   +-- node-profile/         ARSY Node installation/deployment profile
-    |   +-- contracts/            Only contracts without an existing owner
-    |
-    +-- packages/                 Shared SDKs, UI, schemas, tooling
+    +-- packages/                 Shared UI, generated SDKs, schemas, tooling
+    +-- contracts/                Rust-owned/versioned API and event contracts
     +-- docs/                     Narrative, blueprint, ADRs, app docs, plans
     +-- scripts/ and deployment/  CI, release, verification, install, recovery
 
-This is a target logical layout, not an instruction to move the current Cargo workspace blindly. Keep the Rust workspace root if relocation would create needless churn. Cargo and pnpm can coexist in one repository.
+This is a target logical view, not an instruction to relocate the current Cargo workspace. Keep its root and crate identities stable unless evidence demonstrates a necessary change. pnpm may remain for frontend packages and build tooling; it must not introduce a competing backend authority.
 
-## 4. Responsibility boundaries
+## 4. Backend authority — Rust
 
-### ARSY Control — Node.js + Fastify
+Rust owns:
+- ecosystem API and backend service layer;
+- authentication integration and authoritative authorization enforcement;
+- tenant isolation and access policy enforcement;
+- orchestration and platform domain workflows;
+- infrastructure build/deployment/runtime execution;
+- node lifecycle and host operations;
+- platform operational state and telemetry;
+- stable public/internal API contracts.
 
-Owns ecosystem-facing APIs, identity integration, tenant and product policy, orchestration decisions, product workflows, and external integrations.
+First audit existing crates and services. Reuse and extend what exists. Do not assume a missing capability before checking source, tests, docs, migrations, and feature flags.
 
-Does not own container/build/runtime engine internals, a second proxy or scheduler, Rust-private persistence, or duplicate payment execution.
+Use Rust libraries/crates for internal modularity. Separate processes only where security isolation, independent scaling, lifecycle, or fault containment makes it worthwhile.
 
-### ARSY Infrastructure Engine — Rust
+## 5. Frontend and tooling boundary
 
-Owns supported build/deployment execution, workload lifecycle, runtime, workers, nodes, networking, infrastructure resources, platform-local operational state, and infrastructure telemetry.
+Next.js/React applications remain presentation and product-experience layers. They consume documented Rust APIs and never bypass server-side authorization.
 
-Does not own ecosystem-wide identity, tenant membership, product catalog, subscription, entitlement, payment policy, or MoonWitness/ROCKSOUL content.
+Node.js may be used for:
+- Next.js and frontend development/build tooling;
+- pnpm workspace management;
+- code generation and developer scripts when appropriate.
 
-### Applications
+Node.js is not an ARSY backend runtime in this target architecture. Do not add Fastify, Express, Nest, or another Node backend as a parallel authority.
 
-Apps own their experiences and domain workflows. They call authoritative ARSY APIs and do not connect directly to private infrastructure-engine databases or bypass tenant authorization.
+## 6. Legacy Fastify ARSY Hub disposition
 
-### ARSY Node
+The Fastify service in bjo163/A-L-L-A-H.COM is a migration reference, not a production target.
 
-ARSY Node is an installation and runtime profile, not a separate repository or third backend. It packages compatible artifacts and host configuration for a supported VPS/node role.
+Required process:
+1. Inventory routes, handlers, domain logic, authentication, RBAC, tenant model, persistence, events, jobs, integrations, and tests.
+2. Map each capability to existing Rust crates and platform services.
+3. Mark each item reuse, extend, port, replace, or retire.
+4. Port only required behavior that has no suitable Rust owner.
+5. Define and test stable API compatibility for frontend consumers.
+6. Cut consumers over to Rust APIs.
+7. Retire Fastify only after parity, security, migration, and operational gates pass.
 
-## 5. Cross-language integration contract
+Do not port file-by-file or preserve duplicated business rules. Keep the source repository intact until verified migration and cutover.
 
-The Node/Rust boundary must be explicit, versioned, authenticated, and testable.
-
-Required properties:
-1. Service-to-service identity with scoped credentials and rotation/revocation.
-2. Authenticated principal and tenant references; never trust browser-supplied identity.
-3. Versioned request/response and event schemas.
-4. Idempotency keys for provisioning and lifecycle commands.
-5. Durable operation IDs and observable state transitions.
-6. Correlation IDs across API, engine, node, logs, and audit.
-7. Timeouts, retries, cancellation, reconciliation, and compensation semantics.
-8. Secret redaction in logs and telemetry.
-9. Compatibility policy and contract tests in CI.
-10. No shared private database tables; communicate through APIs, events, SDKs, or local library interfaces.
-
-Do not turn every function into an HTTP service. Choose process/API boundaries only when independent lifecycle, isolation, scaling, or security justifies the cost.
-
-## 6. Single source-of-truth rules
+## 7. Single source-of-truth rules
 
 | Domain | Authoritative owner |
 |---|---|
-| Ecosystem identity and tenant policy | ARSY Control |
-| Product authorization/orchestration decision | ARSY Control |
-| Build/deploy/runtime execution | Rust Infrastructure Engine |
-| Infrastructure node state | Rust Infrastructure Engine |
-| Application experience | Owning app |
-| Product billing/catalog/entitlements | Ecosystem commercial domain |
-| Infrastructure usage facts and limits | Rust reports facts; ARSY applies product policy |
-| Platform operational telemetry | Rust Infrastructure Engine |
+| Backend APIs and platform policy | ARSY Rust platform |
+| Identity/access/tenant enforcement | ARSY Rust platform |
+| Build/deploy/runtime execution | Existing Rust infrastructure capabilities |
+| Infrastructure node state | Rust platform/node agent |
+| Application experience | Owning frontend app |
+| Product billing/catalog/entitlements | Ecosystem commercial domain, integrated through Rust APIs |
+| Infrastructure usage facts | Rust platform |
+| Platform operational telemetry | Rust platform |
 | Product analytics and business audit | ARSY / owning product domain |
 | MoonWitness knowledge and narrative | MoonWitness |
 | ROCKSOUL creative/media | ROCKSOUL |
-| Communication signal network | ARSY Radio domain through explicit contract |
+| Communication signal network | ARSY Radio domain through explicit contracts |
 
-If a capability appears in multiple places, identify the source of truth and migrate toward one owner. Do not add a third implementation.
+## 8. API and contract design
 
-## 7. Current implementation and migration truth
+- Rust owns canonical API and event schemas.
+- Version contracts and define compatibility/deprecation policy.
+- Authenticate every service-to-service call.
+- Never trust browser-supplied tenant or role claims.
+- Use stable principal and tenant references with explicit authorization checks.
+- Use idempotency keys for mutating operations.
+- Return durable operation IDs for asynchronous work.
+- Propagate correlation IDs through API, worker, node, logs, and audit.
+- Define timeouts, retries, cancellation, reconciliation, and compensation.
+- Redact secrets and sensitive payloads from logs.
+- Generate or validate frontend SDKs against the canonical contracts.
+- Do not share private database tables across application boundaries.
 
-The destination repository currently holds the substantial Rust/Cargo platform workspace and its technical assets. The source repository bjo163/A-L-L-A-H.COM holds the pnpm workspace, Fastify ARSY Hub, ecosystem apps, shared packages, and associated plans/docs.
+## 9. Current implementation and migration truth
 
-The target is one monorepo, but source consolidation is not complete. Required migration work includes source/destination inventory, duplicate detection, dependency/workspace reconciliation, CI and secret mapping, app/package/contract ownership, docs/plans/ADR preservation, release/deployment reconciliation, and clean-checkout verification.
+The destination currently contains the substantial Temps-derived Rust/Cargo platform workspace. The source repository bjo163/A-L-L-A-H.COM contains a pnpm workspace, Fastify ARSY Hub, Next.js apps, shared packages, and plans/docs.
 
-The Rust source is Temps-derived. Preserve applicable licenses, NOTICE, copyright, and third-party attribution. The existing scripts/install.sh still targets upstream Temps release assets and is not an ARSY Node installer.
+The target is Rust-first, but consolidation is not complete. Fastify must be audited as a migration source and its required capabilities reconciled into Rust. Frontend apps/packages and their tooling may retain Node.js where needed. Do not claim the Rust backend already covers every legacy Fastify capability until route/domain parity is verified.
 
-## 8. Monorepo migration sequence
+Preserve applicable upstream licenses, NOTICE, copyright, and third-party attribution. The existing scripts/install.sh still targets upstream Temps release assets and is not an ARSY Node installer.
 
-### Phase A — Freeze architecture and inventory
-- Declare this repository the only long-term canonical destination.
-- Inventory tracked files in both repositories.
-- Inventory Cargo crates, pnpm packages, apps, APIs, schemas, migrations, workflows, secrets, deployment targets, docs, plans, ADRs, and open issues.
-- Build a path/package ownership map and detect duplicate implementations.
-- Create a migration ledger with source path, target path, owner, decision, status, verification, and commit.
+## 10. Monorepo migration sequence
 
-Exit: every maintained component and critical contract is classified.
+### Phase A — Inventory and Rust capability map
+- Inventory both repositories, branches, packages, crates, apps, APIs, schemas, migrations, workflows, secrets, deployment targets, docs, plans, and issues.
+- Map every Fastify route/domain capability against the existing Rust workspace.
+- Identify duplicate or overlapping Rust capabilities.
+- Create a migration ledger with source, target, owner, action, status, verification, and commit.
 
-### Phase B — Workspace and source integration
-- Preserve the existing Rust workspace and tests.
-- Bring the pnpm workspace and Fastify ARSY app into the canonical repository without overwriting Rust paths.
-- Resolve root manifest collisions deliberately.
-- Reconcile package names and aliases only where safe.
-- Consolidate shared schemas and SDKs; do not duplicate contract ownership.
-- Preserve legal notices and source provenance.
+Exit: every maintained component and backend capability has an explicit disposition.
 
-Exit: clean checkout can install dependencies and discover both workspaces.
+### Phase B — Establish Rust API authority
+- Select the existing Rust crate(s) that should own API and platform entrypoints based on code audit.
+- Document identity, authorization, tenant, error, pagination, versioning, and operation contracts.
+- Implement missing capability only after confirming no existing owner.
+- Add Rust tests and API contract fixtures.
 
-### Phase C — CI, contracts, and security
-- Reconcile GitHub Actions without dropping existing checks.
-- Add coordinated Rust and Node workspace checks.
-- Add cross-language contract validation and integration fixtures.
-- Reconcile secrets and environment variables without committing values.
-- Verify supply-chain, license, vulnerability, and secret-scanning controls.
+Exit: a clear Rust-owned backend/API entrypoint and tested contracts exist.
 
-Exit: required tests run on canonical branches and cross-language contracts are enforced.
+### Phase C — Migrate frontend and shared packages
+- Bring approved Next.js apps and shared UI packages into the monorepo without disturbing Cargo.
+- Keep Node tooling scoped to frontend/build tasks.
+- Generate or validate frontend clients from Rust-owned contracts.
+- Cut frontend consumers over from Fastify endpoints to Rust endpoints.
+- Preserve app blueprints, assets, plans, and tests.
 
-### Phase D — Applications and operations
-- Integrate apps and packages in small ownership batches.
-- Reconcile docs, plans, ADRs, and runbooks.
-- Define local development profiles without forcing every app to run together.
-- Define deployment profiles and compatible component releases.
-- Validate health checks, observability, backup, restore, and rollback.
+Exit: maintained frontend apps build independently and consume the Rust API.
 
-Exit: maintained components have one authoritative source path and executable development/deployment contracts.
+### Phase D — Reconcile legacy Fastify behavior
+- Port missing domain behavior into Rust by bounded capability.
+- Validate behavior and security parity.
+- Migrate data only with explicit schema mapping, backup, and rollback.
+- Remove obsolete Fastify routes/clients only after consumer cutover and tests.
+- Record all retained/deferred/retired capabilities.
 
-### Phase E — VPS installer and source retirement
-- Build canonical release artifacts for Rust and Node components.
-- Publish checksums, signatures/provenance, SBOM, and compatibility manifest.
-- Implement ARSY Node preflight, install, configuration, health, upgrade, rollback, backup, restore, and uninstall.
-- Test clean VPS install, retry, interruption, upgrade, rollback, and restore.
-- Only after acceptance, mark the old source repository read-only/archive it and point it to the canonical destination.
+Exit: no production app depends on Fastify as a backend.
 
-Exit: no active build, deployment, release, or product workflow depends on the old repository.
+### Phase E — CI, release, and operations
+- Preserve and test the existing Rust baseline.
+- Add frontend workspace checks without making Node a backend.
+- Add API/security/integration contract tests.
+- Publish traceable Rust artifacts, SBOM, checksums, signatures/provenance, and release notes.
+- Implement ARSY Node preflight, install, health, upgrade, rollback, backup, restore, and uninstall.
+- Test clean-host installation and recovery.
 
-## 9. ARSY Node requirements
+Exit: canonical CI, Rust release, frontend builds, and VPS operations are reproducible.
 
-- Version-pinned artifacts built by canonical CI.
+### Phase F — Source cutover
+- Verify clean checkout, Rust tests, app builds, API parity, security boundaries, and deployment profiles.
+- Reconcile active issues/plans/branches.
+- Update the source repository with canonical destination and migration status.
+- Archive or make the source read-only only after no active dependency remains.
+
+Exit: all active development uses BRIDGE-ALLAH/EMPIRE-OF-LIGHT.
+
+## 11. ARSY Node requirements
+
+- Version-pinned Rust artifacts built by canonical CI.
 - Supported OS/architecture matrix.
-- SHA-256 checksums and verifiable signatures/provenance.
+- Checksums and verifiable signatures/provenance.
 - Least-privilege service accounts and explicit host permissions.
 - Safe secret generation and configuration.
 - Idempotent install and recovery from interrupted operations.
 - Health checks and actionable diagnostics.
-- Version compatibility across Fastify Control, Rust Engine, and node agents.
+- Compatibility manifest for platform components.
 - Backup/restore, upgrade/rollback, and uninstall.
 - Clean-host test evidence.
 
 Hard stop: do not rename the current upstream Temps installer and do not claim ARSY Node is ready until these gates pass.
 
-## 10. Anti-overlap rules for humans and AI agents
+## 12. Anti-overlap rules
 
-1. Search both source repositories and all monorepo paths.
-2. Search manifests, imports, APIs, schemas, migrations, tests, and active plans.
-3. Name the authoritative owner and source of truth.
-4. Prefer reuse, extension, or migration over duplication.
-5. Do not move a package while another active package owns its contracts or data.
-6. Do not create separate repositories as a workaround for workspace integration.
-7. Do not create a service just to mirror an architecture diagram.
-8. Record cross-domain changes in an ADR and migration ledger.
-9. Keep tasks small, autonomous, testable, and safe to retry.
-10. Update README, narrative, blueprint, contracts, and tests when ownership changes.
+1. Search the existing Rust workspace before adding a crate or service.
+2. Treat Fastify as legacy migration evidence, not a second backend target.
+3. Map behavior and contracts before porting; never copy files blindly.
+4. One owner per data domain, API, policy, and persistence model.
+5. Frontends consume documented APIs and cannot bypass authorization.
+6. Node.js is limited to frontend/tooling roles in this architecture.
+7. Do not create separate repositories to avoid monorepo integration.
+8. Do not split every module into a microservice.
+9. Preserve upstream legal attribution and technical compatibility.
+10. Keep migration batches small, autonomous, testable, and reversible.
 
-## 11. Definition of done
+## 13. Definition of done
 
-A clean checkout of the canonical repository contains both workspaces and all maintained applications; Rust and Node stacks build/test from a clean checkout; cross-language contracts are versioned and tested; each capability has one owner; canonical CI and release automation work; ARSY Node has clean-host evidence; and no active development or deployment depends on the source repository.
+A clean checkout contains the authoritative Rust backend/platform, approved applications, shared frontend packages, Rust-owned contracts, deployment profiles, and documentation. Rust tests and frontend builds are reproducible; API and access boundaries are tested; every capability has one owner; ARSY Node has clean-host evidence; and no active development or production deployment depends on the source repository or a Fastify backend.
 
-One ecosystem. One canonical monorepo. Multiple independently deployable components. No duplicated platform authority.
+One ecosystem. One canonical monorepo. One Rust-first backend authority.
