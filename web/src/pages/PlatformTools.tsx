@@ -69,7 +69,7 @@ export function PlatformTools() {
     <PageContainer innerClassName="space-y-8 pb-6">
       <PageHeader
         title="All platform tools"
-        description="Every Temps capability remains available here while the main sidebar stays focused on daily work."
+        description="Every MW-DEVPLATFORM capability remains available here while the main sidebar stays focused on daily work."
         className="border-b pb-6 lg:items-end"
         actions={
           <div className="relative w-full sm:w-96 lg:w-[28rem]">
