@@ -15,7 +15,17 @@ bash "$UNINSTALLER" --help >/dev/null || fail "uninstaller help failed"
 if bash "$INSTALLER" --invalid-option >/dev/null 2>&1; then
   fail "installer accepted an unknown option"
 fi
+if bash "$INSTALLER" --ref main --skip-start >/dev/null 2>&1; then
+  fail "installer accepted a moving branch instead of an immutable commit SHA"
+fi
 if bash "$UNINSTALLER" --invalid-option >/dev/null 2>&1; then
   fail "uninstaller accepted an unknown option"
 fi
-printf 'PASS: installer/uninstaller syntax and CLI smoke tests\n'
+
+tmp_dir=$(mktemp -d)
+trap 'rm -rf "$tmp_dir"' EXIT
+touch "$tmp_dir/docker-compose.yml"
+if bash "$UNINSTALLER" --dir "$tmp_dir" --yes >/dev/null 2>&1; then
+  fail "uninstaller accepted a directory without its installation environment file"
+fi
+printf 'PASS: installer/uninstaller syntax, pin validation, and fail-closed CLI smoke tests\n'
