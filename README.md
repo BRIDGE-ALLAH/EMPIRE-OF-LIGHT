@@ -1,265 +1,152 @@
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/hero/stop-paying-dark.svg">
-  <img alt="Stop paying for 7 SaaS tools: Vercel, Sentry, PostHog, Pingdom, Resend, E2B and Datadog, replaced by one self-hosted Temps binary" src="assets/hero/stop-paying-light.svg" width="700">
-</picture>
+# MOONWITNESS
+### MW-DEVPLATFORM
 
-[Website](https://temps.sh/?utm_source=github&utm_medium=repo&utm_content=header_en) · [Docs](https://temps.sh/docs?utm_source=github&utm_medium=repo&utm_content=header_en) · [Discussions](https://github.com/gotempsh/temps/discussions)
+**Build with clarity. Deploy with sovereignty. Operate with accountability.**
+
+*An open, self-hostable developer platform for teams who want to build, ship, observe, and govern their digital work on infrastructure they control.*
+
+[Architecture blueprint](docs/BLUEPRINT.md) · [Architecture map](docs/architecture/overview/page.mdx) · [Security guidance](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
 </div>
 
 ---
 
-Temps is one self-hosted binary that deploys your apps and runs everything around them: databases, analytics, error tracking, traces, logs, uptime, email, AI sandboxes and an AI gateway. Open source, on your own server.
+## The story behind the platform
 
-## Install on a VPS
+Software should give people more agency, not make them dependent on an opaque stack of disconnected services.
 
-```bash
-curl -fsSL https://temps.sh/deploy.sh | bash
-```
+**MoonWitness** is the working brand idea behind MW-DEVPLATFORM: *Moon* evokes cycles, perspective, and a light by which change can be observed; *Witness* expresses responsibility, evidence, and the discipline of seeing systems as they really are. Together, the name describes a platform that helps builders create confidently while remaining accountable for what they operate.
 
-Run it on a fresh Ubuntu 24.04 or 22.04 server. It installs Docker if it is missing, runs PostgreSQL, sets Temps up as a service with automatic HTTPS, and prints your console URL and admin password. No domain yet? Pick `quick` mode and you get `https://console.<server-ip>.sslip.io`.
+MW-DEVPLATFORM turns that idea into infrastructure. It brings application delivery, runtime operations, observability, data services, security controls, and AI-assisted workflows into one self-hostable environment. The goal is not to hide complexity behind a slogan. The goal is to make complexity understandable, inspectable, and manageable.
 
-[Quickstart](https://temps.sh/docs/quickstart?utm_source=github&utm_medium=repo&utm_content=install_en) · [Choosing a server](https://temps.sh/docs/choosing-a-server?utm_source=github&utm_medium=repo&utm_content=install_en) · Rather not run a server? [Temps Cloud](https://temps.sh/pricing?utm_source=github&utm_medium=repo&utm_content=cloud_cta_en)
+### Brand promise
 
-<a href="assets/screenshots/dashboard-light.png">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/dashboard-dark.png">
-    <img alt="Temps projects dashboard — services grouped into projects, with traffic, status and latest deployment" src="assets/screenshots/dashboard-light.png">
-  </picture>
-</a><br>
-<sub>Full size: <a href="assets/screenshots/dashboard-light.png">light</a> · <a href="assets/screenshots/dashboard-dark.png">dark</a></sub>
+> **Your infrastructure. Your visibility. Your responsibility.**
 
-## Features
+MW-DEVPLATFORM aims to help independent builders, product teams, and organizations move from fragmented tooling to a coherent operating foundation—without giving up control of their code, data, deployment process, or operational decisions.
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <b>Git push to deploy</b><br>
-      Preview URLs and zero-downtime rollouts for any language, auto-detected or from your Dockerfile or Docker Compose file. <a href="https://temps.sh/docs/deployments">Docs</a><br><br>
-      <a href="assets/screenshots/deployments-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/deployments-dark.png">
-          <img alt="Temps deployments — production releases and preview branches with commit, author and build time, and a failed build with its cause" src="assets/screenshots/deployments-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/deployments-light.png">light</a> · <a href="assets/screenshots/deployments-dark.png">dark</a></sub>
-    </td>
-    <td width="50%" valign="top">
-      <b>Managed databases</b><br>
-      PostgreSQL, Redis, MongoDB, MariaDB and S3-compatible storage, with backups. <a href="https://temps.sh/docs/set-up-managed-services">Docs</a><br><br>
-      <a href="assets/screenshots/databases-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/databases-dark.png">
-          <img alt="Temps databases — running PostgreSQL, Redis, MongoDB, MariaDB and S3-compatible services with live CPU and memory" src="assets/screenshots/databases-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/databases-light.png">light</a> · <a href="assets/screenshots/databases-dark.png">dark</a></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <b>Domains & TLS</b><br>
-      Custom and wildcard domains with automatic Let's Encrypt certificates. <a href="https://temps.sh/docs/domains-ssl">Docs</a><br><br>
-      <a href="assets/screenshots/domains-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/domains-dark.png">
-          <img alt="Temps domains — each domain with its HTTPS method and certificate expiry date" src="assets/screenshots/domains-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/domains-light.png">light</a> · <a href="assets/screenshots/domains-dark.png">dark</a></sub>
-    </td>
-    <td width="50%" valign="top">
-      <b>Web analytics</b><br>
-      Visitors, pages, sources, funnels and web performance, collected by your own server. <a href="https://temps.sh/docs/analytics">Docs</a><br><br>
-      <a href="assets/screenshots/analytics-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/analytics-dark.png">
-          <img alt="Temps web analytics — visitors, sessions and hourly traffic" src="assets/screenshots/analytics-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/analytics-light.png">light</a> · <a href="assets/screenshots/analytics-dark.png">dark</a></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <b>Session replay</b><br>
-      Watch a visit as it happened, with form inputs masked by default. <a href="https://temps.sh/docs/session-replay">Docs</a><br><br>
-      <a href="assets/screenshots/session-replay-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/session-replay-dark.png">
-          <img alt="Temps session replay — a recorded storefront visit at checkout, with masked inputs and the event timeline" src="assets/screenshots/session-replay-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/session-replay-light.png">light</a> · <a href="assets/screenshots/session-replay-dark.png">dark</a></sub>
-    </td>
-    <td width="50%" valign="top">
-      <b>Error tracking</b><br>
-      Sentry-compatible: point your existing Sentry SDK at Temps, then hand an issue to your coding agent. <a href="https://temps.sh/docs/error-tracking">Docs</a><br><br>
-      <a href="assets/screenshots/errors-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/errors-dark.png">
-          <img alt="Temps error tracking — errors across services with status, event and user counts, and a Fix with agent button" src="assets/screenshots/errors-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/errors-light.png">light</a> · <a href="assets/screenshots/errors-dark.png">dark</a></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <b>Distributed traces</b><br>
-      OpenTelemetry ingest, with traces that follow one request across services down to the failing span. <a href="https://temps.sh/docs/opentelemetry">Docs</a><br><br>
-      <a href="assets/screenshots/traces-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/traces-dark.png">
-          <img alt="Temps distributed trace — a checkout request across two services, with the failing span and its error" src="assets/screenshots/traces-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/traces-light.png">light</a> · <a href="assets/screenshots/traces-dark.png">dark</a></sub>
-    </td>
-    <td width="50%" valign="top">
-      <b>Logs</b><br>
-      Container and request logs from every service in one searchable view, with volume by level. <a href="https://temps.sh/docs/logs">Docs</a><br><br>
-      <a href="assets/screenshots/logs-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/logs-dark.png">
-          <img alt="Temps logs — log volume by level, a searchable list across services, and counts per level and service" src="assets/screenshots/logs-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/logs-light.png">light</a> · <a href="assets/screenshots/logs-dark.png">dark</a></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <b>Uptime & alerts</b><br>
-      Health checks, status pages and alert rules. <a href="https://temps.sh/docs/monitoring">Docs</a><br><br>
-      <a href="assets/screenshots/uptime-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/uptime-dark.png">
-          <img alt="Temps uptime — current status, uptime percentage, average response time and an hourly status timeline" src="assets/screenshots/uptime-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/uptime-light.png">light</a> · <a href="assets/screenshots/uptime-dark.png">dark</a></sub>
-    </td>
-    <td width="50%" valign="top">
-      <b>Transactional email</b><br>
-      Send through SMTP or SES with DKIM, and see every message with its delivery, opens and clicks. <a href="https://temps.sh/docs/transactional-email">Docs</a><br><br>
-      <a href="assets/screenshots/email-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/email-dark.png">
-          <img alt="Temps email — sent and failed totals, and recent messages with their status, opens and clicks" src="assets/screenshots/email-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/email-light.png">light</a> · <a href="assets/screenshots/email-dark.png">dark</a></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <b>AI sandboxes</b><br>
-      Isolated Docker or Firecracker sandboxes for running code, with a terminal and preview URLs. <a href="https://temps.sh/docs/sandboxes">Docs</a><br><br>
-      <a href="assets/screenshots/sandbox-detail-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/sandbox-detail-dark.png">
-          <img alt="Temps sandbox detail — a running Docker sandbox with a live in-browser terminal, time left and its preview URL template" src="assets/screenshots/sandbox-detail-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/sandbox-detail-light.png">light</a> · <a href="assets/screenshots/sandbox-detail-dark.png">dark</a></sub>
-    </td>
-    <td width="50%" valign="top">
-      <b>AI gateway</b><br>
-      One OpenAI-compatible endpoint for your own provider keys, with usage and cost per model. <a href="https://temps.sh/docs/ai-gateway">Docs</a><br><br>
-      <a href="assets/screenshots/ai-usage-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/ai-usage-dark.png">
-          <img alt="Temps AI gateway usage — requests, tokens, latency, error rate and estimated cost across providers" src="assets/screenshots/ai-usage-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/ai-usage-light.png">light</a> · <a href="assets/screenshots/ai-usage-dark.png">dark</a></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <b>AI chat</b><br>
-      Ask about a project and get answers from its own errors, logs and traces. Read-only unless you allow changes.<br><br>
-      <a href="assets/screenshots/ai-chat-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/ai-chat-dark.png">
-          <img alt="Temps AI chat explaining failed checkouts from the project's own errors, request logs and traces, with suggested fixes" src="assets/screenshots/ai-chat-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/ai-chat-light.png">light</a> · <a href="assets/screenshots/ai-chat-dark.png">dark</a></sub>
-    </td>
-    <td width="50%" valign="top">
-      <b>Import</b><br>
-      Bring apps, databases with their data, domains and environment variables from Kubernetes, Coolify, Dokploy, CapRover, Portainer, Kamal or plain Docker containers, and from Vercel with <code>temps migrate</code>. <a href="https://temps.sh/docs/import-existing-platform">Docs</a><br><br>
-      <a href="assets/screenshots/import-light.png">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/import-dark.png">
-          <img alt="Temps import wizard — pick a source: Kubernetes, CapRover, Portainer, Kamal, Dokploy, Coolify or Docker containers" src="assets/screenshots/import-light.png">
-        </picture>
-      </a><br>
-      <sub>Full size: <a href="assets/screenshots/import-light.png">light</a> · <a href="assets/screenshots/import-dark.png">dark</a></sub>
-    </td>
-  </tr>
-</table>
+### Principles
 
-## Get started with AI
+- **Amanah — stewardship:** treat access, data, compute, and user trust as responsibilities.
+- **Clarity — observable by design:** make system state, changes, failures, and costs easier to understand.
+- **Sovereignty — control stays with the operator:** favor self-hosting, transparent configuration, and portable workflows.
+- **Ihsan — quality in execution:** prioritize reliable defaults, careful engineering, and useful failure messages.
+- **Adl — fair boundaries:** apply least privilege, explicit permissions, and predictable resource limits.
+- **Rahmah — human-centred operations:** reduce toil and avoid designs that punish users for not knowing hidden system rules.
 
-Temps ships skills that teach coding agents (Claude Code, Codex, Cursor, OpenCode and others) to install Temps on a server, connect to it and run every console operation through the CLI. Add them to your agent:
+These are product and engineering principles, not claims of religious authority or a substitute for the beliefs of any individual or community.
+
+## What MW-DEVPLATFORM is
+
+The repository currently contains a Rust workspace and web application for a self-hosted developer platform. Its existing implementation provides a broad foundation for:
+
+| Area | What it enables |
+|---|---|
+| Application delivery | Connect Git repositories, build containerized apps, deploy releases, and manage previews |
+| Runtime and networking | Run workloads, route traffic, manage domains, TLS, and worker nodes |
+| Data services | Provision and operate PostgreSQL, Redis, MongoDB, MariaDB, and S3-compatible services |
+| Observability | Collect analytics, logs, traces, metrics, uptime signals, and application errors |
+| Security and governance | Authentication, authorization, API keys, audit events, network controls, and vulnerability scanning |
+| AI and automation | AI gateway, agents, sandboxes, CLI, and MCP integration surfaces |
+| Extensibility | Plugin SDK and protocol for integrations and additional capabilities |
+
+The technical foundation is substantial: a Rust workspace with more than one hundred crates, alongside the web application, SDKs, scripts, and documentation. The exact module boundaries and maturity are documented in the repository's architecture materials.
+
+## Product positioning
+
+**Category:** self-hosted developer platform / application operations platform.
+
+**For:** independent developers, engineering teams, digital product studios, and organizations that want an integrated delivery and operations layer.
+
+**Problem:** modern teams often assemble deployment, databases, monitoring, error tracking, logs, analytics, and AI tooling from many separate products. That creates fragmented workflows, duplicated configuration, recurring costs, and operational blind spots.
+
+**Approach:** provide a coherent platform that brings these workflows together while keeping deployment and operational control with the operator.
+
+**Differentiator:** not simply “more tools in one dashboard,” but a consistent operational surface built around visibility, ownership, and responsible control.
+
+## Current implementation and attribution
+
+This repository is based on the Temps codebase and still contains upstream implementation names, package identifiers, environment variables, service names, and documentation references. The current executable and Compose services therefore retain the `temps` naming.
+
+MW-DEVPLATFORM is the intended product and brand direction for this repository. A complete technical rebrand—binary names, Rust crate names, container names, environment variables, UI copy, hosted documentation, installer and release artifacts—must be handled as a separate, tested migration. This README does not claim that migration has already happened.
+
+Upstream attribution, third-party notices, and the applicable MIT OR Apache-2.0 licensing terms must remain intact. See [NOTICE](NOTICE), [LICENSE](LICENSE), and [LICENSE-MIT](LICENSE-MIT).
+
+## Getting started
+
+### Requirements
+
+- Linux host recommended for a self-hosted deployment.
+- Docker Engine and Docker Compose plugin.
+- Git.
+- OpenSSL for generating strong secrets.
+- Access to the Docker socket for workload management. Docker socket access is effectively host-level privilege; deploy only on a trusted host.
+
+### Prepare a local deployment
+
+1. Review the deployment variables and security notes in [`.env.example`](.env.example) and [`docker-compose.yml`](docker-compose.yml).
+2. Create a private `.env` file and set every required value. Do not commit secrets.
+3. Generate independent URL-safe database passwords with `openssl rand -hex 32`.
+4. Prepare the initial administrator password files at the paths configured in `.env`; keep their parent directory private and follow the file permission requirements documented in the example.
+5. Confirm the Docker socket group ID and network ranges do not conflict with your host, LAN, or VPN.
+6. Review the Compose file and its exposed ports before starting services.
+
+The repository's deployment configuration deliberately fails when required credentials are missing. Do not replace those checks with default passwords or expose database ports publicly.
+
+After configuration, start the stack from the repository root:
 
 ```bash
-bunx skills add gotempsh/temps --skill temps temps-platform-setup
+docker compose config
+docker compose up -d --build
+docker compose ps
 ```
 
-**No server yet?** Give your agent a fresh Ubuntu server it can reach over SSH and ask:
-
-> Use the Temps skills to install Temps on root@203.0.113.10 in quick mode, connect the CLI to it, then deploy this repository and tell me its URL when it is live.
-
-It runs the official installer over SSH, leaves the generated admin password and API key on the server, and gives you a browser link to approve the CLI login, so no credential ever passes through the chat.
-
-**Already running Temps?** Connect the CLI to it, then ask your agent:
+If `docker compose config` reports a missing variable, return to `.env` and complete the required configuration. Check service logs with:
 
 ```bash
-bunx @temps-sdk/cli@0.1.38 login https://console.your-server.example
+docker compose logs -f temps
 ```
 
-> Use the Temps skill to verify my connection and list the services on this instance. Do not make any changes.
+> **Operational note:** this is a privileged infrastructure platform. Do not expose its administration interfaces directly to the public internet until TLS, ingress restrictions, administrator credentials, backups, and firewall policy have been reviewed. The commands above are a deployment entry point, not a production security sign-off.
 
-> Use the Temps skill to deploy this repository to Temps and tell me its URL when it is live.
+### Development
 
-For an agent that runs unattended, open **Connect your coding agent** in the console (`/setup/ai`): it creates a dedicated API key and checks that the agent's first request arrives.
+The backend is a Cargo workspace. Start by reviewing:
 
-[Skills](https://temps.sh/docs/skills) · [CLI](https://temps.sh/docs/cli) · [MCP servers](https://temps.sh/docs/mcp-servers)
+- [`AGENTS.md`](AGENTS.md) — repository engineering rules and contributor entry points.
+- [`Cargo.toml`](Cargo.toml) — Rust workspace members and shared dependencies.
+- [`docs/architecture/crates.md`](docs/architecture/crates.md) — generated crate map.
+- [`DESIGN.md`](DESIGN.md) — current web UI design standards.
+- [`REVIEW.md`](REVIEW.md) — recurring security and reliability review findings.
+
+Use the repository's pinned Rust toolchain in [`rust-toolchain.toml`](rust-toolchain.toml). Run checks appropriate to the area you change; do not assume a full workspace test has passed unless it has actually been run.
 
 ## Documentation
 
-Everything else is in the docs at **[temps.sh/docs](https://temps.sh/docs?utm_source=github&utm_medium=repo&utm_content=docs_en)**:
+- **[MW-DEVPLATFORM Blueprint](docs/BLUEPRINT.md)** — narrative, positioning, principles, product architecture, roadmap, and acceptance criteria.
+- [Architecture overview](docs/architecture/overview/page.mdx)
+- [Crate map](docs/architecture/crates.md)
+- [Documentation index](docs/README.md)
+- [Security policy](SECURITY.md)
+- [Contributing guide](CONTRIBUTING.md)
 
-- [Your first deployment](https://temps.sh/docs/your-first-deployment)
-- [Import from another platform](https://temps.sh/docs/import-existing-platform)
-- [SDKs](https://temps.sh/docs/sdks) — analytics, error tracking, KV and blob storage
-- [Production checklist](https://temps.sh/docs/production-checklist) and [upgrading](https://temps.sh/docs/upgrade-temps)
-- [How Temps compares](https://temps.sh/compare?utm_source=github&utm_medium=repo&utm_content=compare_en) to Vercel, Coolify, Dokploy and others
+## Roadmap for the MW identity
 
-## Telemetry
+The brand direction is defined; implementation alignment remains an explicit roadmap:
 
-Temps sends anonymous usage events (a random instance ID, event names such as `deploy_succeeded`, and counts) so the maintainers can see whether self-hosted installs work. It never sends emails, IPs, repository names, domains or anything you typed, and your application data never leaves your server. Turn it off in **Settings › Telemetry**, or for a whole host with `TEMPS_TELEMETRY=0`. [Details](https://temps.sh/docs/data-ownership-and-privacy#anonymous-telemetry)
+1. Establish MW product language and visual identity across the web UI and public documentation.
+2. Inventory all upstream Temps references and classify them as user-facing copy, internal identifiers, attribution, legal notices, or operational compatibility.
+3. Replace user-facing copy only where behavior and support paths are ready.
+4. Design a compatibility-safe migration for CLI, services, environment variables, images, and deployment automation.
+5. Add end-to-end smoke tests and migration documentation before changing production identifiers.
+6. Publish MW-branded installation, upgrade, backup, and recovery guides only after those paths are validated.
 
-## Community & contributing
+## Community and contributions
 
-Questions and ideas in [Discussions](https://github.com/gotempsh/temps/discussions), bugs in [Issues](https://github.com/gotempsh/temps/issues). Contributions are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md).
+Contributions should make the platform more understandable, secure, and dependable. Before proposing a change, read [AGENTS.md](AGENTS.md), [REVIEW.md](REVIEW.md), and [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-Dual-licensed under [MIT](LICENSE-MIT) or [Apache 2.0](LICENSE). Forks and derivative works are welcome, including rebranded and commercial distributions, as long as they keep the copyright, license and attribution notices the chosen license requires. See [NOTICE](NOTICE).
-
----
-
-<div align="center">
-
-[temps.sh](https://temps.sh/?utm_source=github&utm_medium=repo&utm_content=footer_en) | [Documentation](https://temps.sh/docs?utm_source=github&utm_medium=repo&utm_content=footer_en) | [GitHub](https://github.com/gotempsh/temps)
-
-English | [简体中文](README.zh-CN.md) | [Español](README.es.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [日本語](README.ja.md) | [Português](README.pt-BR.md)
-
-</div>
+This repository retains the upstream dual-license model: [MIT](LICENSE-MIT) or [Apache 2.0](LICENSE). Preserve all required copyright, license, and third-party attribution notices in derivative works.
