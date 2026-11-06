@@ -1,348 +1,337 @@
-# MW-DEVPLATFORM — Brand & Product Blueprint
+# Empire of Light Platform — Product & Architecture Blueprint
 
-> **Build with clarity. Deploy with sovereignty. Operate with accountability.**
+> **A sovereign infrastructure foundation for building, delivering, and operating digital products.**
 
-**Status:** Brand and product direction  
-**Repository:** `BRIDGE-ALLAH/MW-DEVPLATFORM`  
-**Implementation baseline:** Temps-derived Rust workspace and web application  
-**Purpose:** Establish one coherent narrative and an actionable path from the current codebase to an MW-branded developer platform.
+| Field | Value |
+|---|---|
+| Canonical repository | `BRIDGE-ALLAH/EMPIRE-OF-LIGHT` |
+| Ecosystem | A-L-L-A-H.COM — Empire of Light |
+| Product | Empire of Light Platform |
+| Category | Self-hostable developer and infrastructure operations platform |
+| Implementation baseline | Temps-derived Rust workspace and web application |
+| Document status | Canonical target blueprint; implementation maturity remains evidence-based |
+| Companion narrative | [PRODUCT_NARRATIVE.md](PRODUCT_NARRATIVE.md) |
 
 ---
 
-## 1. Executive narrative
+## 1. Executive definition
 
-MW-DEVPLATFORM is a self-hostable foundation for building, delivering, observing, and operating digital products.
+Empire of Light Platform is the infrastructure and developer-platform foundation of the A-L-L-A-H.COM ecosystem. It provides the technical substrate for connecting source code, building and releasing applications, operating workloads, managing supported infrastructure services, and understanding system behavior.
 
-It exists because the modern software builder is asked to depend on an expanding chain of disconnected services: one for deployment, another for databases, another for analytics, another for logs and errors, and still more for automation and AI. Each tool may solve a local problem, but the overall system becomes harder to understand, govern, secure, and afford.
+Its purpose is to make infrastructure operations coherent and inspectable while preserving operator control. It does not attempt to become every product in the ecosystem. It provides infrastructure capabilities through explicit contracts so that ecosystem products can build differentiated experiences without reimplementing the runtime.
 
-MW-DEVPLATFORM brings those operational capabilities into one coherent environment. It is designed to help people retain control over their code, infrastructure, data, and decisions—while making the state of their systems visible enough to act responsibly.
+**Product outcome:** an operator can deploy and operate workloads, understand their state, govern access, and recover from failure using documented and testable procedures.
 
-The platform's ambition is not to make every technical detail disappear. It is to make the important details legible: what is running, what changed, what failed, who can act, where data lives, and what should happen next.
+## 2. Strategic context and ecosystem ownership
 
-**Core idea:** technology should increase human agency. A platform earns trust when it makes control practical, evidence accessible, and responsibility explicit.
+A-L-L-A-H.COM is the ecosystem home and integration surface. Empire of Light is the wider vision and the identity of this platform foundation. The following ownership boundaries are normative:
 
-## 2. Meaning of the name
-
-### MoonWitness
-
-The working name combines two ideas:
-
-- **Moon:** perspective, cycles, navigation, and light in changing conditions. It suggests that systems are not static; they evolve through releases, incidents, growth, and recovery.
-- **Witness:** observation, evidence, accountability, and the discipline of seeing what is actually happening rather than relying on assumptions.
-
-Together, **MoonWitness** represents a platform that helps its operators see their digital environment clearly and remain accountable for how it is built and run.
-
-### MW-DEVPLATFORM
-
-MW-DEVPLATFORM is the practical expression of that idea: the engineering environment where products are built, deployed, monitored, secured, and improved.
-
-The brand must not imply that software itself is a source of moral authority, nor claim divine endorsement. Its values are expressed through engineering behavior: honesty about system state, care for user data, fair access boundaries, and reliable operation.
-
-## 3. Brand foundation
-
-### Purpose
-
-Give builders and organizations a dependable, understandable, and self-controlled foundation for digital creation.
-
-### Vision
-
-A world where teams can build and operate serious digital products without surrendering visibility, ownership, or operational agency to a fragmented stack.
-
-### Mission
-
-Unify the essential developer and operations lifecycle in a self-hostable platform with transparent controls, useful observability, secure defaults, and extensible workflows.
-
-### Positioning statement
-
-For developers, product teams, and organizations that want control over their delivery infrastructure, MW-DEVPLATFORM is a self-hosted developer platform that unifies application delivery and operations. Unlike a collection of disconnected point tools, it provides one operational surface designed around clarity, sovereignty, and accountability.
-
-### Brand promise
-
-**Your infrastructure. Your visibility. Your responsibility.**
-
-### Brand personality
-
-- **Grounded:** confident without hype; specific about what works today.
-- **Illuminating:** explains state, cause, and consequence.
-- **Stewardly:** treats access, data, and compute as responsibilities.
-- **Capable:** technically deep, practical, and extensible.
-- **Open:** respects portability, transparency, and community contribution.
-
-### Voice and language
-
-Prefer clear, direct language. Explain the benefit before the implementation detail, then link to the technical reference.
-
-Use:
-- “Keep operational control in your hands.”
-- “See what changed and why.”
-- “One place to deploy, observe, and operate.”
-- “Self-hosted by design; transparent by default.”
-
-Avoid:
-- unsupported claims such as “unhackable,” “zero risk,” or “the only platform you need”;
-- claiming every feature is production-ready without maturity evidence;
-- using spiritual language as a substitute for product proof;
-- presenting planned capabilities as already shipped.
-
-## 4. Values translated into engineering
-
-The following vocabulary may be used as an ethical and product lens. It should be presented respectfully and inclusively, not as a claim that the platform represents a faith or speaks on behalf of a religious tradition.
-
-| Value | Product interpretation | Observable engineering behavior |
+| Capability | Authoritative owner | Integration rule |
 |---|---|---|
-| Amanah — stewardship | Treat trust and entrusted resources seriously | Protect secrets, audit privileged actions, document data handling |
-| Ihsan — excellence | Do work carefully and continuously improve | Strong tests, safe defaults, understandable failures |
-| Adl — fairness | Apply consistent and explainable boundaries | Least privilege, explicit quotas, predictable authorization |
-| Rahmah — care | Reduce avoidable harm and toil | Accessible UX, recoverable workflows, useful error messages |
-| Shura — consultation | Build with feedback and shared learning | Open contribution process, ADRs, documented trade-offs |
+| Ecosystem users, tenant identity, roles, and product policy | A-L-L-A-H.COM / ARSY | Platform receives explicit mapped principals and scoped permissions; no duplicate ecosystem identity store |
+| Product-domain APIs and user-facing workflows | A-L-L-A-H.COM / ARSY and its apps | Use platform APIs/SDKs; do not copy platform internals |
+| Build, deploy, workload execution, nodes, runtime | Empire of Light Platform | ARSY requests and coordinates; this platform executes supported infrastructure operations |
+| Network routing, ingress, domains, TLS, runtime network policy | Empire of Light Platform, within documented scope | Avoid a second proxy or routing engine in ARSY |
+| Platform-local operational telemetry | Empire of Light Platform | Expose events and read APIs; ecosystem analytics may consume them without becoming a second source of runtime truth |
+| Ecosystem audit and cross-tenant administrative policy | A-L-L-A-H.COM / ARSY | Platform keeps its own operational audit; map correlation IDs and actor references explicitly |
+| Platform-local storage and infrastructure persistence | Empire of Light Platform | Do not share private tables with ARSY |
+| Ecosystem commercial catalog, plans, entitlements, and billing policy | A-L-L-A-H.COM / ARSY / Empire Economy | Platform exposes measured usage facts and enforceable resource limits through contracts |
+| Payment processing and commerce experience | Empire Economy and its designated providers | Do not embed a second payment or subscription authority in this platform |
+| MoonWitness research, corpus, narrative, publishing | MoonWitness product surfaces | Consume platform capabilities; do not move narrative content ownership here |
+| ROCKSOUL creative/media products | ROCKSOUL product surfaces | Consume platform capabilities; do not create creative-domain services here |
 
-These are guiding principles for product decisions, not certifications or guarantees.
+A feature with unclear ownership is blocked from implementation until an Architecture Decision Record (ADR) names its owner, data source of truth, API boundary, security model, and migration path.
 
-## 5. Audience and jobs to be done
+## 3. Problem and target users
 
-### Primary audiences
+### Problem
 
-1. **Independent builders:** want to deploy products without assembling and paying for a large stack of services.
-2. **Engineering teams:** want a consistent delivery and operations workflow across multiple applications.
-3. **Digital studios and agencies:** need repeatable infrastructure patterns for multiple projects and clients.
-4. **Organizations with sovereignty requirements:** need control over where workloads and operational data are hosted.
+Teams often assemble application delivery, databases, networking, monitoring, security, and automation from separate products. This fragments configuration and operational evidence, increases integration work, and makes incident ownership difficult to trace.
 
-### Core jobs
+### Target users
 
-- Ship a code change safely.
-- Understand why a deployment or request failed.
-- Know whether services are healthy and how they are performing.
-- Manage domains, certificates, data services, and secrets.
-- Control who can access projects and infrastructure.
-- Automate repetitive work without losing auditability.
-- Recover from incidents and restore critical data.
+1. Independent developers who need a repeatable self-hosted delivery environment.
+2. Engineering teams operating multiple applications and environments.
+3. Digital studios and agencies that need consistent operational patterns.
+4. Organizations requiring control over workload placement, data location, and operational access.
 
-## 6. Product pillars
+### Jobs to be done
 
-### 6.1 Build and deliver
+- Connect a repository and produce a traceable build.
+- Deploy, inspect, and roll back a release.
+- Operate workloads, nodes, domains, certificates, and supported data services.
+- Diagnose behavior using logs, metrics, traces, events, and health signals.
+- Apply least-privilege access and inspect privileged operations.
+- Automate infrastructure workflows with clear failure and retry semantics.
+- Back up, restore, upgrade, and recover a deployment.
 
-Connect source repositories, build applications, create deployments and previews, and manage releases.
+## 4. Product scope
 
-**User outcome:** move from a committed change to a running application with a traceable deployment history.
+### In scope
 
-### 6.2 Run and connect
+- Source integration, build orchestration, deployments, previews, and release lifecycle.
+- Workload execution, containers, workers, nodes, and runtime health.
+- Routing, ingress, domains, TLS, and supported network policy.
+- Supported managed data-service provisioning and lifecycle.
+- Logs, metrics, traces, analytics, errors, uptime, and diagnostics.
+- Platform-local authentication/authorization required to operate the platform.
+- API keys, operational audit, security tooling, and policy enforcement within platform scope.
+- CLI, SDK, plugin, AI, automation, sandbox, and MCP surfaces already supported by the implementation.
+- Operator workflows for configuration, health, backup, restore, upgrade, and rollback.
 
-Operate containerized workloads, domains, TLS, routing, worker nodes, and managed data services.
+### Explicitly out of scope
 
-**User outcome:** run applications and dependencies in infrastructure the operator controls.
+- Becoming the canonical user-facing ecosystem portal; that belongs to A-L-L-A-H.COM apps.
+- Owning ecosystem-wide identity, tenant membership, role policy, or cross-tenant administration.
+- Owning product plans, commercial catalog, subscriptions, entitlements, invoices, or payment processing.
+- Implementing a second general-purpose container runtime, proxy, observability backend, or database platform inside ARSY.
+- MoonWitness corpus, research, story canon, or publishing workflows.
+- ROCKSOUL media creation, distribution, and entertainment workflows.
+- A general-purpose operating system.
+- Claiming a fully supported ARSY Node installer before independent artifacts and installation evidence exist.
 
-### 6.3 Observe and understand
+## 5. Architecture
 
-Collect application analytics, errors, logs, traces, metrics, uptime checks, and operational events.
-
-**User outcome:** answer what happened, where it happened, and what needs attention.
-
-### 6.4 Secure and govern
-
-Provide identity, authentication, authorization, API keys, audit records, network controls, and security scanning.
-
-**User outcome:** make access and operational boundaries explicit and reviewable.
-
-### 6.5 Extend and automate
-
-Expose SDKs, plugin protocols, CLI workflows, AI gateway and agent surfaces, sandboxes, and MCP integration points.
-
-**User outcome:** extend the platform without fragmenting the operating model.
-
-## 7. Technical architecture — current repository baseline
-
-The repository currently contains a Rust Cargo workspace, a web application, SDKs, scripts, deployment configuration, and extensive documentation. The workspace manifest lists more than 100 crates. The architecture is layered; the generated crate map groups the code into library, foundation, toolkit/runtime/traffic, domain/observability/AI/import, and application concerns.
-
-At a conceptual level, the system can be read as these planes:
+The existing repository is a large Rust workspace with a web application, SDKs, scripts, deployment configuration, and documentation. Keep the detailed crate map and architecture overview as the source of truth for actual modules. The following is the product-level logical model:
 
 ```text
-Developer / Operator
-        |
-        v
-Web Console + CLI + SDKs + API / MCP
-        |
-        v
-Control Plane
-  Identity & Authorization
-  Projects & Configuration
-  Git & Deployment Orchestration
-  Domains, Routing & Providers
-  Plugins, AI & Automation
-        |
-        +---------------------------+
-        |                           |
-        v                           v
-Workload / Runtime Plane       Observability Plane
-  Build & Deploy                  Events & Analytics
-  Containers / Workers            Logs / Metrics / Traces
-  Networking / Ingress            Errors / Uptime
-  Managed Services                Audit & Diagnostics
-        |                           |
-        +-------------+-------------+
-                      |
-                      v
-             Persistence & Storage
-       PostgreSQL / ClickHouse / Object Storage
+A-L-L-A-H.COM Apps / ARSY
+  Identity • Tenant Policy • Product APIs • Commercial Policy
+                    |
+           Versioned API / SDK
+                    |
+                    v
++----------------------------------------------+
+|        EMPIRE OF LIGHT PLATFORM              |
+|                                              |
+|  Platform Control Plane                     |
+|  Projects • Platform Config • Orchestration  |
+|                    |                         |
+|  Execution Plane  |  Network / Ingress       |
+|  Builds • Releases|  Routes • TLS • Domains  |
+|  Workloads • Nodes|  Traffic Policy          |
+|                    |                         |
+|  Observability Plane                         |
+|  Logs • Metrics • Traces • Events • Health   |
+|                    |                         |
+|  Platform Persistence & Backup               |
++----------------------------------------------+
+                    |
+             Operator Infrastructure
 ```
 
-This is a conceptual reading of the current repository, not a replacement for the detailed architecture docs or a guarantee that every feature is mature in every deployment mode.
+This is a logical responsibility diagram, not a deployment topology. Do not split modules into new services solely to match the boxes.
 
-### Architecture boundaries
+### 5.1 Platform control plane
 
-- **Experience layer:** web console, CLI, SDKs, APIs, and integration surfaces.
-- **Control plane:** identity, authorization, projects, configuration, orchestration, and policy.
-- **Workload plane:** builds, deployments, containers, networking, nodes, and service providers.
-- **Observability plane:** ingestion, event processing, logs, metrics, traces, analytics, and error tracking.
-- **Persistence layer:** relational data, analytical storage, file/object storage, and backups.
+Owns platform-local resource configuration and orchestration required to operate infrastructure. It must expose stable, documented interfaces for ecosystem integration.
 
-### Existing source-of-truth documents
+### 5.2 Execution plane
 
-- [Crate map](architecture/crates.md) — generated workspace inventory and dependency layers.
-- [Architecture overview](architecture/overview/page.mdx) — current product-level architecture.
-- [Multi-node and build dispatch](architecture/multi-node-and-build-dispatch.md) — distributed execution context.
-- [Design standard](../DESIGN.md) — current web UI conventions.
-- [Agent and engineering rules](../AGENTS.md) — contributor and coding-agent constraints.
-- [Security review checklist](../REVIEW.md) — recurring security and reliability risks.
+Owns the supported build and workload lifecycle: scheduling/dispatch, execution, deployment state, workers, nodes, and runtime health. It must report durable state transitions and meaningful failure reasons.
 
-## 8. Product experience principles
+### 5.3 Network and ingress plane
 
-1. **Resource first:** lead with the user's resource and its primary action, not configuration noise.
-2. **One coherent surface:** avoid nested panels and inconsistent interaction patterns.
-3. **Truthful states:** distinguish loading, empty, filtered, failed, unavailable, and unconfigured states.
-4. **Explain consequences:** show what a change affects before a user commits it.
-5. **Recoverability:** make retries, rollback, backup, and restore discoverable.
-6. **Secure by default:** least privilege, private service networks, protected secrets, and auditable actions.
-7. **Accessible operations:** support keyboard use, readable labels, clear contrast, and actionable errors.
+Owns supported routing, ingress, domains, certificates, and traffic policy. Security-sensitive changes require explicit validation, safe defaults, and audit evidence.
 
-These principles align with the existing UI standard in `DESIGN.md`; they should guide future MW-specific changes without implying that every legacy screen has already been migrated.
+### 5.4 Observability plane
 
-## 9. Brand system direction
+Owns platform operational telemetry and diagnostics. Events must have stable identifiers and correlation metadata. Do not conflate platform telemetry with ecosystem product analytics.
 
-### Visual concept
+### 5.5 Persistence and recovery
 
-The visual identity should communicate night-sky clarity and technical precision without turning the product into a decorative astronomy theme.
+Owns platform-local persistence and supported storage integrations. Backup and restore are product capabilities only when exercised in tests against supported versions.
 
-Suggested direction:
-- deep ink / midnight base for focus and operational calm;
-- moonlight or silver as a neutral highlight;
-- one restrained signal accent for status and primary actions;
-- subtle orbital/grid geometry only in brand surfaces, not behind dense operational data;
-- typography optimized for long technical sessions and high information density.
+## 6. Integration contract with ARSY
 
-### Logo concept
+ARSY is the ecosystem-facing product/control integration layer. It owns ecosystem identity, tenant policy, product-domain APIs, and commercial coordination. Empire of Light Platform owns infrastructure execution and platform-local operational state.
 
-The first MW mark is implemented as a **lunar witness mark**: a restrained crescent and point of light inside a midnight-navy field, paired in the full lockup with the MOONWITNESS wordmark and MW-DEVPLATFORM descriptor. Source assets live in `web/public/svg/mw-icon.svg`, `mw-logo-dark.svg`, and `mw-logo-light.svg`; the favicon is `web/public/favicon.svg`. Legacy SVG asset paths are retained as compatibility aliases to the MW artwork. The mark is a navigation and product-identity device, not a religious symbol or a surveillance claim.
+Required integration rules:
 
-### UI distinction
+1. **No shared private database:** communicate through documented API, SDK, event, or adapter contracts.
+2. **No duplicate authority:** one owner per identity, tenant, billing, runtime, routing, and telemetry domain.
+3. **Explicit principal mapping:** map ecosystem actor and tenant references to scoped platform permissions; never infer authority from a client-supplied tenant ID.
+4. **Least privilege:** use dedicated service credentials with narrowly scoped capabilities and revocation.
+5. **Correlation:** propagate request, actor, tenant-reference, and operation identifiers where appropriate; avoid leaking secrets or sensitive payloads.
+6. **Idempotency:** provisioning and lifecycle commands must safely handle retries and duplicate delivery.
+7. **Observable outcomes:** return operation IDs, durable status, and actionable errors.
+8. **Versioning:** document compatibility and deprecation policy for API/SDK/event contracts.
+9. **Failure isolation:** define timeout, retry, cancellation, compensation, and reconciliation behavior.
+10. **No source copying:** integrate with platform capabilities; do not fork internal modules into ARSY.
 
-Keep the brand layer separate from semantic status colors. Success, warning, failure, and neutral states must remain accessible and consistent regardless of theme.
+### Ownership examples
 
-## 10. Roadmap: from brand to usable product
+- ARSY decides whether a tenant may request a deployment; the platform executes the authorized deployment.
+- The platform reports resource usage facts; ARSY/Empire Economy applies product plan, entitlement, and billing policy.
+- The platform records infrastructure operations; ARSY records ecosystem-level administrative and business audit events. Correlate them without merging ownership.
+- The platform may have platform-local operator accounts; those accounts do not replace ecosystem users or tenant membership.
 
-### Phase 0 — Establish truth
+## 7. Current implementation truth
 
-- [x] Publish this narrative and link it from the root README.
-- [x] State clearly that the current codebase is Temps-derived.
-- [x] Preserve upstream notices, licenses, and legal attribution.
-- [x] Establish a compatibility policy separating product copy from internal identifiers.
+The current codebase is derived from Temps and retains a Rust workspace of more than one hundred crates, web UI, SDKs, scripts, Compose configuration, and upstream technical documentation.
 
-**Exit criteria:** README and blueprint agree about the current implementation and remaining work.
+The source tree includes capability areas for delivery, runtime, networking, managed services, observability, security, AI/automation, and extensibility. Capability presence does not establish feature completeness or production maturity. The crate map, source, tests, ADRs, release workflow, and runbooks remain authoritative for implementation detail.
 
-### Phase 1 — Brand alignment (in progress)
+### Known identity and installer gap
 
-- [x] Define the initial MW logo family, neutral/lunar-gold palette, typography direction, icon usage, and writing style in `docs/BRAND_SYSTEM.md`.
-- [x] Add MW product identity to the browser title, favicon, shared sidebar, loading shell, login screen, setup copy, and package description.
-- [x] Add application metadata and social-preview descriptions to the HTML shell.
-- [x] Keep upstream legal attribution and implementation identifiers intact; legacy SVG logo paths now resolve to MW artwork.
-- [x] Review all 186 page modules and the primary shared UI components; replace user-facing upstream product copy across authentication, onboarding, AI, projects, deployments, domains, email, monitoring, security, and observability surfaces.
-- [ ] Finish the separate audit of email templates, notification payloads, CLI output, installer messages, and generated/public pages; retain explicit Temps Cloud and upstream SDK/API identifiers where they are real integrations.
-- [ ] Run frontend lint, typecheck, unit tests, and production build; review light/dark and mobile screenshots. Current GitHub Actions runs do not provide a completed frontend validation result.
-- [ ] Align any public landing page and documentation navigation that is shipped by this repository.
+- The root README and existing blueprint previously described MOONWITNESS / MW-DEVPLATFORM and required reconciliation after the repository rename.
+- The installer at `scripts/install.sh` still targets `gotempsh/temps`, downloads `temps-*` release assets, and installs the `temps` binary.
+- Technical identifiers remain upstream-derived. No blind global rename is authorized.
+- No claim is made here that an independent Empire of Light release artifact, ARSY Node installer, clean VPS install, or production upgrade/rollback has been validated.
 
-**Exit criteria:** all shipped public surfaces consistently use MW identity, remain accessible, and pass frontend validation without changing upstream behavior.
+Treat these as explicit migration gaps, not cosmetic documentation details.
 
-### Phase 2 — Safe technical rebrand
+## 8. Naming and source provenance
 
-- Inventory CLI commands, crate names, environment variables, service/container names, image names, telemetry keys, URLs, and installer references.
-- Decide which identifiers must remain compatible and which can change.
-- Add aliases/deprecation windows before renaming external interfaces.
-- Update deployment templates, upgrade scripts, tests, and operational docs together.
+- **Ecosystem:** A-L-L-A-H.COM — Empire of Light.
+- **Platform product:** Empire of Light Platform.
+- **Repository:** `BRIDGE-ALLAH/EMPIRE-OF-LIGHT`.
+- **Ecosystem application/control integration:** ARSY in the A-L-L-A-H.COM repository.
+- **Future self-hosted node/distribution experience:** ARSY Node, only after release and installer gates are met.
 
-**Exit criteria:** a clean install and an upgrade from the previous naming scheme both work in automated tests.
+This repository is Temps-derived. Preserve all upstream copyright statements, NOTICE files, license texts, and third-party attribution. Keep implementation identifiers compatible until each migration is planned and tested. A product rename does not change legal provenance.
 
-### Phase 3 — Operational readiness
+## 9. ARSY Node and VPS installation direction
 
-- Validate install, first-admin bootstrap, TLS/ingress, backups, restore, upgrade, rollback, and disaster recovery.
-- Add smoke tests for the supported deployment profile.
-- Publish feature maturity and supported environment matrices.
-- Verify security controls and document the threat model.
+ARSY Node is the intended ecosystem-facing name for a self-hosted installation profile that combines verified Empire of Light platform artifacts with the required A-L-L-A-H.COM integration components. It is a distribution and installation contract, not a new runtime to build in parallel.
 
-**Exit criteria:** a new operator can install, secure, back up, upgrade, and recover an instance using only the published guide.
+### Required installer properties
 
-### Phase 4 — Ecosystem and trust
+- Version-pinned, platform-specific release artifacts.
+- SHA-256 checksums and preferably verifiable signatures/provenance.
+- Supported Linux distributions and CPU architectures documented.
+- Preflight checks for privileges, disk, memory, ports, DNS, firewall, and Docker/runtime prerequisites.
+- Explicit configuration and secret generation; no default production credentials.
+- Idempotent installation and safe re-execution.
+- Health checks and actionable failure diagnostics.
+- Least-privilege service execution and documented host-level permissions.
+- Backup, restore, upgrade, rollback, and uninstall behavior.
+- No silent migration or destructive data operation.
+- Clean-host integration tests for each supported profile.
 
-- Publish plugin and SDK examples under the MW narrative.
-- Establish a public roadmap and decision record process.
-- Publish security disclosure and release practices.
-- Build a contributor and user feedback loop.
+### Installer implementation sequence
 
-**Exit criteria:** external contributors can understand the product direction and safely extend it.
+1. Inventory the current upstream installer, release workflows, binaries, assets, Compose services, and environment variables.
+2. Define the supported product distribution and version compatibility matrix.
+3. Establish an independent release pipeline that builds and publishes the intended artifacts.
+4. Add artifact checksums/signatures and provenance verification.
+5. Implement ARSY Node preflight, configuration, install, health, and recovery commands.
+6. Test clean install, interrupted install, rerun/idempotency, upgrade, rollback, backup, and restore.
+7. Publish operator documentation and known limitations.
+8. Only then replace or wrap upstream installer entry points, preserving attribution and a documented compatibility path.
 
-## 11. Non-negotiable trust requirements
+**Hard stop:** until steps 1–7 have evidence, `scripts/install.sh` must remain clearly identified as the upstream Temps installer. Do not tell users to run it to install Empire of Light or ARSY Node.
 
-- Never commit secrets, real customer identifiers, private hostnames, or production payloads.
-- Preserve upstream copyright, licenses, and third-party notices.
-- Do not claim data sovereignty without documenting telemetry, external calls, backups, and storage boundaries.
-- Do not claim production readiness without test evidence and an explicit support matrix.
-- Treat Docker socket access and host-level privileges as high risk.
-- Require review for authorization, secret handling, migrations, resource limits, cancellation, and cleanup.
-- Keep user-facing product names separate from internal compatibility identifiers until migration is proven.
+## 10. Security, reliability, and trust requirements
+
+- Never commit secrets, private customer data, production identifiers, or host-specific credentials.
+- Treat Docker socket access and host-level execution as high-risk capabilities.
+- Apply least privilege and private service networking.
+- Keep secrets out of logs, command output, URLs, browser state, and telemetry.
+- Document external network calls, telemetry, data residency, backup destinations, and retention.
+- Audit privileged actions with actor, operation, target, correlation ID, and timestamp; redact sensitive values.
+- Require review for authentication, authorization, cryptography, migrations, resource limits, cancellation, and cleanup.
+- Define resource quotas and safe defaults for multi-tenant or shared environments.
+- Test failure paths, retries, duplicate commands, partial upgrades, and restore procedures.
+- Preserve upstream licenses and notices.
+
+## 11. Roadmap and exit gates
+
+### Phase 0 — Identity and truth alignment
+
+- [x] Confirm repository identity as `BRIDGE-ALLAH/EMPIRE-OF-LIGHT`.
+- [x] Establish the platform's role within A-L-L-A-H.COM.
+- [x] Separate platform execution from ARSY ecosystem policy and product workflows.
+- [x] Document the upstream installer limitation and provenance requirement.
+- [ ] Audit all user-facing surfaces, docs navigation, CLI output, email templates, installer messages, and release metadata for remaining legacy product copy.
+- [ ] Record all residual overlap findings as owned migration tasks or ADRs.
+
+**Exit gate:** repository narrative, README, and blueprint agree; no unsupported maturity claims remain.
+
+### Phase 1 — Platform boundary and API contract
+
+- [ ] Inventory current public APIs, SDKs, events, auth models, and platform-local resource domains.
+- [ ] Define ARSY-to-platform service authentication and principal/tenant mapping.
+- [ ] Define API/event versioning, idempotency, correlation, retry, timeout, and reconciliation behavior.
+- [ ] Identify duplicate or conflicting implementations in ARSY and assign one owner per capability.
+- [ ] Add contract tests and integration test fixtures.
+
+**Exit gate:** an end-to-end provisioning operation can be authorized by ARSY, executed by the platform, and reconciled with auditable outcomes without shared private storage.
+
+### Phase 2 — Independent release foundation
+
+- [ ] Define supported release targets and version policy.
+- [ ] Build reproducible platform artifacts in CI.
+- [ ] Publish checksums, signatures/provenance, SBOM, and release notes.
+- [ ] Separate product artifacts from upstream release URLs and names without erasing attribution.
+- [ ] Validate upgrade compatibility and rollback policy.
+
+**Exit gate:** a pinned release can be installed and verified without downloading an upstream Temps binary.
+
+### Phase 3 — ARSY Node and operator readiness
+
+- [ ] Implement installer preflight and safe configuration.
+- [ ] Implement idempotent install, health, upgrade, rollback, backup, restore, and uninstall workflows.
+- [ ] Test clean-host installs on every supported OS/architecture profile.
+- [ ] Validate firewall, TLS, secrets, permissions, data persistence, and failure recovery.
+- [ ] Publish operator runbooks and support matrix.
+
+**Exit gate:** an operator can install, secure, inspect, back up, upgrade, roll back, and recover using published instructions.
+
+### Phase 4 — Product maturity and ecosystem integration
+
+- [ ] Publish feature maturity and known limitations.
+- [ ] Publish API/SDK examples and integration contracts.
+- [ ] Validate metering facts and resource-limit enforcement with ARSY/Empire Economy.
+- [ ] Establish release, vulnerability disclosure, and support processes.
+- [ ] Add operational SLOs and incident/recovery exercises.
+
+**Exit gate:** ecosystem products integrate through stable contracts, and platform releases have repeatable operational evidence.
 
 ## 12. Definition of done
 
-A release can be described as **MW-DEVPLATFORM usable** only when all applicable checks pass:
+A feature is complete only when:
 
-- [ ] A clean installation succeeds from the published instructions.
-- [ ] Initial administrator setup works without shipping default credentials.
-- [ ] A sample application can be connected, built, deployed, and reached over HTTPS.
-- [ ] Logs, deployment status, and at least one observability workflow are usable.
-- [ ] Authentication and authorization boundaries are tested.
-- [ ] Backup and restore have been exercised, not merely documented.
-- [ ] Upgrade and rollback paths are tested for the supported release.
-- [ ] Public documentation matches the actual binaries, images, commands, and environment variables.
-- [ ] Legal attribution and third-party notices remain complete.
-- [ ] The release has a published feature maturity and known-limitations section.
+- its authoritative owner and non-overlap boundary are documented;
+- behavior is implemented and covered by relevant tests;
+- security, permissions, resource limits, and failure paths are reviewed;
+- API/configuration changes are documented and versioned;
+- observability and actionable diagnostics exist;
+- upgrade, rollback, and data compatibility are considered;
+- the README and blueprint describe actual behavior, not aspirations.
 
-## 13. External narrative references and verification status
+A release is production-ready only when the release readiness runbook's applicable checks pass with recorded evidence. Documentation alone is not evidence of implementation.
 
-The requested references were `moonwitnessxv` and `A-L-L-AH.COM`. They could not be reliably retrieved during this documentation update: the first did not resolve to a verifiable source and the second returned a gateway error. Search results also surfaced unrelated namesakes. Therefore, this blueprint does **not** attribute any specific quotation, doctrine, manifesto, or official statement to those sources.
+## 13. Anti-overlap rules for contributors and AI agents
 
-The MoonWitness interpretation and values in this document are an original working brand synthesis for MW-DEVPLATFORM. Before treating them as the definitive founder narrative, verify the intended source URLs and review their original content with the project owner.
+Before creating a service, crate, package, database table, API, worker, or UI surface:
 
-## 14. Release readiness — evidence-based status
+1. Search the existing workspace and architecture docs for an equivalent capability.
+2. Search the A-L-L-A-H.COM repository's documented ownership contracts.
+3. Name the authoritative owner and source of truth.
+4. Prefer extension or integration over duplication.
+5. If two existing implementations overlap, document the observed overlap and propose a migration; do not add a third.
+6. Keep a capability in this repository only when it is part of the infrastructure platform's execution responsibility.
+7. Keep ecosystem identity, tenant policy, product billing, and creative/knowledge domains outside this repository.
+8. Add an ADR for any new cross-repository boundary or change of ownership.
 
-The brand and product direction are documented, but documentation completion is not equivalent to software completion.
+### Prohibited shortcuts
 
-At the time of this update:
-- The repository contains multiple GitHub Actions workflow definitions.
-- The GitHub repository API returned no recent workflow-run records and no published release records.
-- The only branch returned by the repository API was `main`; no open pull requests or issues were returned.
-- The current deployment manifests and Cargo workspace retain Temps identifiers.
-- No independent clean-host install, sample-app deployment, restore drill, or upgrade/rollback result was available as evidence in this review.
+- Global search-and-replace of upstream identifiers.
+- Rebranding the installer without changing and testing its actual download source.
+- Claiming a service, API, billing flow, installer, or release is complete based only on a plan or diagram.
+- Creating a second runtime, proxy, identity provider, billing authority, or observability backend to avoid integration work.
+- Splitting modules into microservices without a scaling, isolation, ownership, or reliability justification.
+- Removing upstream notices or rewriting history to imply original authorship.
 
-Accordingly, the release is **not certified production-ready**. This is an evidence status, not a claim that the software is broken.
+## 14. Source-of-truth documents
 
-The operational acceptance process is now documented in [Release Readiness & Operator Runbook](RELEASE_READINESS.md). A release owner must attach reproducible CI, build, security, installation, sample deployment, backup/restore, and upgrade/rollback evidence before checking off the Definition of Done in this blueprint.
+- [Product narrative](PRODUCT_NARRATIVE.md) — purpose, ecosystem role, ownership boundaries, and product voice.
+- [Architecture overview](architecture/overview/page.mdx) — implementation-oriented architecture.
+- [Crate map](architecture/crates.md) — workspace inventory.
+- [Release readiness](RELEASE_READINESS.md) — evidence required for safe operation.
+- [AGENTS.md](../AGENTS.md) — engineering and agent rules.
+- [REVIEW.md](../REVIEW.md) — recurring security and reliability findings.
+- [NOTICE](../NOTICE), [LICENSE](../LICENSE), and [LICENSE-MIT](../LICENSE-MIT) — upstream provenance and licensing.
 
-The next engineering sequence is:
-1. Run the existing CI and test workflows against the exact release commit; fix failures and retain run links.
-2. Validate the Compose stack on a clean supported Linux host using private, unique credentials.
-3. Deploy a sample application and verify ingress, TLS, logs, health, and observability end to end.
-4. Exercise backup/restore and upgrade/rollback on disposable test environments.
-5. Publish the supported OS/architecture matrix, known limitations, release notes, and operator support guidance.
-6. Only then make a production-readiness claim or publish a stable MW-branded release.
-
----
-
-**One-line narrative:**  
-*MW-DEVPLATFORM is the clear, self-hostable foundation for people who build and operate with ownership—bringing delivery, visibility, and responsible control into one place.*
+When documents disagree, implementation and tests establish current behavior; this blueprint establishes intended ownership and target direction. Update both when a verified architectural decision changes.
