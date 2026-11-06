@@ -2,138 +2,121 @@
 
 Destination: BRIDGE-ALLAH/EMPIRE-OF-LIGHT  
 Source: bjo163/A-L-L-A-H.COM  
-Decision: one canonical monorepo; source repository is temporary until verified migration and retirement.
+Decision: one canonical monorepo; Rust-first backend; source repository is temporary until verified migration and retirement.
 
 ## Objective
 
-Consolidate the existing Node.js/Fastify ARSY Hub, pnpm workspace, ecosystem applications, shared packages, plans, contracts, and product documentation into the existing Rust/Cargo platform repository. Preserve both technology stacks as complementary components of one ARSY platform. Do not rewrite the Rust engine in JavaScript or rewrite ARSY Control in Rust.
+Consolidate the ecosystem applications, shared packages, contracts, plans, and documentation into the existing Rust/Cargo platform repository. Establish Rust as the sole backend/platform authority. The legacy Fastify ARSY Hub is a migration reference: inventory its behavior, reuse existing Rust capabilities, port only missing required behavior, cut consumers over, and retire the Fastify backend after verified parity.
+
+Do not preserve two backend implementations. Do not rewrite the existing Rust platform in Node.js.
 
 ## Verified starting point
 
 - Destination contains a substantial Temps-derived Rust/Cargo workspace, deployment assets, scripts, SDKs, and technical documentation.
-- Source contains a pnpm workspace, apps/arsy Fastify backend, Next.js apps, shared packages, scripts, and ecosystem documentation/plans.
-- The source package manifest currently points repository/homepage/bugs metadata at bjo163/A-L-L-A-H.COM; update these references after migration is actually complete.
+- Source contains a pnpm workspace, Fastify ARSY Hub, Next.js apps, shared packages, scripts, and ecosystem documentation/plans.
+- The source package manifest points repository/homepage/bugs metadata at bjo163/A-L-L-A-H.COM; update these references after migration is complete.
 - Destination scripts/install.sh currently downloads gotempsh/temps release assets and installs temps; it is not an ARSY Node installer.
-- These facts establish the migration need, not completion.
+- These facts establish migration work, not completion or Rust feature parity.
 
 ## Migration rules
 
 1. Never overwrite destination paths without comparing both versions.
 2. Preserve the existing Rust workspace and Cargo metadata.
-3. Preserve the pnpm workspace and package boundaries; reconcile root manifest collisions deliberately.
-4. Inventory every app, package, crate, script, workflow, contract, schema, migration, secret name, deployment target, and active plan.
-5. Detect duplicates by behavior and ownership, not merely by directory/package name.
-6. Choose one authoritative implementation per capability; record retained, merged, replaced, or retired decisions.
-7. Preserve useful commit history where feasible, and always preserve legal notices, license files, copyright, and attribution.
-8. Do not move secrets or environment values into Git.
-9. Keep the source repository intact until acceptance gates pass.
-10. Make each migration batch small, independently verifiable, and reversible.
+3. Keep pnpm only for frontend workspace and tooling where needed; do not add Fastify as a backend.
+4. Inventory every app, package, crate, route, API, schema, migration, workflow, secret name, deployment target, and active plan.
+5. Map legacy Fastify behavior to Rust capabilities before writing code.
+6. Reuse existing Rust capability; port only missing behavior to its correct Rust owner.
+7. Choose one authoritative implementation per capability and record retained, merged, replaced, or retired decisions.
+8. Preserve useful commit history where feasible, and always preserve legal notices, license files, copyright, and attribution.
+9. Do not move secrets or environment values into Git.
+10. Keep the source repository intact until acceptance gates pass.
+11. Make each migration batch small, independently verifiable, and reversible.
 
 ## Work packages
 
-### MC-001 — Repository and source inventory
+### MC-001 — Repository and capability inventory
 - Enumerate destination and source trees.
-- Capture branch/default-branch and recent commit baselines.
-- Inventory Cargo crates and pnpm workspace packages.
-- Inventory apps, runtime ports, scripts, CI workflows, deployment manifests, schemas, migrations, docs, plans, ADRs, and open issues.
-- Produce docs/migration/MIGRATION_LEDGER.md with source path, target path, owner, decision, status, test, and commit reference.
-- Identify binary/large assets and license constraints.
+- Inventory Cargo crates, pnpm packages, apps, Fastify routes, APIs, schemas, migrations, workflows, deployment manifests, docs, plans, ADRs, and open issues.
+- Capture source branch/default-branch and commit baselines.
+- Map each legacy Fastify capability against Rust code, tests, docs, and feature flags.
+- Produce docs/migration/MIGRATION_LEDGER.md with source path, target owner, action, status, test, and commit reference.
 
-Acceptance: every maintained top-level component and critical integration has an inventory entry.
+Acceptance: every maintained app and backend capability has a documented disposition.
 
-### MC-002 — Workspace integration design
-- Identify root manifest conflicts and existing workspace assumptions.
-- Decide whether Cargo remains at repository root and pnpm workspace coexists there; prefer coexistence over moving Cargo unless tooling forces a move.
-- Define non-conflicting script names and CI job boundaries.
-- Define shared contract ownership and code-generation direction.
-- Document local development profiles that do not require starting every app.
+### MC-002 — Rust backend authority design
+- Identify the existing Rust API/service entrypoints and crate ownership.
+- Map identity, authorization, tenant isolation, audit, orchestration, jobs, and domain persistence.
+- Identify genuine gaps only after searching the full Rust workspace.
+- Define versioned API/event contracts and compatibility policy.
+- Add or extend Rust crates only where a verified gap exists.
 
-Acceptance: a tested workspace design exists before source moves.
+Acceptance: one documented Rust backend authority with tested contracts and no parallel Fastify target.
 
-### MC-003 — Rust baseline preservation
-- Record existing Cargo toolchain, build/test commands, feature flags, and CI.
-- Preserve crate names, database migrations, runtime identifiers, and upstream compatibility.
+### MC-003 — Preserve and verify Rust baseline
+- Record existing Cargo toolchain, workspace commands, feature flags, and CI.
+- Preserve crate names, migrations, runtime identifiers, and upstream compatibility.
 - Run baseline checks where environment permits and record failures as baseline facts.
-- Do not use global Temps replacement.
+- Do not globally replace Temps identifiers.
 
 Acceptance: existing Rust build/test paths remain available and regression checks are documented.
 
-### MC-004 — Fastify ARSY Control migration
-- Migrate the Fastify app and its owned packages into non-conflicting paths.
-- Preserve auth, tenant, RBAC, audit, ORM, plugin, and API contracts.
-- Reconcile package names and repository metadata only after paths and imports are stable.
-- Ensure no Fastify app imports private Rust storage or bypasses engine authorization.
-- Add a clean-checkout Fastify smoke test.
+### MC-004 — Reconcile legacy Fastify ARSY Hub
+- Inventory routes, handlers, schemas, auth/RBAC, tenant model, persistence, integrations, jobs, events, and tests.
+- Classify each capability as already covered by Rust, extend existing Rust owner, port missing behavior, or retire.
+- Port domain behavior into Rust by bounded capability; do not translate files line-by-line.
+- Add parity tests and security tests.
+- Migrate consumers to Rust APIs and preserve compatibility where required.
+- Retire Fastify runtime only after verified parity and consumer cutover.
 
-Acceptance: ARSY Control installs, tests, and starts from the canonical monorepo.
+Acceptance: no production app or deployment depends on Fastify as a backend.
 
-### MC-005 — Application and shared package migration
-- Migrate apps in small ownership batches.
-- Reconcile shared UI, types, SDK, linting, config, and build tooling.
-- Detect duplicate UI/contracts and keep one owner.
-- Preserve each app's README, blueprint, plans, assets, and tests.
-- Ensure each app can be built independently.
+### MC-005 — Frontend and shared package migration
+- Migrate approved Next.js apps and shared UI packages into non-conflicting paths.
+- Keep Node.js/pnpm scoped to frontend builds, code generation, and developer tooling.
+- Generate or validate SDKs against Rust-owned contracts.
+- Remove obsolete Fastify clients only after consumer cutover.
+- Preserve app blueprints, plans, assets, and tests.
 
-Acceptance: all maintained apps have one canonical path and independently verifiable build commands.
+Acceptance: maintained frontends build independently and consume Rust-owned APIs.
 
-### MC-006 — Cross-language contract
-- Define Node-to-Rust authentication and service identity.
-- Define versioned request/response/event schemas.
-- Add idempotency, operation IDs, correlation IDs, timeouts, retry, cancellation, and reconciliation semantics.
-- Add contract tests and integration fixtures.
-- Keep private databases separate; no shared private tables.
+### MC-006 — CI, security, release, and deployment
+- Reconcile GitHub Actions without dropping Rust checks.
+- Add Rust backend, frontend build, API contract, and integration tests.
+- Reconcile secrets and environment variables without committing values.
+- Publish traceable Rust artifacts, SBOM, checksums, signatures/provenance, and release notes.
+- Implement ARSY Node preflight, install, health, upgrade, rollback, backup, restore, and uninstall.
 
-Acceptance: a representative authorized operation can be issued by ARSY Control, executed by Rust, and reconciled with durable status.
+Acceptance: canonical CI and release checks are reproducible; ARSY Node has clean-host evidence.
 
-### MC-007 — CI, release, and deployment
-- Reconcile GitHub Actions without dropping existing checks.
-- Add affected-component checks plus a full release verification path.
-- Map required secrets and environment variables without committing values.
-- Coordinate compatible Rust/Node artifact versions.
-- Add SBOM, checksums, signatures/provenance, release notes, and rollback policy.
-- Update deployment manifests and repository links after source migration.
-
-Acceptance: canonical CI builds and tests changed workspaces and produces traceable compatible artifacts.
-
-### MC-008 — ARSY Node installer
-- Inventory and quarantine the current upstream Temps installer from product-facing use.
-- Define supported VPS OS/architecture profiles.
-- Build version-pinned canonical artifacts.
-- Implement preflight, safe configuration, install, health, upgrade, rollback, backup, restore, and uninstall.
-- Test clean host, retry, interruption, and recovery.
-- Never download an upstream Temps binary under an ARSY name.
-
-Acceptance: clean VPS install and recovery evidence exists for every declared supported profile.
-
-### MC-009 — Documentation and plan reconciliation
-- Move current product narratives, app blueprints, autonomous rules, plans, ADRs, and runbooks.
+### MC-007 — Documentation and plan reconciliation
+- Move current product narratives, app blueprints, autonomous task plans, ADRs, and runbooks.
 - Detect contradictory or superseded documents.
 - Keep one canonical doc per subject; link to it instead of cloning.
-- Update all repository links and ownership references.
+- Update repository links and ownership references.
 - Preserve useful historical context as superseded records.
 
 Acceptance: agents and developers can identify one authoritative entrypoint and no active plan points to a competing repository.
 
-### MC-010 — Cutover and source retirement
-- Run full clean-checkout install/build/test verification.
-- Verify app routes, API contracts, Rust engine operations, and deployment profiles.
+### MC-008 — Cutover and source retirement
+- Run full clean-checkout Rust tests and frontend build verification.
+- Verify API parity, auth/tenant boundaries, app routes, and deployment profiles.
 - Confirm active branches/plans/issues have been reconciled or explicitly deferred.
 - Update source repository README with canonical destination and migration status.
-- Make source repository read-only/archive only after acceptance and no active dependency remains.
+- Archive or make source repository read-only only after no active dependency remains.
 
 Acceptance: all active work uses BRIDGE-ALLAH/EMPIRE-OF-LIGHT; source repository is no longer required.
 
 ## Non-goals
 
 - Do not create a third repository.
-- Do not rewrite Rust engine in Node.js.
-- Do not rewrite Fastify ARSY Control in Rust.
-- Do not force every component into one process.
+- Do not build or retain Fastify as a parallel production backend.
+- Do not rewrite Rust capabilities in Node.js.
+- Do not force every Rust crate into a separate process.
 - Do not split every module into a microservice.
 - Do not globally rename Temps identifiers.
 - Do not delete source repository or its history before verified cutover.
-- Do not claim consolidation, production readiness, or installer readiness based on documentation alone.
+- Do not claim Rust feature parity, consolidation, production readiness, or installer readiness without evidence.
 
 ## Definition of done
 
-A clean checkout of the canonical repository contains both workspaces and all maintained applications; the Rust and Node stacks have independent local build/test commands; shared contracts are tested; all capabilities have a single owner; canonical CI and releases work; ARSY Node has clean-host evidence; and no active development or deployment depends on the source repository.
+A clean checkout of the canonical repository contains the authoritative Rust backend/platform, approved applications, frontend packages, Rust-owned contracts, and documentation. Rust tests and frontend builds are reproducible; legacy Fastify capabilities have explicit parity/disposition evidence; each capability has one owner; canonical CI and releases work; ARSY Node has clean-host evidence; and no active development or deployment depends on the source repository.
