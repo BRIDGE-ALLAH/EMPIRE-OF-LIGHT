@@ -735,7 +735,7 @@ export function S3SourceDetail() {
                 size="sm"
                 onClick={() => discoverOrphansMutation.mutate()}
                 disabled={discoverOrphansMutation.isPending || !sourceId}
-                title="Scan S3 for backups not tracked in the database — useful after a Temps restore from a different instance"
+                title="Scan S3 for backups not tracked in the database — useful after an MW-DEVPLATFORM restore from a different instance"
               >
                 {discoverOrphansMutation.isPending ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
